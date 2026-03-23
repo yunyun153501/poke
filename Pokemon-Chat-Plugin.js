@@ -1811,7 +1811,7 @@ var TIME_KEYS = ["dawn","morning","noon","afternoon","night"];
 
 var player = null;
 var gState = null;
-var isVisible = true;
+var isVisible = false;
 var _eventLog = [];
 
 function createNewPlayer(name, starterKey, region) {
@@ -2935,8 +2935,15 @@ function injectStyles() {
     var s = document.createElement("style");
     s.id = STYLE_ID;
     s.textContent = [
-".pk-wrap{font-family:'Segoe UI',Arial,sans-serif;color:#e0e0e0;background:#1a1a2e;border-radius:12px;padding:10px;max-width:480px;margin:0 auto;font-size:14px;line-height:1.4;box-sizing:border-box;}",
+"html,body{background:transparent;overflow:hidden;width:100%;height:100%;margin:0;padding:0;pointer-events:none;touch-action:none;}",
+".pk-wrap,.pk-toast{pointer-events:auto;touch-action:auto;}",
+".pk-wrap{position:fixed;top:10px;right:20px;width:460px;max-height:calc(100vh - 40px);font-family:'Segoe UI',Arial,sans-serif;color:#e0e0e0;background:rgba(26,26,46,0.97);backdrop-filter:blur(12px);border-radius:12px;padding:0;font-size:14px;line-height:1.4;box-sizing:border-box;z-index:99999;display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 40px rgba(0,0,0,0.6);}",
 "#" + UI_ID + ".hidden{display:none!important;}",
+".pk-header{background:linear-gradient(135deg,rgba(231,76,60,0.4),rgba(155,35,53,0.4));padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);}",
+".pk-header-title{color:#fff;font-weight:bold;font-size:14px;}",
+".pk-header-btn{width:28px;height:28px;border:none;border-radius:6px;background:rgba(255,255,255,0.1);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;}",
+".pk-header-btn:hover{background:rgba(255,255,255,0.25);}",
+".pk-body{padding:10px;overflow-y:auto;flex:1;}",
 ".pk-wrap *{box-sizing:border-box;}",
 ".pk-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px;margin:6px 0;}",
 ".pk-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;color:#fff;text-align:center;}",
@@ -2980,7 +2987,8 @@ function injectStyles() {
 ".pk-dex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:4px;}",
 ".pk-dex-item{background:rgba(255,255,255,0.05);border-radius:6px;padding:4px;text-align:center;font-size:10px;}",
 ".pk-dex-item.pk-dex-seen{border:1px solid rgba(39,174,96,0.4);}",
-".pk-dex-item.pk-dex-unseen{opacity:0.3;}"
+".pk-dex-item.pk-dex-unseen{opacity:0.3;}",
+"@media screen and (max-width:520px){html,body{overflow:auto;} .pk-wrap{top:0;right:0;width:100%;max-height:100vh;border-radius:0;}}"
     ].join("\n");
     document.head.appendChild(s);
 }
@@ -2993,8 +3001,15 @@ function createUI() {
     if (existing) return existing;
     var div = document.createElement("div");
     div.id = UI_ID;
-    div.className = "pk-wrap";
+    div.className = "pk-wrap" + (isVisible ? "" : " hidden");
+    div.innerHTML = '<div class="pk-header"><div class="pk-header-title">🎮 포켓몬 배틀</div><div style="display:flex;gap:6px;"><button class="pk-header-btn" id="pk-close-btn" title="닫기">✕</button></div></div><div class="pk-body" id="pk-body"></div>';
     document.body.appendChild(div);
+    div.querySelector("#pk-close-btn").addEventListener("click", async function() {
+        div.classList.add("hidden");
+        isVisible = false;
+        await lsSet(KEY_VIS, "false");
+        if (_hasRisu) { try { await Risuai.hideContainer(); } catch(e){} }
+    });
     return div;
 }
 
@@ -3020,6 +3035,7 @@ function render() {
     if (!isVisible) return;
     injectStyles();
     var container = createUI();
+    var body = container.querySelector("#pk-body") || container;
     var html = '';
     if (!player || !gState) {
         html = renderTitleScreen();
@@ -3058,8 +3074,8 @@ function render() {
     } else {
         html = renderOverworld();
     }
-    container.innerHTML = html;
-    bindHandlers(container);
+    body.innerHTML = html;
+    bindHandlers(body);
 }
 
 function renderTitleScreen() {
@@ -4189,7 +4205,7 @@ function bindHandlers(container) {
 
 async function initPlugin() {
     injectStyles();
-    isVisible = (await lsGet(KEY_VIS)) !== "false";
+    isVisible = (await lsGet(KEY_VIS)) === "true";
     // ※ API 3.0: registerButton 먼저 등록 (세이브 로드 에러로 버튼 실종 방지)
     if (_hasRisu) {
         try {
