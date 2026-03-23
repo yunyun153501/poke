@@ -1002,7 +1002,7 @@ kanto: {
             {n:"소녀 서연",em:"👧",pokemon:[{k:"bellsprout",l:7},{k:"oddish",l:7}],reward:210},
             {n:"벌레잡이 지호",em:"🧒",pokemon:[{k:"metapod",l:7},{k:"kakuna",l:7},{k:"butterfree",l:8}],reward:240}
           ]},
-        {id:"k_r3",n:"니비시티",desc:"바위 체육관의 도시",lv:[8,13],pokemon:[{k:"geodude",w:30},{k:"sandshrew",w:25},{k:"zubat",w:20},{k:"onix",w:10},{k:"diglett",w:15}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:1,
+        {id:"k_r3",n:"니비시티",desc:"바위 체육관의 도시",lv:[8,13],pokemon:[{k:"geodude",w:30},{k:"sandshrew",w:25},{k:"zubat",w:20},{k:"onix",w:10},{k:"diglett",w:15}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:0,
          trainers:[
             {n:"등산가 태호",em:"🧗",pokemon:[{k:"geodude",l:9},{k:"geodude",l:10},{k:"sandshrew",l:10}],reward:300},
             {n:"등산가 진우",em:"🧗",pokemon:[{k:"geodude",l:10},{k:"sandshrew",l:11}],reward:330},
@@ -1209,7 +1209,7 @@ hoenn: {
             {n:"닌자 유리",em:"🥷",pokemon:[{k:"poochyena",l:7},{k:"slakoth",l:8}],reward:240},
             {n:"소년 현우",em:"👦",pokemon:[{k:"zigzagoon",l:7},{k:"ralts",l:7}],reward:210}
          ]},
-        {id:"h_r3",n:"금탄시티",desc:"바위 체육관의 도시",lv:[8,14],pokemon:[{k:"geodude",w:25},{k:"makuhita",w:20},{k:"aron",w:15},{k:"zubat",w:15},{k:"meditite",w:15},{k:"geodude",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:1,
+        {id:"h_r3",n:"금탄시티",desc:"바위 체육관의 도시",lv:[8,14],pokemon:[{k:"geodude",w:25},{k:"makuhita",w:20},{k:"aron",w:15},{k:"zubat",w:15},{k:"meditite",w:15},{k:"geodude",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:0,
          trainers:[
             {n:"등산가 태호",em:"🧗",pokemon:[{k:"geodude",l:10},{k:"aron",l:10}],reward:300},
             {n:"격투가 민수",em:"🥊",pokemon:[{k:"makuhita",l:11},{k:"meditite",l:10}],reward:330},
@@ -2937,7 +2937,7 @@ function injectStyles() {
     s.textContent = [
 "html,body{background:transparent;overflow:hidden;width:100%;height:100%;margin:0;padding:0;pointer-events:none;touch-action:none;}",
 ".pk-wrap,.pk-toast{pointer-events:auto;touch-action:auto;}",
-".pk-wrap{position:fixed;top:10px;right:20px;width:460px;max-height:calc(100vh - 40px);font-family:'Segoe UI',Arial,sans-serif;color:#e0e0e0;background:rgba(26,26,46,0.97);backdrop-filter:blur(12px);border-radius:12px;padding:0;font-size:14px;line-height:1.4;box-sizing:border-box;z-index:99999;display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 40px rgba(0,0,0,0.6);}",
+".pk-wrap{position:fixed;top:10px;right:20px;width:920px;max-height:calc(100vh - 40px);font-family:'Segoe UI',Arial,sans-serif;color:#e0e0e0;background:rgba(26,26,46,0.97);backdrop-filter:blur(12px);border-radius:12px;padding:0;font-size:14px;line-height:1.4;box-sizing:border-box;z-index:99999;display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 40px rgba(0,0,0,0.6);}",
 "#" + UI_ID + ".hidden{display:none!important;}",
 ".pk-header{background:linear-gradient(135deg,rgba(231,76,60,0.4),rgba(155,35,53,0.4));padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.08);}",
 ".pk-header-title{color:#fff;font-weight:bold;font-size:14px;}",
@@ -2988,7 +2988,7 @@ function injectStyles() {
 ".pk-dex-item{background:rgba(255,255,255,0.05);border-radius:6px;padding:4px;text-align:center;font-size:10px;}",
 ".pk-dex-item.pk-dex-seen{border:1px solid rgba(39,174,96,0.4);}",
 ".pk-dex-item.pk-dex-unseen{opacity:0.3;}",
-"@media screen and (max-width:520px){html,body{overflow:auto;} .pk-wrap{top:0;right:0;width:100%;max-height:100vh;border-radius:0;}}"
+"@media screen and (max-width:960px){html,body{overflow:auto;} .pk-wrap{top:0;right:0;width:100%;max-height:100vh;border-radius:0;}}"
     ].join("\n");
     document.head.appendChild(s);
 }
@@ -3071,6 +3071,8 @@ function render() {
         html = renderRoadDetail();
     } else if (gState.subScreen === "battlePartySwitch") {
         html = renderBattlePartySwitch();
+    } else if (gState.subScreen === "pokedexDetail") {
+        html = renderPokedexDetail();
     } else {
         html = renderOverworld();
     }
@@ -3137,10 +3139,12 @@ function renderOverworld() {
     html += '<button class="pk-btn ' + (player.region==="johto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="johto">🏔️ 성도</button>';
     html += '<button class="pk-btn ' + (player.region==="hoenn"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="hoenn">🌴 호엔</button>';
     html += '<button class="pk-btn ' + (player.region==="sinnoh"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="sinnoh">❄️ 신오</button>';
+    html += '<button class="pk-btn ' + (player.region==="unova"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="unova">🏙️ 하나</button>';
+    html += '<button class="pk-btn ' + (player.region==="kalos"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="kalos">🗼 칼로스</button>';
     html += '</div>';
     // 상단 상태바
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px">';
-    html += '<span style="font-size:13px">👤 ' + player.name + '</span>';
+    html += '<span style="font-size:13px;cursor:pointer" data-action="poke_changeName" title="이름 변경">👤 ' + player.name + ' ✏️</span>';
     html += '<span style="font-size:12px">📅 ' + player.day + '일차 ' + TIME_NAMES[player.timeOfDay] + '</span>';
     html += '<span class="pk-gold" style="font-size:13px">💰 ₩' + player.gold.toLocaleString() + '</span>';
     html += '</div>';
@@ -3149,8 +3153,10 @@ function renderOverworld() {
     var jBadges = player.badges.johto ? player.badges.johto.length : 0;
     var hBadges = player.badges.hoenn ? player.badges.hoenn.length : 0;
     var sBadges = player.badges.sinnoh ? player.badges.sinnoh.length : 0;
+    var uBadges = player.badges.unova ? player.badges.unova.length : 0;
+    var xBadges = player.badges.kalos ? player.badges.kalos.length : 0;
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:4px 10px;font-size:10px">';
-    html += '<span>🏅 칸토 ' + kBadges + '/8 | 성도 ' + jBadges + '/8 | 호엔 ' + hBadges + '/8 | 신오 ' + sBadges + '/8</span>';
+    html += '<span>🏅 칸토 ' + kBadges + '/8 | 성도 ' + jBadges + '/8 | 호엔 ' + hBadges + '/8 | 신오 ' + sBadges + '/8 | 하나 ' + uBadges + '/8 | 칼로스 ' + xBadges + '/8</span>';
     html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_advanceTime">⏰ 다음 시간</button>';
     html += '</div>';
     // 파티 미니바
@@ -3290,6 +3296,49 @@ function renderRoadDetail() {
     html += '<button class="pk-btn pk-btn-purple pk-btn-sm" data-action="poke_openParty">👥 파티</button>';
     html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_openBag">🎒 가방</button>';
     html += '</div>';
+    // 체육관 (이 도시에 있는 체육관)
+    var gymList = GYMS[player.region];
+    if (gymList) {
+        var badges = player.badges[player.region] || [];
+        for (var gi = 0; gi < gymList.length; gi++) {
+            var gym = gymList[gi];
+            if (gym.city !== road.n) continue;
+            var hasBadge = (badges.indexOf(gym.id) !== -1);
+            html += '<div class="pk-card" style="padding:8px;margin:6px 0;border-left:3px solid ' + (hasBadge ? '#f5c518' : '#e74c3c') + '">';
+            html += '<div style="font-size:14px;font-weight:bold;margin-bottom:4px">🏟️ ' + gym.n + ' ' + typeSpan(gym.type) + '</div>';
+            if (hasBadge) {
+                html += '<div style="font-size:11px;color:#f5c518;margin-bottom:4px">' + gym.badgeEm + ' ' + gym.badge + ' 획득 완료!</div>';
+            }
+            for (var li = 0; li < gym.leaders.length; li++) {
+                var leader = gym.leaders[li];
+                var gKey = gym.id + "_" + leader.id;
+                var defeatedToday = (player.defeatedGyms[gKey] === player.day);
+                var defeatedBefore = (player.defeatedGyms[gKey] !== undefined && !defeatedToday) || hasBadge;
+                html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;margin-top:4px;border-top:1px solid rgba(255,255,255,0.05)">';
+                html += '<div>';
+                html += '<span style="font-size:14px">' + leader.em + '</span> ';
+                html += '<span style="font-size:12px;font-weight:bold">' + leader.n + '</span>';
+                if (gym.leaders.length > 1) html += ' <span style="font-size:10px;color:#888">(Gen ' + leader.gen + ')</span>';
+                html += '<div style="font-size:10px;color:#aaa">';
+                for (var lp = 0; lp < leader.pokemon.length; lp++) {
+                    var tpd = POKEDEX[leader.pokemon[lp].k];
+                    html += (tpd ? tpd.em : "?") + 'Lv.' + leader.pokemon[lp].l + ' ';
+                }
+                html += '</div>';
+                html += '<div style="font-size:10px;color:#f5c518">💰 ₩' + leader.reward + '</div>';
+                html += '</div>';
+                if (defeatedToday) {
+                    html += '<span style="font-size:11px;color:#27ae60">✅ 오늘 승리</span>';
+                } else if (defeatedBefore) {
+                    html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_gymBattle" data-args="' + gi + ',' + li + '">🔄 재대결</button>';
+                } else {
+                    html += '<button class="pk-btn pk-btn-red pk-btn-sm" data-action="poke_gymBattle" data-args="' + gi + ',' + li + '">⚔️ 도전</button>';
+                }
+                html += '</div>';
+            }
+            html += '</div>';
+        }
+    }
     return html;
 }
 
@@ -3632,12 +3681,117 @@ function renderPokedexScreen() {
     for (var i = 0; i < entries.length; i++) {
         var e = entries[i];
         var isSeen = player.pokedex && player.pokedex[e.k];
-        html += '<div class="pk-dex-item ' + (isSeen ? 'pk-dex-seen' : 'pk-dex-unseen') + '">';
+        html += '<div class="pk-dex-item ' + (isSeen ? 'pk-dex-seen' : 'pk-dex-unseen') + '"' + (isSeen ? ' data-action="poke_pokedexDetail" data-args="' + e.k + '" style="cursor:pointer"' : '') + '>';
         html += '<div style="font-size:18px">' + (isSeen ? e.data.em : '?') + '</div>';
         html += '<div style="font-size:9px">#' + e.data.id + '</div>';
         html += '<div style="font-size:9px">' + (isSeen ? e.data.n : '???') + '</div>';
         html += '</div>';
     }
+    html += '</div>';
+    return html;
+}
+
+function renderPokedexDetail() {
+    var key = gState.pokedexKey;
+    var pd = POKEDEX[key];
+    if (!pd) return '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_backToPokedex">◀ 도감</button><div>데이터 없음</div>';
+    var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_backToPokedex">◀ 도감 목록</button>';
+    // Header
+    html += '<div class="pk-card" style="text-align:center;padding:12px;margin:8px 0">';
+    html += '<div style="font-size:40px">' + pd.em + '</div>';
+    html += '<div style="font-size:16px;font-weight:bold;margin:4px 0">' + pd.n + ' <span style="color:#aaa;font-size:12px">#' + pd.id + '</span></div>';
+    html += '<div style="margin:4px 0">';
+    for (var ti = 0; ti < pd.t.length; ti++) {
+        html += typeSpan(pd.t[ti]) + ' ';
+    }
+    html += '</div>';
+    html += '</div>';
+    // Base stats
+    var statNames = ["HP", "공격", "방어", "특공", "특방", "스피드"];
+    html += '<div class="pk-card" style="padding:8px;margin:6px 0">';
+    html += '<div style="font-size:13px;font-weight:bold;margin-bottom:6px">📊 종족값</div>';
+    var totalStat = 0;
+    for (var si = 0; si < 6; si++) {
+        var val = pd.s[si];
+        totalStat += val;
+        var barPct = Math.min(100, Math.round((val / 255) * 100));
+        var barColor = val >= 100 ? "#27ae60" : (val >= 60 ? "#f5c518" : "#e74c3c");
+        html += '<div style="display:flex;align-items:center;gap:6px;margin:2px 0;font-size:11px">';
+        html += '<span style="width:45px;text-align:right;color:#aaa">' + statNames[si] + '</span>';
+        html += '<span style="width:30px;text-align:right;font-weight:bold">' + val + '</span>';
+        html += '<div style="flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden">';
+        html += '<div style="width:' + barPct + '%;height:100%;background:' + barColor + ';border-radius:4px"></div>';
+        html += '</div></div>';
+    }
+    html += '<div style="font-size:11px;color:#aaa;text-align:right;margin-top:4px">합계: ' + totalStat + '</div>';
+    html += '</div>';
+    // Moves learnable by level
+    if (pd.ml) {
+        html += '<div class="pk-card" style="padding:8px;margin:6px 0">';
+        html += '<div style="font-size:13px;font-weight:bold;margin-bottom:6px">📚 레벨업 기술</div>';
+        var levels = Object.keys(pd.ml).sort(function(a, b) { return parseInt(a) - parseInt(b); });
+        for (var li = 0; li < levels.length; li++) {
+            var lv = levels[li];
+            var moveKeys = pd.ml[lv];
+            if (typeof moveKeys === "string") moveKeys = [moveKeys];
+            for (var mi = 0; mi < moveKeys.length; mi++) {
+                var mv = MOVES[moveKeys[mi]];
+                if (!mv) continue;
+                html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;font-size:11px;border-bottom:1px solid rgba(255,255,255,0.05)">';
+                html += '<span><span style="color:#aaa;width:30px;display:inline-block">Lv.' + lv + '</span> ' + typeSpan(mv.t) + ' ' + mv.n + '</span>';
+                html += '<span style="color:#aaa">' + (mv.c === "status" ? "변화" : (mv.c === "physical" ? "물리" : "특수")) + (mv.p > 0 ? ' 위력:' + mv.p : '') + '</span>';
+                html += '</div>';
+            }
+        }
+        html += '</div>';
+    }
+    // Evolution info
+    html += '<div class="pk-card" style="padding:8px;margin:6px 0">';
+    html += '<div style="font-size:13px;font-weight:bold;margin-bottom:6px">🔄 진화</div>';
+    if (pd.e) {
+        var evoPd = POKEDEX[pd.e.to];
+        html += '<div style="font-size:12px">' + pd.em + ' ' + pd.n + ' → ';
+        html += '<span style="font-weight:bold">' + (evoPd ? evoPd.em + ' ' + evoPd.n : pd.e.to) + '</span>';
+        html += ' <span style="color:#aaa">(Lv.' + pd.e.l + ')</span></div>';
+    } else {
+        // Check if anything evolves into this
+        var preEvo = null;
+        var pKeys = Object.keys(POKEDEX);
+        for (var pi = 0; pi < pKeys.length; pi++) {
+            var pe = POKEDEX[pKeys[pi]];
+            if (pe.e && pe.e.to === key) { preEvo = {key: pKeys[pi], data: pe}; break; }
+        }
+        if (preEvo) {
+            html += '<div style="font-size:12px">' + preEvo.data.em + ' ' + preEvo.data.n + ' → ' + pd.em + ' ' + pd.n + ' (최종 진화)</div>';
+        } else {
+            html += '<div style="font-size:12px;color:#aaa">진화하지 않는 포켓몬</div>';
+        }
+    }
+    html += '</div>';
+    // Flavor text based on type
+    var flavorTypes = {
+        fire: "뜨거운 불꽃의 힘을 지닌 포켓몬이다.",
+        water: "물의 힘을 자유자재로 다루는 포켓몬이다.",
+        grass: "자연의 에너지를 흡수하여 성장하는 포켓몬이다.",
+        electric: "강력한 전기를 발생시키는 포켓몬이다.",
+        ice: "극한의 냉기를 내뿜는 포켓몬이다.",
+        fighting: "단련된 육체로 강력한 격투 기술을 구사한다.",
+        poison: "독을 사용하여 적을 약화시키는 포켓몬이다.",
+        ground: "대지의 힘을 이용하여 싸우는 포켓몬이다.",
+        flying: "하늘을 자유롭게 나는 포켓몬이다.",
+        psychic: "초능력으로 상대를 제압하는 포켓몬이다.",
+        bug: "작지만 놀라운 능력을 숨기고 있는 포켓몬이다.",
+        rock: "바위처럼 단단한 몸을 가진 포켓몬이다.",
+        ghost: "어둠 속에서 나타나는 신비한 포켓몬이다.",
+        dragon: "전설적인 힘을 가진 드래곤 포켓몬이다.",
+        dark: "어둠의 힘을 이용하여 싸우는 포켓몬이다.",
+        steel: "강철같이 단단한 방어력을 자랑하는 포켓몬이다.",
+        fairy: "신비로운 요정의 힘을 가진 포켓몬이다.",
+        normal: "평범해 보이지만 다양한 기술을 배울 수 있는 포켓몬이다."
+    };
+    var flavor = flavorTypes[pd.t[0]] || "신비한 포켓몬이다.";
+    html += '<div class="pk-card" style="padding:8px;margin:6px 0;font-size:12px;color:#ccc;font-style:italic">';
+    html += '📝 ' + flavor;
     html += '</div>';
     return html;
 }
@@ -3684,14 +3838,15 @@ function renderGymScreen() {
             if (defeatedToday) {
                 html += '<span style="font-size:11px;color:#27ae60">✅ 오늘 승리</span>';
             } else if (defeatedBefore) {
-                html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_gymBattle" data-args="' + g + ',' + l + '">🔄 재대결</button>';
+                html += '<span style="font-size:11px;color:#27ae60">✅ 승리</span>';
             } else {
-                html += '<button class="pk-btn pk-btn-red pk-btn-sm" data-action="poke_gymBattle" data-args="' + g + ',' + l + '">⚔️ 도전</button>';
+                html += '<span style="font-size:11px;color:#e74c3c">❌ 미도전</span>';
             }
             html += '</div>';
         }
         html += '</div>';
     }
+    html += '<div style="font-size:11px;color:#888;text-align:center;margin:8px 0">💡 체육관 도전은 해당 도시를 방문하세요</div>';
     return html;
 }
 
@@ -3760,6 +3915,29 @@ window.poke_switchRegion = async function(region) {
     player.region = region;
     player.roadIdx = 0;
     await saveAll();
+    render();
+};
+
+window.poke_changeName = async function() {
+    var newName = prompt("새 이름을 입력하세요:", player.name);
+    if (newName && newName.trim()) {
+        player.name = newName.trim();
+        await saveAll();
+        render();
+    }
+};
+
+window.poke_pokedexDetail = function(key) {
+    if (!gState) return;
+    gState.subScreen = "pokedexDetail";
+    gState.pokedexKey = key;
+    render();
+};
+
+window.poke_backToPokedex = function() {
+    if (!gState) return;
+    gState.subScreen = "pokedex";
+    gState.pokedexKey = null;
     render();
 };
 
@@ -3930,6 +4108,9 @@ window.poke_openBadges = function() { gState.subScreen = "badges"; render(); };
 window.poke_back = function() {
     if (gState.subScreen === "roadDetail") {
         gState.subScreen = null;
+    } else if (gState.subScreen === "pokedexDetail") {
+        gState.subScreen = "pokedex";
+        gState.pokedexKey = null;
     } else if (gState.subScreen === "battlePartySwitch") {
         gState.subScreen = null;
     } else {
