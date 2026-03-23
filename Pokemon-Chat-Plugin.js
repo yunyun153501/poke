@@ -293,7 +293,7 @@ hitmontop:  {n:"카포에라",id:237,t:["fighting"],s:[50,95,95,35,110,70],ml:{1
 miltank:    {n:"밀탱크",id:241,t:["normal"],s:[95,80,105,40,70,100],ml:{1:["tackle","growl"],5:["bodyslam"],13:["stomp"],19:["earthquake"],25:["hyperbeam"]},e:null,cr:45,xp:172,em:"🐄"},
 blissey:    {n:"해피너스",id:242,t:["normal"],s:[255,10,10,75,135,55],ml:{1:["tackle","dazzlinggleam"],12:["bodyslam"],20:["softboiled"],28:["psychic"]},e:null,cr:30,xp:608,em:"🩷"},
 raikou:     {n:"라이코",id:243,t:["electric"],s:[90,85,75,115,100,115],ml:{1:["thundershock","quickattack","thunderbolt"],30:["thunder"],40:["calmmind"],50:["hyperbeam"]},e:null,cr:3,xp:261,em:"⚡"},
-entei:      {n:"앤테이",id:244,t:["fire"],s:[115,115,85,90,75,100],ml:{1:["ember","bite","flamethrower"],30:["fireblast"],40:["calmmind"],50:["hyperbeam"]},e:null,cr:3,xp:261,em:"��"},
+entei:      {n:"앤테이",id:244,t:["fire"],s:[115,115,85,90,75,100],ml:{1:["ember","bite","flamethrower"],30:["fireblast"],40:["calmmind"],50:["hyperbeam"]},e:null,cr:3,xp:261,em:"🔥"},
 suicune:    {n:"스이쿤",id:245,t:["water"],s:[100,75,115,90,115,85],ml:{1:["watergun","bite","surf"],30:["icebeam"],40:["calmmind"],50:["hyperbeam"]},e:null,cr:3,xp:261,em:"💧"},
 larvitar:   {n:"애버라스",id:246,t:["rock","ground"],s:[50,64,50,45,50,41],ml:{1:["tackle","bite"],5:["rockthrow"],10:["mudshot"]},e:{l:30,to:"pupitar"},cr:45,xp:60,em:"🪨"},
 pupitar:    {n:"데기라스",id:247,t:["rock","ground"],s:[70,84,70,65,70,51],ml:{1:["tackle","bite","rockthrow"],30:["rockslide"],36:["earthquake"]},e:{l:55,to:"tyranitar"},cr:45,xp:144,em:"🪨"},
@@ -714,7 +714,7 @@ async function loadAll() {
             player = JSON.parse(p);
             gState = JSON.parse(s);
             _eventLog = gState.eventLog || [];
-            // 마이그레이션: 이전 버전 호환
+            // 마이그레이션: v1.0→v2.0 호환 (routeIdx→roadIdx 이름 변경, 도감/트레이너 필드 추가)
             if (!player.pokedex) player.pokedex = {};
             if (!player.defeatedTrainers) player.defeatedTrainers = {};
             if (player.routeIdx !== undefined && player.roadIdx === undefined) {
@@ -749,7 +749,7 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
     var level = attackerPoke.level;
     var power = move.p;
 
-    // 분화 등 HP비례기
+    // HP비례기: 분화(eruption)는 현재HP/최대HP 비율로 위력이 변동 (최대150→최소1)
     if (moveKey === "eruption") {
         power = Math.max(1, Math.floor(150 * attackerPoke.currentHp / attackerPoke.stats[0]));
     }
