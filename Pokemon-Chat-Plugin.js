@@ -603,7 +603,8 @@ function createNewPlayer(name, starterKey, region) {
         roadIdx: 0,
         badges: 0,
         pokedex: dex,
-        defeatedTrainers: {}
+        defeatedTrainers: {},
+        day: 1
     };
 }
 
@@ -717,6 +718,7 @@ async function loadAll() {
             // 마이그레이션: v1.0→v2.0 호환 (routeIdx→roadIdx 이름 변경, 도감/트레이너 필드 추가)
             if (!player.pokedex) player.pokedex = {};
             if (!player.defeatedTrainers) player.defeatedTrainers = {};
+            if (player.day === undefined) player.day = 1;
             if (player.routeIdx !== undefined && player.roadIdx === undefined) {
                 player.roadIdx = player.routeIdx;
                 delete player.routeIdx;
@@ -852,9 +854,10 @@ function startTrainerBattle(road, trainerIdx) {
     var trainer = road.trainers[trainerIdx];
     if (!trainer) return false;
     var tKey = road.id + "_t" + trainerIdx;
-    if (player.defeatedTrainers[tKey]) {
-        return false; // 이미 이긴 트레이너
+    if (player.defeatedTrainers[tKey] === player.day) {
+        return false; // 오늘 이미 이긴 트레이너
     }
+    var isRematch = (player.defeatedTrainers[tKey] !== undefined);
     // 트레이너 파티 생성
     var enemyParty = [];
     for (var i = 0; i < trainer.pokemon.length; i++) {
@@ -874,6 +877,7 @@ function startTrainerBattle(road, trainerIdx) {
         trainerEmoji: trainer.em,
         trainerReward: trainer.reward,
         trainerKey: tKey,
+        isRematch: isRematch,
         enemyParty: enemyParty,
         enemyIdx: 0,
         enemy: enemyParty[0],
@@ -1104,24 +1108,26 @@ function executeTurn(playerMoveKey) {
     for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
 }
 
-// 경험치 지급 (isTrainerWin: 트레이너 최종승리시에만 돈 지급)
+// 경험치 지급 (isTrainerWin: 트레이너 최종승리시에만 돈 선택권 부여)
 function grantExp(myPoke, enemy, isTrainerWin) {
     var enemyData = POKEDEX[enemy.key];
     if (!enemyData) return;
-    // 트레이너전 경험치 1.5배
-    var trainerBonus = (gState.battleData && gState.battleData.type === "trainer") ? 1.5 : 1;
+    var bd = gState.battleData;
+    // 트레이너전 경험치: 첫 대결 1.5배, 재대결 1배
+    var isRematch = (bd && bd.isRematch);
+    var trainerBonus = (bd && bd.type === "trainer" && !isRematch) ? 1.5 : 1;
     var exp = Math.floor((enemyData.xp * enemy.level * trainerBonus) / 7);
     if (exp < 1) exp = 1;
     myPoke.exp += exp;
-    gState.battleData.msg.push(myPoke.nickname + "은(는) " + exp + " 경험치를 얻었다!");
+    bd.msg.push(myPoke.nickname + "은(는) " + exp + " 경험치를 얻었다!");
     addLog(myPoke.nickname + "은(는) " + exp + " 경험치를 얻었다!", "exp");
-    // 트레이너 최종 승리 시에만 돈 지급
-    if (isTrainerWin && gState.battleData.type === "trainer") {
-        var reward = gState.battleData.trainerReward || 500;
-        player.gold += reward;
-        gState.battleData.msg.push("💰 ₩" + reward + "을 획득했다!");
-        addLog("💰 ₩" + reward + " 획득!", "gold");
-        player.defeatedTrainers[gState.battleData.trainerKey] = true;
+    // 트레이너 최종 승리 시 보상금 대기 (자동 지급 안함, 선택)
+    if (isTrainerWin && bd.type === "trainer") {
+        var baseReward = bd.trainerReward || 500;
+        var reward = isRematch ? Math.floor(baseReward * 0.2) : baseReward;
+        bd.pendingReward = reward;
+        bd.msg.push("💰 상금 ₩" + reward + (isRematch ? " (재대결 20%)" : "") + "을 받을 수 있다!");
+        player.defeatedTrainers[bd.trainerKey] = player.day;
     }
     while (myPoke.level < MAX_LEVEL) {
         var needed = getExpForLevel(myPoke.level + 1) - getExpForLevel(myPoke.level);
@@ -1615,8 +1621,10 @@ function renderRoadDetail() {
         for (var i = 0; i < road.trainers.length; i++) {
             var tr = road.trainers[i];
             var tKey = road.id + "_t" + i;
-            var defeated = player.defeatedTrainers[tKey];
-            html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px' + (defeated ? ';opacity:0.5' : '') + '">';
+            var defeatedDay = player.defeatedTrainers[tKey];
+            var defeatedToday = (defeatedDay === player.day);
+            var defeatedBefore = (defeatedDay !== undefined && !defeatedToday);
+            html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px' + (defeatedToday ? ';opacity:0.5' : '') + '">';
             html += '<div>';
             html += '<span style="font-size:14px">' + tr.em + '</span> ';
             html += '<span style="font-size:13px;font-weight:bold">' + tr.n + '</span>';
@@ -1628,10 +1636,12 @@ function renderRoadDetail() {
             html += '</div>';
             html += '<div style="font-size:10px;color:#f5c518">💰 ₩' + tr.reward + '</div>';
             html += '</div>';
-            if (!defeated) {
-                html += '<button class="pk-btn pk-btn-red pk-btn-sm" data-action="poke_trainerBattle" data-args="' + i + '">⚔️ 배틀</button>';
+            if (defeatedToday) {
+                html += '<span style="font-size:11px;color:#27ae60">✅ 오늘 승리</span>';
+            } else if (defeatedBefore) {
+                html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_trainerBattle" data-args="' + i + '">🔄 재대결</button>';
             } else {
-                html += '<span style="font-size:11px;color:#27ae60">✅ 승리</span>';
+                html += '<button class="pk-btn pk-btn-red pk-btn-sm" data-action="poke_trainerBattle" data-args="' + i + '">⚔️ 배틀</button>';
             }
             html += '</div>';
         }
@@ -1689,7 +1699,16 @@ function renderBattleScreen() {
     for (var i = 0; i < bd.msg.length; i++) html += '<p>' + bd.msg[i] + '</p>';
     html += '</div>';
     if (bd.won || bd.caught || bd.fled) {
-        html += '<button class="pk-btn pk-btn-green pk-btn-block" data-action="poke_endBattle">✅ 확인</button>';
+        if (bd.pendingReward && !bd.rewardHandled) {
+            html += '<div class="pk-card" style="text-align:center;border-color:#f5c518">';
+            html += '<div style="font-size:14px;font-weight:bold;color:#f5c518;margin-bottom:6px">💰 상금 ₩' + bd.pendingReward.toLocaleString() + '</div>';
+            html += '<div style="display:flex;gap:8px;justify-content:center">';
+            html += '<button class="pk-btn pk-btn-green" data-action="poke_acceptReward">💰 받기</button>';
+            html += '<button class="pk-btn pk-btn-gray" data-action="poke_declineReward">🚫 거절</button>';
+            html += '</div></div>';
+        } else {
+            html += '<button class="pk-btn pk-btn-green pk-btn-block" data-action="poke_endBattle">✅ 확인</button>';
+        }
     } else if (bd.lost) {
         html += '<button class="pk-btn pk-btn-red pk-btn-block" data-action="poke_blackout">😵 패배 확인</button>';
     } else if (myPoke.currentHp <= 0) {
