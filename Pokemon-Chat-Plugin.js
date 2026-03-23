@@ -1109,84 +1109,84 @@ sinnoh: {
 var GYMS = {
 kanto: [
     {id:"k_gym1",city:"니비시티",n:"니비시티 체육관",type:"rock",badge:"회색뱃지",badgeEm:"🪨",
-     leaders:[{id:"brock",n:"웅",em:"🏋️",gen:1,pokemon:[{k:"geodude",l:12},{k:"onix",l:14}],reward:1400,rewardItems:["protein"]}]},
+     leaders:[{id:"brock",n:"웅",em:"🏋️",gen:1,pokemon:[{k:"geodude",l:12},{k:"onix",l:14}],reward:1400,rewardItems:["tm39_rockslide"]}]},
     {id:"k_gym2",city:"블루시티",n:"블루시티 체육관",type:"water",badge:"블루뱃지",badgeEm:"💧",
-     leaders:[{id:"misty",n:"이슬",em:"💧",gen:1,pokemon:[{k:"staryu",l:18},{k:"starmie",l:21}],reward:2100,rewardItems:["calcium"]}]},
+     leaders:[{id:"misty",n:"이슬",em:"💧",gen:1,pokemon:[{k:"staryu",l:18},{k:"starmie",l:21}],reward:2100,rewardItems:["tm55_scald"]}]},
     {id:"k_gym3",city:"노량시티",n:"노량시티 체육관",type:"electric",badge:"오렌지뱃지",badgeEm:"⚡",
-     leaders:[{id:"surge",n:"마티스",em:"⚡",gen:1,pokemon:[{k:"voltorb",l:21},{k:"pikachu",l:18},{k:"raichu",l:24}],reward:2400,rewardItems:["carbos"]}]},
+     leaders:[{id:"surge",n:"마티스",em:"⚡",gen:1,pokemon:[{k:"voltorb",l:21},{k:"pikachu",l:18},{k:"raichu",l:24}],reward:2400,rewardItems:["tm73_thunderwave"]}]},
     {id:"k_gym4",city:"무지개시티",n:"무지개시티 체육관",type:"grass",badge:"레인보우뱃지",badgeEm:"🌈",
-     leaders:[{id:"erika",n:"민화",em:"🌿",gen:1,pokemon:[{k:"victreebel",l:29},{k:"tangela",l:24},{k:"vileplume",l:29}],reward:2900,rewardItems:["rarecandy"]}]},
+     leaders:[{id:"erika",n:"민화",em:"🌿",gen:1,pokemon:[{k:"victreebel",l:29},{k:"tangela",l:24},{k:"vileplume",l:29}],reward:2900,rewardItems:["tm86_grassknot"]}]},
     {id:"k_gym5",city:"연분홍시티",n:"연분홍시티 체육관",type:"poison",badge:"핑크뱃지",badgeEm:"☠️",
      leaders:[
-        {id:"koga",n:"독",em:"☠️",gen:1,pokemon:[{k:"koffing",l:37},{k:"muk",l:39},{k:"weezing",l:43}],reward:4300,rewardItems:["iron"]},
+        {id:"koga",n:"독",em:"☠️",gen:1,pokemon:[{k:"koffing",l:37},{k:"muk",l:39},{k:"weezing",l:43}],reward:4300,rewardItems:["tm06_toxic"]},
         {id:"janine",n:"도희",em:"🥷",gen:2,pokemon:[{k:"crobat",l:36},{k:"weezing",l:36},{k:"ariados",l:33},{k:"venomoth",l:39}],reward:3900}
      ]},
     {id:"k_gym6",city:"노란시티",n:"노란시티 체육관",type:"psychic",badge:"골드뱃지",badgeEm:"🔮",
-     leaders:[{id:"sabrina",n:"초련",em:"🔮",gen:1,pokemon:[{k:"kadabra",l:38},{k:"mrmime",l:37},{k:"venomoth",l:38},{k:"alakazam",l:43}],reward:4300,rewardItems:["calcium"]}]},
+     leaders:[{id:"sabrina",n:"초련",em:"🔮",gen:1,pokemon:[{k:"kadabra",l:38},{k:"mrmime",l:37},{k:"venomoth",l:38},{k:"alakazam",l:43}],reward:4300,rewardItems:["tm29_psychic"]}]},
     {id:"k_gym7",city:"홍련섬",n:"홍련섬 체육관",type:"fire",badge:"크림슨뱃지",badgeEm:"🔥",
-     leaders:[{id:"blaine",n:"강연",em:"🔥",gen:1,pokemon:[{k:"growlithe",l:42},{k:"ponyta",l:40},{k:"rapidash",l:42},{k:"arcanine",l:47}],reward:4700,rewardItems:["rarecandy"]}]},
+     leaders:[{id:"blaine",n:"강연",em:"🔥",gen:1,pokemon:[{k:"growlithe",l:42},{k:"ponyta",l:40},{k:"rapidash",l:42},{k:"arcanine",l:47}],reward:4700,rewardItems:["tm35_flamethrower"]}]},
     {id:"k_gym8",city:"상록시티",n:"상록시티 체육관",type:"ground",badge:"그린뱃지",badgeEm:"🌍",
      leaders:[
-        {id:"giovanni",n:"비주기",em:"🦹",gen:1,pokemon:[{k:"rhyhorn",l:45},{k:"dugtrio",l:42},{k:"nidoqueen",l:44},{k:"nidoking",l:45},{k:"rhydon",l:50}],reward:6500,rewardItems:["rarecandy","masterball"]},
+        {id:"giovanni",n:"비주기",em:"🦹",gen:1,pokemon:[{k:"rhyhorn",l:45},{k:"dugtrio",l:42},{k:"nidoqueen",l:44},{k:"nidoking",l:45},{k:"rhydon",l:50}],reward:6500,rewardItems:["tm26_earthquake","masterball"]},
         {id:"blue",n:"그린",em:"🏆",gen:2,pokemon:[{k:"pidgeot",l:56},{k:"alakazam",l:54},{k:"rhydon",l:56},{k:"gyarados",l:58},{k:"arcanine",l:58},{k:"exeggutor",l:58}],reward:8000}
      ]}
 ],
 johto: [
     {id:"j_gym1",city:"도라지시티",n:"도라지시티 체육관",type:"flying",badge:"제피르뱃지",badgeEm:"🪶",
-     leaders:[{id:"falkner",n:"비상",em:"🐦",gen:2,pokemon:[{k:"pidgey",l:7},{k:"pidgeotto",l:9}],reward:900,rewardItems:["protein"]}]},
+     leaders:[{id:"falkner",n:"비상",em:"🐦",gen:2,pokemon:[{k:"pidgey",l:7},{k:"pidgeotto",l:9}],reward:900,rewardItems:["tm40_aerialace"]}]},
     {id:"j_gym2",city:"고동마을",n:"고동마을 체육관",type:"bug",badge:"인섹트뱃지",badgeEm:"🐛",
-     leaders:[{id:"bugsy",n:"호일",em:"🐛",gen:2,pokemon:[{k:"metapod",l:14},{k:"kakuna",l:14},{k:"scyther",l:16}],reward:1600,rewardItems:["netball","netball","netball"]}]},
+     leaders:[{id:"bugsy",n:"호일",em:"🐛",gen:2,pokemon:[{k:"metapod",l:14},{k:"kakuna",l:14},{k:"scyther",l:16}],reward:1600,rewardItems:["tm89_uturn"]}]},
     {id:"j_gym3",city:"금빛시티",n:"금빛시티 체육관",type:"normal",badge:"레귤러뱃지",badgeEm:"⭐",
-     leaders:[{id:"whitney",n:"꼭두",em:"⭐",gen:2,pokemon:[{k:"clefairy",l:18},{k:"miltank",l:20}],reward:2000,rewardItems:["rarecandy"]}]},
+     leaders:[{id:"whitney",n:"꼭두",em:"⭐",gen:2,pokemon:[{k:"clefairy",l:18},{k:"miltank",l:20}],reward:2000,rewardItems:["tm42_facade"]}]},
     {id:"j_gym4",city:"인주시티",n:"인주시티 체육관",type:"ghost",badge:"팬텀뱃지",badgeEm:"👻",
-     leaders:[{id:"morty",n:"유빙",em:"👻",gen:2,pokemon:[{k:"gastly",l:21},{k:"haunter",l:21},{k:"gengar",l:25},{k:"haunter",l:23}],reward:2500,rewardItems:["duskball","duskball","duskball"]}]},
+     leaders:[{id:"morty",n:"유빙",em:"👻",gen:2,pokemon:[{k:"gastly",l:21},{k:"haunter",l:21},{k:"gengar",l:25},{k:"haunter",l:23}],reward:2500,rewardItems:["tm30_shadowball"]}]},
     {id:"j_gym5",city:"담청시티",n:"담청시티 체육관",type:"fighting",badge:"쇼크뱃지",badgeEm:"💪",
-     leaders:[{id:"chuck",n:"사도",em:"💪",gen:2,pokemon:[{k:"primeape",l:27},{k:"poliwrath",l:30}],reward:3000,rewardItems:["iron"]}]},
+     leaders:[{id:"chuck",n:"사도",em:"💪",gen:2,pokemon:[{k:"primeape",l:27},{k:"poliwrath",l:30}],reward:3000,rewardItems:["tm01_focuspunch"]}]},
     {id:"j_gym6",city:"연고시티",n:"연고시티 체육관",type:"steel",badge:"스틸뱃지",badgeEm:"⚙️",
-     leaders:[{id:"jasmine",n:"미강",em:"⚙️",gen:2,pokemon:[{k:"magnemite",l:30},{k:"magnemite",l:30},{k:"steelix",l:35}],reward:3500,rewardItems:["iron"]}]},
+     leaders:[{id:"jasmine",n:"미강",em:"⚙️",gen:2,pokemon:[{k:"magnemite",l:30},{k:"magnemite",l:30},{k:"steelix",l:35}],reward:3500,rewardItems:["tm91_flashcannon"]}]},
     {id:"j_gym7",city:"담홍시티",n:"담홍시티 체육관",type:"ice",badge:"아이스뱃지",badgeEm:"❄️",
-     leaders:[{id:"pryce",n:"류옹",em:"❄️",gen:2,pokemon:[{k:"seel",l:27},{k:"dewgong",l:29},{k:"piloswine",l:31}],reward:3100,rewardItems:["rarecandy"]}]},
+     leaders:[{id:"pryce",n:"류옹",em:"❄️",gen:2,pokemon:[{k:"seel",l:27},{k:"dewgong",l:29},{k:"piloswine",l:31}],reward:3100,rewardItems:["tm13_icebeam"]}]},
     {id:"j_gym8",city:"블랙쏜시티",n:"블랙쏜시티 체육관",type:"dragon",badge:"라이징뱃지",badgeEm:"🐉",
-     leaders:[{id:"clair",n:"이향",em:"🐉",gen:2,pokemon:[{k:"dragonair",l:37},{k:"dragonair",l:37},{k:"dragonair",l:37},{k:"kingdra",l:40}],reward:4000,rewardItems:["rarecandy","masterball"]}]}
+     leaders:[{id:"clair",n:"이향",em:"🐉",gen:2,pokemon:[{k:"dragonair",l:37},{k:"dragonair",l:37},{k:"dragonair",l:37},{k:"kingdra",l:40}],reward:4000,rewardItems:["tm59_dragonpulse","masterball"]}]}
 ],
 hoenn: [
     {id:"h_gym1",city:"금탄시티",n:"금탄시티 체육관",type:"rock",badge:"스톤뱃지",badgeEm:"🪨",
-     leaders:[{id:"roxanne",n:"이즈미",em:"🪨",gen:3,pokemon:[{k:"geodude",l:12},{k:"geodude",l:12},{k:"aron",l:14}],reward:1400,rewardItems:["protein"]}]},
+     leaders:[{id:"roxanne",n:"이즈미",em:"🪨",gen:3,pokemon:[{k:"geodude",l:12},{k:"geodude",l:12},{k:"aron",l:14}],reward:1400,rewardItems:["tm39_rockslide"]}]},
     {id:"h_gym2",city:"무로시티",n:"무로시티 체육관",type:"fighting",badge:"너클뱃지",badgeEm:"🥊",
-     leaders:[{id:"brawly",n:"토키",em:"🥊",gen:3,pokemon:[{k:"machop",l:16},{k:"makuhita",l:18},{k:"meditite",l:17}],reward:1800,rewardItems:["calcium"]}]},
+     leaders:[{id:"brawly",n:"토키",em:"🥊",gen:3,pokemon:[{k:"machop",l:16},{k:"makuhita",l:18},{k:"meditite",l:17}],reward:1800,rewardItems:["tm31_brickbreak"]}]},
     {id:"h_gym3",city:"보라시티",n:"보라시티 체육관",type:"electric",badge:"다이나모뱃지",badgeEm:"⚡",
-     leaders:[{id:"wattson",n:"테센",em:"⚡",gen:3,pokemon:[{k:"voltorb",l:20},{k:"electrike",l:20},{k:"magnemite",l:22},{k:"manectric",l:24}],reward:2400,rewardItems:["carbos"]}]},
+     leaders:[{id:"wattson",n:"테센",em:"⚡",gen:3,pokemon:[{k:"voltorb",l:20},{k:"electrike",l:20},{k:"magnemite",l:22},{k:"manectric",l:24}],reward:2400,rewardItems:["tm24_thunderbolt"]}]},
     {id:"h_gym4",city:"풍연마을",n:"풍연마을 체육관",type:"fire",badge:"히트뱃지",badgeEm:"🔥",
-     leaders:[{id:"flannery",n:"아스나",em:"🔥",gen:3,pokemon:[{k:"slugma",l:26},{k:"slugma",l:26},{k:"ponyta",l:28},{k:"growlithe",l:29}],reward:2900,rewardItems:["rarecandy"]}]},
+     leaders:[{id:"flannery",n:"아스나",em:"🔥",gen:3,pokemon:[{k:"slugma",l:26},{k:"slugma",l:26},{k:"ponyta",l:28},{k:"growlithe",l:29}],reward:2900,rewardItems:["tm35_flamethrower"]}]},
     {id:"h_gym5",city:"하절시티",n:"하절시티 체육관",type:"normal",badge:"밸런스뱃지",badgeEm:"⚖️",
-     leaders:[{id:"norman",n:"센리",em:"⚖️",gen:3,pokemon:[{k:"slakoth",l:28},{k:"vigoroth",l:30},{k:"slaking",l:31}],reward:3100,rewardItems:["protein"]}]},
+     leaders:[{id:"norman",n:"센리",em:"⚖️",gen:3,pokemon:[{k:"slakoth",l:28},{k:"vigoroth",l:30},{k:"slaking",l:31}],reward:3100,rewardItems:["tm42_facade"]}]},
     {id:"h_gym6",city:"트라이시티",n:"트라이시티 체육관",type:"flying",badge:"페더뱃지",badgeEm:"🪶",
-     leaders:[{id:"winona",n:"나기",em:"🪶",gen:3,pokemon:[{k:"swablu",l:30},{k:"altaria",l:33},{k:"aerodactyl",l:32}],reward:3300,rewardItems:["carbos"]}]},
+     leaders:[{id:"winona",n:"나기",em:"🪶",gen:3,pokemon:[{k:"swablu",l:30},{k:"altaria",l:33},{k:"aerodactyl",l:32}],reward:3300,rewardItems:["tm40_aerialace"]}]},
     {id:"h_gym7",city:"트라이시티",n:"트라이시티 에스퍼 체육관",type:"psychic",badge:"마인드뱃지",badgeEm:"🔮",
-     leaders:[{id:"tateliza",n:"풍&란",em:"🔮",gen:3,pokemon:[{k:"gardevoir",l:36},{k:"medicham",l:35},{k:"alakazam",l:36}],reward:3600,rewardItems:["rarecandy"]}]},
+     leaders:[{id:"tateliza",n:"풍&란",em:"🔮",gen:3,pokemon:[{k:"gardevoir",l:36},{k:"medicham",l:35},{k:"alakazam",l:36}],reward:3600,rewardItems:["tm29_psychic"]}]},
     {id:"h_gym8",city:"루네시티",n:"루네시티 체육관",type:"water",badge:"레인뱃지",badgeEm:"🌧️",
      leaders:[
-        {id:"wallace",n:"미쿠리",em:"💧",gen:3,pokemon:[{k:"milotic",l:40},{k:"tentacruel",l:38},{k:"gyarados",l:39},{k:"starmie",l:39}],reward:4000,rewardItems:["rarecandy","masterball"]},
+        {id:"wallace",n:"미쿠리",em:"💧",gen:3,pokemon:[{k:"milotic",l:40},{k:"tentacruel",l:38},{k:"gyarados",l:39},{k:"starmie",l:39}],reward:4000,rewardItems:["tm94_surf","masterball"]},
         {id:"juan",n:"아단",em:"🌊",gen:3,pokemon:[{k:"milotic",l:42},{k:"kingdra",l:41},{k:"tentacruel",l:40}],reward:4100}
      ]}
 ],
 sinnoh: [
     {id:"s_gym1",city:"흑금시티",n:"흑금시티 체육관",type:"rock",badge:"콜뱃지",badgeEm:"🪨",
-     leaders:[{id:"roark",n:"효태",em:"🪨",gen:4,pokemon:[{k:"geodude",l:12},{k:"onix",l:12},{k:"cranidos",l:14}],reward:1400,rewardItems:["protein"]}]},
+     leaders:[{id:"roark",n:"효태",em:"🪨",gen:4,pokemon:[{k:"geodude",l:12},{k:"onix",l:12},{k:"cranidos",l:14}],reward:1400,rewardItems:["tm39_rockslide"]}]},
     {id:"s_gym2",city:"영원시티",n:"영원시티 체육관",type:"grass",badge:"포레스트뱃지",badgeEm:"🌿",
-     leaders:[{id:"gardenia",n:"유채",em:"🌿",gen:4,pokemon:[{k:"oddish",l:19},{k:"shroomish",l:19},{k:"grotle",l:22}],reward:2200,rewardItems:["calcium"]}]},
+     leaders:[{id:"gardenia",n:"유채",em:"🌿",gen:4,pokemon:[{k:"oddish",l:19},{k:"shroomish",l:19},{k:"grotle",l:22}],reward:2200,rewardItems:["tm86_grassknot"]}]},
     {id:"s_gym3",city:"노모세시티",n:"노모세시티 체육관",type:"water",badge:"코볼트뱃지",badgeEm:"💧",
-     leaders:[{id:"crasherwake",n:"맥시",em:"💧",gen:4,pokemon:[{k:"gyarados",l:27},{k:"golduck",l:27},{k:"poliwrath",l:30}],reward:3000,rewardItems:["iron"]}]},
+     leaders:[{id:"crasherwake",n:"맥시",em:"💧",gen:4,pokemon:[{k:"gyarados",l:27},{k:"golduck",l:27},{k:"poliwrath",l:30}],reward:3000,rewardItems:["tm55_scald"]}]},
     {id:"s_gym4",city:"요스가시티",n:"요스가시티 체육관",type:"ghost",badge:"렐릭뱃지",badgeEm:"👻",
-     leaders:[{id:"fantina",n:"멜리사",em:"👻",gen:4,pokemon:[{k:"drifloon",l:32},{k:"haunter",l:32},{k:"misdreavus",l:34}],reward:3400,rewardItems:["duskball","duskball","duskball"]}]},
+     leaders:[{id:"fantina",n:"멜리사",em:"👻",gen:4,pokemon:[{k:"drifloon",l:32},{k:"haunter",l:32},{k:"misdreavus",l:34}],reward:3400,rewardItems:["tm65_shadowclaw"]}]},
     {id:"s_gym5",city:"노모세시티",n:"격투 체육관",type:"fighting",badge:"코볼트뱃지",badgeEm:"💪",
-     leaders:[{id:"maylene",n:"자두",em:"💪",gen:4,pokemon:[{k:"meditite",l:28},{k:"machoke",l:29},{k:"lucario",l:32}],reward:3200,rewardItems:["iron"]}]},
+     leaders:[{id:"maylene",n:"자두",em:"💪",gen:4,pokemon:[{k:"meditite",l:28},{k:"machoke",l:29},{k:"lucario",l:32}],reward:3200,rewardItems:["tm31_brickbreak"]}]},
     {id:"s_gym6",city:"미오시티",n:"미오시티 체육관",type:"steel",badge:"마인뱃지",badgeEm:"⚙️",
-     leaders:[{id:"byron",n:"동관",em:"⚙️",gen:4,pokemon:[{k:"shieldon",l:36},{k:"steelix",l:36},{k:"bastiodon",l:39}],reward:3900,rewardItems:["iron"]}]},
+     leaders:[{id:"byron",n:"동관",em:"⚙️",gen:4,pokemon:[{k:"shieldon",l:36},{k:"steelix",l:36},{k:"bastiodon",l:39}],reward:3900,rewardItems:["tm91_flashcannon"]}]},
     {id:"s_gym7",city:"키싱시티",n:"키싱시티 체육관",type:"ice",badge:"아이시클뱃지",badgeEm:"❄️",
-     leaders:[{id:"candice",n:"무청",em:"❄️",gen:4,pokemon:[{k:"snover",l:38},{k:"sneasel",l:38},{k:"piloswine",l:40},{k:"abomasnow",l:42}],reward:4200,rewardItems:["rarecandy"]}]},
+     leaders:[{id:"candice",n:"무청",em:"❄️",gen:4,pokemon:[{k:"snover",l:38},{k:"sneasel",l:38},{k:"piloswine",l:40},{k:"abomasnow",l:42}],reward:4200,rewardItems:["tm13_icebeam"]}]},
     {id:"s_gym8",city:"선전시티",n:"선전시티 체육관",type:"electric",badge:"비콘뱃지",badgeEm:"⚡",
-     leaders:[{id:"volkner",n:"전진",em:"⚡",gen:4,pokemon:[{k:"raichu",l:46},{k:"luxray",l:48},{k:"electabuzz",l:47}],reward:4800,rewardItems:["rarecandy","masterball"]}]}
+     leaders:[{id:"volkner",n:"전진",em:"⚡",gen:4,pokemon:[{k:"raichu",l:46},{k:"luxray",l:48},{k:"electabuzz",l:47}],reward:4800,rewardItems:["tm24_thunderbolt","masterball"]}]}
 ]
 };
 
@@ -2480,6 +2480,8 @@ function render() {
         html = renderGymScreen();
     } else if (gState.subScreen === "badges") {
         html = renderBadgeScreen();
+    } else if (gState.subScreen === "tmPartySelect") {
+        html = renderTmPartySelect();
     } else if (gState.subScreen === "roadDetail") {
         html = renderRoadDetail();
     } else if (gState.subScreen === "battlePartySwitch") {
@@ -2902,13 +2904,43 @@ function renderBagScreen() {
         html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px">';
         html += '<div><div style="font-weight:bold;font-size:13px">' + item.n + ' x' + player.bag[k] + '</div>';
         html += '<div style="font-size:10px;color:#aaa">' + item.desc + '</div></div>';
-        if (item.type !== "ball" && item.type !== "etc" && item.type !== "battle") {
+        if (item.type === "tm") {
+            html += '<button class="pk-btn pk-btn-green pk-btn-xs" data-action="poke_useTM" data-args="' + k + '">가르치기</button>';
+        } else if (item.type !== "ball" && item.type !== "etc" && item.type !== "battle") {
             html += '<button class="pk-btn pk-btn-green pk-btn-xs" data-action="poke_useItemSelect" data-args="' + k + '">사용</button>';
         }
         html += '</div>';
     }
     return html;
 }
+
+function renderTmPartySelect() {
+    var tmKey = gState.tmItemKey;
+    var item = ITEMS[tmKey];
+    if (!item) return '';
+    var moveKey = item.value;
+    var move = MOVES[moveKey];
+    var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
+    html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">💿 ' + item.n + '</div>';
+    html += '<div style="font-size:12px;color:#aaa;margin-bottom:8px">' + (move ? typeSpan(move.t) + ' ' + move.n + ' | 위력:' + (move.p||"-") + ' | PP:' + move.pp : '???') + '</div>';
+    html += '<div style="font-size:13px;margin-bottom:8px">기술을 배울 포켓몬을 선택하세요:</div>';
+    for (var i = 0; i < player.party.length; i++) {
+        var p = player.party[i];
+        var pd = POKEDEX[p.key]; var em = pd ? pd.em : "?";
+        var alreadyKnows = false;
+        for (var j = 0; j < p.moves.length; j++) { if (p.moves[j].key === moveKey) { alreadyKnows = true; break; } }
+        html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px">';
+        html += '<div><span style="font-size:16px">' + em + '</span> <span style="font-weight:bold">' + p.nickname + '</span> <span style="color:#aaa;font-size:11px">Lv.' + p.level + '</span>';
+        html += '<div style="font-size:10px;color:#888">';
+        for (var j = 0; j < p.moves.length; j++) { var mv = MOVES[p.moves[j].key]; html += (mv ? mv.n : '?') + (j < p.moves.length-1 ? ', ' : ''); }
+        html += '</div></div>';
+        if (alreadyKnows) { html += '<span style="font-size:11px;color:#888">이미 알고있음</span>'; }
+        else { html += '<button class="pk-btn pk-btn-green pk-btn-sm" data-action="poke_teachTM" data-args="' + i + '">가르치기</button>'; }
+        html += '</div>';
+    }
+    return html;
+}
+
 
 function renderSummaryScreen() {
     var idx = gState.summaryIdx || 0;
@@ -3434,6 +3466,45 @@ window.poke_cancelLearn = async function() {
     await saveAll();
     render();
 };
+
+window.poke_useTM = async function(tmKey) {
+    if (!player || !ITEMS[tmKey]) return;
+    gState.subScreen = "tmPartySelect";
+    gState.tmItemKey = tmKey;
+    await saveAll();
+    render();
+};
+
+window.poke_teachTM = async function(idx) {
+    idx = parseInt(idx, 10);
+    if (isNaN(idx) || !gState.tmItemKey) return;
+    var tmKey = gState.tmItemKey;
+    var item = ITEMS[tmKey];
+    if (!item || item.type !== "tm") return;
+    var moveKey = item.value;
+    var poke = player.party[idx];
+    if (!poke) return;
+    for (var j = 0; j < poke.moves.length; j++) {
+        if (poke.moves[j].key === moveKey) { showToast("이미 이 기술을 알고 있습니다!"); return; }
+    }
+    player.bag[tmKey]--;
+    if (player.bag[tmKey] <= 0) delete player.bag[tmKey];
+    if (poke.moves.length < 4) {
+        var mv = MOVES[moveKey];
+        poke.moves.push({key: moveKey, ppLeft: mv ? mv.pp : 10});
+        addLog(poke.nickname + "은(는) " + (mv?mv.n:moveKey) + "을(를) 배웠다!", "learn");
+        showToast(poke.nickname + "이(가) " + (mv?mv.n:moveKey) + "을(를) 배웠다!");
+        gState.subScreen = null;
+        gState.tmItemKey = null;
+    } else {
+        gState.pendingMoveLearn = {pokeIdx: idx, moveKey: moveKey};
+        gState.subScreen = null;
+        gState.tmItemKey = null;
+    }
+    await saveAll();
+    render();
+};
+
 
 window.poke_acceptReward = async function() {
     if (!gState || !gState.battleData) return;
