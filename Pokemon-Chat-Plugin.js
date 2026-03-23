@@ -2794,6 +2794,21 @@ function addLog(msg, type) {
 }
 
 // ═══════════════════════════════════════════════
+// 🌟 특성 헬퍼 함수
+// ═══════════════════════════════════════════════
+function getAbility(poke) {
+    if (!poke) return null;
+    var pd = POKEDEX[poke.key];
+    if (!pd || !pd.ab) return null;
+    return ABILITIES[pd.ab] || null;
+}
+function getAbilityKey(poke) {
+    if (!poke) return null;
+    var pd = POKEDEX[poke.key];
+    return pd ? pd.ab : null;
+}
+
+// ═══════════════════════════════════════════════
 // ⚔️ 데미지 계산 (정식 포켓몬 공식 기반 보정)
 // ═══════════════════════════════════════════════
 function calcDamage(attackerPoke, defenderPoke, moveKey) {
@@ -2803,8 +2818,19 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
     var defData = POKEDEX[defenderPoke.key];
     if (!atkData || !defData) return {dmg:1, eff:1, crit:false};
 
+    var atkAbKey = getAbilityKey(attackerPoke);
+    var defAbKey = getAbilityKey(defenderPoke);
+
     var level = attackerPoke.level;
     var power = move.p;
+
+    // 특성: technician → 위력60이하 1.5배
+    if (atkAbKey === "technician" && power <= 60) power = Math.floor(power * 1.5);
+    // 특성: pinch (심록/맹화/급류/벌레의알림)
+    var atkAb = getAbility(attackerPoke);
+    if (atkAb && atkAb.type === "pinch" && atkAb.boostType === move.t && attackerPoke.currentHp <= Math.floor(attackerPoke.stats[0] / 3)) power = Math.floor(power * 1.5);
+    // 특성: toughclaws → 접촉(physical) 기술 1.3배
+    if (atkAbKey === "toughclaws" && move.c === "physical") power = Math.floor(power * 1.3);
 
     // HP비례기: 분화(eruption)는 현재HP/최대HP 비율로 위력이 변동 (최대150→최소1)
     if (moveKey === "eruption") {
@@ -2815,7 +2841,15 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
     if (move.c === "physical") {
         atkStat = attackerPoke.stats[1] * getStatMult(attackerPoke.statStages.atk);
         defStat = defenderPoke.stats[2] * getStatMult(defenderPoke.statStages.def);
-        if (attackerPoke.status === "burn") atkStat *= 0.5;
+        if (attackerPoke.status === "burn" && atkAbKey !== "guts") atkStat *= 0.5;
+        // 특성: hugpower/purepower → 물리공격 2배
+        if (atkAbKey === "hugpower" || atkAbKey === "purepower") atkStat *= 2;
+        // 특성: guts → 상태이상 시 물리공격 1.5배
+        if (atkAbKey === "guts" && attackerPoke.status) atkStat *= 1.5;
+        // 특성: marvelscale → 상태이상 시 방어 1.5배
+        if (defAbKey === "marvelscale" && defenderPoke.status) defStat *= 1.5;
+        // 특성: furcoat → 물리방어 2배
+        if (defAbKey === "furcoat") defStat *= 2;
     } else {
         atkStat = attackerPoke.stats[3] * getStatMult(attackerPoke.statStages.spatk);
         defStat = defenderPoke.stats[4] * getStatMult(defenderPoke.statStages.spdef);
@@ -2829,22 +2863,62 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
 
     // STAB
     var stab = 1;
-    for (var i = 0; i < atkData.t.length; i++) {
-        if (atkData.t[i] === move.t) { stab = 1.5; break; }
+    var atkTypes = attackerPoke.megaTypes || atkData.t;
+    for (var i = 0; i < atkTypes.length; i++) {
+        if (atkTypes[i] === move.t) { stab = 1.5; break; }
     }
+    // 특성: adaptability → STAB 2배
+    if (atkAbKey === "adaptability" && stab > 1) stab = 2;
 
     // 타입 상성
-    var eff = getTypeEffect(move.t, defData.t);
+    var defTypes = defenderPoke.megaTypes || defData.t;
+    var eff = getTypeEffect(move.t, defTypes);
 
-    // 급소 (1/24 기본, highcrit이면 1/8)
+    // 특성: scrappy → 노말/격투가 고스트에 적중
+    if (atkAbKey === "scrappy" && (move.t === "normal" || move.t === "fighting") && eff === 0) eff = 1;
+
+    // 특성: wonderguard → 효과 좋은 기술만 맞음
+    if (defAbKey === "wonderguard" && eff <= 1 && eff > 0) return {dmg:0, eff:0, crit:false, blocked:"wonderguard"};
+    // 특성: 타입 면역 특성들
+    if (defAbKey === "levitate" && move.t === "ground") return {dmg:0, eff:0, crit:false, absorbed:"levitate"};
+    if (defAbKey === "flashfire" && move.t === "fire") { defenderPoke.flashFireBoost = true; return {dmg:0, eff:0, crit:false, absorbed:"flashfire"}; }
+    if (defAbKey === "waterabsorb" && move.t === "water") return {dmg:0, eff:0, crit:false, absorbed:"waterabsorb"};
+    if (defAbKey === "voltabsorb" && move.t === "electric") return {dmg:0, eff:0, crit:false, absorbed:"voltabsorb"};
+    if ((defAbKey === "lightningrod" || defAbKey === "motordrive") && move.t === "electric") return {dmg:0, eff:0, crit:false, absorbed:defAbKey};
+    if (defAbKey === "sapsipper" && move.t === "grass") return {dmg:0, eff:0, crit:false, absorbed:"sapsipper"};
+
+    // 특성: thickfat → 불/얼음 반감
+    if (defAbKey === "thickfat" && (move.t === "fire" || move.t === "ice")) eff *= 0.5;
+    // 특성: filter/solidrock → 효과 좋은 기술 3/4
+    if ((defAbKey === "filter" || defAbKey === "solidrock") && eff > 1) eff *= 0.75;
+    // 특성: multiscale → HP만땅 시 반감
+    if (defAbKey === "multiscale" && defenderPoke.currentHp >= defenderPoke.stats[0]) eff *= 0.5;
+
+    // 특성: flashfire boost for attacker
+    if (atkAbKey === "flashfire" && move.t === "fire" && attackerPoke.flashFireBoost) power = Math.floor(power * 1.5);
+
+    // 급소
     var critChance = (move.ef === "highcrit") ? 0.125 : (attackerPoke.critBoost ? 0.125 : (1/24));
-    var crit = (Math.random() < critChance) ? 1.5 : 1;
+    // 특성: superluck → 급소율 상승
+    if (atkAbKey === "superluck") critChance = Math.min(0.5, critChance * 2);
+    // 특성: shellarmor/battlearmor → 급소 무효
+    var crit = 1;
+    if (defAbKey !== "shellarmor" && defAbKey !== "battlearmor") {
+        crit = (Math.random() < critChance) ? 1.5 : 1;
+    }
+    // 특성: sniper → 급소 시 2.25배
+    if (atkAbKey === "sniper" && crit > 1) crit = 2.25;
 
     // 랜덤 (0.85~1.00)
     var rand = rngf(0.85, 1.0);
 
     var dmg = Math.floor(baseDmg * stab * eff * crit * rand);
     if (dmg < 1 && eff > 0) dmg = 1;
+
+    // 특성: sturdy → HP만땅에서 일격사 방지
+    if (defAbKey === "sturdy" && defenderPoke.currentHp >= defenderPoke.stats[0] && dmg >= defenderPoke.currentHp) {
+        dmg = defenderPoke.currentHp - 1;
+    }
 
     return {dmg: dmg, eff: eff, crit: crit > 1};
 }
@@ -3148,6 +3222,12 @@ function startWildBattle(road) {
     var dn = POKEDEX[chosen] ? POKEDEX[chosen].n : chosen;
     addLog("야생 " + dn + " (Lv." + lv + ")이(가) 나타났다!", "battle");
     gState.battleData.msg.push("야생 " + dn + " (Lv." + lv + ")이(가) 나타났다!");
+    // 특성: intimidate (내 포켓몬)
+    var myFirst = player.party[gState.battleData.myIdx];
+    if (getAbilityKey(myFirst) === "intimidate") {
+        gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
+        gState.battleData.msg.push(myFirst.nickname + "의 위협! " + dn + "의 공격이 떨어졌다!");
+    }
     return true;
 }
 
@@ -3195,6 +3275,12 @@ function startTrainerBattle(road, trainerIdx) {
     addLog(trainer.em + " " + trainer.n + "이(가) 승부를 걸어왔다!", "battle");
     gState.battleData.msg.push(trainer.em + " " + trainer.n + "이(가) 승부를 걸어왔다!");
     gState.battleData.msg.push(trainer.n + "은(는) " + enemyParty[0].nickname + "을(를) 내보냈다!");
+    // 특성: intimidate (내 포켓몬)
+    var myFirstT = player.party[gState.battleData.myIdx];
+    if (getAbilityKey(myFirstT) === "intimidate") {
+        gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
+        gState.battleData.msg.push(myFirstT.nickname + "의 위협! " + enemyParty[0].nickname + "의 공격이 떨어졌다!");
+    }
     // 도감 등록
     for (var i = 0; i < enemyParty.length; i++) {
         if (player.pokedex) player.pokedex[enemyParty[i].key] = true;
@@ -3253,6 +3339,12 @@ function startGymBattle(regionKey, gymIdx, leaderIdx) {
     addLog(leader.em + " 관장 " + leader.n + "이(가) 승부를 걸어왔다!", "battle");
     gState.battleData.msg.push(leader.em + " 관장 " + leader.n + "이(가) 승부를 걸어왔다!");
     gState.battleData.msg.push("관장 " + leader.n + "은(는) " + enemyParty[0].nickname + "을(를) 내보냈다!");
+    // 특성: intimidate (내 포켓몬)
+    var myFirstG = player.party[gState.battleData.myIdx];
+    if (getAbilityKey(myFirstG) === "intimidate") {
+        gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
+        gState.battleData.msg.push(myFirstG.nickname + "의 위협! " + enemyParty[0].nickname + "의 공격이 떨어졌다!");
+    }
     for (var i = 0; i < enemyParty.length; i++) {
         if (player.pokedex) player.pokedex[enemyParty[i].key] = true;
     }
@@ -3341,29 +3433,81 @@ function canAct(poke, bd) {
 
 function doStatusDamage(poke, bd) {
     if (poke.currentHp <= 0) return;
-    if (poke.status === "burn") {
+    // 특성: magicguard → 기술 외 데미지 없음
+    var abKey = getAbilityKey(poke);
+    if (poke.status === "burn" && abKey !== "magicguard") {
         var dmg = Math.max(1, Math.floor(poke.stats[0] / 16));
         poke.currentHp = Math.max(0, poke.currentHp - dmg);
         bd.msg.push(poke.nickname + "은(는) 화상 데미지를 받았다! (-" + dmg + ")");
     }
-    if (poke.status === "poison") {
+    if (poke.status === "poison" && abKey !== "magicguard") {
         var dmg = Math.max(1, Math.floor(poke.stats[0] / 8));
         poke.currentHp = Math.max(0, poke.currentHp - dmg);
         bd.msg.push(poke.nickname + "은(는) 독 데미지를 받았다! (-" + dmg + ")");
     }
     if (poke.guardSpec && poke.guardSpec > 0) poke.guardSpec--;
+    // 특성: speedboost → 매 턴 스피드 +1
+    if (abKey === "speedboost" && poke.currentHp > 0) {
+        poke.statStages.spd = Math.min(6, poke.statStages.spd + 1);
+        bd.msg.push(poke.nickname + "의 가속! 스피드가 올라갔다!");
+    }
+    // 특성: shedskin → 1/3 확률 상태회복
+    if (abKey === "shedskin" && poke.status && Math.random() < 1/3) {
+        bd.msg.push(poke.nickname + "의 탈피! 상태이상이 회복되었다!");
+        poke.status = null; poke.statusTurns = 0;
+    }
 }
 
 function executeAttack(attacker, defender, moveKey, bd) {
     var mv = MOVES[moveKey];
     if (!mv) return;
     bd.msg.push(attacker.nickname + "의 " + mv.n + "!");
+    // 명중률 체크
     if (mv.a > 0 && mv.a < 100) {
         var accMult = getStatMult(attacker.statStages.acc) / getStatMult(defender.statStages.eva);
+        // 특성: compoundeyes → 명중률 1.3배
+        if (getAbilityKey(attacker) === "compoundeyes") accMult *= 1.3;
+        // 특성: noguard → 반드시 명중
+        if (getAbilityKey(attacker) === "noguard" || getAbilityKey(defender) === "noguard") accMult = 999;
         if (Math.random() * 100 > mv.a * accMult) { bd.msg.push("그러나 빗나갔다!"); return; }
     }
     if (mv.c !== "status" && mv.p > 0) {
         var result = calcDamage(attacker, defender, moveKey);
+        // 특성: 타입 흡수
+        if (result.absorbed) {
+            var absAb = ABILITIES[result.absorbed];
+            bd.msg.push(defender.nickname + "의 " + (absAb?absAb.n:result.absorbed) + "!");
+            if (result.absorbed === "waterabsorb" || result.absorbed === "voltabsorb") {
+                var aheal = Math.max(1, Math.floor(defender.stats[0] / 4));
+                defender.currentHp = Math.min(defender.stats[0], defender.currentHp + aheal);
+                bd.msg.push(defender.nickname + "은(는) HP를 회복했다! (+" + aheal + ")");
+            } else if (result.absorbed === "flashfire") {
+                bd.msg.push(defender.nickname + "의 불꽃 기술 위력이 올라갔다!");
+            } else if (result.absorbed === "lightningrod") {
+                defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 1);
+                bd.msg.push(defender.nickname + "의 특수공격이 올라갔다!");
+            } else if (result.absorbed === "motordrive") {
+                defender.statStages.spd = Math.min(6, defender.statStages.spd + 1);
+                bd.msg.push(defender.nickname + "의 스피드가 올라갔다!");
+            } else if (result.absorbed === "sapsipper") {
+                defender.statStages.atk = Math.min(6, defender.statStages.atk + 1);
+                bd.msg.push(defender.nickname + "의 공격이 올라갔다!");
+            } else {
+                bd.msg.push("효과가 없는 것 같다...");
+            }
+            for (var i = 0; i < attacker.moves.length; i++) {
+                if (attacker.moves[i].key === moveKey) { attacker.moves[i].ppLeft = Math.max(0, attacker.moves[i].ppLeft - 1); break; }
+            }
+            return;
+        }
+        if (result.blocked) {
+            var blkAb = ABILITIES[result.blocked];
+            bd.msg.push(defender.nickname + "의 " + (blkAb?blkAb.n:result.blocked) + "! 효과가 없는 것 같다...");
+            for (var i = 0; i < attacker.moves.length; i++) {
+                if (attacker.moves[i].key === moveKey) { attacker.moves[i].ppLeft = Math.max(0, attacker.moves[i].ppLeft - 1); break; }
+            }
+            return;
+        }
         defender.currentHp = Math.max(0, defender.currentHp - result.dmg);
         var effMsg = "";
         if (result.eff >= 2) effMsg = " 효과가 굉장했다!";
@@ -3378,18 +3522,55 @@ function executeAttack(attacker, defender, moveKey, bd) {
             bd.msg.push(attacker.nickname + "은(는) " + heal + " HP를 흡수했다!");
         }
         if (mv.ef === "recoil") {
-            var recoil = Math.max(1, Math.floor(result.dmg / 3));
-            attacker.currentHp = Math.max(0, attacker.currentHp - recoil);
-            bd.msg.push(attacker.nickname + "은(는) 반동으로 " + recoil + " 데미지를 받았다!");
+            // 특성: rockhead → 반동 데미지 없음
+            if (getAbilityKey(attacker) !== "rockhead") {
+                var recoil = Math.max(1, Math.floor(result.dmg / 3));
+                attacker.currentHp = Math.max(0, attacker.currentHp - recoil);
+                bd.msg.push(attacker.nickname + "은(는) 반동으로 " + recoil + " 데미지를 받았다!");
+            }
         }
         if (mv.ef === "selfdestruct") {
             attacker.currentHp = 0;
             bd.msg.push(attacker.nickname + "은(는) 쓰러졌다!");
         }
+        // 특성: 접촉 반사 (roughskin/ironbarbs)
+        if (mv.c === "physical" && result.dmg > 0 && defender.currentHp > 0) {
+            var defAbKey = getAbilityKey(defender);
+            if (defAbKey === "roughskin" || defAbKey === "ironbarbs") {
+                var rsDmg = Math.max(1, Math.floor(attacker.stats[0] / 8));
+                attacker.currentHp = Math.max(0, attacker.currentHp - rsDmg);
+                bd.msg.push(defender.nickname + "의 " + ABILITIES[defAbKey].n + "! " + attacker.nickname + "에게 " + rsDmg + " 데미지!");
+            }
+            // 특성: 접촉 상태이상 (staticbody/poisonpoint/flamebody)
+            var defAb = getAbility(defender);
+            if (defAb && defAb.type === "contact_status" && !attacker.status && attacker.currentHp > 0) {
+                if (Math.random() * 100 < defAb.chance) {
+                    var atkAbDef = getAbility(attacker);
+                    var immune = false;
+                    if (atkAbDef && atkAbDef.type === "statusimmune" && atkAbDef.immune === defAb.status) immune = true;
+                    if (!immune) {
+                        attacker.status = defAb.status;
+                        attacker.statusTurns = 0;
+                        bd.msg.push(defender.nickname + "의 " + defAb.n + "! " + attacker.nickname + "은(는) " + statusName(attacker.status) + " 상태가 되었다!");
+                    }
+                }
+            }
+        }
+        // 특성: moxie → 쓰러뜨리면 공격+1
+        if (defender.currentHp <= 0 && getAbilityKey(attacker) === "moxie") {
+            attacker.statStages.atk = Math.min(6, attacker.statStages.atk + 1);
+            bd.msg.push(attacker.nickname + "의 자신감! 공격이 올라갔다!");
+        }
     }
     // PP 감소
     for (var i = 0; i < attacker.moves.length; i++) {
         if (attacker.moves[i].key === moveKey) { attacker.moves[i].ppLeft = Math.max(0, attacker.moves[i].ppLeft - 1); break; }
+    }
+    // 특성: pressure → PP 추가 소모
+    if (getAbilityKey(defender) === "pressure") {
+        for (var i = 0; i < attacker.moves.length; i++) {
+            if (attacker.moves[i].key === moveKey) { attacker.moves[i].ppLeft = Math.max(0, attacker.moves[i].ppLeft - 1); break; }
+        }
     }
     applyMoveEffects(moveKey, attacker, defender, bd);
 }
@@ -4250,22 +4431,32 @@ function renderBattleScreen() {
     // 내 포켓몬
     html += '<div class="pk-poke-card" style="border-left:3px solid #3498db">';
     html += '<div style="font-size:11px;color:#3498db">나의 포켓몬</div>';
-    html += '<div class="pk-poke-emoji">' + (myData?myData.em:"?") + '</div>';
-    html += '<div style="font-weight:bold">' + myPoke.nickname + ' <span style="color:#aaa;font-size:11px">Lv.' + myPoke.level + '</span></div>';
-    if (myData) { for (var i = 0; i < myData.t.length; i++) html += typeSpan(myData.t[i]); }
+    var myEm = (myPoke.isMega && myPoke.megaForm) ? myPoke.megaForm.em : (myData?myData.em:"?");
+    var myName = (myPoke.isMega && myPoke.megaNickname) ? myPoke.megaNickname : myPoke.nickname;
+    html += '<div class="pk-poke-emoji">' + myEm + '</div>';
+    html += '<div style="font-weight:bold">' + myName + ' <span style="color:#aaa;font-size:11px">Lv.' + myPoke.level + '</span></div>';
+    var myTypes = myPoke.megaTypes || (myData ? myData.t : []);
+    for (var i = 0; i < myTypes.length; i++) html += typeSpan(myTypes[i]);
     html += '<div style="font-size:11px;margin-top:4px">HP: ' + Math.max(0,myPoke.currentHp) + '/' + myPoke.stats[0] + '</div>';
     html += hpBar(myPoke.currentHp, myPoke.stats[0]);
     if (myPoke.status && myPoke.status !== "confuse") html += '<div style="font-size:10px;color:#e74c3c;margin-top:2px">⚠️ ' + statusName(myPoke.status) + '</div>';
+    // 특성 표시
+    var myAb = getAbility(myPoke);
+    if (myAb) html += '<div style="font-size:10px;color:#9b59b6;margin-top:1px">⭐ ' + myAb.n + '</div>';
+    if (myPoke.isMega) html += '<div style="font-size:10px;color:#e91e63;margin-top:1px">💎 메가진화</div>';
     html += '</div>';
     // 적 포켓몬
     html += '<div class="pk-poke-card" style="border-left:3px solid #e74c3c">';
     html += '<div style="font-size:11px;color:#e74c3c">' + (bd.type==="trainer"?"상대":"야생") + ' 포켓몬</div>';
     html += '<div class="pk-poke-emoji">' + (enData?enData.em:"?") + '</div>';
     html += '<div style="font-weight:bold">' + enemy.nickname + ' <span style="color:#aaa;font-size:11px">Lv.' + enemy.level + '</span></div>';
-    if (enData) { for (var i = 0; i < enData.t.length; i++) html += typeSpan(enData.t[i]); }
+    var enTypes = enemy.megaTypes || (enData ? enData.t : []);
+    for (var i = 0; i < enTypes.length; i++) html += typeSpan(enTypes[i]);
     html += '<div style="font-size:11px;margin-top:4px">HP: ' + Math.max(0,enemy.currentHp) + '/' + enemy.stats[0] + '</div>';
     html += hpBar(enemy.currentHp, enemy.stats[0]);
     if (enemy.status && enemy.status !== "confuse") html += '<div style="font-size:10px;color:#e74c3c;margin-top:2px">⚠️ ' + statusName(enemy.status) + '</div>';
+    var enAb = getAbility(enemy);
+    if (enAb) html += '<div style="font-size:10px;color:#9b59b6;margin-top:1px">⭐ ' + enAb.n + '</div>';
     // 트레이너전 남은 포켓몬
     if (bd.type === "trainer" && bd.enemyParty) {
         html += '<div style="font-size:10px;color:#aaa;margin-top:3px">남은: ' + (bd.enemyParty.length - bd.enemyIdx) + '/' + bd.enemyParty.length + '</div>';
@@ -4316,6 +4507,13 @@ function renderBattleScreen() {
         }
         html += '<button class="pk-btn pk-btn-blue pk-btn-xs" data-action="poke_battleParty">🔄 교체</button>';
         html += '<button class="pk-btn pk-btn-green pk-btn-xs" data-action="poke_battleBag">🎒 아이템</button>';
+        // 메가진화 버튼
+        if (player.bag.megaring && !bd.megaUsed) {
+            var canMega = !!MEGA_DATA[myPoke.key] || !!MEGA_DATA[myPoke.key + "x"];
+            if (canMega && !myPoke.isMega) {
+                html += '<button class="pk-btn pk-btn-xs" style="background:#9b59b6;color:#fff" data-action="poke_megaEvolve">💎 메가진화</button>';
+            }
+        }
         if (bd.type === "wild") html += '<button class="pk-btn pk-btn-gray pk-btn-xs" data-action="poke_run">🏃 도주</button>';
         html += '</div>';
     }
@@ -4510,6 +4708,10 @@ function renderSummaryScreen() {
     html += '<div style="font-size:18px;font-weight:bold">' + poke.nickname + '</div>';
     html += '<div style="color:#aaa;font-size:12px">Lv.' + poke.level + ' | EXP: ' + poke.exp + ' / ' + (getExpForLevel(poke.level+1)-getExpForLevel(poke.level)) + '</div>';
     if (pd) { for (var i = 0; i < pd.t.length; i++) html += typeSpan(pd.t[i]); }
+    // 특성 표시
+    if (pd && pd.ab && ABILITIES[pd.ab]) {
+        html += '<div style="margin-top:4px"><span style="font-size:11px;color:#9b59b6">⭐ 특성: ' + ABILITIES[pd.ab].n + '</span> <span style="font-size:10px;color:#777">' + ABILITIES[pd.ab].desc + '</span></div>';
+    }
     html += '</div>';
     // 스탯
     html += '<div class="pk-card">';
@@ -4964,6 +5166,17 @@ window.poke_switchInBattle = async function(idx) {
     gState.subScreen = null;
     if (prev && prev.currentHp > 0) {
         bd.msg.push(prev.nickname + "을(를) 교체했다!");
+        // 특성: naturalcure → 교체 시 상태회복
+        if (getAbilityKey(prev) === "naturalcure" && prev.status) {
+            prev.status = null; prev.statusTurns = 0;
+            bd.msg.push(prev.nickname + "의 자연회복! 상태이상이 회복되었다!");
+        }
+        // 특성: regenerator → 교체 시 HP 1/3 회복
+        if (getAbilityKey(prev) === "regenerator") {
+            var rHeal = Math.max(1, Math.floor(prev.stats[0] / 3));
+            prev.currentHp = Math.min(prev.stats[0], prev.currentHp + rHeal);
+            bd.msg.push(prev.nickname + "의 재생력! HP가 회복되었다! (+" + rHeal + ")");
+        }
         // 교체 시 적이 공격
         var emk = enemyChooseMove(bd.enemy);
         if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, player.party[bd.myIdx], emk, bd);
@@ -4971,6 +5184,11 @@ window.poke_switchInBattle = async function(idx) {
     }
     var curPoke = player.party[bd.myIdx];
     bd.msg.push(curPoke.nickname + " 가라!");
+    // 특성: intimidate → 등장 시 상대 공격 -1
+    if (getAbilityKey(curPoke) === "intimidate") {
+        bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
+        bd.msg.push(curPoke.nickname + "의 위협! " + bd.enemy.nickname + "의 공격이 떨어졌다!");
+    }
     for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
     await saveAll();
     render();
@@ -4984,6 +5202,23 @@ window.poke_endBattle = async function() {
         if (player.battleCount >= 5) {
             advanceTime();
             showToast(TIME_NAMES[player.timeOfDay]);
+        }
+    }
+    // 메가진화 해제
+    for (var i = 0; i < player.party.length; i++) {
+        var p = player.party[i];
+        if (p.isMega) {
+            p.isMega = false;
+            p.megaForm = null;
+            p.megaTypes = null;
+            p.megaNickname = null;
+            var origData = POKEDEX[p.key];
+            if (origData) {
+                var origStats = calcStats(origData.s, p.level, p.iv);
+                var hpRatio = p.currentHp / p.stats[0];
+                p.stats = origStats;
+                p.currentHp = Math.max(0, Math.floor(origStats[0] * hpRatio));
+            }
         }
     }
     gState.phase = "overworld";
@@ -5011,6 +5246,21 @@ window.poke_blackout = async function() {
         addLog("😵 패배... 소지금의 일부를 잃었다.", "battle");
     }
     healAllPokemon();
+    // 메가진화 해제
+    for (var i = 0; i < player.party.length; i++) {
+        var p = player.party[i];
+        if (p.isMega) {
+            p.isMega = false;
+            p.megaForm = null;
+            p.megaTypes = null;
+            p.megaNickname = null;
+            var origData = POKEDEX[p.key];
+            if (origData) {
+                var origStats = calcStats(origData.s, p.level, p.iv);
+                p.stats = origStats;
+            }
+        }
+    }
     gState.phase = "overworld";
     gState.subScreen = null;
     gState.battleData = null;
@@ -5054,6 +5304,32 @@ window.poke_back = function() {
 window.poke_battleBag = function() {
     if (!gState || !gState.battleData) return;
     gState.subScreen = "bag";
+    render();
+};
+
+window.poke_megaEvolve = async function() {
+    if (!gState || !gState.battleData) return;
+    var bd = gState.battleData;
+    if (bd.megaUsed) { showToast("이미 메가진화를 사용했습니다!"); return; }
+    if (!player.bag.megaring) { showToast("메가링이 없습니다!"); return; }
+    var myPoke = player.party[bd.myIdx];
+    if (!myPoke || myPoke.currentHp <= 0) return;
+    var megaKey = myPoke.key;
+    var megaForm = MEGA_DATA[megaKey];
+    if (!megaForm && MEGA_DATA[megaKey + "x"]) megaForm = MEGA_DATA[megaKey + "x"];
+    if (!megaForm) { showToast("이 포켓몬은 메가진화할 수 없습니다!"); return; }
+    bd.megaUsed = true;
+    myPoke.isMega = true;
+    myPoke.megaForm = megaForm;
+    var megaStats = calcStats(megaForm.s, myPoke.level, myPoke.iv);
+    var hpRatio = myPoke.currentHp / myPoke.stats[0];
+    myPoke.stats = megaStats;
+    myPoke.currentHp = Math.max(1, Math.floor(megaStats[0] * hpRatio));
+    myPoke.megaTypes = megaForm.t;
+    myPoke.megaNickname = megaForm.n;
+    bd.msg = [myPoke.nickname + "이(가) 메가진화했다! → " + megaForm.n + "!"];
+    for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
+    await saveAll();
     render();
 };
 
