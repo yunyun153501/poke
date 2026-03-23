@@ -622,6 +622,9 @@ masterball:  {n:"마스터볼",desc:"100% 포획",type:"ball",value:255,buy:9999
 // ═══════════════════════════════════════════════
 // 🎮 게임 상태 & 유틸
 // ═══════════════════════════════════════════════
+var TIME_NAMES = ["🌙 새벽","🌅 아침","☀️ 점심","🌇 오후","🌃 밤"];
+var TIME_KEYS = ["dawn","morning","noon","afternoon","night"];
+
 var player = null;
 var gState = null;
 var isVisible = true;
@@ -643,7 +646,11 @@ function createNewPlayer(name, starterKey, region) {
         pokedex: dex,
         defeatedTrainers: {},
         defeatedGyms: {},
-        day: 1
+        day: 1,
+        timeOfDay: 1,
+        battleCount: 0,
+        caughtLegendaries: {},
+        roamingLocation: null
     };
 }
 
@@ -759,6 +766,11 @@ async function loadAll() {
             if (!player.defeatedTrainers) player.defeatedTrainers = {};
             if (!player.defeatedGyms) player.defeatedGyms = {};
             if (player.day === undefined) player.day = 1;
+            // 시간 시스템 마이그레이션
+            if (player.timeOfDay === undefined) player.timeOfDay = 1;
+            if (player.battleCount === undefined) player.battleCount = 0;
+            if (!player.caughtLegendaries) player.caughtLegendaries = {};
+            if (player.roamingLocation === undefined) player.roamingLocation = null;
             // badges 형식 마이그레이션 (숫자→객체)
             if (typeof player.badges === 'number' || !player.badges) {
                 player.badges = {kanto:[], johto:[]};
@@ -839,6 +851,46 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
 
     return {dmg: dmg, eff: eff, crit: crit > 1};
 }
+
+// ═══════════════════════════════════════════════
+// ⏰ 시간 시스템
+// ═══════════════════════════════════════════════
+function advanceTime() {
+    if (!player) return;
+    player.timeOfDay++;
+    player.battleCount = 0;
+    if (player.timeOfDay >= 5) {
+        player.timeOfDay = 0;
+        player.day++;
+        addLog("🌅 " + player.day + "일차가 밝았다!", "system");
+    }
+    addLog("⏰ 시간이 흘러 " + TIME_NAMES[player.timeOfDay] + " 이(가) 되었다.", "system");
+    // 로밍 전설 포켓몬 위치 재배치 (낮→밤, 밤→새벽 등 시간 변할 때마다)
+    randomizeRoamingLocation();
+}
+
+function randomizeRoamingLocation() {
+    if (!player) return;
+    // 성도 뱃지 3개 이상이면 로밍 시작
+    var jBadges = player.badges.johto ? player.badges.johto.length : 0;
+    if (jBadges < 3) { player.roamingLocation = null; return; }
+    // 라이코/앤테이/스이쿤 중 아직 안 잡은 것이 있으면 로밍
+    var roamers = ["raikou","entei","suicune"];
+    var active = [];
+    for (var i = 0; i < roamers.length; i++) {
+        if (!player.caughtLegendaries[roamers[i]]) active.push(roamers[i]);
+    }
+    if (active.length === 0) { player.roamingLocation = null; return; }
+    // 현재 지역의 랜덤 도로에 배치
+    var region = REGIONS[player.region];
+    if (!region) return;
+    var roadCount = region.roads.length;
+    var rIdx = rng(0, roadCount - 1);
+    player.roamingLocation = {region: player.region, roadIdx: rIdx, pokemon: active};
+}
+
+function isNightTime() { return player && player.timeOfDay === 4; }
+function isDawnTime() { return player && player.timeOfDay === 0; }
 
 // ═══════════════════════════════════════════════
 // ⚔️ 배틀 시스템
@@ -1660,7 +1712,7 @@ function renderOverworld() {
     // 상단 상태바
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px">';
     html += '<span style="font-size:13px">👤 ' + player.name + '</span>';
-    html += '<span style="font-size:12px">📅 ' + player.day + '일차</span>';
+    html += '<span style="font-size:12px">📅 ' + player.day + '일차 ' + TIME_NAMES[player.timeOfDay] + '</span>';
     html += '<span class="pk-gold" style="font-size:13px">💰 ₩' + player.gold.toLocaleString() + '</span>';
     html += '</div>';
     // 뱃지 미니바
@@ -1668,7 +1720,7 @@ function renderOverworld() {
     var jBadges = player.badges.johto ? player.badges.johto.length : 0;
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:4px 10px;font-size:11px">';
     html += '<span>🏅 칸토 ' + kBadges + '/8 | 성도 ' + jBadges + '/8</span>';
-    html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_nextDay">🌅 다음 날</button>';
+    html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_advanceTime">⏰ 다음 시간</button>';
     html += '</div>';
     // 파티 미니바
     html += '<div style="display:flex;gap:4px;margin:4px 0;flex-wrap:wrap;justify-content:center">';
@@ -2227,6 +2279,19 @@ window.poke_switchRegion = async function(region) {
 window.poke_selectRoad = async function(idx) {
     idx = parseInt(idx, 10);
     if (isNaN(idx)) return;
+    // 뱃지 체크: 도로 이동 조건
+    var region = REGIONS[player.region];
+    if (region && region.roads[idx] && region.roads[idx].reqBadges !== undefined) {
+        var curBadges = player.badges[player.region] ? player.badges[player.region].length : 0;
+        if (curBadges < region.roads[idx].reqBadges) {
+            showToast("🏅 뱃지 " + region.roads[idx].reqBadges + "개 필요! (현재 " + curBadges + "개)");
+            return;
+        }
+    }
+    // 맵 이동 시 시간 경과
+    if (player.roadIdx !== idx) {
+        advanceTime();
+    }
     player.roadIdx = idx;
     gState.subScreen = "roadDetail";
     await saveAll();
@@ -2319,6 +2384,14 @@ window.poke_switchInBattle = async function(idx) {
 
 window.poke_endBattle = async function() {
     if (!gState) return;
+    // 배틀 카운트 증가 → 5회마다 시간 경과
+    if (player) {
+        player.battleCount = (player.battleCount || 0) + 1;
+        if (player.battleCount >= 5) {
+            advanceTime();
+            showToast(TIME_NAMES[player.timeOfDay]);
+        }
+    }
     gState.phase = "overworld";
     gState.subScreen = "roadDetail";
     gState.battleData = null;
@@ -2330,6 +2403,9 @@ window.poke_endBattle = async function() {
 
 window.poke_blackout = async function() {
     if (!player) return;
+    // 배틀 카운트 증가
+    player.battleCount = (player.battleCount || 0) + 1;
+    if (player.battleCount >= 5) advanceTime();
     var bd = gState.battleData;
     if (bd && bd.type === "trainer") {
         var baseReward = bd.trainerReward || 500;
@@ -2508,12 +2584,10 @@ window.poke_declineReward = async function() {
     render();
 };
 
-window.poke_nextDay = async function() {
+window.poke_advanceTime = async function() {
     if (!player) return;
-    player.day++;
-    healAllPokemon();
-    addLog("🌅 " + player.day + "일차가 밝았다! 모든 포켓몬이 회복되었다.", "system");
-    showToast("🌅 " + player.day + "일차! 트레이너 재도전 가능!");
+    advanceTime();
+    showToast(TIME_NAMES[player.timeOfDay] + " (Day " + player.day + ")");
     await saveAll();
     render();
 };
