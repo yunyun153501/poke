@@ -1,5 +1,5 @@
 //@name Pokemon Battle
-//@display-name 🎮 포켓몬 배틀 (Gen 1-4)
+//@display-name 🎮 포켓몬 배틀 (Gen 1-6)
 //@api 3.0
 //@version 2.0
 //@arg pokemon_save string "" "포켓몬 세이브 데이터"
@@ -3074,7 +3074,7 @@ function render() {
 function renderTitleScreen() {
     var html = '<div style="text-align:center;padding:20px 0">';
     html += '<div style="font-size:28px;margin:10px 0">🎮 포켓몬 배틀</div>';
-    html += '<div style="color:#aaa;font-size:12px;margin-bottom:20px">Gen 1~4 | 칸토 & 성도 & 호엔 & 신오</div>';
+    html += '<div style="color:#aaa;font-size:12px;margin-bottom:20px">Gen 1~6 | 칸토 & 성도 & 호엔 & 신오 & 하나 & 칼로스</div>';
     html += '<div style="display:flex;flex-direction:column;gap:8px;max-width:200px;margin:0 auto">';
     html += '<button class="pk-btn pk-btn-red pk-btn-block" data-action="poke_newGame">🆕 새 게임</button>';
     html += '<button class="pk-btn pk-btn-blue pk-btn-block" data-action="poke_continue">📂 이어하기</button>';
@@ -4214,13 +4214,16 @@ async function initPlugin() {
                 if (win) {
                     if (isVisible) {
                         win.classList.remove("hidden");
-                        await Risuai.showContainer('fullscreen');
-                        if (!player || !gState) { await loadAll(); }
-                        render();
                     } else {
                         win.classList.add("hidden");
-                        await Risuai.hideContainer();
                     }
+                }
+                if (isVisible) {
+                    await Risuai.showContainer('fullscreen');
+                    if (!player || !gState) { await loadAll(); }
+                    render();
+                } else {
+                    await Risuai.hideContainer();
                 }
             });
         } catch(e) { console.error(PLUGIN, "registerButton error:", e); }
@@ -4230,6 +4233,12 @@ async function initPlugin() {
         console.log(PLUGIN, "세이브 데이터 로드 완료");
     }
     render();
+    // 시작 시 창이 열려있었다면 컨테이너 표시
+    if (_hasRisu && isVisible) {
+        var win = document.getElementById(UI_ID);
+        if (win) win.classList.remove("hidden");
+        await Risuai.showContainer('fullscreen');
+    }
 }
 
 await initPlugin();
