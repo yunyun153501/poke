@@ -3854,8 +3854,8 @@ function renderGymScreen() {
 function renderBadgeScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">🏅 뱃지 컬렉션</div>';
-    var regions = ["kanto", "johto", "hoenn", "sinnoh"];
-    var regionNames = {kanto: "칸토 지방", johto: "성도 지방", hoenn: "호엔 지방", sinnoh: "신오 지방"};
+    var regions = ["kanto", "johto", "hoenn", "sinnoh", "unova", "kalos"];
+    var regionNames = {kanto: "칸토 지방", johto: "성도 지방", hoenn: "호엔 지방", sinnoh: "신오 지방", unova: "하나 지방", kalos: "칼로스 지방"};
     for (var r = 0; r < regions.length; r++) {
         var rk = regions[r];
         var gymList = GYMS[rk];
