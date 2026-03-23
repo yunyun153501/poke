@@ -573,7 +573,236 @@ phione:     {n:"피오네",id:489,t:["water"],s:[80,80,80,80,80,80],ml:{1:["wate
 manaphy:    {n:"마나피",id:490,t:["water"],s:[100,100,100,100,100,100],ml:{1:["watergun","bubblebeam"],30:["surf"],50:["hydropump"]},e:null,cr:3,xp:270,em:"🌊"},
 darkrai:    {n:"다크라이",id:491,t:["dark"],s:[70,90,90,135,90,125],ml:{1:["darkpulse","hypnosis"],30:["shadowball"],50:["shadowball"]},e:null,cr:3,xp:270,em:"🌑"},
 shaymin:    {n:"쉐이미",id:492,t:["grass"],s:[100,100,100,100,100,100],ml:{1:["megadrain","razorleaf"],30:["solarbeam"],50:["dazzlinggleam"]},e:null,cr:3,xp:270,em:"🌸"},
-arceus:     {n:"아르세우스",id:493,t:["normal"],s:[120,120,120,120,120,120],ml:{1:["hyperbeam","earthquake"],30:["outrage"],50:["psychic"]},e:null,cr:3,xp:324,em:"✨"}
+arceus:     {n:"아르세우스",id:493,t:["normal"],s:[120,120,120,120,120,120],ml:{1:["hyperbeam","earthquake"],30:["outrage"],50:["psychic"]},e:null,cr:3,xp:324,em:"✨"},
+// ═══ Gen 5-6 (하나/Unova & 칼로스/Kalos) ═══
+victini:    {n:"비크티니",id:494,t:["psychic","fire"],s:[100,100,100,100,100,100],ml:{1:["quickattack","ember"],20:["flamethrower"],35:["psychic"]},e:null,cr:3,xp:270,em:"🔥"},
+snivy:    {n:"주리비얀",id:495,t:["grass"],s:[45,45,55,45,55,63],ml:{1:["tackle","leer"],17:["vinewhip"],28:["megadrain"]},e:{l:17,to:"servine"},cr:45,xp:62,em:"🌿"},
+servine:    {n:"주리번",id:496,t:["grass"],s:[60,60,75,60,75,83],ml:{1:["tackle","vinewhip"],20:["megadrain"],32:["razorleaf"]},e:{l:36,to:"serperior"},cr:45,xp:145,em:"🌿"},
+serperior:    {n:"샤로다",id:497,t:["grass"],s:[75,75,95,75,95,113],ml:{1:["vinewhip","megadrain"],30:["razorleaf"],44:["energyball"]},e:null,cr:45,xp:238,em:"🐍"},
+tepig:    {n:"뚜꾸리",id:498,t:["fire"],s:[65,63,45,45,45,45],ml:{1:["tackle","ember"],15:["smokescreen"],25:["flamethrower"]},e:{l:17,to:"pignite"},cr:45,xp:62,em:"🐷"},
+pignite:    {n:"차오꿀",id:499,t:["fire","fighting"],s:[90,93,55,70,55,55],ml:{1:["tackle","ember"],20:["flamethrower"],30:["brickbreak"]},e:{l:36,to:"emboar"},cr:45,xp:146,em:"🐷"},
+emboar:    {n:"염무왕",id:500,t:["fire","fighting"],s:[110,123,65,100,65,65],ml:{1:["ember","brickbreak"],30:["flamethrower"],43:["flareblitz"]},e:null,cr:45,xp:238,em:"��"},
+oshawott:    {n:"수댕이",id:501,t:["water"],s:[55,55,45,63,45,45],ml:{1:["tackle","watergun"],17:["waterpulse"],25:["aquatail"]},e:{l:17,to:"dewott"},cr:45,xp:62,em:"🦦"},
+dewott:    {n:"쌍검자비",id:502,t:["water"],s:[75,75,60,83,60,60],ml:{1:["tackle","watergun"],20:["waterpulse"],30:["aquatail"]},e:{l:36,to:"samurott"},cr:45,xp:145,em:"🦦"},
+samurott:    {n:"대검귀",id:503,t:["water"],s:[95,100,85,108,70,70],ml:{1:["watergun","slash"],30:["aquatail"],40:["hydropump"]},e:null,cr:45,xp:238,em:"⚔️"},
+patrat:    {n:"보르쥐",id:504,t:["normal"],s:[45,55,39,35,39,42],ml:{1:["tackle","leer"],13:["bite"],22:["crunch"]},e:{l:20,to:"watchog"},cr:255,xp:51,em:"🐭"},
+watchog:    {n:"보르그",id:505,t:["normal"],s:[60,85,69,60,69,77],ml:{1:["tackle","bite"],20:["crunch"],32:["slash"]},e:null,cr:255,xp:147,em:"👀"},
+lillipup:    {n:"요테리",id:506,t:["normal"],s:[45,60,45,25,45,55],ml:{1:["tackle","leer"],8:["bite"],15:["quickattack"]},e:{l:16,to:"herdier"},cr:255,xp:55,em:"🐶"},
+herdier:    {n:"하데리에",id:507,t:["normal"],s:[65,80,65,35,65,60],ml:{1:["tackle","bite"],20:["crunch"],28:["bodyslam"]},e:{l:32,to:"stoutland"},cr:120,xp:130,em:"🐕"},
+stoutland:    {n:"바랑도르",id:508,t:["normal"],s:[85,110,90,45,90,80],ml:{1:["bite","crunch"],32:["bodyslam"],45:["hyperbeam"]},e:null,cr:45,xp:225,em:"🐕"},
+purrloin:    {n:"쌔비냥",id:509,t:["dark"],s:[41,50,37,50,37,66],ml:{1:["scratch","growl"],10:["pursuit"],20:["slash"]},e:{l:20,to:"liepard"},cr:255,xp:56,em:"🐱"},
+liepard:    {n:"레파르다스",id:510,t:["dark"],s:[64,88,50,88,50,106],ml:{1:["scratch","pursuit"],22:["slash"],34:["darkpulse"]},e:null,cr:90,xp:156,em:"🐆"},
+pansage:    {n:"야나프",id:511,t:["grass"],s:[50,53,48,53,48,64],ml:{1:["scratch","leer"],10:["vinewhip"],22:["razorleaf"]},e:null,cr:190,xp:63,em:"🌿"},
+simisage:    {n:"야나키",id:512,t:["grass"],s:[75,98,63,98,63,101],ml:{1:["razorleaf","leer"],22:["energyball"],40:["solarbeam"]},e:null,cr:75,xp:174,em:"🌿"},
+pansear:    {n:"바오프",id:513,t:["fire"],s:[50,53,48,53,48,64],ml:{1:["scratch","leer"],10:["ember"],22:["flamethrower"]},e:null,cr:190,xp:63,em:"🔥"},
+simisear:    {n:"바오키",id:514,t:["fire"],s:[75,98,63,98,63,101],ml:{1:["ember","leer"],22:["flamethrower"],40:["fireblast"]},e:null,cr:75,xp:174,em:"🔥"},
+panpour:    {n:"앗차프",id:515,t:["water"],s:[50,53,48,53,48,64],ml:{1:["scratch","leer"],10:["watergun"],22:["waterpulse"]},e:null,cr:190,xp:63,em:"💧"},
+simipour:    {n:"앗차키",id:516,t:["water"],s:[75,98,63,98,63,101],ml:{1:["watergun","leer"],22:["waterpulse"],40:["hydropump"]},e:null,cr:75,xp:174,em:"💧"},
+munna:    {n:"몽나",id:517,t:["psychic"],s:[76,25,45,67,55,24],ml:{1:["pound","hypnosis"],13:["psybeam"],25:["psychic"]},e:null,cr:190,xp:58,em:"🌙"},
+musharna:    {n:"몽얌나",id:518,t:["psychic"],s:[116,55,85,107,95,29],ml:{1:["psybeam","hypnosis"],25:["psychic"],40:["calmmind"]},e:null,cr:75,xp:170,em:"🌙"},
+pidove:    {n:"콩둘기",id:519,t:["normal","flying"],s:[50,55,50,36,30,43],ml:{1:["tackle","growl"],15:["quickattack"],22:["airslash"]},e:{l:21,to:"tranquill"},cr:255,xp:53,em:"🕊️"},
+tranquill:    {n:"유토브",id:520,t:["normal","flying"],s:[62,77,62,50,42,65],ml:{1:["quickattack","airslash"],21:["aerialace"],30:["wingattack"]},e:{l:32,to:"unfezant"},cr:120,xp:125,em:"🕊️"},
+unfezant:    {n:"켄호로우",id:521,t:["normal","flying"],s:[80,115,80,65,55,93],ml:{1:["quickattack","airslash"],32:["bravebird"],45:["hyperbeam"]},e:null,cr:45,xp:220,em:"��"},
+blitzle:    {n:"줄뮤마",id:522,t:["electric"],s:[45,60,32,50,32,76],ml:{1:["quickattack","thunderwave"],11:["spark"],25:["thunderbolt"]},e:{l:27,to:"zebstrika"},cr:190,xp:59,em:"⚡"},
+zebstrika:    {n:"제브라이카",id:523,t:["electric"],s:[75,100,63,80,63,116],ml:{1:["quickattack","spark"],27:["thunderbolt"],42:["wildcharge"]},e:null,cr:75,xp:174,em:"⚡"},
+roggenrola:    {n:"단굴",id:524,t:["rock"],s:[55,75,85,25,25,15],ml:{1:["tackle","sandattack"],14:["rockthrow"],25:["rockslide"]},e:{l:25,to:"boldore"},cr:255,xp:56,em:"🪨"},
+boldore:    {n:"고르비",id:525,t:["rock"],s:[70,105,105,50,40,20],ml:{1:["tackle","rockthrow"],25:["rockslide"],36:["stoneedge"]},e:null,cr:120,xp:137,em:"🪨"},
+gigalith:    {n:"기가이어스",id:526,t:["rock"],s:[85,135,130,60,80,25],ml:{1:["rockthrow","rockslide"],36:["stoneedge"],48:["stealthrock"]},e:null,cr:45,xp:232,em:"🪨"},
+woobat:    {n:"코로모리",id:527,t:["psychic","flying"],s:[65,45,43,55,43,72],ml:{1:["confusion","airslash"],15:["psybeam"],29:["calmmind"]},e:null,cr:190,xp:65,em:"🦇"},
+swoobat:    {n:"맘박쥐",id:528,t:["psychic","flying"],s:[67,57,55,77,55,114],ml:{1:["confusion","airslash"],25:["psybeam"],36:["psychic"]},e:null,cr:45,xp:149,em:"🦇"},
+drilbur:    {n:"두더류",id:529,t:["ground"],s:[60,85,40,30,45,68],ml:{1:["scratch","mudslap"],15:["dig"],29:["earthquake"]},e:{l:31,to:"excadrill"},cr:120,xp:66,em:"⛏️"},
+excadrill:    {n:"몰드류",id:530,t:["ground","steel"],s:[110,135,60,50,65,88],ml:{1:["mudslap","ironhead"],31:["earthquake"],42:["swordsdance"]},e:null,cr:60,xp:178,em:"⛏️"},
+audino:    {n:"다부니",id:531,t:["normal"],s:[103,60,86,60,86,50],ml:{1:["pound","growl"],15:["bodyslam"],30:["wish"]},e:null,cr:255,xp:390,em:"💗"},
+timburr:    {n:"으랏차",id:532,t:["fighting"],s:[75,80,55,25,35,35],ml:{1:["pound","leer"],12:["lowkick"],20:["brickbreak"]},e:{l:25,to:"gurdurr"},cr:180,xp:61,em:"💪"},
+gurdurr:    {n:"토쇠골",id:533,t:["fighting"],s:[85,105,85,40,50,40],ml:{1:["pound","brickbreak"],25:["focusenergy"],37:["closecombat"]},e:null,cr:90,xp:142,em:"💪"},
+conkeldurr:    {n:"노보청",id:534,t:["fighting"],s:[105,140,95,55,65,45],ml:{1:["brickbreak","focusenergy"],37:["closecombat"],45:["drainpunch"]},e:null,cr:45,xp:227,em:"🏗️"},
+tympole:    {n:"동두리건",id:535,t:["water"],s:[50,50,40,50,40,64],ml:{1:["tackle","bubblebeam"],12:["mudslap"],20:["waterpulse"]},e:{l:25,to:"palpitoad"},cr:255,xp:59,em:"🎵"},
+palpitoad:    {n:"두까비",id:536,t:["water","ground"],s:[75,65,55,65,55,69],ml:{1:["bubblebeam","mudslap"],25:["waterpulse"],33:["earthpower"]},e:{l:36,to:"seismitoad"},cr:120,xp:134,em:"🐸"},
+seismitoad:    {n:"두빅굴",id:537,t:["water","ground"],s:[105,95,75,85,75,74],ml:{1:["bubblebeam","mudslap"],36:["earthpower"],44:["hydropump"]},e:null,cr:45,xp:229,em:"🐸"},
+throh:    {n:"던지미",id:538,t:["fighting"],s:[120,100,85,30,85,45],ml:{1:["lowkick","leer"],17:["brickbreak"],33:["closecombat"]},e:null,cr:45,xp:163,em:"🥋"},
+sawk:    {n:"타격귀",id:539,t:["fighting"],s:[75,125,75,30,75,85],ml:{1:["lowkick","leer"],17:["brickbreak"],33:["closecombat"]},e:null,cr:45,xp:163,em:"🥋"},
+sewaddle:    {n:"두르보",id:540,t:["bug","grass"],s:[45,53,70,40,60,42],ml:{1:["tackle","bugbite"],15:["razorleaf"],20:["absorb"]},e:{l:20,to:"swadloon"},cr:255,xp:62,em:"🐛"},
+swadloon:    {n:"두르쿤",id:541,t:["bug","grass"],s:[55,63,90,50,80,42],ml:{1:["bugbite","razorleaf"],20:["protect"],28:["energyball"]},e:null,cr:120,xp:133,em:"🌱"},
+leavanny:    {n:"모아머",id:542,t:["bug","grass"],s:[75,103,80,70,80,92],ml:{1:["bugbite","razorleaf"],32:["xscissor"],40:["energyball"]},e:null,cr:45,xp:225,em:"🍃"},
+venipede:    {n:"마디네",id:543,t:["bug","poison"],s:[30,45,59,30,39,57],ml:{1:["poisonsting","leer"],12:["bugbite"],22:["poisonfang"]},e:{l:22,to:"whirlipede"},cr:255,xp:52,em:"🐛"},
+whirlipede:    {n:"휠구",id:544,t:["bug","poison"],s:[40,55,99,40,79,47],ml:{1:["poisonsting","bugbite"],22:["poisonfang"],28:["protect"]},e:{l:30,to:"scolipede"},cr:120,xp:126,em:"🐛"},
+scolipede:    {n:"펜도라",id:545,t:["bug","poison"],s:[60,100,89,55,69,112],ml:{1:["poisonsting","bugbite"],30:["sludgebomb"],44:["xscissor"]},e:null,cr:45,xp:218,em:"🐛"},
+cottonee:    {n:"소미안",id:546,t:["grass","fairy"],s:[40,27,60,37,50,66],ml:{1:["absorb","growl"],10:["megadrain"],19:["razorleaf"]},e:null,cr:190,xp:56,em:"☁️"},
+whimsicott:    {n:"엘풍",id:547,t:["grass","fairy"],s:[60,67,85,77,75,116],ml:{1:["megadrain","moonblast"],28:["energyball"],40:["dazzlinggleam"]},e:null,cr:75,xp:168,em:"☁️"},
+petilil:    {n:"치릴리",id:548,t:["grass"],s:[45,35,50,70,50,30],ml:{1:["absorb","growl"],10:["megadrain"],22:["energyball"]},e:null,cr:190,xp:56,em:"🌸"},
+lilligant:    {n:"드레디어",id:549,t:["grass"],s:[70,60,75,110,75,90],ml:{1:["megadrain","petalblizzard"],28:["energyball"],40:["solarbeam"]},e:null,cr:75,xp:168,em:"🌺"},
+basculin:    {n:"배쓰나이",id:550,t:["water"],s:[70,92,65,80,55,98],ml:{1:["tackle","watergun"],17:["aquatail"],28:["crunch"]},e:null,cr:25,xp:161,em:"🐟"},
+sandile:    {n:"깜눈크",id:551,t:["ground","dark"],s:[50,72,35,35,35,65],ml:{1:["leer","bite"],16:["mudslap"],22:["dig"]},e:{l:29,to:"krokorok"},cr:180,xp:58,em:"🐊"},
+krokorok:    {n:"악비르",id:552,t:["ground","dark"],s:[60,82,45,45,45,74],ml:{1:["bite","mudslap"],29:["crunch"],33:["earthquake"]},e:{l:40,to:"krookodile"},cr:90,xp:123,em:"🐊"},
+krookodile:    {n:"악비아르",id:553,t:["ground","dark"],s:[95,117,80,65,70,92],ml:{1:["bite","crunch"],40:["earthquake"],48:["darkpulse"]},e:null,cr:45,xp:234,em:"🐊"},
+darumaka:    {n:"달막화",id:554,t:["fire"],s:[70,90,45,15,45,50],ml:{1:["tackle","ember"],17:["flamethrower"],30:["flareblitz"]},e:{l:35,to:"darmanitan"},cr:120,xp:63,em:"🔥"},
+darmanitan:    {n:"불비달마",id:555,t:["fire"],s:[105,140,55,30,55,95],ml:{1:["tackle","flamethrower"],35:["flareblitz"],47:["fireblast"]},e:null,cr:60,xp:168,em:"🔥"},
+maractus:    {n:"마라카치",id:556,t:["grass"],s:[75,86,67,106,67,60],ml:{1:["absorb","poisonpowder"],18:["megadrain"],30:["energyball"]},e:null,cr:255,xp:161,em:"🌵"},
+dwebble:    {n:"돌살이",id:557,t:["bug","rock"],s:[50,65,85,35,35,55],ml:{1:["furycutter","rockthrow"],18:["bugbite"],24:["rockslide"]},e:{l:34,to:"crustle"},cr:190,xp:65,em:"🪨"},
+crustle:    {n:"암팰리스",id:558,t:["bug","rock"],s:[70,105,125,65,75,45],ml:{1:["bugbite","rockslide"],34:["xscissor"],42:["stoneedge"]},e:null,cr:75,xp:170,em:"🪨"},
+scraggy:    {n:"곤율랭",id:559,t:["dark","fighting"],s:[50,75,70,35,70,48],ml:{1:["leer","lowkick"],12:["bite"],23:["brickbreak"]},e:{l:39,to:"scrafty"},cr:180,xp:70,em:"🦎"},
+scrafty:    {n:"배루키",id:560,t:["dark","fighting"],s:[65,90,115,45,115,58],ml:{1:["lowkick","bite"],23:["brickbreak"],39:["crunch"]},e:null,cr:90,xp:171,em:"🦎"},
+sigilyph:    {n:"심보러",id:561,t:["psychic","flying"],s:[72,58,80,103,80,97],ml:{1:["confusion","airslash"],24:["psybeam"],38:["psychic"]},e:null,cr:45,xp:172,em:"👁️"},
+yamask:    {n:"데스마스",id:562,t:["ghost"],s:[38,30,85,55,65,30],ml:{1:["tackle","hex"],17:["shadowball"],25:["willowisp"]},e:{l:34,to:"cofagrigus"},cr:190,xp:61,em:"👻"},
+cofagrigus:    {n:"데스니칸",id:563,t:["ghost"],s:[58,50,145,95,105,30],ml:{1:["hex","willowisp"],34:["shadowball"],45:["darkpulse"]},e:null,cr:90,xp:169,em:"⚰️"},
+tirtouga:    {n:"프로토가",id:564,t:["water","rock"],s:[54,78,103,53,45,22],ml:{1:["watergun","bite"],15:["aquatail"],25:["rockslide"]},e:{l:37,to:"carracosta"},cr:45,xp:71,em:"🐢"},
+carracosta:    {n:"늑골라",id:565,t:["water","rock"],s:[74,108,133,83,65,32],ml:{1:["watergun","rockslide"],37:["aquatail"],45:["stoneedge"]},e:null,cr:45,xp:173,em:"🐢"},
+archen:    {n:"아켄",id:566,t:["rock","flying"],s:[55,112,45,74,45,70],ml:{1:["quickattack","rockthrow"],18:["aerialace"],28:["rockslide"]},e:{l:37,to:"archeops"},cr:45,xp:71,em:"🦕"},
+archeops:    {n:"아케오스",id:567,t:["rock","flying"],s:[75,140,65,112,65,110],ml:{1:["rockthrow","aerialace"],37:["rockslide"],51:["stoneedge"]},e:null,cr:45,xp:177,em:"🦕"},
+trubbish:    {n:"깨봉이",id:568,t:["poison"],s:[50,50,62,40,62,65],ml:{1:["pound","poisonsting"],14:["sludge"],23:["toxic"]},e:{l:36,to:"garbodor"},cr:190,xp:66,em:"🗑️"},
+garbodor:    {n:"더스트나",id:569,t:["poison"],s:[80,95,82,60,82,75],ml:{1:["poisonsting","sludge"],36:["sludgebomb"],46:["toxic"]},e:null,cr:60,xp:166,em:"🗑️"},
+zorua:    {n:"조로아",id:570,t:["dark"],s:[40,65,40,80,40,65],ml:{1:["scratch","leer"],13:["pursuit"],25:["darkpulse"]},e:{l:30,to:"zoroark"},cr:75,xp:66,em:"🦊"},
+zoroark:    {n:"조로아크",id:571,t:["dark"],s:[60,105,60,120,60,105],ml:{1:["pursuit","scratch"],30:["darkpulse"],44:["shadowball"]},e:null,cr:45,xp:179,em:"🦊"},
+minccino:    {n:"치라미",id:572,t:["normal"],s:[55,50,40,40,40,75],ml:{1:["pound","growl"],13:["quickattack"],25:["slash"]},e:null,cr:255,xp:60,em:"🐹"},
+cinccino:    {n:"치라치노",id:573,t:["normal"],s:[75,95,60,65,60,115],ml:{1:["pound","quickattack"],25:["slash"],40:["bodyslam"]},e:null,cr:60,xp:165,em:"🐹"},
+gothita:    {n:"고디탱",id:574,t:["psychic"],s:[45,30,50,55,65,45],ml:{1:["pound","confusion"],16:["psybeam"],24:["calmmind"]},e:{l:32,to:"gothorita"},cr:200,xp:58,em:"🔮"},
+gothorita:    {n:"고디보미",id:575,t:["psychic"],s:[60,45,70,75,85,55],ml:{1:["confusion","psybeam"],32:["psychic"],39:["calmmind"]},e:{l:41,to:"gothitelle"},cr:100,xp:130,em:"🔮"},
+gothitelle:    {n:"고디모아젤",id:576,t:["psychic"],s:[70,55,95,95,110,65],ml:{1:["psybeam","psychic"],41:["calmmind"],48:["shadowball"]},e:null,cr:50,xp:221,em:"🔮"},
+solosis:    {n:"유니란",id:577,t:["psychic"],s:[45,30,40,105,50,20],ml:{1:["confusion","recover"],16:["psybeam"],25:["calmmind"]},e:{l:32,to:"duosion"},cr:200,xp:58,em:"🧬"},
+duosion:    {n:"듀란",id:578,t:["psychic"],s:[65,40,50,125,60,30],ml:{1:["confusion","psybeam"],32:["psychic"],39:["calmmind"]},e:{l:41,to:"reuniclus"},cr:100,xp:130,em:"🧬"},
+reuniclus:    {n:"란쿨루스",id:579,t:["psychic"],s:[110,65,75,125,85,30],ml:{1:["psybeam","psychic"],41:["calmmind"],48:["energyball"]},e:null,cr:50,xp:221,em:"🧬"},
+ducklett:    {n:"꼬지보리",id:580,t:["water","flying"],s:[62,44,50,44,50,55],ml:{1:["watergun","wingattack"],15:["bubblebeam"],27:["airslash"]},e:{l:35,to:"swanna"},cr:190,xp:61,em:"🦆"},
+swanna:    {n:"스완나",id:581,t:["water","flying"],s:[75,87,63,87,63,98],ml:{1:["watergun","wingattack"],35:["airslash"],40:["surf"]},e:null,cr:45,xp:166,em:"🦢"},
+vanillite:    {n:"바닐프티",id:582,t:["ice"],s:[36,50,50,65,60,44],ml:{1:["tackle","aurorabeam"],13:["icebeam"],22:["icepunch"]},e:{l:35,to:"vanillish"},cr:255,xp:61,em:"🍦"},
+vanillish:    {n:"바닐리치",id:583,t:["ice"],s:[51,65,65,80,75,59],ml:{1:["tackle","aurorabeam"],35:["icebeam"],42:["blizzard"]},e:{l:47,to:"vanilluxe"},cr:120,xp:138,em:"🍦"},
+vanilluxe:    {n:"배바닐라",id:584,t:["ice"],s:[71,95,85,110,95,79],ml:{1:["aurorabeam","icebeam"],47:["blizzard"],53:["explosion"]},e:null,cr:45,xp:241,em:"🍦"},
+deerling:    {n:"사철록",id:585,t:["normal","grass"],s:[60,60,50,40,50,75],ml:{1:["tackle","growl"],16:["razorleaf"],24:["energyball"]},e:{l:34,to:"sawsbuck"},cr:190,xp:67,em:"🦌"},
+sawsbuck:    {n:"노고록",id:586,t:["normal","grass"],s:[80,100,70,60,70,95],ml:{1:["tackle","razorleaf"],34:["energyball"],44:["solarbeam"]},e:null,cr:75,xp:166,em:"🦌"},
+emolga:    {n:"에몽가",id:587,t:["electric","flying"],s:[55,75,60,75,60,103],ml:{1:["thundershock","quickattack"],15:["spark"],30:["thunderbolt"]},e:null,cr:200,xp:150,em:"🐿️"},
+karrablast:    {n:"딱정곤",id:588,t:["bug"],s:[50,75,45,40,45,60],ml:{1:["leer","furycutter"],13:["bugbite"],25:["xscissor"]},e:null,cr:200,xp:75,em:"🐛"},
+escavalier:    {n:"슈발리에",id:589,t:["bug","steel"],s:[70,135,105,60,105,20],ml:{1:["furycutter","ironhead"],25:["xscissor"],40:["irondefense"]},e:null,cr:75,xp:173,em:"⚔️"},
+foongus:    {n:"깜놀버슬",id:590,t:["grass","poison"],s:[69,55,45,55,55,15],ml:{1:["absorb","growl"],12:["megadrain"],24:["toxic"]},e:{l:39,to:"amoonguss"},cr:190,xp:59,em:"🍄"},
+amoonguss:    {n:"뽀록나",id:591,t:["grass","poison"],s:[114,85,70,85,80,30],ml:{1:["absorb","megadrain"],39:["sludgebomb"],43:["gigadrain"]},e:null,cr:75,xp:162,em:"🍄"},
+frillish:    {n:"탱그릴",id:592,t:["water","ghost"],s:[55,40,50,65,85,40],ml:{1:["watergun","hex"],17:["bubblebeam"],27:["shadowball"]},e:{l:40,to:"jellicent"},cr:190,xp:67,em:"🪼"},
+jellicent:    {n:"탱탱겔",id:593,t:["water","ghost"],s:[100,60,70,85,105,60],ml:{1:["watergun","hex"],40:["shadowball"],48:["hydropump"]},e:null,cr:60,xp:168,em:"🪼"},
+alomomola:    {n:"맘복치",id:594,t:["water"],s:[165,75,80,40,45,65],ml:{1:["watergun","pound"],17:["wish"],29:["surf"]},e:null,cr:75,xp:165,em:"💗"},
+joltik:    {n:"쪼마리",id:595,t:["bug","electric"],s:[50,47,50,57,50,65],ml:{1:["furycutter","thunderwave"],12:["bugbite"],20:["spark"]},e:{l:36,to:"galvantula"},cr:190,xp:64,em:"🕷️"},
+galvantula:    {n:"전툴라",id:596,t:["bug","electric"],s:[70,77,60,97,60,108],ml:{1:["bugbite","spark"],36:["thunderbolt"],46:["signalbeam"]},e:null,cr:75,xp:165,em:"🕷️"},
+ferroseed:    {n:"철시드",id:597,t:["grass","steel"],s:[44,50,91,24,86,10],ml:{1:["tackle","irondefense"],14:["leechseed"],21:["ironhead"]},e:{l:40,to:"ferrothorn"},cr:255,xp:61,em:"🌰"},
+ferrothorn:    {n:"너트령",id:598,t:["grass","steel"],s:[74,94,131,54,116,20],ml:{1:["tackle","ironhead"],40:["energyball"],46:["flashcannon"]},e:null,cr:90,xp:171,em:"🌰"},
+klink:    {n:"기어르",id:599,t:["steel"],s:[40,55,70,45,60,30],ml:{1:["tackle","thundershock"],16:["irondefense"],26:["flashcannon"]},e:{l:38,to:"klang"},cr:130,xp:60,em:"⚙️"},
+klang:    {n:"기기어르",id:600,t:["steel"],s:[60,80,95,70,85,50],ml:{1:["tackle","thundershock"],38:["flashcannon"],44:["ironhead"]},e:{l:49,to:"klinklang"},cr:60,xp:154,em:"⚙️"},
+klinklang:    {n:"기기기어르",id:601,t:["steel"],s:[60,100,115,70,85,90],ml:{1:["thundershock","flashcannon"],49:["ironhead"],54:["hyperbeam"]},e:null,cr:30,xp:234,em:"⚙️"},
+tynamo:    {n:"저리어",id:602,t:["electric"],s:[35,55,40,45,40,60],ml:{1:["tackle","thunderwave"],10:["spark"],18:["thundershock"]},e:{l:39,to:"eelektrik"},cr:190,xp:55,em:"⚡"},
+eelektrik:    {n:"저리릴",id:603,t:["electric"],s:[65,85,70,75,70,40],ml:{1:["spark","thundershock"],39:["thunderbolt"],44:["crunch"]},e:null,cr:60,xp:142,em:"⚡"},
+eelektross:    {n:"저리더프",id:604,t:["electric"],s:[85,115,80,105,80,50],ml:{1:["spark","thunderbolt"],44:["crunch"],54:["wildcharge"]},e:null,cr:30,xp:232,em:"⚡"},
+elgyem:    {n:"리그레",id:605,t:["psychic"],s:[55,55,55,85,55,30],ml:{1:["confusion","growl"],15:["psybeam"],25:["calmmind"]},e:{l:42,to:"beheeyem"},cr:255,xp:67,em:"👽"},
+beheeyem:    {n:"벰크",id:606,t:["psychic"],s:[75,75,75,125,95,40],ml:{1:["confusion","psybeam"],42:["psychic"],50:["calmmind"]},e:null,cr:90,xp:170,em:"👽"},
+litwick:    {n:"불켜미",id:607,t:["ghost","fire"],s:[50,30,55,65,55,20],ml:{1:["ember","hex"],13:["willowisp"],24:["shadowball"]},e:{l:41,to:"lampent"},cr:190,xp:55,em:"🕯️"},
+lampent:    {n:"램프라",id:608,t:["ghost","fire"],s:[60,40,60,95,60,55],ml:{1:["ember","hex"],41:["shadowball"],49:["flamethrower"]},e:null,cr:90,xp:130,em:"🔥"},
+chandelure:    {n:"샹델라",id:609,t:["ghost","fire"],s:[60,55,90,145,90,80],ml:{1:["shadowball","flamethrower"],45:["fireblast"],50:["darkpulse"]},e:null,cr:45,xp:234,em:"🔥"},
+axew:    {n:"터검니",id:610,t:["dragon"],s:[46,87,60,30,40,57],ml:{1:["scratch","leer"],13:["dragonclaw"],24:["dragonpulse"]},e:{l:38,to:"fraxure"},cr:75,xp:64,em:"🐉"},
+fraxure:    {n:"액슨도",id:611,t:["dragon"],s:[66,117,70,40,50,67],ml:{1:["scratch","dragonclaw"],38:["dragonpulse"],42:["swordsdance"]},e:{l:48,to:"haxorus"},cr:60,xp:144,em:"🐉"},
+haxorus:    {n:"액스라이즈",id:612,t:["dragon"],s:[76,147,90,60,70,97],ml:{1:["dragonclaw","dragonpulse"],48:["outrage"],53:["swordsdance"]},e:null,cr:45,xp:243,em:"🐉"},
+cubchoo:    {n:"코고미",id:613,t:["ice"],s:[55,70,40,60,40,40],ml:{1:["pound","growl"],13:["icepunch"],21:["aurorabeam"]},e:{l:37,to:"beartic"},cr:120,xp:61,em:"🧊"},
+beartic:    {n:"툰베어",id:614,t:["ice"],s:[95,130,80,70,80,50],ml:{1:["icepunch","aurorabeam"],37:["icebeam"],45:["blizzard"]},e:null,cr:60,xp:177,em:"🐻‍❄️"},
+cryogonal:    {n:"프리지오",id:615,t:["ice"],s:[80,50,50,95,135,105],ml:{1:["icebeam","recover"],21:["aurorabeam"],37:["blizzard"]},e:null,cr:25,xp:180,em:"❄️"},
+shelmet:    {n:"쪼마기",id:616,t:["bug"],s:[50,40,85,40,65,25],ml:{1:["tackle","absorb"],16:["bugbite"],28:["protect"]},e:null,cr:200,xp:61,em:"🐛"},
+accelgor:    {n:"아기르더",id:617,t:["bug"],s:[80,70,40,100,60,145],ml:{1:["quickattack","bugbite"],28:["xscissor"],40:["signalbeam"]},e:null,cr:75,xp:173,em:"💨"},
+stunfisk:    {n:"메더",id:618,t:["ground","electric"],s:[109,66,84,81,99,32],ml:{1:["mudslap","thundershock"],17:["thunderwave"],30:["earthpower"]},e:null,cr:75,xp:165,em:"🐟"},
+mienfoo:    {n:"비조푸",id:619,t:["fighting"],s:[45,85,50,55,50,65],ml:{1:["pound","lowkick"],17:["brickbreak"],29:["drainpunch"]},e:{l:50,to:"mienshao"},cr:180,xp:70,em:"🥊"},
+mienshao:    {n:"비조도",id:620,t:["fighting"],s:[65,125,60,95,60,105],ml:{1:["lowkick","brickbreak"],50:["closecombat"],56:["aurasphere"]},e:null,cr:45,xp:179,em:"🥊"},
+druddigon:    {n:"크리만",id:621,t:["dragon"],s:[77,120,90,60,90,48],ml:{1:["scratch","leer"],18:["bite"],27:["dragonclaw"]},e:null,cr:45,xp:170,em:"🐲"},
+golett:    {n:"골비람",id:622,t:["ground","ghost"],s:[59,74,50,35,50,35],ml:{1:["pound","mudslap"],17:["shadowclaw"],25:["earthquake"]},e:{l:43,to:"golurk"},cr:190,xp:61,em:"🤖"},
+golurk:    {n:"골루그",id:623,t:["ground","ghost"],s:[89,124,80,55,80,55],ml:{1:["mudslap","shadowclaw"],43:["earthquake"],50:["shadowball"]},e:null,cr:90,xp:169,em:"🤖"},
+pawniard:    {n:"자망칼",id:624,t:["dark","steel"],s:[45,85,70,40,40,60],ml:{1:["scratch","leer"],17:["ironhead"],25:["slash"]},e:{l:52,to:"bisharp"},cr:120,xp:68,em:"🔪"},
+bisharp:    {n:"절각참",id:625,t:["dark","steel"],s:[65,125,100,60,70,70],ml:{1:["ironhead","slash"],52:["darkpulse"],57:["irondefense"]},e:null,cr:45,xp:172,em:"🔪"},
+bouffalant:    {n:"버프론",id:626,t:["normal"],s:[95,110,95,40,95,55],ml:{1:["tackle","leer"],16:["pursuit"],31:["bodyslam"]},e:null,cr:45,xp:172,em:"🐃"},
+rufflet:    {n:"수리둥보",id:627,t:["normal","flying"],s:[70,83,50,37,50,60],ml:{1:["leer","scratch"],14:["wingattack"],23:["aerialace"]},e:{l:54,to:"braviary"},cr:190,xp:70,em:"🦅"},
+braviary:    {n:"워글",id:628,t:["normal","flying"],s:[100,123,75,57,75,80],ml:{1:["wingattack","aerialace"],54:["bravebird"],60:["slash"]},e:null,cr:60,xp:179,em:"🦅"},
+vullaby:    {n:"벌차이",id:629,t:["dark","flying"],s:[70,55,75,45,65,60],ml:{1:["leer","growl"],14:["wingattack"],23:["darkpulse"]},e:{l:54,to:"mandibuzz"},cr:190,xp:74,em:"🦅"},
+mandibuzz:    {n:"버랜지나",id:630,t:["dark","flying"],s:[110,65,105,55,95,80],ml:{1:["wingattack","darkpulse"],54:["bravebird"],57:["airslash"]},e:null,cr:60,xp:179,em:"🦅"},
+heatmor:    {n:"앤티골",id:631,t:["fire"],s:[85,97,66,105,66,65],ml:{1:["leer","ember"],16:["flamethrower"],31:["fireblast"]},e:null,cr:90,xp:169,em:"🔥"},
+durant:    {n:"아이언트",id:632,t:["bug","steel"],s:[58,109,112,48,48,109],ml:{1:["bite","furycutter"],16:["bugbite"],26:["ironhead"]},e:null,cr:90,xp:169,em:"🐜"},
+deino:    {n:"모노두",id:633,t:["dark","dragon"],s:[52,65,50,45,50,38],ml:{1:["tackle","bite"],17:["dragonbreath"],25:["crunch"]},e:{l:50,to:"zweilous"},cr:45,xp:60,em:"🐉"},
+zweilous:    {n:"디헤드",id:634,t:["dark","dragon"],s:[72,85,70,65,70,58],ml:{1:["bite","dragonbreath"],50:["crunch"],55:["dragonpulse"]},e:{l:64,to:"hydreigon"},cr:45,xp:147,em:"🐉"},
+hydreigon:    {n:"삼삼드래",id:635,t:["dark","dragon"],s:[92,105,90,125,90,98],ml:{1:["bite","crunch"],64:["dragonpulse"],68:["darkpulse"]},e:null,cr:45,xp:270,em:"🐉"},
+larvesta:    {n:"활화르바",id:636,t:["bug","fire"],s:[55,85,55,10,55,60],ml:{1:["ember","absorb"],20:["bugbite"],30:["flamethrower"]},e:{l:59,to:"volcarona"},cr:45,xp:72,em:"🐛"},
+volcarona:    {n:"불카모스",id:637,t:["bug","fire"],s:[85,60,65,135,105,100],ml:{1:["ember","bugbite"],59:["flamethrower"],65:["fireblast"]},e:null,cr:15,xp:248,em:"🦋"},
+cobalion:    {n:"코바르온",id:638,t:["steel","fighting"],s:[91,90,129,90,72,108],ml:{1:["quickattack","ironhead"],25:["closecombat"],37:["flashcannon"]},e:null,cr:3,xp:261,em:"⚔️"},
+terrakion:    {n:"테라키온",id:639,t:["rock","fighting"],s:[91,129,90,72,90,108],ml:{1:["quickattack","rockslide"],25:["closecombat"],37:["stoneedge"]},e:null,cr:3,xp:261,em:"🪨"},
+virizion:    {n:"비리디온",id:640,t:["grass","fighting"],s:[91,90,72,90,129,108],ml:{1:["quickattack","razorleaf"],25:["closecombat"],37:["energyball"]},e:null,cr:3,xp:261,em:"🌿"},
+tornadus:    {n:"토네로스",id:641,t:["flying"],s:[79,115,70,125,80,111],ml:{1:["airslash","bite"],25:["bravebird"],40:["darkpulse"]},e:null,cr:3,xp:261,em:"🌪️"},
+thundurus:    {n:"볼트로스",id:642,t:["electric","flying"],s:[79,115,70,125,80,111],ml:{1:["thundershock","airslash"],25:["thunderbolt"],40:["thunder"]},e:null,cr:3,xp:261,em:"⛈️"},
+reshiram:    {n:"레시라무",id:643,t:["dragon","fire"],s:[100,120,100,150,120,90],ml:{1:["dragonbreath","ember"],35:["flamethrower"],50:["dragonpulse"]},e:null,cr:3,xp:306,em:"🔥"},
+zekrom:    {n:"제크로무",id:644,t:["dragon","electric"],s:[100,150,120,120,100,90],ml:{1:["dragonbreath","thundershock"],35:["thunderbolt"],50:["dragonpulse"]},e:null,cr:3,xp:306,em:"⚡"},
+landorus:    {n:"랜드로스",id:645,t:["ground","flying"],s:[89,125,90,115,80,101],ml:{1:["mudslap","rockthrow"],25:["earthpower"],40:["earthquake"]},e:null,cr:3,xp:270,em:"🌍"},
+kyurem:    {n:"큐레무",id:646,t:["dragon","ice"],s:[125,130,90,130,90,95],ml:{1:["dragonbreath","icebeam"],35:["dragonpulse"],50:["blizzard"]},e:null,cr:3,xp:297,em:"🧊"},
+keldeo:    {n:"케르디오",id:647,t:["water","fighting"],s:[91,72,90,129,90,108],ml:{1:["watergun","quickattack"],25:["surf"],37:["closecombat"]},e:null,cr:3,xp:261,em:"🦄"},
+meloetta:    {n:"메로엣타",id:648,t:["normal","psychic"],s:[100,77,77,128,128,90],ml:{1:["quickattack","confusion"],21:["psychic"],36:["hyperbeam"]},e:null,cr:3,xp:270,em:"🎵"},
+genesect:    {n:"게노세크트",id:649,t:["bug","steel"],s:[71,120,95,120,95,99],ml:{1:["furycutter","flashcannon"],22:["xscissor"],40:["signalbeam"]},e:null,cr:3,xp:270,em:"🤖"},
+chespin:    {n:"도치마론",id:650,t:["grass"],s:[56,61,65,48,45,38],ml:{1:["tackle","vinewhip"],11:["razorleaf"],18:["leechseed"]},e:{l:16,to:"quilladin"},cr:45,xp:63,em:"🌰"},
+quilladin:    {n:"도치보구",id:651,t:["grass"],s:[61,78,95,56,58,57],ml:{1:["tackle","vinewhip"],16:["razorleaf"],26:["energyball"]},e:{l:36,to:"chesnaught"},cr:45,xp:142,em:"🌰"},
+chesnaught:    {n:"브리가론",id:652,t:["grass","fighting"],s:[88,107,122,74,75,64],ml:{1:["vinewhip","brickbreak"],36:["energyball"],48:["closecombat"]},e:null,cr:45,xp:239,em:"🛡️"},
+fennekin:    {n:"푸호꼬",id:653,t:["fire"],s:[40,45,40,62,60,60],ml:{1:["scratch","ember"],11:["flamethrower"],20:["psybeam"]},e:{l:16,to:"braixen"},cr:45,xp:61,em:"🦊"},
+braixen:    {n:"테르나",id:654,t:["fire"],s:[59,59,58,90,70,73],ml:{1:["scratch","ember"],16:["flamethrower"],25:["psybeam"]},e:{l:36,to:"delphox"},cr:45,xp:143,em:"🦊"},
+delphox:    {n:"마폭시",id:655,t:["fire","psychic"],s:[75,69,72,114,100,104],ml:{1:["ember","flamethrower"],36:["psychic"],47:["fireblast"]},e:null,cr:45,xp:240,em:"🦊"},
+froakie:    {n:"개구마르",id:656,t:["water"],s:[41,56,40,62,44,71],ml:{1:["pound","watergun"],10:["bubblebeam"],18:["quickattack"]},e:{l:16,to:"frogadier"},cr:45,xp:63,em:"🐸"},
+frogadier:    {n:"개굴반장",id:657,t:["water"],s:[54,63,52,83,56,97],ml:{1:["pound","watergun"],16:["bubblebeam"],25:["waterpulse"]},e:{l:36,to:"greninja"},cr:45,xp:142,em:"🐸"},
+greninja:    {n:"개굴닌자",id:658,t:["water","dark"],s:[72,95,67,103,71,122],ml:{1:["watergun","darkpulse"],36:["surf"],49:["hydropump"]},e:null,cr:45,xp:239,em:"🥷"},
+bunnelby:    {n:"파르빗",id:659,t:["normal"],s:[38,36,38,32,36,57],ml:{1:["tackle","leer"],7:["mudslap"],15:["quickattack"]},e:{l:20,to:"diggersby"},cr:255,xp:47,em:"🐰"},
+diggersby:    {n:"파르토",id:660,t:["normal","ground"],s:[85,56,77,50,77,78],ml:{1:["tackle","mudslap"],20:["dig"],30:["earthquake"]},e:null,cr:127,xp:148,em:"🐰"},
+fletchling:    {n:"화살꼬빈",id:661,t:["normal","flying"],s:[45,50,43,40,38,62],ml:{1:["tackle","growl"],10:["quickattack"],17:["aerialace"]},e:{l:17,to:"fletchinder"},cr:255,xp:56,em:"🐦"},
+fletchinder:    {n:"불화살빈",id:662,t:["fire","flying"],s:[62,73,55,56,52,84],ml:{1:["quickattack","ember"],17:["aerialace"],25:["flamethrower"]},e:{l:35,to:"talonflame"},cr:120,xp:134,em:"🐦"},
+talonflame:    {n:"파이어로",id:663,t:["fire","flying"],s:[78,81,71,74,69,126],ml:{1:["ember","aerialace"],35:["flamethrower"],44:["bravebird"]},e:null,cr:45,xp:175,em:"🐦"},
+scatterbug:    {n:"분이벌레",id:664,t:["bug"],s:[38,35,40,27,25,35],ml:{1:["tackle","bugbite"],6:["stunspore"],9:["poisonpowder"]},e:{l:9,to:"spewpa"},cr:255,xp:40,em:"🐛"},
+spewpa:    {n:"분떠도가",id:665,t:["bug"],s:[45,22,60,27,30,29],ml:{1:["tackle","protect"],9:["bugbite"],12:["stunspore"]},e:{l:12,to:"vivillon"},cr:120,xp:75,em:"🐛"},
+vivillon:    {n:"비비용",id:666,t:["bug","flying"],s:[80,52,50,90,50,89],ml:{1:["bugbite","airslash"],12:["signalbeam"],31:["sleeppowder"]},e:null,cr:45,xp:185,em:"🦋"},
+litleo:    {n:"레오꼬",id:667,t:["fire","normal"],s:[62,50,58,73,54,72],ml:{1:["tackle","ember"],15:["flamethrower"],23:["bodyslam"]},e:{l:35,to:"pyroar"},cr:220,xp:74,em:"🦁"},
+pyroar:    {n:"화염레오",id:668,t:["fire","normal"],s:[86,68,72,109,66,106],ml:{1:["ember","bodyslam"],35:["flamethrower"],42:["fireblast"]},e:null,cr:65,xp:177,em:"🦁"},
+flabebe:    {n:"플라베베",id:669,t:["fairy"],s:[44,38,39,61,79,42],ml:{1:["tackle","absorb"],15:["dazzlinggleam"],22:["wish"]},e:{l:19,to:"floette"},cr:225,xp:61,em:"🌸"},
+floette:    {n:"플라엣트",id:670,t:["fairy"],s:[54,45,47,75,98,52],ml:{1:["tackle","dazzlinggleam"],19:["wish"],27:["moonblast"]},e:null,cr:120,xp:130,em:"🌸"},
+florges:    {n:"플라제스",id:671,t:["fairy"],s:[78,65,68,112,154,75],ml:{1:["dazzlinggleam","moonblast"],35:["calmmind"],46:["wish"]},e:null,cr:45,xp:248,em:"🌺"},
+skiddo:    {n:"메이클",id:672,t:["grass"],s:[66,65,48,62,57,52],ml:{1:["tackle","vinewhip"],12:["razorleaf"],20:["leechseed"]},e:{l:32,to:"gogoat"},cr:200,xp:70,em:"🐐"},
+gogoat:    {n:"고고트",id:673,t:["grass"],s:[123,100,62,97,81,68],ml:{1:["vinewhip","razorleaf"],32:["energyball"],40:["solarbeam"]},e:null,cr:45,xp:186,em:"🐐"},
+pancham:    {n:"판짱",id:674,t:["fighting"],s:[67,82,62,46,48,43],ml:{1:["tackle","leer"],12:["lowkick"],20:["brickbreak"]},e:{l:32,to:"pangoro"},cr:220,xp:70,em:"🐼"},
+pangoro:    {n:"부란다",id:675,t:["fighting","dark"],s:[95,124,78,69,71,58],ml:{1:["lowkick","brickbreak"],32:["crunch"],42:["closecombat"]},e:null,cr:65,xp:173,em:"🐼"},
+furfrou:    {n:"트리미앙",id:676,t:["normal"],s:[75,80,60,65,90,102],ml:{1:["tackle","growl"],15:["bite"],27:["bodyslam"]},e:null,cr:160,xp:165,em:"🐩"},
+espurr:    {n:"냐스퍼",id:677,t:["psychic"],s:[62,48,54,63,60,68],ml:{1:["scratch","confusion"],13:["psybeam"],19:["calmmind"]},e:{l:25,to:"meowstic"},cr:190,xp:71,em:"🐱"},
+meowstic:    {n:"냐오닉스",id:678,t:["psychic"],s:[74,48,76,83,81,104],ml:{1:["confusion","psybeam"],25:["psychic"],35:["calmmind"]},e:null,cr:75,xp:163,em:"🐱"},
+honedge:    {n:"단칼빙",id:679,t:["steel","ghost"],s:[45,80,100,35,37,28],ml:{1:["tackle","shadowclaw"],13:["irondefense"],18:["slash"]},e:{l:35,to:"doublade"},cr:180,xp:65,em:"⚔️"},
+doublade:    {n:"쌍검킬",id:680,t:["steel","ghost"],s:[59,110,150,45,49,35],ml:{1:["shadowclaw","slash"],35:["ironhead"],40:["swordsdance"]},e:null,cr:90,xp:157,em:"⚔️"},
+aegislash:    {n:"길가르드",id:681,t:["steel","ghost"],s:[60,50,150,150,150,60],ml:{1:["shadowclaw","ironhead"],35:["flashcannon"],42:["shadowball"]},e:null,cr:45,xp:234,em:"🛡️"},
+spritzee:    {n:"슈쁘",id:682,t:["fairy"],s:[78,52,60,63,65,23],ml:{1:["tackle","dazzlinggleam"],17:["moonblast"],25:["calmmind"]},e:null,cr:200,xp:68,em:"🌸"},
+aromatisse:    {n:"프레프티르",id:683,t:["fairy"],s:[101,72,72,99,89,29],ml:{1:["dazzlinggleam","moonblast"],35:["calmmind"],42:["psychic"]},e:null,cr:140,xp:162,em:"🌸"},
+swirlix:    {n:"페로꼬",id:684,t:["fairy"],s:[62,48,66,59,57,49],ml:{1:["tackle","playrough"],17:["dazzlinggleam"],26:["wish"]},e:null,cr:200,xp:68,em:"🍬"},
+slurpuff:    {n:"페로미",id:685,t:["fairy"],s:[82,80,86,85,75,72],ml:{1:["playrough","dazzlinggleam"],35:["moonblast"],45:["calmmind"]},e:null,cr:140,xp:168,em:"🍬"},
+inkay:    {n:"오케이징",id:686,t:["dark","psychic"],s:[53,54,53,37,46,45],ml:{1:["tackle","psybeam"],8:["darkpulse"],15:["hypnosis"]},e:{l:30,to:"malamar"},cr:190,xp:58,em:"🦑"},
+malamar:    {n:"칼라마네로",id:687,t:["dark","psychic"],s:[86,92,88,68,75,73],ml:{1:["psybeam","darkpulse"],30:["psychic"],40:["slash"]},e:null,cr:75,xp:169,em:"🦑"},
+binacle:    {n:"거북손손",id:688,t:["rock","water"],s:[42,52,67,39,56,50],ml:{1:["scratch","watergun"],10:["rockthrow"],20:["slash"]},e:{l:39,to:"barbaracle"},cr:120,xp:61,em:"🪨"},
+barbaracle:    {n:"거북손데스",id:689,t:["rock","water"],s:[72,105,115,54,86,68],ml:{1:["slash","watergun"],39:["stoneedge"],48:["rockslide"]},e:null,cr:45,xp:175,em:"🪨"},
+skrelp:    {n:"수레기",id:690,t:["poison","water"],s:[50,60,60,54,60,30],ml:{1:["tackle","watergun"],12:["poisonsting"],23:["sludgebomb"]},e:{l:48,to:"dragalge"},cr:225,xp:64,em:"🐉"},
+dragalge:    {n:"드래캄",id:691,t:["poison","dragon"],s:[65,75,90,97,123,44],ml:{1:["watergun","poisonsting"],48:["dragonpulse"],53:["sludgebomb"]},e:null,cr:55,xp:173,em:"🐉"},
+clauncher:    {n:"철포어",id:692,t:["water"],s:[50,53,62,58,63,44],ml:{1:["watergun","bubblebeam"],20:["waterpulse"],30:["aquatail"]},e:{l:37,to:"clawitzer"},cr:225,xp:66,em:"🦞"},
+clawitzer:    {n:"블로스터",id:693,t:["water"],s:[71,73,88,120,89,59],ml:{1:["watergun","waterpulse"],37:["surf"],48:["hydropump"]},e:null,cr:55,xp:100,em:"🦞"},
+helioptile:    {n:"에리키텔",id:694,t:["electric","normal"],s:[44,38,33,61,43,70],ml:{1:["pound","thundershock"],11:["thunderwave"],22:["thunderbolt"]},e:null,cr:190,xp:58,em:"🦎"},
+heliolisk:    {n:"일레도리자드",id:695,t:["electric","normal"],s:[62,55,52,109,94,109],ml:{1:["thundershock","thunderbolt"],25:["thunderwave"],40:["thunder"]},e:null,cr:75,xp:168,em:"🦎"},
+tyrunt:    {n:"티고라스",id:696,t:["rock","dragon"],s:[58,89,77,45,45,48],ml:{1:["tackle","bite"],12:["rockthrow"],20:["dragonclaw"]},e:{l:39,to:"tyrantrum"},cr:45,xp:72,em:"🦖"},
+tyrantrum:    {n:"견고라스",id:697,t:["rock","dragon"],s:[82,121,119,69,59,71],ml:{1:["bite","dragonclaw"],39:["rockslide"],47:["stoneedge"]},e:null,cr:45,xp:182,em:"🦖"},
+amaura:    {n:"아마루스",id:698,t:["rock","ice"],s:[77,59,50,67,63,46],ml:{1:["tackle","aurorabeam"],13:["rockthrow"],20:["icebeam"]},e:{l:39,to:"aurorus"},cr:45,xp:72,em:"🦕"},
+aurorus:    {n:"아마루르가",id:699,t:["rock","ice"],s:[123,77,72,99,92,58],ml:{1:["aurorabeam","rockthrow"],39:["icebeam"],50:["blizzard"]},e:null,cr:45,xp:104,em:"🦕"},
+sylveon:    {n:"님피아",id:700,t:["fairy"],s:[95,65,65,110,130,60],ml:{1:["tackle","dazzlinggleam"],20:["moonblast"],29:["calmmind"]},e:null,cr:45,xp:184,em:"🎀"},
+hawlucha:    {n:"루차불",id:701,t:["fighting","flying"],s:[78,92,75,74,63,118],ml:{1:["tackle","aerialace"],16:["brickbreak"],28:["closecombat"]},e:null,cr:100,xp:175,em:"🦅"},
+dedenne:    {n:"데덴네",id:702,t:["electric","fairy"],s:[67,58,57,81,67,101],ml:{1:["tackle","thundershock"],11:["thunderwave"],23:["thunderbolt"]},e:null,cr:180,xp:151,em:"🐹"},
+carbink:    {n:"멜시",id:703,t:["rock","fairy"],s:[50,50,150,50,150,50],ml:{1:["tackle","rockthrow"],18:["stealthrock"],35:["moonblast"]},e:null,cr:60,xp:100,em:"��"},
+goomy:    {n:"미끄메라",id:704,t:["dragon"],s:[45,50,35,55,75,40],ml:{1:["tackle","absorb"],13:["dragonbreath"],18:["dragonpulse"]},e:{l:40,to:"sliggoo"},cr:45,xp:60,em:"🐉"},
+sliggoo:    {n:"미끄네일",id:705,t:["dragon"],s:[68,75,53,83,113,60],ml:{1:["tackle","dragonbreath"],40:["dragonpulse"],47:["mudslap"]},e:{l:50,to:"goodra"},cr:45,xp:158,em:"🐉"},
+goodra:    {n:"미끄래곤",id:706,t:["dragon"],s:[90,100,70,110,150,80],ml:{1:["dragonbreath","dragonpulse"],50:["outrage"],55:["energyball"]},e:null,cr:45,xp:270,em:"🐉"},
+klefki:    {n:"클레피",id:707,t:["steel","fairy"],s:[57,80,91,80,87,75],ml:{1:["tackle","flashcannon"],15:["dazzlinggleam"],23:["irondefense"]},e:null,cr:75,xp:165,em:"🔑"},
+phantump:    {n:"나목령",id:708,t:["ghost","grass"],s:[43,70,48,50,60,38],ml:{1:["tackle","hex"],13:["leechseed"],19:["shadowclaw"]},e:null,cr:120,xp:62,em:"🌳"},
+trevenant:    {n:"오로트",id:709,t:["ghost","grass"],s:[85,110,76,65,82,56],ml:{1:["hex","shadowclaw"],28:["energyball"],36:["shadowball"]},e:null,cr:60,xp:166,em:"🌳"},
+pumpkaboo:    {n:"호바귀",id:710,t:["ghost","grass"],s:[49,66,70,44,55,51],ml:{1:["tackle","hex"],16:["shadowball"],20:["leechseed"]},e:null,cr:120,xp:67,em:"🎃"},
+gourgeist:    {n:"펌킨인",id:711,t:["ghost","grass"],s:[65,90,122,58,75,84],ml:{1:["hex","shadowball"],30:["energyball"],36:["shadowclaw"]},e:null,cr:60,xp:173,em:"🎃"},
+bergmite:    {n:"꽁어름",id:712,t:["ice"],s:[55,69,85,32,35,28],ml:{1:["tackle","bite"],15:["icepunch"],22:["icebeam"]},e:{l:37,to:"avalugg"},cr:190,xp:61,em:"🧊"},
+avalugg:    {n:"크레베이스",id:713,t:["ice"],s:[95,117,184,44,46,28],ml:{1:["tackle","icepunch"],37:["icebeam"],46:["blizzard"]},e:null,cr:46,xp:180,em:"🧊"},
+noibat:    {n:"음뱃",id:714,t:["flying","dragon"],s:[40,30,35,45,40,55],ml:{1:["tackle","airslash"],16:["dragonbreath"],23:["bite"]},e:{l:48,to:"noivern"},cr:190,xp:49,em:"🦇"},
+noivern:    {n:"음번",id:715,t:["flying","dragon"],s:[85,70,80,97,80,123],ml:{1:["airslash","dragonbreath"],48:["dragonpulse"],53:["bravebird"]},e:null,cr:45,xp:187,em:"🦇"},
+xerneas:    {n:"제르네아스",id:716,t:["fairy"],s:[126,131,95,131,98,99],ml:{1:["tackle","dazzlinggleam"],26:["moonblast"],51:["calmmind"]},e:null,cr:3,xp:306,em:"🦌"},
+yveltal:    {n:"이벨타르",id:717,t:["dark","flying"],s:[126,131,95,131,98,99],ml:{1:["airslash","darkpulse"],26:["bravebird"],51:["hyperbeam"]},e:null,cr:3,xp:306,em:"🦅"},
+zygarde:    {n:"지가르데",id:718,t:["dragon","ground"],s:[108,100,121,81,95,95],ml:{1:["bite","dragonbreath"],26:["earthquake"],51:["outrage"]},e:null,cr:3,xp:270,em:"🐍"},
+diancie:    {n:"디안시",id:719,t:["rock","fairy"],s:[50,100,150,100,150,50],ml:{1:["tackle","rockthrow"],18:["moonblast"],35:["dazzlinggleam"]},e:null,cr:3,xp:270,em:"💎"},
+hoopa:    {n:"후파",id:720,t:["psychic","ghost"],s:[80,110,60,150,130,70],ml:{1:["confusion","shadowball"],25:["psychic"],46:["darkpulse"]},e:null,cr:3,xp:270,em:"🔮"},
+volcanion:    {n:"볼케니온",id:721,t:["fire","water"],s:[80,110,120,130,90,70],ml:{1:["ember","watergun"],26:["flamethrower"],46:["hydropump"]},e:null,cr:3,xp:270,em:"🌋"}
 };
 
 // ═══════════════════════════════════════════════
@@ -726,7 +955,25 @@ furycutter:  {n:"연속자르기",t:"bug",c:"physical",p:40,a:95,pp:20},
 leer:        {n:"째려보기",t:"normal",c:"status",p:0,a:100,pp:30},
 willowisp:   {n:"도깨비불",t:"fire",c:"status",p:0,a:85,pp:15,ef:"burn"},
 lockon:      {n:"록온",t:"normal",c:"status",p:0,a:100,pp:5},
-megapunch:   {n:"메가톤펀치",t:"normal",c:"physical",p:80,a:85,pp:20}
+megapunch:   {n:"메가톤펀치",t:"normal",c:"physical",p:80,a:85,pp:20},
+// ═══ Gen 5-6 추가 기술 ═══
+energyball:  {n:"에너지볼",t:"grass",c:"special",p:90,a:100,pp:10,ef:"spdef_down",ec:10},
+airslash:    {n:"에어슬래시",t:"flying",c:"special",p:75,a:95,pp:15,ef:"flinch",ec:30},
+bravebird:   {n:"브레이브버드",t:"flying",c:"physical",p:120,a:100,pp:15,ef:"recoil"},
+wildcharge:  {n:"와일드볼트",t:"electric",c:"physical",p:90,a:100,pp:15,ef:"recoil"},
+stealthrock: {n:"스텔스록",t:"rock",c:"status",p:0,a:100,pp:20},
+wish:        {n:"힐링위시",t:"normal",c:"status",p:0,a:100,pp:10,ef:"heal"},
+drainpunch:  {n:"드레인펀치",t:"fighting",c:"physical",p:75,a:100,pp:10,ef:"drain"},
+earthpower:  {n:"대지의힘",t:"ground",c:"special",p:90,a:100,pp:10,ef:"spdef_down",ec:10},
+protect:     {n:"방어",t:"normal",c:"status",p:0,a:100,pp:10},
+poisonfang:  {n:"독엄니",t:"poison",c:"physical",p:50,a:100,pp:15,ef:"poison",ec:50},
+petalblizzard:{n:"꽃보라",t:"grass",c:"physical",p:90,a:100,pp:15},
+recover:     {n:"회복",t:"normal",c:"status",p:0,a:100,pp:10,ef:"heal"},
+irondefense: {n:"철벽",t:"steel",c:"status",p:0,a:100,pp:15,ef:"def_up"},
+leechseed:   {n:"씨뿌리기",t:"grass",c:"status",p:0,a:90,pp:10,ef:"drain"},
+aurasphere:  {n:"파동탄",t:"fighting",c:"special",p:80,a:0,pp:20},
+shadowclaw:  {n:"섀도클로",t:"ghost",c:"physical",p:70,a:100,pp:15,ef:"highcrit"},
+playrough:   {n:"자랑부리기",t:"fairy",c:"physical",p:90,a:90,pp:10,ef:"atk_down",ec:10}
 };
 
 // ═══════════════════════════════════════════════
@@ -1121,6 +1368,213 @@ sinnoh: {
          ]}
     ]
 }
+,unova:{n:"하나 지방",em:"🏙️",roads:[
+{id:"u_r1",n:"1번도로",desc:"산기슭마을~넝쿨시티",lv:[2,5],pokemon:[{k:"lillipup",w:25},{k:"patrat",w:25},{k:"pidove",w:20},{k:"purrloin",w:15},{k:"pidgey",w:10},{k:"rattata",w:5}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote"],encounterRate:0.85,reqBadges:0,
+trainers:[
+{n:"소년 태민",em:"👦",pokemon:[{k:"lillipup",l:3},{k:"patrat",l:4}],reward:120},
+{n:"소녀 수아",em:"👧",pokemon:[{k:"pidove",l:3},{k:"purrloin",l:4}],reward:110},
+{n:"유치원생 도윤",em:"👦",pokemon:[{k:"lillipup",l:4}],reward:100},
+{n:"소년 시우",em:"👦",pokemon:[{k:"patrat",l:4},{k:"pidove",l:4}],reward:140},
+{n:"소녀 하은",em:"👧",pokemon:[{k:"purrloin",l:4},{k:"lillipup",l:5}],reward:150},
+{n:"유치원생 서준",em:"👦",pokemon:[{k:"pidove",l:5}],reward:120},
+{n:"소년 지호",em:"👦",pokemon:[{k:"lillipup",l:4},{k:"patrat",l:5},{k:"pidove",l:5}],reward:180}
+]},
+{id:"u_r2",n:"넝쿨시티",desc:"꿈터",lv:[4,9],pokemon:[{k:"munna",w:20},{k:"woobat",w:20},{k:"roggenrola",w:20},{k:"timburr",w:15},{k:"zubat",w:15},{k:"geodude",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote"],encounterRate:0.80,reqBadges:0,
+trainers:[
+{n:"소년 현우",em:"👦",pokemon:[{k:"roggenrola",l:6},{k:"timburr",l:6}],reward:180},
+{n:"소녀 예린",em:"👧",pokemon:[{k:"munna",l:7},{k:"woobat",l:7}],reward:200},
+{n:"슈퍼너드 동혁",em:"🤓",pokemon:[{k:"geodude",l:6},{k:"roggenrola",l:7}],reward:220},
+{n:"등산가 병철",em:"🧗",pokemon:[{k:"timburr",l:7},{k:"geodude",l:8}],reward:240},
+{n:"소녀 나윤",em:"👧",pokemon:[{k:"woobat",l:7},{k:"munna",l:8}],reward:220},
+{n:"소년 유찬",em:"👦",pokemon:[{k:"roggenrola",l:8},{k:"zubat",l:7}],reward:250},
+{n:"슈퍼너드 상민",em:"🤓",pokemon:[{k:"munna",l:8},{k:"roggenrola",l:8},{k:"timburr",l:9}],reward:280}
+]},
+{id:"u_r3",n:"칠보시티",desc:"고대도시",lv:[10,16],pokemon:[{k:"blitzle",w:20},{k:"sewaddle",w:20},{k:"cottonee",w:20},{k:"petilil",w:15},{k:"oddish",w:15},{k:"bellsprout",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote"],encounterRate:0.80,reqBadges:1,
+trainers:[
+{n:"소녀 민지",em:"👧",pokemon:[{k:"cottonee",l:12},{k:"petilil",l:13}],reward:300},
+{n:"등산가 재원",em:"🧗",pokemon:[{k:"blitzle",l:13},{k:"sewaddle",l:13}],reward:350},
+{n:"슈퍼너드 태양",em:"🤓",pokemon:[{k:"oddish",l:13},{k:"bellsprout",l:14}],reward:380},
+{n:"소녀 채원",em:"👧",pokemon:[{k:"petilil",l:14},{k:"cottonee",l:14}],reward:360},
+{n:"과학자 정훈",em:"🔬",pokemon:[{k:"blitzle",l:14},{k:"sewaddle",l:15}],reward:420},
+{n:"등산가 석진",em:"🧗",pokemon:[{k:"sewaddle",l:14},{k:"oddish",l:14},{k:"blitzle",l:15}],reward:460},
+{n:"슈퍼너드 준영",em:"🤓",pokemon:[{k:"cottonee",l:15},{k:"petilil",l:15},{k:"blitzle",l:16}],reward:520}
+]},
+{id:"u_r4",n:"구름시티",desc:"벌레체육관",lv:[14,22],pokemon:[{k:"venipede",w:20},{k:"dwebble",w:20},{k:"scraggy",w:20},{k:"sandile",w:15},{k:"caterpie",w:15},{k:"weedle",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:2,
+trainers:[
+{n:"소년 건우",em:"👦",pokemon:[{k:"venipede",l:17},{k:"dwebble",l:17}],reward:450},
+{n:"불량배 용태",em:"😎",pokemon:[{k:"scraggy",l:18},{k:"sandile",l:18}],reward:500},
+{n:"블랙벨트 무현",em:"🥋",pokemon:[{k:"scraggy",l:18},{k:"venipede",l:19}],reward:520},
+{n:"짐꾼 대성",em:"🏋️",pokemon:[{k:"dwebble",l:19},{k:"sandile",l:19}],reward:540},
+{n:"소년 성준",em:"👦",pokemon:[{k:"venipede",l:19},{k:"caterpie",l:18},{k:"weedle",l:19}],reward:580},
+{n:"불량배 진태",em:"😎",pokemon:[{k:"scraggy",l:20},{k:"sandile",l:20},{k:"venipede",l:20}],reward:650},
+{n:"블랙벨트 형석",em:"🥋",pokemon:[{k:"dwebble",l:20},{k:"scraggy",l:21},{k:"sandile",l:22}],reward:720}
+]},
+{id:"u_r5",n:"뇌문시티",desc:"전기체육관",lv:[20,28],pokemon:[{k:"joltik",w:20},{k:"tynamo",w:15},{k:"emolga",w:20},{k:"zebstrika",w:15},{k:"pikachu",w:15},{k:"magnemite",w:15}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:3,
+trainers:[
+{n:"슈퍼너드 지성",em:"🤓",pokemon:[{k:"joltik",l:23},{k:"magnemite",l:23}],reward:600},
+{n:"과학자 연수",em:"🔬",pokemon:[{k:"tynamo",l:24},{k:"pikachu",l:24}],reward:650},
+{n:"소녀 다은",em:"👧",pokemon:[{k:"emolga",l:24},{k:"joltik",l:24}],reward:640},
+{n:"슈퍼너드 원빈",em:"🤓",pokemon:[{k:"magnemite",l:25},{k:"zebstrika",l:25}],reward:700},
+{n:"에이스 수혁",em:"🎯",pokemon:[{k:"pikachu",l:25},{k:"emolga",l:26}],reward:750},
+{n:"과학자 명진",em:"🔬",pokemon:[{k:"tynamo",l:26},{k:"joltik",l:26},{k:"magnemite",l:26}],reward:850},
+{n:"에이스 보라",em:"🎯",pokemon:[{k:"zebstrika",l:27},{k:"emolga",l:27},{k:"pikachu",l:28}],reward:950}
+]},
+{id:"u_r6",n:"호도모에시티",desc:"땅체육관",lv:[26,34],pokemon:[{k:"drilbur",w:20},{k:"palpitoad",w:15},{k:"sandile",w:15},{k:"krokorok",w:15},{k:"diglett",w:20},{k:"cubone",w:15}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal"],encounterRate:0.78,reqBadges:4,
+trainers:[
+{n:"짐꾼 광수",em:"🏋️",pokemon:[{k:"drilbur",l:29},{k:"sandile",l:29}],reward:800},
+{n:"등산가 철민",em:"🧗",pokemon:[{k:"diglett",l:30},{k:"cubone",l:30}],reward:850},
+{n:"블랙벨트 용주",em:"🥋",pokemon:[{k:"krokorok",l:30},{k:"drilbur",l:31}],reward:900},
+{n:"레인저 소영",em:"🌲",pokemon:[{k:"palpitoad",l:31},{k:"sandile",l:31}],reward:920},
+{n:"짐꾼 만호",em:"🏋️",pokemon:[{k:"cubone",l:31},{k:"diglett",l:32},{k:"drilbur",l:32}],reward:1000},
+{n:"등산가 유라",em:"🧗",pokemon:[{k:"krokorok",l:32},{k:"palpitoad",l:32},{k:"sandile",l:33}],reward:1100},
+{n:"블랙벨트 태권",em:"🥋",pokemon:[{k:"drilbur",l:33},{k:"krokorok",l:33},{k:"cubone",l:34}],reward:1300}
+]},
+{id:"u_r7",n:"소라시티",desc:"비행체육관",lv:[30,38],pokemon:[{k:"tranquill",w:20},{k:"archen",w:15},{k:"rufflet",w:15},{k:"sigilyph",w:15},{k:"pidgeotto",w:15},{k:"staravia",w:20}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal"],encounterRate:0.78,reqBadges:5,
+trainers:[
+{n:"파일럿 상현",em:"✈️",pokemon:[{k:"tranquill",l:33},{k:"pidgeotto",l:33}],reward:1000},
+{n:"모델 유리",em:"💃",pokemon:[{k:"sigilyph",l:34},{k:"rufflet",l:34}],reward:1050},
+{n:"에이스 동건",em:"🎯",pokemon:[{k:"staravia",l:34},{k:"archen",l:35}],reward:1100},
+{n:"파일럿 재이",em:"✈️",pokemon:[{k:"pidgeotto",l:35},{k:"tranquill",l:35}],reward:1150},
+{n:"닌자 한솔",em:"🥷",pokemon:[{k:"sigilyph",l:35},{k:"rufflet",l:36}],reward:1200},
+{n:"에이스 은서",em:"🎯",pokemon:[{k:"archen",l:36},{k:"staravia",l:36},{k:"tranquill",l:37}],reward:1400},
+{n:"파일럿 승재",em:"✈️",pokemon:[{k:"rufflet",l:37},{k:"sigilyph",l:37},{k:"archen",l:38}],reward:1600}
+]},
+{id:"u_r8",n:"설화시티",desc:"얼음체육관",lv:[36,44],pokemon:[{k:"cubchoo",w:20},{k:"cryogonal",w:15},{k:"vanillite",w:20},{k:"beartic",w:15},{k:"swinub",w:15},{k:"sneasel",w:15}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","fullrestore","revive","fullheal","quickball","duskball"],encounterRate:0.75,reqBadges:6,
+trainers:[
+{n:"등산가 현식",em:"🧗",pokemon:[{k:"cubchoo",l:39},{k:"swinub",l:39}],reward:1300},
+{n:"닌자 세빈",em:"🥷",pokemon:[{k:"sneasel",l:40},{k:"cryogonal",l:40}],reward:1400},
+{n:"에이스 규진",em:"🎯",pokemon:[{k:"vanillite",l:40},{k:"beartic",l:41}],reward:1500},
+{n:"블랙벨트 동환",em:"🥋",pokemon:[{k:"cubchoo",l:41},{k:"swinub",l:41}],reward:1450},
+{n:"등산가 지연",em:"🧗",pokemon:[{k:"cryogonal",l:42},{k:"beartic",l:42},{k:"sneasel",l:42}],reward:1700},
+{n:"닌자 하린",em:"🥷",pokemon:[{k:"sneasel",l:42},{k:"vanillite",l:43},{k:"cubchoo",l:43}],reward:1800},
+{n:"에이스 태훈",em:"🎯",pokemon:[{k:"beartic",l:43},{k:"cryogonal",l:43},{k:"sneasel",l:44}],reward:2000}
+]},
+{id:"u_r9",n:"쌍용시티",desc:"드래곤체육관",lv:[40,50],pokemon:[{k:"deino",w:20},{k:"druddigon",w:15},{k:"axew",w:20},{k:"fraxure",w:15},{k:"dratini",w:15},{k:"bagon",w:15}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","fullrestore","revive","fullheal","quickball","duskball"],encounterRate:0.75,reqBadges:7,
+trainers:[
+{n:"에이스 민혁",em:"🎯",pokemon:[{k:"deino",l:43},{k:"axew",l:43}],reward:1600},
+{n:"닌자 소라",em:"🥷",pokemon:[{k:"dratini",l:44},{k:"fraxure",l:44}],reward:1700},
+{n:"버틀러 윤호",em:"🎩",pokemon:[{k:"druddigon",l:44},{k:"bagon",l:45}],reward:1800},
+{n:"블랙벨트 강민",em:"🥋",pokemon:[{k:"axew",l:45},{k:"deino",l:45}],reward:1850},
+{n:"에이스 수빈",em:"🎯",pokemon:[{k:"fraxure",l:46},{k:"dratini",l:46},{k:"druddigon",l:47}],reward:2000},
+{n:"닌자 도현",em:"🥷",pokemon:[{k:"bagon",l:47},{k:"axew",l:47},{k:"deino",l:48}],reward:2200},
+{n:"버틀러 재윤",em:"🎩",pokemon:[{k:"druddigon",l:48},{k:"fraxure",l:48},{k:"deino",l:49}],reward:2350},
+{n:"에이스 하준",em:"🎯",pokemon:[{k:"fraxure",l:49},{k:"druddigon",l:49},{k:"bagon",l:50},{k:"axew",l:50}],reward:2500}
+]},
+{id:"u_r10",n:"용의나선탑",desc:"챔피언로드",lv:[50,70],pokemon:[{k:"hydreigon",w:15},{k:"haxorus",w:15},{k:"chandelure",w:15},{k:"volcarona",w:15},{k:"excadrill",w:10},{k:"conkeldurr",w:10},{k:"dragonite",w:10},{k:"metagross",w:10}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal","quickball","duskball","timerball","rarecandy"],encounterRate:0.70,reqBadges:8,
+trainers:[
+{n:"사천왕 연화",em:"🔥",pokemon:[{k:"chandelure",l:56},{k:"volcarona",l:57},{k:"haxorus",l:55},{k:"hydreigon",l:58}],reward:2500},
+{n:"사천왕 고스트",em:"👻",pokemon:[{k:"chandelure",l:57},{k:"hydreigon",l:58},{k:"metagross",l:56},{k:"conkeldurr",l:57}],reward:2800},
+{n:"사천왕 격투",em:"🥊",pokemon:[{k:"conkeldurr",l:58},{k:"excadrill",l:57},{k:"haxorus",l:58},{k:"dragonite",l:59}],reward:3000},
+{n:"사천왕 다크",em:"🌑",pokemon:[{k:"hydreigon",l:59},{k:"chandelure",l:58},{k:"metagross",l:59},{k:"volcarona",l:60}],reward:3200},
+{n:"에이스 도윤",em:"🎯",pokemon:[{k:"haxorus",l:58},{k:"excadrill",l:57},{k:"dragonite",l:59}],reward:2600},
+{n:"에이스 서윤",em:"🎯",pokemon:[{k:"volcarona",l:59},{k:"conkeldurr",l:58},{k:"metagross",l:60}],reward:2900},
+{n:"에이스 하민",em:"🎯",pokemon:[{k:"hydreigon",l:60},{k:"chandelure",l:59},{k:"haxorus",l:61},{k:"dragonite",l:61}],reward:3500},
+{n:"챔피언 아데크",em:"🏆",pokemon:[{k:"volcarona",l:62},{k:"hydreigon",l:63},{k:"haxorus",l:63},{k:"excadrill",l:62},{k:"conkeldurr",l:62},{k:"dragonite",l:65}],reward:5000}
+]}
+]},kalos:{n:"칼로스 지방",em:"🗼",roads:[
+{id:"x_r1",n:"2번도로",desc:"백단의 숲",lv:[2,5],pokemon:[{k:"bunnelby",w:25},{k:"fletchling",w:25},{k:"scatterbug",w:20},{k:"litleo",w:15},{k:"zigzagoon",w:10},{k:"pidgey",w:5}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote"],encounterRate:0.85,reqBadges:0,
+trainers:[
+{n:"소년 현서",em:"👦",pokemon:[{k:"bunnelby",l:3},{k:"fletchling",l:4}],reward:120},
+{n:"소녀 지유",em:"👧",pokemon:[{k:"scatterbug",l:3},{k:"litleo",l:4}],reward:110},
+{n:"유치원생 은호",em:"👦",pokemon:[{k:"bunnelby",l:4}],reward:100},
+{n:"소년 재하",em:"👦",pokemon:[{k:"fletchling",l:4},{k:"zigzagoon",l:4}],reward:130},
+{n:"소녀 소율",em:"👧",pokemon:[{k:"litleo",l:4},{k:"scatterbug",l:5}],reward:140},
+{n:"소년 도현",em:"👦",pokemon:[{k:"bunnelby",l:5},{k:"fletchling",l:5},{k:"pidgey",l:5}],reward:180}
+]},
+{id:"x_r2",n:"백단시티",desc:"백단시티 외곽",lv:[4,9],pokemon:[{k:"espurr",w:20},{k:"honedge",w:15},{k:"pancham",w:20},{k:"furfrou",w:15},{k:"eevee",w:15},{k:"ralts",w:15}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote"],encounterRate:0.80,reqBadges:0,
+trainers:[
+{n:"소녀 하린",em:"👧",pokemon:[{k:"espurr",l:6},{k:"ralts",l:6}],reward:170},
+{n:"모델 세라",em:"💃",pokemon:[{k:"furfrou",l:7},{k:"eevee",l:7}],reward:200},
+{n:"슈퍼너드 지환",em:"🤓",pokemon:[{k:"honedge",l:7},{k:"espurr",l:7}],reward:210},
+{n:"소녀 윤서",em:"👧",pokemon:[{k:"pancham",l:7},{k:"ralts",l:8}],reward:220},
+{n:"모델 유나",em:"💃",pokemon:[{k:"furfrou",l:8},{k:"eevee",l:8}],reward:240},
+{n:"슈퍼너드 시원",em:"🤓",pokemon:[{k:"honedge",l:8},{k:"pancham",l:8}],reward:250},
+{n:"소녀 아인",em:"👧",pokemon:[{k:"espurr",l:8},{k:"ralts",l:9},{k:"eevee",l:9}],reward:280}
+]},
+{id:"x_r3",n:"관목시티",desc:"관목시티 주변",lv:[10,16],pokemon:[{k:"skiddo",w:20},{k:"spritzee",w:15},{k:"swirlix",w:15},{k:"dedenne",w:20},{k:"pikachu",w:15},{k:"mareep",w:15}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote"],encounterRate:0.80,reqBadges:1,
+trainers:[
+{n:"소년 준혁",em:"👦",pokemon:[{k:"skiddo",l:12},{k:"dedenne",l:13}],reward:300},
+{n:"소녀 나은",em:"👧",pokemon:[{k:"spritzee",l:13},{k:"swirlix",l:13}],reward:320},
+{n:"레인저 민재",em:"🌲",pokemon:[{k:"skiddo",l:13},{k:"mareep",l:14}],reward:350},
+{n:"댄서 소희",em:"💃",pokemon:[{k:"pikachu",l:14},{k:"dedenne",l:14}],reward:380},
+{n:"소년 우진",em:"👦",pokemon:[{k:"mareep",l:14},{k:"skiddo",l:15}],reward:400},
+{n:"레인저 세진",em:"🌲",pokemon:[{k:"spritzee",l:15},{k:"swirlix",l:15},{k:"dedenne",l:15}],reward:460},
+{n:"소녀 예나",em:"👧",pokemon:[{k:"pikachu",l:15},{k:"skiddo",l:16},{k:"dedenne",l:16}],reward:520}
+]},
+{id:"x_r4",n:"미르시티",desc:"미르시티 외곽",lv:[14,22],pokemon:[{k:"inkay",w:20},{k:"binacle",w:15},{k:"hawlucha",w:20},{k:"helioptile",w:15},{k:"machop",w:15},{k:"geodude",w:15}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:2,
+trainers:[
+{n:"블랙벨트 상훈",em:"🥋",pokemon:[{k:"hawlucha",l:17},{k:"machop",l:17}],reward:450},
+{n:"등산가 영민",em:"🧗",pokemon:[{k:"geodude",l:18},{k:"binacle",l:18}],reward:480},
+{n:"과학자 현정",em:"🔬",pokemon:[{k:"helioptile",l:18},{k:"inkay",l:19}],reward:520},
+{n:"불량배 태수",em:"😎",pokemon:[{k:"inkay",l:19},{k:"hawlucha",l:19}],reward:540},
+{n:"블랙벨트 동준",em:"🥋",pokemon:[{k:"machop",l:19},{k:"binacle",l:20}],reward:580},
+{n:"등산가 보겸",em:"🧗",pokemon:[{k:"geodude",l:20},{k:"helioptile",l:20},{k:"hawlucha",l:21}],reward:650},
+{n:"과학자 은수",em:"🔬",pokemon:[{k:"inkay",l:21},{k:"helioptile",l:21},{k:"binacle",l:22}],reward:720}
+]},
+{id:"x_r5",n:"해변시티",desc:"해변시티 해안가",lv:[20,28],pokemon:[{k:"clauncher",w:20},{k:"skrelp",w:15},{k:"barbaracle",w:15},{k:"dragalge",w:10},{k:"tentacool",w:20},{k:"horsea",w:20}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:3,
+trainers:[
+{n:"수영선수 태영",em:"🏊",pokemon:[{k:"clauncher",l:23},{k:"tentacool",l:23}],reward:600},
+{n:"낚시꾼 한수",em:"🎣",pokemon:[{k:"horsea",l:24},{k:"skrelp",l:24}],reward:640},
+{n:"선원 광호",em:"⚓",pokemon:[{k:"tentacool",l:24},{k:"clauncher",l:25}],reward:680},
+{n:"소녀 미래",em:"👧",pokemon:[{k:"skrelp",l:25},{k:"horsea",l:25}],reward:700},
+{n:"수영선수 은비",em:"🏊",pokemon:[{k:"clauncher",l:26},{k:"barbaracle",l:26}],reward:750},
+{n:"낚시꾼 정수",em:"🎣",pokemon:[{k:"horsea",l:26},{k:"skrelp",l:27},{k:"tentacool",l:26}],reward:850},
+{n:"선원 대호",em:"⚓",pokemon:[{k:"barbaracle",l:27},{k:"clauncher",l:27},{k:"dragalge",l:28}],reward:950}
+]},
+{id:"x_r6",n:"향전시티",desc:"향전시티 주변",lv:[26,34],pokemon:[{k:"phantump",w:20},{k:"pumpkaboo",w:15},{k:"goomy",w:15},{k:"bergmite",w:15},{k:"gastly",w:20},{k:"sneasel",w:15}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal"],encounterRate:0.78,reqBadges:4,
+trainers:[
+{n:"닌자 유성",em:"🥷",pokemon:[{k:"gastly",l:29},{k:"phantump",l:29}],reward:800},
+{n:"과학자 도균",em:"🔬",pokemon:[{k:"bergmite",l:30},{k:"goomy",l:30}],reward:860},
+{n:"에이스 성은",em:"🎯",pokemon:[{k:"pumpkaboo",l:30},{k:"sneasel",l:31}],reward:900},
+{n:"슈퍼너드 창민",em:"🤓",pokemon:[{k:"phantump",l:31},{k:"gastly",l:31}],reward:920},
+{n:"닌자 세찬",em:"🥷",pokemon:[{k:"sneasel",l:31},{k:"pumpkaboo",l:32},{k:"gastly",l:32}],reward:1050},
+{n:"과학자 예준",em:"🔬",pokemon:[{k:"goomy",l:32},{k:"bergmite",l:33},{k:"phantump",l:33}],reward:1150},
+{n:"에이스 나라",em:"🎯",pokemon:[{k:"gastly",l:33},{k:"sneasel",l:33},{k:"goomy",l:34}],reward:1300}
+]},
+{id:"x_r7",n:"쿠노에시티",desc:"쿠노에시티 동굴",lv:[30,38],pokemon:[{k:"noibat",w:20},{k:"tyrunt",w:15},{k:"amaura",w:15},{k:"carbink",w:15},{k:"bagon",w:15},{k:"larvitar",w:20}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal"],encounterRate:0.78,reqBadges:5,
+trainers:[
+{n:"등산가 석현",em:"🧗",pokemon:[{k:"carbink",l:33},{k:"larvitar",l:33}],reward:1000},
+{n:"에이스 다인",em:"🎯",pokemon:[{k:"noibat",l:34},{k:"tyrunt",l:34}],reward:1100},
+{n:"블랙벨트 원석",em:"🥋",pokemon:[{k:"larvitar",l:34},{k:"bagon",l:35}],reward:1150},
+{n:"과학자 승연",em:"🔬",pokemon:[{k:"amaura",l:35},{k:"tyrunt",l:35}],reward:1200},
+{n:"등산가 혜진",em:"🧗",pokemon:[{k:"carbink",l:35},{k:"larvitar",l:36},{k:"noibat",l:36}],reward:1350},
+{n:"에이스 현준",em:"🎯",pokemon:[{k:"bagon",l:36},{k:"tyrunt",l:37},{k:"amaura",l:37}],reward:1450},
+{n:"과학자 다율",em:"🔬",pokemon:[{k:"noibat",l:37},{k:"carbink",l:37},{k:"tyrunt",l:38}],reward:1600}
+]},
+{id:"x_r8",n:"히요쿠시티",desc:"히요쿠시티 설원",lv:[36,44],pokemon:[{k:"avalugg",w:15},{k:"goodra",w:10},{k:"trevenant",w:20},{k:"gourgeist",w:20},{k:"gengar",w:15},{k:"weavile",w:20}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","fullrestore","revive","fullheal","quickball","duskball"],encounterRate:0.75,reqBadges:6,
+trainers:[
+{n:"닌자 시헌",em:"🥷",pokemon:[{k:"weavile",l:39},{k:"gengar",l:39}],reward:1300},
+{n:"버틀러 정빈",em:"🎩",pokemon:[{k:"trevenant",l:40},{k:"gourgeist",l:40}],reward:1400},
+{n:"에이스 하영",em:"🎯",pokemon:[{k:"avalugg",l:40},{k:"goodra",l:41}],reward:1500},
+{n:"모델 지안",em:"💃",pokemon:[{k:"gengar",l:41},{k:"weavile",l:41}],reward:1500},
+{n:"닌자 규현",em:"🥷",pokemon:[{k:"trevenant",l:42},{k:"gourgeist",l:42},{k:"weavile",l:42}],reward:1700},
+{n:"버틀러 인성",em:"🎩",pokemon:[{k:"avalugg",l:42},{k:"goodra",l:43},{k:"gengar",l:43}],reward:1800},
+{n:"에이스 소민",em:"🎯",pokemon:[{k:"weavile",l:43},{k:"trevenant",l:43},{k:"goodra",l:44}],reward:2000}
+]},
+{id:"x_r9",n:"미아레시티",desc:"도심지역",lv:[40,50],pokemon:[{k:"klefki",w:15},{k:"aegislash",w:15},{k:"dragalge",w:15},{k:"malamar",w:15},{k:"metagross",w:20},{k:"gardevoir",w:20}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","fullrestore","revive","fullheal","quickball","duskball"],encounterRate:0.75,reqBadges:7,
+trainers:[
+{n:"에이스 준서",em:"🎯",pokemon:[{k:"klefki",l:43},{k:"aegislash",l:43}],reward:1600},
+{n:"과학자 세현",em:"🔬",pokemon:[{k:"malamar",l:44},{k:"metagross",l:44}],reward:1700},
+{n:"모델 아라",em:"💃",pokemon:[{k:"gardevoir",l:44},{k:"klefki",l:45}],reward:1750},
+{n:"닌자 혁진",em:"🥷",pokemon:[{k:"dragalge",l:45},{k:"aegislash",l:45}],reward:1800},
+{n:"버틀러 재원",em:"🎩",pokemon:[{k:"metagross",l:46},{k:"gardevoir",l:46}],reward:1900},
+{n:"에이스 가은",em:"🎯",pokemon:[{k:"malamar",l:46},{k:"klefki",l:47},{k:"aegislash",l:47}],reward:2100},
+{n:"과학자 명준",em:"🔬",pokemon:[{k:"dragalge",l:47},{k:"metagross",l:48},{k:"gardevoir",l:48}],reward:2300},
+{n:"에이스 태윤",em:"🎯",pokemon:[{k:"aegislash",l:48},{k:"metagross",l:49},{k:"gardevoir",l:49},{k:"malamar",l:50}],reward:2500}
+]},
+{id:"x_r10",n:"챔피언로드",desc:"칼로스 챔피언로드",lv:[50,70],pokemon:[{k:"noivern",w:15},{k:"tyrantrum",w:15},{k:"aurorus",w:12},{k:"sylveon",w:12},{k:"goodra",w:12},{k:"talonflame",w:12},{k:"garchomp",w:12},{k:"dragonite",w:10}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal","quickball","duskball","timerball","rarecandy"],encounterRate:0.70,reqBadges:8,
+trainers:[
+{n:"사천왕 파키라",em:"🔥",pokemon:[{k:"talonflame",l:56},{k:"volcarona",l:57},{k:"chandelure",l:55},{k:"tyrantrum",l:58}],reward:2500},
+{n:"사천왕 즈미",em:"💧",pokemon:[{k:"dragalge",l:57},{k:"goodra",l:58},{k:"barbaracle",l:56},{k:"clawitzer",l:57}],reward:2800},
+{n:"사천왕 간피",em:"🗡️",pokemon:[{k:"aegislash",l:58},{k:"noivern",l:57},{k:"aurorus",l:58},{k:"tyrantrum",l:59}],reward:3000},
+{n:"사천왕 드라세나",em:"🐉",pokemon:[{k:"garchomp",l:59},{k:"dragonite",l:58},{k:"goodra",l:59},{k:"noivern",l:60}],reward:3200},
+{n:"에이스 빛나",em:"🎯",pokemon:[{k:"sylveon",l:58},{k:"aurorus",l:57},{k:"talonflame",l:59}],reward:2600},
+{n:"에이스 상우",em:"🎯",pokemon:[{k:"tyrantrum",l:59},{k:"garchomp",l:58},{k:"metagross",l:60}],reward:2900},
+{n:"에이스 이슬",em:"🎯",pokemon:[{k:"noivern",l:60},{k:"goodra",l:59},{k:"dragonite",l:61},{k:"sylveon",l:61}],reward:3500},
+{n:"챔피언 카르네",em:"🏆",pokemon:[{k:"gardevoir",l:62},{k:"tyrantrum",l:63},{k:"goodra",l:63},{k:"aurorus",l:62},{k:"talonflame",l:62},{k:"garchomp",l:65}],reward:5000}
+]}
+]}
+
 };
 
 // ═══════════════════════════════════════════════
@@ -1208,6 +1662,43 @@ sinnoh: [
     {id:"s_gym8",city:"선전시티",n:"선전시티 체육관",type:"electric",badge:"비콘뱃지",badgeEm:"⚡",
      leaders:[{id:"volkner",n:"전진",em:"⚡",gen:4,pokemon:[{k:"raichu",l:46},{k:"luxray",l:48},{k:"electabuzz",l:47}],reward:4800,rewardItems:["tm24_thunderbolt","masterball"]}]}
 ]
+,unova: [
+    {id:"u_gym1",city:"칠보시티",n:"칠보시티 체육관",type:"normal",badge:"트라이뱃지",badgeEm:"📐",
+     leaders:[{id:"cilan",n:"덴트",em:"🌿",gen:5,pokemon:[{k:"lillipup",l:12},{k:"pansage",l:14}],reward:1400,rewardItems:["tm83_workup"]}]},
+    {id:"u_gym2",city:"칠보시티",n:"칠보시티 체육관",type:"normal",badge:"베이직뱃지",badgeEm:"⭐",
+     leaders:[{id:"lenora",n:"알로에",em:"📖",gen:5,pokemon:[{k:"herdier",l:18},{k:"watchog",l:20}],reward:2000,rewardItems:["tm67_retaliate"]}]},
+    {id:"u_gym3",city:"구름시티",n:"구름시티 체육관",type:"bug",badge:"비틀뱃지",badgeEm:"🐛",
+     leaders:[{id:"burgh",n:"아티",em:"🎨",gen:5,pokemon:[{k:"whirlipede",l:21},{k:"dwebble",l:21},{k:"leavanny",l:23}],reward:2300,rewardItems:["tm76_strugglebug"]}]},
+    {id:"u_gym4",city:"뇌문시티",n:"뇌문시티 체육관",type:"electric",badge:"볼트뱃지",badgeEm:"⚡",
+     leaders:[{id:"elesa",n:"카밀레",em:"💡",gen:5,pokemon:[{k:"emolga",l:25},{k:"zebstrika",l:27}],reward:2700,rewardItems:["tm72_voltswitch"]}]},
+    {id:"u_gym5",city:"호도모에시티",n:"호도모에시티 체육관",type:"ground",badge:"퀘이크뱃지",badgeEm:"🌍",
+     leaders:[{id:"clay",n:"야콘",em:"⛏️",gen:5,pokemon:[{k:"krokorok",l:29},{k:"palpitoad",l:29},{k:"excadrill",l:31}],reward:3100,rewardItems:["tm78_bulldoze"]}]},
+    {id:"u_gym6",city:"소라시티",n:"소라시티 체육관",type:"flying",badge:"제트뱃지",badgeEm:"🌪️",
+     leaders:[{id:"skyla",n:"풍란",em:"✈️",gen:5,pokemon:[{k:"swoobat",l:33},{k:"unfezant",l:33},{k:"swanna",l:35}],reward:3500,rewardItems:["tm62_acrobatics"]}]},
+    {id:"u_gym7",city:"설화시티",n:"설화시티 체육관",type:"ice",badge:"아이시클뱃지",badgeEm:"❄️",
+     leaders:[{id:"brycen",n:"담죽",em:"🥋",gen:5,pokemon:[{k:"vanillish",l:37},{k:"cryogonal",l:37},{k:"beartic",l:39}],reward:3900,rewardItems:["tm79_frostbreath"]}]},
+    {id:"u_gym8",city:"쌍용시티",n:"쌍용시티 체육관",type:"dragon",badge:"레전드뱃지",badgeEm:"🐉",
+     leaders:[{id:"drayden",n:"사가",em:"🐲",gen:5,pokemon:[{k:"druddigon",l:41},{k:"flygon",l:41},{k:"haxorus",l:43}],reward:4300,rewardItems:["tm82_dragontail","masterball"]}]}
+],
+kalos: [
+    {id:"x_gym1",city:"백단시티",n:"백단시티 체육관",type:"bug",badge:"버그뱃지",badgeEm:"🐛",
+     leaders:[{id:"viola",n:"비올라",em:"📷",gen:6,pokemon:[{k:"surskit",l:10},{k:"vivillon",l:12}],reward:1200,rewardItems:["tm83_infestation"]}]},
+    {id:"x_gym2",city:"관목시티",n:"관목시티 체육관",type:"rock",badge:"클리프뱃지",badgeEm:"🪨",
+     leaders:[{id:"grant",n:"자크로",em:"🧗",gen:6,pokemon:[{k:"amaura",l:25},{k:"tyrunt",l:25}],reward:2500,rewardItems:["tm39_rockslide"]}]},
+    {id:"x_gym3",city:"미르시티",n:"미르시티 체육관",type:"fighting",badge:"럼블뱃지",badgeEm:"🥊",
+     leaders:[{id:"korrina",n:"코르니",em:"⛸️",gen:6,pokemon:[{k:"mienfoo",l:29},{k:"machoke",l:28},{k:"hawlucha",l:32}],reward:3200,rewardItems:["tm98_powerpunch"]}]},
+    {id:"x_gym4",city:"해변시티",n:"해변시티 체육관",type:"grass",badge:"플랜트뱃지",badgeEm:"🌱",
+     leaders:[{id:"ramos",n:"후쿠지",em:"🌳",gen:6,pokemon:[{k:"jumpluff",l:30},{k:"gogoat",l:34}],reward:3400,rewardItems:["tm86_grassknot"]}]},
+    {id:"x_gym5",city:"향전시티",n:"향전시티 체육관",type:"electric",badge:"볼티지뱃지",badgeEm:"⚡",
+     leaders:[{id:"clemont",n:"시트론",em:"💡",gen:6,pokemon:[{k:"emolga",l:35},{k:"magneton",l:35},{k:"heliolisk",l:37}],reward:3700,rewardItems:["tm24_thunderbolt"]}]},
+    {id:"x_gym6",city:"쿠노에시티",n:"쿠노에시티 체육관",type:"fairy",badge:"페어리뱃지",badgeEm:"🧚",
+     leaders:[{id:"valerie",n:"마슈",em:"👘",gen:6,pokemon:[{k:"mawile",l:38},{k:"mrmime",l:38},{k:"sylveon",l:42}],reward:4200,rewardItems:["tm99_dazzlinggleam"]}]},
+    {id:"x_gym7",city:"히요쿠시티",n:"히요쿠시티 체육관",type:"psychic",badge:"사이킥뱃지",badgeEm:"🔮",
+     leaders:[{id:"olympia",n:"고지카",em:"🌙",gen:6,pokemon:[{k:"sigilyph",l:44},{k:"slowking",l:44},{k:"meowstic",l:48}],reward:4800,rewardItems:["tm04_calmmind"]}]},
+    {id:"x_gym8",city:"미아레시티",n:"미아레시티 체육관",type:"ice",badge:"아이스버그뱃지",badgeEm:"🧊",
+     leaders:[{id:"wulfric",n:"우르프",em:"🏔️",gen:6,pokemon:[{k:"abomasnow",l:56},{k:"cryogonal",l:55},{k:"avalugg",l:59}],reward:5900,rewardItems:["tm13_icebeam","masterball"]}]}
+]
+
 };
 
 // ═══════════════════════════════════════════════
@@ -1296,7 +1787,20 @@ tm86_grassknot:  {n:"기술머신86 [풀묶기]",desc:"풀묶기를 가르친다
 tm89_uturn:      {n:"기술머신89 [유턴]",desc:"유턴을 가르친다",type:"tm",value:"bugbite",buy:3000,sell:1500},
 tm91_flashcannon:{n:"기술머신91 [러스터캐논]",desc:"러스터캐논을 가르친다",type:"tm",value:"flashcannon",buy:5500,sell:2750},
 tm94_surf:       {n:"기술머신94 [파도타기]",desc:"파도타기를 가르친다",type:"tm",value:"surf",buy:5500,sell:2750},
-tm95_darkpulse:  {n:"기술머신95 [악의파동]",desc:"악의파동을 가르친다",type:"tm",value:"darkpulse",buy:5500,sell:2750}
+tm95_darkpulse:  {n:"기술머신95 [악의파동]",desc:"악의파동을 가르친다",type:"tm",value:"darkpulse",buy:5500,sell:2750},
+// ═══ Gen 5-6 체육관 보상 TM ═══
+tm04_calmmind:   {n:"기술머신04 [명상]",desc:"명상을 가르친다",type:"tm",value:"calmmind",buy:3000,sell:1500},
+tm62_acrobatics: {n:"기술머신62 [곡예]",desc:"곡예를 가르친다",type:"tm",value:"aerialace",buy:3000,sell:1500},
+tm67_retaliate:  {n:"기술머신67 [보복]",desc:"보복을 가르친다",type:"tm",value:"pursuit",buy:3000,sell:1500},
+tm72_voltswitch: {n:"기술머신72 [볼트체인지]",desc:"볼트체인지를 가르친다",type:"tm",value:"thunderbolt",buy:5500,sell:2750},
+tm76_strugglebug:{n:"기술머신76 [버그저항]",desc:"버그저항을 가르친다",type:"tm",value:"bugbite",buy:3000,sell:1500},
+tm78_bulldoze:   {n:"기술머신78 [지진밟기]",desc:"지진밟기를 가르친다",type:"tm",value:"earthquake",buy:5500,sell:2750},
+tm79_frostbreath:{n:"기술머신79 [프로스트브레스]",desc:"프로스트브레스를 가르친다",type:"tm",value:"icebeam",buy:3000,sell:1500},
+tm82_dragontail: {n:"기술머신82 [드래곤테일]",desc:"드래곤테일을 가르친다",type:"tm",value:"dragonclaw",buy:5500,sell:2750},
+tm83_workup:     {n:"기술머신83 [자기암시]",desc:"자기암시를 가르친다",type:"tm",value:"swordsdance",buy:3000,sell:1500},
+tm83_infestation:{n:"기술머신83b [침식]",desc:"침식을 가르친다",type:"tm",value:"bugbite",buy:3000,sell:1500},
+tm98_powerpunch: {n:"기술머신98 [파워업펀치]",desc:"파워업펀치를 가르친다",type:"tm",value:"brickbreak",buy:5500,sell:2750},
+tm99_dazzlinggleam:{n:"기술머신99 [매지컬샤인]",desc:"매지컬샤인을 가르친다",type:"tm",value:"dazzlinggleam",buy:5500,sell:2750}
 };
 
 // ═══════════════════════════════════════════════
@@ -1322,7 +1826,7 @@ function createNewPlayer(name, starterKey, region) {
         gold: 3000,
         region: region || "kanto",
         roadIdx: 0,
-        badges: {kanto:[], johto:[], hoenn:[], sinnoh:[]},
+        badges: {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[]},
         pokedex: dex,
         defeatedTrainers: {},
         defeatedGyms: {},
@@ -1453,12 +1957,14 @@ async function loadAll() {
             if (player.roamingLocation === undefined) player.roamingLocation = null;
             // badges 형식 마이그레이션 (숫자→객체)
             if (typeof player.badges === 'number' || !player.badges) {
-                player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[]};
+                player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[]};
             }
             if (!player.badges.kanto) player.badges.kanto = [];
             if (!player.badges.johto) player.badges.johto = [];
             if (!player.badges.hoenn) player.badges.hoenn = [];
             if (!player.badges.sinnoh) player.badges.sinnoh = [];
+            if (!player.badges.unova) player.badges.unova = [];
+            if (!player.badges.kalos) player.badges.kalos = [];
             if (player.routeIdx !== undefined && player.roadIdx === undefined) {
                 player.roadIdx = player.routeIdx;
                 delete player.routeIdx;
@@ -1573,6 +2079,24 @@ sinnoh_fixed: [
     {key:"azelf",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:50,name:"아그놈"},
     {key:"regigigas",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:70,name:"레지기가스"}
 ],
+// 하나 전설 (하나 뱃지 8개 필요, 용의나선탑에서 조우)
+unova_fixed: [
+    {key:"reshiram",road:"u_r10",reqRegion:"unova",reqBadges:8,level:70,name:"레시라무"},
+    {key:"zekrom",road:"u_r10",reqRegion:"unova",reqBadges:8,level:70,name:"제크로무"},
+    {key:"kyurem",road:"u_r10",reqRegion:"unova",reqBadges:8,level:70,name:"큐레무"},
+    {key:"cobalion",road:"u_r10",reqRegion:"unova",reqBadges:8,level:50,name:"코바르온"},
+    {key:"terrakion",road:"u_r10",reqRegion:"unova",reqBadges:8,level:50,name:"테라키온"},
+    {key:"virizion",road:"u_r10",reqRegion:"unova",reqBadges:8,level:50,name:"비리디온"},
+    {key:"landorus",road:"u_r10",reqRegion:"unova",reqBadges:8,level:70,name:"랜드로스"},
+    {key:"tornadus",road:"u_r10",reqRegion:"unova",reqBadges:8,level:70,name:"토네로스"},
+    {key:"thundurus",road:"u_r10",reqRegion:"unova",reqBadges:8,level:70,name:"볼트로스"}
+],
+// 칼로스 전설 (칼로스 뱃지 8개 필요, 챔피언로드에서 조우)
+kalos_fixed: [
+    {key:"xerneas",road:"x_r10",reqRegion:"kalos",reqBadges:8,level:70,name:"제르네아스"},
+    {key:"yveltal",road:"x_r10",reqRegion:"kalos",reqBadges:8,level:70,name:"이벨타르"},
+    {key:"zygarde",road:"x_r10",reqRegion:"kalos",reqBadges:8,level:70,name:"지가르데"}
+],
 // 로밍 (성도 뱃지 3개 이상, 랜덤 도로에 출현)
 roaming: ["raikou","entei","suicune"],
 // 환상 (업적 조건)
@@ -1585,7 +2109,14 @@ mythical: [
     {key:"shaymin",reqType:"pokedex",reqCount:400,level:50,name:"쉐이미"},
     {key:"arceus",reqType:"totalBadges",reqCount:32,level:80,name:"아르세우스"},
     {key:"phione",reqType:"pokedex",reqCount:450,level:30,name:"피오네"},
-    {key:"manaphy",reqType:"totalBadges",reqCount:32,level:50,name:"마나피"}
+    {key:"manaphy",reqType:"totalBadges",reqCount:32,level:50,name:"마나피"},
+    {key:"victini",reqType:"totalBadges",reqCount:40,level:50,name:"비크티니"},
+    {key:"keldeo",reqType:"pokedex",reqCount:500,level:50,name:"케르디오"},
+    {key:"meloetta",reqType:"totalBadges",reqCount:40,level:50,name:"메로엣타"},
+    {key:"genesect",reqType:"pokedex",reqCount:600,level:50,name:"게노세크트"},
+    {key:"diancie",reqType:"totalBadges",reqCount:48,level:50,name:"디안시"},
+    {key:"hoopa",reqType:"pokedex",reqCount:650,level:50,name:"후파"},
+    {key:"volcanion",reqType:"totalBadges",reqCount:48,level:50,name:"볼케니온"}
 ]
 };
 
@@ -1624,6 +2155,22 @@ function getAvailableLegendaries(roadId) {
         var badges = player.badges[le.reqRegion] ? player.badges[le.reqRegion].length : 0;
         if (badges >= le.reqBadges) available.push(le);
     }
+    // 고정 전설 (하나)
+    for (var i = 0; i < LEGENDARY_ENCOUNTERS.unova_fixed.length; i++) {
+        var le = LEGENDARY_ENCOUNTERS.unova_fixed[i];
+        if (le.road !== roadId) continue;
+        if (player.caughtLegendaries[le.key]) continue;
+        var badges = player.badges[le.reqRegion] ? player.badges[le.reqRegion].length : 0;
+        if (badges >= le.reqBadges) available.push(le);
+    }
+    // 고정 전설 (칼로스)
+    for (var i = 0; i < LEGENDARY_ENCOUNTERS.kalos_fixed.length; i++) {
+        var le = LEGENDARY_ENCOUNTERS.kalos_fixed[i];
+        if (le.road !== roadId) continue;
+        if (player.caughtLegendaries[le.key]) continue;
+        var badges = player.badges[le.reqRegion] ? player.badges[le.reqRegion].length : 0;
+        if (badges >= le.reqBadges) available.push(le);
+    }
     return available;
 }
 
@@ -1637,7 +2184,7 @@ function getAvailableMythicals() {
             var seen = Object.keys(player.pokedex || {}).length;
             if (seen >= m.reqCount) available.push(m);
         } else if (m.reqType === "totalBadges") {
-            var total = (player.badges.kanto ? player.badges.kanto.length : 0) + (player.badges.johto ? player.badges.johto.length : 0) + (player.badges.hoenn ? player.badges.hoenn.length : 0) + (player.badges.sinnoh ? player.badges.sinnoh.length : 0);
+            var total = (player.badges.kanto ? player.badges.kanto.length : 0) + (player.badges.johto ? player.badges.johto.length : 0) + (player.badges.hoenn ? player.badges.hoenn.length : 0) + (player.badges.sinnoh ? player.badges.sinnoh.length : 0) + (player.badges.unova ? player.badges.unova.length : 0) + (player.badges.kalos ? player.badges.kalos.length : 0);
             if (total >= m.reqCount) available.push(m);
         }
     }
@@ -1741,8 +2288,8 @@ function startWildBattle(road) {
         return false;
     }
     // 시간대별 포켓몬 필터링
-    var nightOnly = {gastly:1,haunter:1,gengar:1,hoothoot:1,noctowl:1,murkrow:1,misdreavus:1,spinarak:1,ariados:1,sneasel:1,umbreon:1,houndour:1,houndoom:1};
-    var dayOnly = {sunkern:1,sunflora:1,ledyba:1,ledian:1,espeon:1};
+    var nightOnly = {gastly:1,haunter:1,gengar:1,hoothoot:1,noctowl:1,murkrow:1,misdreavus:1,spinarak:1,ariados:1,sneasel:1,umbreon:1,houndour:1,houndoom:1,litwick:1,lampent:1,chandelure:1,phantump:1,trevenant:1,pumpkaboo:1,gourgeist:1};
+    var dayOnly = {sunkern:1,sunflora:1,ledyba:1,ledian:1,espeon:1,cottonee:1,whimsicott:1,petilil:1,lilligant:1,helioptile:1,heliolisk:1};
     var isNight = isNightTime() || isDawnTime(); // 밤/새벽
     var isDay = !isNight;
     // 가중치 조정된 포켓몬 리스트 생성
@@ -2541,10 +3088,12 @@ function renderStarterSelect() {
         kanto: [{k:"bulbasaur",n:"이상해씨",t:"풀/독",em:"🌿"},{k:"charmander",n:"파이리",t:"불꽃",em:"🔥"},{k:"squirtle",n:"꼬부기",t:"물",em:"🐢"}],
         johto: [{k:"chikorita",n:"치코리타",t:"풀",em:"🍃"},{k:"cyndaquil",n:"브케인",t:"불꽃",em:"🔥"},{k:"totodile",n:"리아코",t:"물",em:"🐊"}],
         hoenn: [{k:"treecko",n:"나무지기",t:"풀",em:"🌿"},{k:"torchic",n:"아차모",t:"불꽃",em:"🔥"},{k:"mudkip",n:"물짱이",t:"물",em:"💧"}],
-        sinnoh: [{k:"turtwig",n:"모부기",t:"풀",em:"🌿"},{k:"chimchar",n:"불꽃숭이",t:"불꽃",em:"🔥"},{k:"piplup",n:"팽도리",t:"물",em:"💧"}]
+        sinnoh: [{k:"turtwig",n:"모부기",t:"풀",em:"🌿"},{k:"chimchar",n:"불꽃숭이",t:"불꽃",em:"🔥"},{k:"piplup",n:"팽도리",t:"물",em:"💧"}],
+        unova: [{k:"snivy",n:"주리비얀",t:"풀",em:"🌿"},{k:"tepig",n:"뚜꾸리",t:"불꽃",em:"🐷"},{k:"oshawott",n:"수댕이",t:"물",em:"🦦"}],
+        kalos: [{k:"chespin",n:"도치마론",t:"풀",em:"🌰"},{k:"fennekin",n:"푸호꼬",t:"불꽃",em:"🦊"},{k:"froakie",n:"개구마르",t:"물",em:"🐸"}]
     };
     var starters = startersByRegion[region] || startersByRegion.kanto;
-    var regionNameMap = {kanto:"칸토",johto:"성도",hoenn:"호엔",sinnoh:"신오"};
+    var regionNameMap = {kanto:"칸토",johto:"성도",hoenn:"호엔",sinnoh:"신오",unova:"하나",kalos:"칼로스"};
     var html = '<div style="text-align:center;padding:10px 0">';
     html += '<div style="font-size:18px;margin-bottom:4px">🎒 첫 파트너 포켓몬 선택</div>';
     html += '<div style="color:#aaa;font-size:12px;margin-bottom:12px">' + (regionNameMap[region] || "칸토") + ' 지방에서 모험 시작!</div>';
@@ -2554,6 +3103,8 @@ function renderStarterSelect() {
     html += '<button class="pk-btn ' + (region==="johto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="johto">🏔️ 성도</button>';
     html += '<button class="pk-btn ' + (region==="hoenn"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="hoenn">🌴 호엔</button>';
     html += '<button class="pk-btn ' + (region==="sinnoh"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="sinnoh">❄️ 신오</button>';
+    html += '<button class="pk-btn ' + (region==="unova"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="unova">🏙️ 하나</button>';
+    html += '<button class="pk-btn ' + (region==="kalos"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="kalos">🗼 칼로스</button>';
     html += '</div>';
     html += '<div style="display:flex;gap:8px;justify-content:center">';
     for (var i = 0; i < starters.length; i++) {
