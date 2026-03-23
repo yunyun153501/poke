@@ -3037,10 +3037,10 @@ function render() {
     var container = createUI();
     var body = container.querySelector("#pk-body") || container;
     var html = '';
-    if (!player || !gState) {
-        html = renderTitleScreen();
-    } else if (gState.subScreen === "starterSelect") {
+    if (gState && gState.subScreen === "starterSelect") {
         html = renderStarterSelect();
+    } else if (!player || !gState) {
+        html = renderTitleScreen();
     } else if (gState.pendingEvo) {
         html = renderEvolutionScreen();
     } else if (gState.pendingMoveLearn) {
