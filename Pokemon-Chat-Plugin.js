@@ -2516,10 +2516,10 @@ filter:{n:"필터",desc:"효과 좋은 기술 데미지 3/4",type:"filter"},
 solidrock:{n:"하드록",desc:"효과 좋은 기술 데미지 3/4",type:"filter"},
 unaware:{n:"천진",desc:"상대 능력변화 무시",type:"unaware"},
 magicguard:{n:"매직가드",desc:"기술 이외의 데미지 없음",type:"magicguard"},
-pickup:{n:"픽업",desc:"전투 후 아이템 획득 확률",type:"none"},
-keeneye:{n:"날카로운눈",desc:"명중률 하락 방지",type:"none"},
+pickup:{n:"픽업",desc:"전투 후 아이템 획득 확률",type:"pickup"},
+keeneye:{n:"날카로운눈",desc:"명중률 하락 방지",type:"prevent_accdown"},
 runaway:{n:"도주",desc:"야생전에서 반드시 도주 가능",type:"runaway"},
-synchronize:{n:"싱크로",desc:"상태이상을 상대에게도 전달",type:"none"},
+synchronize:{n:"싱크로",desc:"상태이상을 상대에게도 전달",type:"synchronize"},
 innerfocus:{n:"정신력",desc:"풀죽지 않음",type:"noflinch"},
 scrappy:{n:"배짱",desc:"노말/격투 기술이 고스트에 적중",type:"scrappy"},
 defiant:{n:"오기",desc:"능력 하락 시 공격 2단계 상승",type:"defiant"},
@@ -2529,9 +2529,9 @@ parentalbond:{n:"부자유친",desc:"기술을 2번 발동 (2번째 위력 25%)"
 pixilate:{n:"페어리스킨",desc:"노말 기술이 페어리 타입+1.2배",type:"none"},
 aerilate:{n:"스카이스킨",desc:"노말 기술이 비행 타입+1.2배",type:"none"},
 refrigerate:{n:"프리즈스킨",desc:"노말 기술이 얼음 타입+1.2배",type:"none"},
-strongjaw:{n:"단단한턱",desc:"물기 기술 1.5배",type:"none"},
-ironfist:{n:"철주먹",desc:"펀치 기술 1.2배",type:"none"},
-megalauncher:{n:"메가런처",desc:"파동 기술 1.5배",type:"none"},
+strongjaw:{n:"단단한턱",desc:"물기 기술 1.5배",type:"strongjaw"},
+ironfist:{n:"철주먹",desc:"펀치 기술 1.2배",type:"ironfist"},
+megalauncher:{n:"메가런처",desc:"파동 기술 1.5배",type:"megalauncher"},
 serenegrace:{n:"천의은총",desc:"추가효과 확률 2배",type:"serenegrace"},
 poisontouch:{n:"독수",desc:"접촉 기술에 30% 독",type:"contact_status",status:"poison",chance:30},
 effectspore:{n:"포자",desc:"접촉 시 11% 독/마비/잠듦",type:"contact_status",status:"poison",chance:11},
@@ -2547,16 +2547,16 @@ owntempo:{n:"마이페이스",desc:"혼란에 걸리지 않음",type:"none"},
 earlybird:{n:"일찍기상",desc:"잠듦에서 빨리 깬다",type:"none"},
 colorchange:{n:"변색",desc:"맞은 기술 타입으로 변한다",type:"none"},
 trace:{n:"트레이스",desc:"상대 특성을 복사",type:"none"},
-shadowtag:{n:"그림자밟기",desc:"상대가 도주 불가",type:"none"},
-arenatrap:{n:"개미지옥",desc:"상대가 도주 불가",type:"none"},
+shadowtag:{n:"그림자밟기",desc:"상대가 도주 불가",type:"notrap"},
+arenatrap:{n:"개미지옥",desc:"상대가 도주 불가",type:"notrap"},
 stench:{n:"악취",desc:"접촉 시 10% 풀죽음",type:"none"},
 dryskin:{n:"건조피부",desc:"물 기술로 회복, 불에 약함",type:"none"},
 rivalry:{n:"투쟁심",desc:"동성 상대에게 1.25배",type:"none"},
-reckless:{n:"무모한",desc:"반동기 위력 1.2배",type:"none"},
+reckless:{n:"무모한",desc:"반동기 위력 1.2배",type:"reckless"},
 sheerforce:{n:"우격다짐",desc:"추가효과 제거 대신 1.3배",type:"none"},
 contrary:{n:"심술꾸러기",desc:"능력변화가 반대로 적용",type:"none"},
 prankster:{n:"짓궂은마음",desc:"변화기술 우선도+1",type:"none"},
-justified:{n:"정의의마음",desc:"악 기술에 공격 1단계 상승",type:"none"},
+justified:{n:"정의의마음",desc:"악 기술에 공격 1단계 상승",type:"justified"},
 overcoat:{n:"방진",desc:"날씨 데미지/가루 기술 무효",type:"none"},
 cursedbody:{n:"저주받은바디",desc:"접촉 시 30% 기술봉인",type:"none"},
 aromaveil:{n:"아로마베일",desc:"정신 기술에 면역",type:"none"},
@@ -2798,12 +2798,16 @@ function addLog(msg, type) {
 // ═══════════════════════════════════════════════
 function getAbility(poke) {
     if (!poke) return null;
+    // 메가진화 시 메가폼 특성 우선
+    if (poke.isMega && poke.megaForm && poke.megaForm.ab) return ABILITIES[poke.megaForm.ab] || null;
     var pd = POKEDEX[poke.key];
     if (!pd || !pd.ab) return null;
     return ABILITIES[pd.ab] || null;
 }
 function getAbilityKey(poke) {
     if (!poke) return null;
+    // 메가진화 시 메가폼 특성 우선
+    if (poke.isMega && poke.megaForm && poke.megaForm.ab) return poke.megaForm.ab;
     var pd = POKEDEX[poke.key];
     return pd ? pd.ab : null;
 }
@@ -2831,6 +2835,17 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
     if (atkAb && atkAb.type === "pinch" && atkAb.boostType === move.t && attackerPoke.currentHp <= Math.floor(attackerPoke.stats[0] / 3)) power = Math.floor(power * 1.5);
     // 특성: toughclaws → 접촉(physical) 기술 1.3배
     if (atkAbKey === "toughclaws" && move.c === "physical") power = Math.floor(power * 1.3);
+    // 특성: strongjaw → 물기 기술 1.5배 (bite, crunch, firefang, etc.)
+    var biteKeys = {bite:1,crunch:1,poisonfang:1,icefang:1,firefang:1,thunderfang:1};
+    if (atkAbKey === "strongjaw" && biteKeys[moveKey]) power = Math.floor(power * 1.5);
+    // 특성: ironfist → 펀치 기술 1.2배
+    var punchKeys = {megapunch:1,icepunch:1,firepunch:1,thunderpunch:1,drainpunch:1,focuspunch:1,machpunch:1,skyuppercut:1,hammerarm:1,closecombat:1};
+    if (atkAbKey === "ironfist" && punchKeys[moveKey]) power = Math.floor(power * 1.2);
+    // 특성: megalauncher → 파동 기술 1.5배
+    var pulseKeys = {aurasphere:1,darkpulse:1,waterpulse:1,dragonpulse:1};
+    if (atkAbKey === "megalauncher" && pulseKeys[moveKey]) power = Math.floor(power * 1.5);
+    // 특성: reckless → 반동기 위력 1.2배
+    if (atkAbKey === "reckless" && move.ef === "recoil") power = Math.floor(power * 1.2);
 
     // HP비례기: 분화(eruption)는 현재HP/최대HP 비율로 위력이 변동 (최대150→최소1)
     if (moveKey === "eruption") {
@@ -3357,7 +3372,10 @@ function applyMoveEffects(move, attacker, defender, bd) {
     var an = attacker.nickname;
     var dn = defender.nickname;
     if (mv.ef && mv.ec) {
-        if (Math.random() * 100 < mv.ec) {
+        // 특성: serenegrace → 추가효과 확률 2배
+        var effChance = mv.ec;
+        if (getAbilityKey(attacker) === "serenegrace") effChance = Math.min(100, effChance * 2);
+        if (Math.random() * 100 < effChance) {
             if (mv.ef === "burn" && !defender.status) {
                 defender.status = "burn"; bd.msg.push(dn + "은(는) 화상을 입었다!");
             } else if (mv.ef === "paralyze" && !defender.status) {
@@ -3373,13 +3391,34 @@ function applyMoveEffects(move, attacker, defender, bd) {
                     defender.status = "confuse"; defender.statusTurns = rng(2,5); bd.msg.push(dn + "은(는) 혼란에 빠졌다!");
                 }
             } else if (mv.ef === "flinch") {
-                defender._flinched = true;
+                // 특성: innerfocus/noflinch → 풀죽지 않음
+                var defAbForFlinch = getAbility(defender);
+                var flinchImmune = (getAbilityKey(defender) === "innerfocus") || (defAbForFlinch && defAbForFlinch.type === "noflinch");
+                if (!flinchImmune) {
+                    defender._flinched = true;
+                }
+            }
+            // 특성: synchronize → 상태이상 반사 (독/마비/화상만)
+            if (defender.status && getAbilityKey(defender) === "synchronize" && !attacker.status) {
+                if (defender.status === "poison" || defender.status === "burn" || defender.status === "paralyze") {
+                    attacker.status = defender.status;
+                    attacker.statusTurns = 0;
+                    bd.msg.push(dn + "의 싱크로! " + an + "도 " + statusName(attacker.status) + " 상태가 되었다!");
+                }
             }
         }
     }
     if (mv.c === "status" && mv.p === 0) {
         // guardSpec blocks stat drops
-        if (defender.guardSpec && defender.guardSpec > 0 && (mv.ef === "atk_down" || mv.ef === "atk_down2" || mv.ef === "def_down" || mv.ef === "acc_down" || mv.ef === "spd_down")) {
+        var isStatDown = (mv.ef === "atk_down" || mv.ef === "atk_down2" || mv.ef === "def_down" || mv.ef === "acc_down" || mv.ef === "spd_down");
+        // 특성: clearbody/whitesmoke → 능력치 하락 방지
+        var defAbType = getAbility(defender) ? getAbility(defender).type : null;
+        if (isStatDown && defAbType === "prevent_statdown") {
+            bd.msg.push(dn + "의 " + getAbility(defender).n + "! 능력치가 떨어지지 않는다!");
+        // 특성: keeneye → 명중률 하락 방지
+        } else if (mv.ef === "acc_down" && getAbilityKey(defender) === "keeneye") {
+            bd.msg.push(dn + "의 날카로운눈! 명중률이 떨어지지 않는다!");
+        } else if (defender.guardSpec && defender.guardSpec > 0 && isStatDown) {
             bd.msg.push(dn + "은(는) 에펙트가드로 보호받고 있다!");
         } else if (mv.ef === "atk_down") { defender.statStages.atk = Math.max(-6, defender.statStages.atk - 1); bd.msg.push(dn + "의 공격이 떨어졌다!"); }
         else if (mv.ef === "atk_down2") { defender.statStages.atk = Math.max(-6, defender.statStages.atk - 2); bd.msg.push(dn + "의 공격이 크게 떨어졌다!"); }
@@ -3560,6 +3599,11 @@ function executeAttack(attacker, defender, moveKey, bd) {
         if (defender.currentHp <= 0 && getAbilityKey(attacker) === "moxie") {
             attacker.statStages.atk = Math.min(6, attacker.statStages.atk + 1);
             bd.msg.push(attacker.nickname + "의 자신감! 공격이 올라갔다!");
+        }
+        // 특성: justified → 악 기술에 맞으면 공격+1
+        if (result.dmg > 0 && mv.t === "dark" && getAbilityKey(defender) === "justified" && defender.currentHp > 0) {
+            defender.statStages.atk = Math.min(6, defender.statStages.atk + 1);
+            bd.msg.push(defender.nickname + "의 정의의마음! 공격이 올라갔다!");
         }
     }
     // PP 감소
@@ -3886,6 +3930,12 @@ function tryRun() {
     bd.msg = [];
     var myPoke = player.party[bd.myIdx];
     var mySpd = myPoke.stats[5]; var enSpd = bd.enemy.stats[5];
+    // 특성: runaway → 야생전에서 반드시 도주
+    if (getAbilityKey(myPoke) === "runaway") {
+        bd.msg.push(myPoke.nickname + "의 도주! 무사히 도망쳤다!"); bd.fled = true;
+        for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
+        return;
+    }
     var chance = ((mySpd * 128) / enSpd + 30) / 256;
     if (Math.random() < Math.max(0.2, Math.min(0.95, chance))) {
         bd.msg.push("무사히 도망쳤다!"); bd.fled = true;
@@ -5224,6 +5274,17 @@ window.poke_endBattle = async function() {
     gState.phase = "overworld";
     gState.subScreen = "roadDetail";
     gState.battleData = null;
+    // 특성: pickup → 전투 후 10% 확률 아이템 획득
+    for (var pi = 0; pi < player.party.length; pi++) {
+        if (getAbilityKey(player.party[pi]) === "pickup" && player.party[pi].currentHp > 0 && Math.random() < 0.1) {
+            var pickupItems = ["potion","superpotion","pokeball","greatball","revive","repel"];
+            var pickItem = pickupItems[rng(0, pickupItems.length - 1)];
+            player.bag[pickItem] = (player.bag[pickItem] || 0) + 1;
+            var pickItemData = ITEMS[pickItem];
+            addLog("⭐ " + player.party[pi].nickname + "의 픽업! " + (pickItemData ? pickItemData.n : pickItem) + "을(를) 주웠다!", "item");
+            break; // 한 번에 하나만
+        }
+    }
     if (gState.pendingEvo) { await saveAll(); render(); return; }
     if (gState.pendingMoveLearn) { await saveAll(); render(); return; }
     await saveAll();
