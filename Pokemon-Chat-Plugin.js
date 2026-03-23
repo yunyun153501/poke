@@ -325,7 +325,7 @@ smoochum:   {n:"뽀뽀라",id:238,t:["ice","psychic"],s:[45,30,15,85,65,65],ml:{
 elekid:     {n:"에레키드",id:239,t:["electric"],s:[45,63,37,65,55,95],ml:{1:["thundershock","leer"],6:["quickattack"],11:["thunderpunch"]},e:{l:30,to:"electabuzz"},cr:45,xp:72,em:"⚡"},
 magby:      {n:"마그비",id:240,t:["fire"],s:[45,75,37,70,55,83],ml:{1:["ember","leer"],7:["smokescreen"],13:["firepunch"]},e:{l:30,to:"magmar"},cr:45,xp:73,em:"🔥"},
 // ── Gen 3: 호엔 지방 포켓몬 ──
-treecko:    {n:"나무지기",id:252,t:["grass"],s:[40,45,35,65,55,70],ml:{1:["pound","absorb"],6:["absorb"],16:["megadrain"],29:["razorleaf"],45:["solarbeam"]},e:{l:16,to:"grovyle"},cr:45,xp:62,em:"🦎"},
+treecko:    {n:"나무지기",id:252,t:["grass"],s:[40,45,35,65,55,70],ml:{1:["pound","absorb"],6:["quickattack"],16:["megadrain"],29:["razorleaf"],45:["solarbeam"]},e:{l:16,to:"grovyle"},cr:45,xp:62,em:"🦎"},
 grovyle:    {n:"나무돌이",id:253,t:["grass"],s:[50,65,45,85,65,95],ml:{1:["pound","absorb"],16:["razorleaf"],29:["megadrain"],39:["solarbeam"]},e:{l:36,to:"sceptile"},cr:45,xp:142,em:"🦎"},
 sceptile:   {n:"나무킹",id:254,t:["grass"],s:[70,85,65,105,85,120],ml:{1:["pound","razorleaf"],36:["megadrain"],51:["solarbeam"]},e:null,cr:45,xp:239,em:"🦎"},
 torchic:    {n:"아차모",id:255,t:["fire"],s:[45,60,40,70,50,45],ml:{1:["scratch","ember"],7:["ember"],16:["flamethrower"]},e:{l:16,to:"combusken"},cr:45,xp:62,em:"🐥"},
