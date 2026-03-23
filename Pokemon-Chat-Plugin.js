@@ -590,7 +590,7 @@ function calcDamage(attacker, defender, moveKey, attackerPoke, defenderPoke) {
         atkStat = attackerPoke.stats[3] * getStatMult(attackerPoke.statStages.spatk);
         defStat = defenderPoke.stats[4] * getStatMult(defenderPoke.statStages.spdef);
     }
-    // 데미지 공식
+    // 포켓몬 공식 데미지 계산: ((2*Lv/5+2)*Power*(Atk/Def))/50+2
     var baseDmg = ((2 * level / 5 + 2) * move.p * (atkStat / defStat)) / 50 + 2;
     // STAB
     var stab = 1;
@@ -908,7 +908,7 @@ function attemptCapture(ballKey) {
     else if (enemy.status === "paralyze" || enemy.status === "burn" || enemy.status === "poison") statusBonus = 1.5;
     var a = ((3 * maxHp - 2 * curHp) * catchRate * ballBonus) / (3 * maxHp) * statusBonus;
     a = Math.min(255, a);
-    // 흔들림 체크 (4번)
+    // 포켓몬 공식 흔들림 판정: b = 65535 / (255/a)^(3/16), 4회 체크
     var b = 1048560 / Math.sqrt(Math.sqrt(16711680 / a));
     var shakes = 0;
     for (var i = 0; i < 4; i++) {
@@ -1947,7 +1947,7 @@ window.poke_openBag = function() { gState.subScreen = "bag"; render(); };
 window.poke_openLog = function() { gState.subScreen = "log"; render(); };
 window.poke_back = function() { gState.subScreen = null; render(); };
 
-window.poke_battleBag = function() {
+window.poke_battleBag = async function() {
     // 배틀 중 아이템 사용 - 간단하게 포션 종류만
     if (!gState || !gState.battleData) return;
     var bd = gState.battleData;
@@ -1966,7 +1966,7 @@ window.poke_battleBag = function() {
                 }
                 doStatusDamage(bd.enemy, bd);
                 for (var j = 0; j < bd.msg.length; j++) addLog(bd.msg[j], "battle");
-                saveAll();
+                await saveAll();
                 render();
                 return;
             }
@@ -1996,23 +1996,23 @@ window.poke_sellItem = async function(key) {
     render();
 };
 
-window.poke_useItemSelect = function(key) {
+window.poke_useItemSelect = async function(key) {
     // 아이템 사용할 포켓몬 선택 (간단: 첫 번째 적합한 포켓몬에 자동 적용)
     var item = ITEMS[key];
     if (!item) return;
     for (var i = 0; i < player.party.length; i++) {
         var p = player.party[i];
         if (item.type === "heal" && p.currentHp > 0 && p.currentHp < p.stats[0]) {
-            if (useItem(key, i)) { showToast(p.nickname + "에게 사용!"); saveAll(); render(); return; }
+            if (useItem(key, i)) { showToast(p.nickname + "에게 사용!"); await saveAll(); render(); return; }
         }
         if (item.type === "fullheal" && p.currentHp > 0 && (p.currentHp < p.stats[0] || p.status)) {
-            if (useItem(key, i)) { showToast(p.nickname + " 완전 회복!"); saveAll(); render(); return; }
+            if (useItem(key, i)) { showToast(p.nickname + " 완전 회복!"); await saveAll(); render(); return; }
         }
         if (item.type === "revive" && p.currentHp <= 0) {
-            if (useItem(key, i)) { showToast(p.nickname + " 부활!"); saveAll(); render(); return; }
+            if (useItem(key, i)) { showToast(p.nickname + " 부활!"); await saveAll(); render(); return; }
         }
         if (item.type === "cure" && p.status === item.value) {
-            if (useItem(key, i)) { showToast(p.nickname + " 상태 회복!"); saveAll(); render(); return; }
+            if (useItem(key, i)) { showToast(p.nickname + " 상태 회복!"); await saveAll(); render(); return; }
         }
     }
     showToast("사용할 대상이 없습니다!");
