@@ -1135,15 +1135,32 @@ function startWildBattle(road) {
         addLog("풀숲을 탐색했지만 포켓몬이 나타나지 않았다...", "info");
         return false;
     }
+    // 시간대별 포켓몬 필터링
+    var nightOnly = {gastly:1,haunter:1,gengar:1,hoothoot:1,noctowl:1,murkrow:1,misdreavus:1,spinarak:1,ariados:1,sneasel:1,umbreon:1,houndour:1,houndoom:1};
+    var dayOnly = {sunkern:1,sunflora:1,ledyba:1,ledian:1,espeon:1};
+    var isNight = isNightTime() || isDawnTime(); // 밤/새벽
+    var isDay = !isNight;
+    // 가중치 조정된 포켓몬 리스트 생성
+    var filtered = [];
+    for (var i = 0; i < road.pokemon.length; i++) {
+        var pk = road.pokemon[i];
+        var w = pk.w;
+        if (nightOnly[pk.k] && isDay) w = Math.floor(w * 0.2); // 밤 전용 포켓몬은 낮에 20%
+        if (nightOnly[pk.k] && isNight) w = Math.floor(w * 2.0); // 밤에 2배
+        if (dayOnly[pk.k] && isNight) w = Math.floor(w * 0.2); // 낮 전용 포켓몬은 밤에 20%
+        if (dayOnly[pk.k] && isDay) w = Math.floor(w * 1.5); // 낮에 1.5배
+        if (w < 1) w = 1;
+        filtered.push({k: pk.k, w: w});
+    }
     // 야생 포켓몬 선택
     var totalW = 0;
-    for (var i = 0; i < road.pokemon.length; i++) totalW += road.pokemon[i].w;
+    for (var i = 0; i < filtered.length; i++) totalW += filtered[i].w;
     var r = Math.random() * totalW;
     var cumW = 0;
-    var chosen = road.pokemon[0].k;
-    for (var i = 0; i < road.pokemon.length; i++) {
-        cumW += road.pokemon[i].w;
-        if (r < cumW) { chosen = road.pokemon[i].k; break; }
+    var chosen = filtered[0].k;
+    for (var i = 0; i < filtered.length; i++) {
+        cumW += filtered[i].w;
+        if (r < cumW) { chosen = filtered[i].k; break; }
     }
     var lv = rng(road.lv[0], road.lv[1]);
     var wildPoke = createPokemonInstance(chosen, lv);
@@ -2021,7 +2038,7 @@ function renderRoadDetail() {
     // 도로 정보
     html += '<div class="pk-card" style="border-color:rgba(233,69,96,0.4)">';
     html += '<div style="font-size:16px;font-weight:bold;color:#f5c518">📍 ' + road.n + '</div>';
-    html += '<div style="color:#aaa;font-size:12px">' + road.desc + ' | Lv.' + road.lv[0] + '~' + road.lv[1] + '</div>';
+    html += '<div style="color:#aaa;font-size:12px">' + road.desc + ' | Lv.' + road.lv[0] + '~' + road.lv[1] + ' | ' + TIME_NAMES[player.timeOfDay] + '</div>';
     // 출현 포켓몬
     html += '<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:3px">';
     for (var i = 0; i < road.pokemon.length; i++) {
