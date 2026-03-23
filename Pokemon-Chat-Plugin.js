@@ -2990,10 +2990,11 @@ function injectStyles() {
 // ═══════════════════════════════════════════════
 function createUI() {
     var existing = document.getElementById(UI_ID);
-    if (existing) existing.remove();
+    if (existing) return existing;
     var div = document.createElement("div");
     div.id = UI_ID;
     div.className = "pk-wrap";
+    document.body.appendChild(div);
     return div;
 }
 
@@ -3058,16 +3059,6 @@ function render() {
         html = renderOverworld();
     }
     container.innerHTML = html;
-    var target = null;
-    if (_hasRisu) {
-        try {
-            target = Risuai.getContainer();
-            if (!target) target = document.getElementById('risuai-container');
-        } catch(e) {}
-    }
-    if (!target) target = document.getElementById("poke-target") || document.body;
-    target.innerHTML = '';
-    target.appendChild(container);
     bindHandlers(container);
 }
 
