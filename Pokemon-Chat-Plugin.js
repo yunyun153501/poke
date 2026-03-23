@@ -754,7 +754,7 @@ kanto: {
             {n:"과학자 현수",em:"🔬",pokemon:[{k:"voltorb",l:14},{k:"magnemite",l:15}],reward:450},
             {n:"등산가 석진",em:"🧗",pokemon:[{k:"geodude",l:14},{k:"geodude",l:14},{k:"machop",l:15}],reward:450}
           ]},
-        {id:"k_r5",n:"블루시티",desc:"바다가 보이는 항구 도시",lv:[14,20],pokemon:[{k:"tentacool",w:25},{k:"psyduck",w:20},{k:"growlithe",w:15},{k:"vulpix",w:10},{k:"abra",w:10},{k:"drowzee",w:10},{k:"shellder",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","antidote","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:2,
+        {id:"k_r5",n:"블루시티",desc:"바다가 보이는 항구 도시",lv:[14,20],pokemon:[{k:"tentacool",w:25},{k:"psyduck",w:20},{k:"growlithe",w:15},{k:"vulpix",w:10},{k:"abra",w:10},{k:"drowzee",w:10},{k:"shellder",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","antidote","paralyzeheal","awakening","netball"],encounterRate:0.80,reqBadges:2,
          trainers:[
             {n:"수영선수 현지",em:"🏊",pokemon:[{k:"tentacool",l:16},{k:"shellder",l:17},{k:"staryu",l:18}],reward:540},
             {n:"낚시꾼 동현",em:"🎣",pokemon:[{k:"magikarp",l:10},{k:"magikarp",l:12},{k:"goldeen",l:16},{k:"poliwag",l:17}],reward:500},
@@ -774,7 +774,7 @@ kanto: {
             {n:"소년 강민",em:"👦",pokemon:[{k:"voltorb",l:22},{k:"pikachu",l:23},{k:"magnemite",l:22}],reward:690},
             {n:"슈퍼너드 태우",em:"🤓",pokemon:[{k:"voltorb",l:23},{k:"electrode",l:24}],reward:720}
           ]},
-        {id:"k_r7",n:"무지개시티",desc:"무지개빛 도시",lv:[22,30],pokemon:[{k:"oddish",w:15},{k:"bellsprout",w:15},{k:"venonat",w:15},{k:"grimer",w:10},{k:"koffing",w:10},{k:"exeggcute",w:10},{k:"tangela",w:10},{k:"eevee",w:5},{k:"igglybuff",w:3}],hasCenter:true,hasShop:true,shopItems:["superball","superpotion","hyperpotion","antidote","paralyzeheal","awakening","revive"],encounterRate:0.80,reqBadges:4,
+        {id:"k_r7",n:"무지개시티",desc:"무지개빛 도시",lv:[22,30],pokemon:[{k:"oddish",w:15},{k:"bellsprout",w:15},{k:"venonat",w:15},{k:"grimer",w:10},{k:"koffing",w:10},{k:"exeggcute",w:10},{k:"tangela",w:10},{k:"eevee",w:5},{k:"igglybuff",w:3}],hasCenter:true,hasShop:true,shopItems:["superball","superpotion","hyperpotion","antidote","paralyzeheal","awakening","revive","nestball","repeatball","timerball"],encounterRate:0.80,reqBadges:4,
          trainers:[
             {n:"슈퍼너드 종혁",em:"🤓",pokemon:[{k:"porygon",l:24},{k:"magneton",l:25}],reward:750},
             {n:"로켓단 간부",em:"🦹",pokemon:[{k:"arbok",l:25},{k:"weezing",l:26},{k:"golbat",l:26}],reward:900},
@@ -784,7 +784,7 @@ kanto: {
             {n:"슈퍼너드 찬영",em:"🤓",pokemon:[{k:"porygon",l:27},{k:"magneton",l:27}],reward:810},
             {n:"아가씨 다온",em:"👩",pokemon:[{k:"tangela",l:27},{k:"eevee",l:26}],reward:780}
           ]},
-        {id:"k_r8",n:"연분홍시티",desc:"바다의 도시",lv:[28,36],pokemon:[{k:"tentacool",w:15},{k:"horsea",w:15},{k:"staryu",w:10},{k:"krabby",w:15},{k:"shellder",w:10},{k:"seel",w:10},{k:"slowpoke",w:10},{k:"psyduck",w:15},{k:"mantine",w:5},{k:"qwilfish",w:5},{k:"remoraid",w:5}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal","awakening","burnheal","iceheal"],encounterRate:0.80,reqBadges:5,
+        {id:"k_r8",n:"연분홍시티",desc:"바다의 도시",lv:[28,36],pokemon:[{k:"tentacool",w:15},{k:"horsea",w:15},{k:"staryu",w:10},{k:"krabby",w:15},{k:"shellder",w:10},{k:"seel",w:10},{k:"slowpoke",w:10},{k:"psyduck",w:15},{k:"mantine",w:5},{k:"qwilfish",w:5},{k:"remoraid",w:5}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal","awakening","burnheal","iceheal","duskball","diveball"],encounterRate:0.80,reqBadges:5,
          trainers:[
             {n:"수영선수 하나",em:"🏊",pokemon:[{k:"seadra",l:30},{k:"golduck",l:31},{k:"tentacruel",l:32}],reward:960},
             {n:"낚시꾼 준서",em:"🎣",pokemon:[{k:"gyarados",l:30},{k:"kingler",l:31}],reward:930},
@@ -794,7 +794,7 @@ kanto: {
             {n:"아가씨 세아",em:"👩",pokemon:[{k:"seel",l:31},{k:"dewgong",l:33}],reward:990},
             {n:"수영선수 범수",em:"🏊",pokemon:[{k:"tentacool",l:30},{k:"horsea",l:31},{k:"seadra",l:33}],reward:990}
           ]},
-        {id:"k_r9",n:"홍련섬",desc:"불의 섬",lv:[34,42],pokemon:[{k:"ponyta",w:20},{k:"growlithe",w:15},{k:"magmar",w:15},{k:"vulpix",w:15},{k:"slugma",w:10},{k:"rhyhorn",w:15},{k:"cubone",w:10},{k:"skarmory",w:5},{k:"magby",w:5}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","hyperpotion","fullrestore","revive","antidote","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:6,
+        {id:"k_r9",n:"홍련섬",desc:"불의 섬",lv:[34,42],pokemon:[{k:"ponyta",w:20},{k:"growlithe",w:15},{k:"magmar",w:15},{k:"vulpix",w:15},{k:"slugma",w:10},{k:"rhyhorn",w:15},{k:"cubone",w:10},{k:"skarmory",w:5},{k:"magby",w:5}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","hyperpotion","fullrestore","revive","antidote","paralyzeheal","awakening","quickball"],encounterRate:0.80,reqBadges:6,
          trainers:[
             {n:"과학자 민호",em:"🔬",pokemon:[{k:"electrode",l:36},{k:"magneton",l:37},{k:"porygon",l:36}],reward:1110},
             {n:"연구원 지영",em:"👩‍🔬",pokemon:[{k:"omanyte",l:35},{k:"kabuto",l:35},{k:"aerodactyl",l:38}],reward:1140},
@@ -823,7 +823,7 @@ kanto: {
             {n:"에이스 해나",em:"🎯",pokemon:[{k:"arcanine",l:44},{k:"lapras",l:45},{k:"alakazam",l:45}],reward:3200},
             {n:"등산가 철민",em:"🧗",pokemon:[{k:"graveler",l:43},{k:"golem",l:45},{k:"onix",l:44}],reward:3000}
           ]},
-        {id:"k_r12",n:"석영고원",desc:"최강의 트레이너가 모이는 곳",lv:[50,70],pokemon:[{k:"dragonair",w:15},{k:"dragonite",w:5},{k:"lapras",w:10},{k:"snorlax",w:10},{k:"aerodactyl",w:10}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal"],encounterRate:0.60,reqBadges:8,
+        {id:"k_r12",n:"석영고원",desc:"최강의 트레이너가 모이는 곳",lv:[50,70],pokemon:[{k:"dragonair",w:15},{k:"dragonite",w:5},{k:"lapras",w:10},{k:"snorlax",w:10},{k:"aerodactyl",w:10}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal","quickball","duskball","timerball","rarecandy"],encounterRate:0.60,reqBadges:8,
          trainers:[
             {n:"챔피언 그린",em:"🏆",pokemon:[{k:"pidgeot",l:55},{k:"alakazam",l:55},{k:"rhydon",l:55},{k:"gyarados",l:56},{k:"arcanine",l:56},{k:"exeggutor",l:58}],reward:8000}
          ]}
@@ -860,7 +860,7 @@ johto: {
             {n:"벌레잡이 지안",em:"🧒",pokemon:[{k:"paras",l:13},{k:"ledyba",l:12},{k:"spinarak",l:13}],reward:390},
             {n:"닌자 유빈",em:"🥷",pokemon:[{k:"oddish",l:13},{k:"bellsprout",l:14}],reward:420}
           ]},
-        {id:"j_r4",n:"금빛시티",desc:"빛나는 대도시",lv:[14,22],pokemon:[{k:"murkrow",w:20},{k:"sneasel",w:15},{k:"houndour",w:15},{k:"growlithe",w:15},{k:"machop",w:15},{k:"abra",w:10},{k:"meowth",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","antidote","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:2,
+        {id:"j_r4",n:"금빛시티",desc:"빛나는 대도시",lv:[14,22],pokemon:[{k:"murkrow",w:20},{k:"sneasel",w:15},{k:"houndour",w:15},{k:"growlithe",w:15},{k:"machop",w:15},{k:"abra",w:10},{k:"meowth",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","antidote","paralyzeheal","awakening","netball","nestball"],encounterRate:0.80,reqBadges:2,
          trainers:[
             {n:"불량배 성민",em:"😎",pokemon:[{k:"murkrow",l:16},{k:"houndour",l:17},{k:"sneasel",l:17}],reward:510},
             {n:"짐꾼 태식",em:"🏋️",pokemon:[{k:"machop",l:17},{k:"machoke",l:19}],reward:570},
@@ -890,7 +890,7 @@ johto: {
             {n:"로켓단 과학자",em:"🔬",pokemon:[{k:"grimer",l:27},{k:"koffing",l:28},{k:"muk",l:29}],reward:870},
             {n:"선원 형근",em:"⚓",pokemon:[{k:"poliwag",l:27},{k:"corsola",l:28},{k:"tentacruel",l:29}],reward:870}
           ]},
-        {id:"j_r7",n:"담청시티",desc:"약의 도시",lv:[25,33],pokemon:[{k:"flaaffy",w:15},{k:"ponyta",w:15},{k:"machoke",w:10},{k:"houndoom",w:10},{k:"sneasel",w:15},{k:"swinub",w:15},{k:"phanpy",w:10},{k:"gligar",w:10},{k:"shuckle",w:5},{k:"octillery",w:3}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal","awakening","burnheal","iceheal"],encounterRate:0.80,reqBadges:5,
+        {id:"j_r7",n:"담청시티",desc:"약의 도시",lv:[25,33],pokemon:[{k:"flaaffy",w:15},{k:"ponyta",w:15},{k:"machoke",w:10},{k:"houndoom",w:10},{k:"sneasel",w:15},{k:"swinub",w:15},{k:"phanpy",w:10},{k:"gligar",w:10},{k:"shuckle",w:5},{k:"octillery",w:3}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal","awakening","burnheal","iceheal","repeatball","timerball","duskball"],encounterRate:0.80,reqBadges:5,
          trainers:[
             {n:"닌자 켄지",em:"🥷",pokemon:[{k:"crobat",l:28},{k:"ariados",l:29},{k:"forretress",l:30}],reward:900},
             {n:"블랙벨트 경민",em:"🥋",pokemon:[{k:"machoke",l:29},{k:"primeape",l:30}],reward:900},
@@ -910,7 +910,7 @@ johto: {
             {n:"에이스 수민",em:"🎯",pokemon:[{k:"ursaring",l:37},{k:"piloswine",l:36},{k:"pupitar",l:35}],reward:1110},
             {n:"등산가 태훈",em:"🧗",pokemon:[{k:"swinub",l:34},{k:"piloswine",l:36},{k:"sneasel",l:37}],reward:1110}
           ]},
-        {id:"j_r9",n:"소용돌이섬",desc:"강력한 포켓몬이 사는 곳",lv:[40,65],pokemon:[{k:"tyranitar",w:3},{k:"ampharos",w:8},{k:"houndoom",w:10},{k:"crobat",w:10},{k:"steelix",w:5},{k:"togetic",w:8},{k:"kingdra",w:5},{k:"scizor",w:5},{k:"dragonite",w:3},{k:"gyarados",w:10}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal"],encounterRate:0.55,reqBadges:8,
+        {id:"j_r9",n:"소용돌이섬",desc:"강력한 포켓몬이 사는 곳",lv:[40,65],pokemon:[{k:"tyranitar",w:3},{k:"ampharos",w:8},{k:"houndoom",w:10},{k:"crobat",w:10},{k:"steelix",w:5},{k:"togetic",w:8},{k:"kingdra",w:5},{k:"scizor",w:5},{k:"dragonite",w:3},{k:"gyarados",w:10}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal","quickball","duskball","timerball","rarecandy"],encounterRate:0.55,reqBadges:8,
          trainers:[
             {n:"챔피언 목호",em:"🏆",pokemon:[{k:"dragonite",l:55},{k:"tyranitar",l:55},{k:"gyarados",l:56},{k:"charizard",l:56},{k:"alakazam",l:55},{k:"machamp",l:58}],reward:8000},
             {n:"에이스 호성",em:"��",pokemon:[{k:"tyranitar",l:50},{k:"dragonite",l:52}],reward:6000},
@@ -960,7 +960,7 @@ hoenn: {
             {n:"수영선수 태리",em:"🏊",pokemon:[{k:"tentacool",l:15},{k:"carvanha",l:16}],reward:480},
             {n:"격투가 진우",em:"🥊",pokemon:[{k:"meditite",l:16},{k:"makuhita",l:16}],reward:480}
          ]},
-        {id:"h_r5",n:"보라시티",desc:"전기 체육관의 도시",lv:[17,24],pokemon:[{k:"electrike",w:25},{k:"pikachu",w:15},{k:"magnemite",w:15},{k:"voltorb",w:10},{k:"oddish",w:10},{k:"zigzagoon",w:10},{k:"linoone",w:15}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:3,
+        {id:"h_r5",n:"보라시티",desc:"전기 체육관의 도시",lv:[17,24],pokemon:[{k:"electrike",w:25},{k:"pikachu",w:15},{k:"magnemite",w:15},{k:"voltorb",w:10},{k:"oddish",w:10},{k:"zigzagoon",w:10},{k:"linoone",w:15}],hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","paralyzeheal","awakening","netball","nestball"],encounterRate:0.80,reqBadges:3,
          trainers:[
             {n:"전기기사 상훈",em:"⚡",pokemon:[{k:"electrike",l:20},{k:"magnemite",l:20}],reward:600},
             {n:"소녀 은서",em:"👧",pokemon:[{k:"pikachu",l:21},{k:"electrike",l:20}],reward:630},
@@ -978,7 +978,7 @@ hoenn: {
             {n:"불꽃소년 성호",em:"🔥",pokemon:[{k:"growlithe",l:26},{k:"slugma",l:27}],reward:810},
             {n:"등산가 소정",em:"🧗",pokemon:[{k:"lairon",l:26},{k:"trapinch",l:26}],reward:780}
          ]},
-        {id:"h_r7",n:"하절시티",desc:"노멀 체육관의 도시",lv:[26,33],pokemon:[{k:"linoone",w:15},{k:"swablu",w:15},{k:"electrike",w:10},{k:"mightyena",w:15},{k:"breloom",w:10},{k:"vigoroth",w:10},{k:"absol",w:5},{k:"medicham",w:10},{k:"manectric",w:10}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal","awakening","burnheal","iceheal"],encounterRate:0.80,reqBadges:5,
+        {id:"h_r7",n:"하절시티",desc:"노멀 체육관의 도시",lv:[26,33],pokemon:[{k:"linoone",w:15},{k:"swablu",w:15},{k:"electrike",w:10},{k:"mightyena",w:15},{k:"breloom",w:10},{k:"vigoroth",w:10},{k:"absol",w:5},{k:"medicham",w:10},{k:"manectric",w:10}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","superpotion","hyperpotion","revive","antidote","paralyzeheal","awakening","burnheal","iceheal","repeatball","timerball","diveball"],encounterRate:0.80,reqBadges:5,
          trainers:[
             {n:"아가씨 보라",em:"👩",pokemon:[{k:"vigoroth",l:29},{k:"linoone",l:28}],reward:870},
             {n:"불량배 세준",em:"😎",pokemon:[{k:"mightyena",l:29},{k:"sharpedo",l:30}],reward:900},
@@ -1005,7 +1005,7 @@ hoenn: {
             {n:"블랙벨트 석훈",em:"🥋",pokemon:[{k:"hariyama",l:44},{k:"medicham",l:43}],reward:2500},
             {n:"에이스 미영",em:"🎯",pokemon:[{k:"metagross",l:46},{k:"aggron",l:45}],reward:3200}
          ]},
-        {id:"h_r10",n:"공중의 기둥",desc:"전설의 포켓몬이 잠든 곳",lv:[50,70],pokemon:[{k:"salamence",w:5},{k:"metagross",w:3},{k:"flygon",w:8},{k:"altaria",w:10},{k:"absol",w:10},{k:"aggron",w:8},{k:"milotic",w:5},{k:"slaking",w:3},{k:"gardevoir",w:8}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal"],encounterRate:0.55,reqBadges:8,
+        {id:"h_r10",n:"공중의 기둥",desc:"전설의 포켓몬이 잠든 곳",lv:[50,70],pokemon:[{k:"salamence",w:5},{k:"metagross",w:3},{k:"flygon",w:8},{k:"altaria",w:10},{k:"absol",w:10},{k:"aggron",w:8},{k:"milotic",w:5},{k:"slaking",w:3},{k:"gardevoir",w:8}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal","quickball","duskball","timerball","rarecandy"],encounterRate:0.55,reqBadges:8,
          trainers:[
             {n:"챔피언 미쿠리",em:"🏆",pokemon:[{k:"milotic",l:56},{k:"gardevoir",l:55},{k:"flygon",l:55},{k:"metagross",l:57},{k:"salamence",l:58}],reward:8000}
          ]}
@@ -1050,7 +1050,7 @@ sinnoh: {
             {n:"소년 예준",em:"👦",pokemon:[{k:"luxio",l:18},{k:"staravia",l:18}],reward:540},
             {n:"닌자 유빈",em:"🥷",pokemon:[{k:"croagunk",l:18},{k:"skorupi",l:19}],reward:570}
          ]},
-        {id:"s_r5",n:"노모세시티",desc:"물 체육관의 습지 도시",lv:[20,27],pokemon:[{k:"croagunk",w:15},{k:"skorupi",w:10},{k:"psyduck",w:15},{k:"tentacool",w:10},{k:"shellder",w:10},{k:"goldeen",w:10},{k:"staravia",w:10},{k:"luxio",w:10},{k:"gible",w:10}],hasCenter:true,hasShop:true,shopItems:["superball","superpotion","revive","antidote","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:3,
+        {id:"s_r5",n:"노모세시티",desc:"물 체육관의 습지 도시",lv:[20,27],pokemon:[{k:"croagunk",w:15},{k:"skorupi",w:10},{k:"psyduck",w:15},{k:"tentacool",w:10},{k:"shellder",w:10},{k:"goldeen",w:10},{k:"staravia",w:10},{k:"luxio",w:10},{k:"gible",w:10}],hasCenter:true,hasShop:true,shopItems:["superball","superpotion","revive","antidote","paralyzeheal","awakening","netball","nestball","diveball"],encounterRate:0.80,reqBadges:3,
          trainers:[
             {n:"수영선수 하나",em:"🏊",pokemon:[{k:"psyduck",l:23},{k:"tentacool",l:22}],reward:690},
             {n:"낚시꾼 민규",em:"🎣",pokemon:[{k:"goldeen",l:22},{k:"shellder",l:23}],reward:690},
@@ -1068,7 +1068,7 @@ sinnoh: {
             {n:"에이스 미영",em:"🎯",pokemon:[{k:"gabite",l:30},{k:"drifblim",l:29}],reward:900},
             {n:"영매사 보라",em:"🔮",pokemon:[{k:"haunter",l:30},{k:"misdreavus",l:30}],reward:900}
          ]},
-        {id:"s_r7",n:"미오시티",desc:"강철 체육관의 항구도시",lv:[30,38],pokemon:[{k:"luxray",w:10},{k:"staraptor",w:10},{k:"gabite",w:10},{k:"snover",w:15},{k:"sneasel",w:10},{k:"skorupi",w:10},{k:"drapion",w:5},{k:"toxicroak",w:5},{k:"riolu",w:10},{k:"shieldon",w:5},{k:"cranidos",w:10}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","hyperpotion","fullrestore","revive","antidote","paralyzeheal","awakening"],encounterRate:0.80,reqBadges:5,
+        {id:"s_r7",n:"미오시티",desc:"강철 체육관의 항구도시",lv:[30,38],pokemon:[{k:"luxray",w:10},{k:"staraptor",w:10},{k:"gabite",w:10},{k:"snover",w:15},{k:"sneasel",w:10},{k:"skorupi",w:10},{k:"drapion",w:5},{k:"toxicroak",w:5},{k:"riolu",w:10},{k:"shieldon",w:5},{k:"cranidos",w:10}],hasCenter:true,hasShop:true,shopItems:["superball","ultraball","hyperpotion","fullrestore","revive","antidote","paralyzeheal","awakening","repeatball","timerball","duskball"],encounterRate:0.80,reqBadges:5,
          trainers:[
             {n:"등산가 지원",em:"🧗",pokemon:[{k:"cranidos",l:33},{k:"shieldon",l:33}],reward:990},
             {n:"격투가 현준",em:"🥊",pokemon:[{k:"riolu",l:33},{k:"toxicroak",l:34}],reward:1020},
@@ -1095,7 +1095,7 @@ sinnoh: {
             {n:"블랙벨트 민수",em:"🥋",pokemon:[{k:"lucario",l:46},{k:"toxicroak",l:45}],reward:2500},
             {n:"에이스 찬영",em:"🎯",pokemon:[{k:"garchomp",l:47},{k:"metagross",l:46}],reward:3200}
          ]},
-        {id:"s_r10",n:"창기둥",desc:"전설의 포켓몬이 잠든 곳",lv:[50,70],pokemon:[{k:"garchomp",w:5},{k:"lucario",w:8},{k:"metagross",w:3},{k:"salamence",w:3},{k:"abomasnow",w:10},{k:"drapion",w:10},{k:"staraptor",w:10},{k:"luxray",w:10},{k:"infernape",w:5},{k:"empoleon",w:5},{k:"torterra",w:5}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal"],encounterRate:0.55,reqBadges:8,
+        {id:"s_r10",n:"창기둥",desc:"전설의 포켓몬이 잠든 곳",lv:[50,70],pokemon:[{k:"garchomp",w:5},{k:"lucario",w:8},{k:"metagross",w:3},{k:"salamence",w:3},{k:"abomasnow",w:10},{k:"drapion",w:10},{k:"staraptor",w:10},{k:"luxray",w:10},{k:"infernape",w:5},{k:"empoleon",w:5},{k:"torterra",w:5}],hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","maxpotion","fullrestore","revive","fullheal","quickball","duskball","timerball","rarecandy"],encounterRate:0.55,reqBadges:8,
          trainers:[
             {n:"챔피언 난천",em:"🏆",pokemon:[{k:"garchomp",l:58},{k:"lucario",l:56},{k:"milotic",l:56},{k:"staraptor",l:55},{k:"infernape",l:57}],reward:8000}
          ]}
@@ -1109,84 +1109,84 @@ sinnoh: {
 var GYMS = {
 kanto: [
     {id:"k_gym1",city:"니비시티",n:"니비시티 체육관",type:"rock",badge:"회색뱃지",badgeEm:"🪨",
-     leaders:[{id:"brock",n:"웅",em:"🏋️",gen:1,pokemon:[{k:"geodude",l:12},{k:"onix",l:14}],reward:1400}]},
+     leaders:[{id:"brock",n:"웅",em:"🏋️",gen:1,pokemon:[{k:"geodude",l:12},{k:"onix",l:14}],reward:1400,rewardItems:["protein"]}]},
     {id:"k_gym2",city:"블루시티",n:"블루시티 체육관",type:"water",badge:"블루뱃지",badgeEm:"💧",
-     leaders:[{id:"misty",n:"이슬",em:"💧",gen:1,pokemon:[{k:"staryu",l:18},{k:"starmie",l:21}],reward:2100}]},
+     leaders:[{id:"misty",n:"이슬",em:"💧",gen:1,pokemon:[{k:"staryu",l:18},{k:"starmie",l:21}],reward:2100,rewardItems:["calcium"]}]},
     {id:"k_gym3",city:"노량시티",n:"노량시티 체육관",type:"electric",badge:"오렌지뱃지",badgeEm:"⚡",
-     leaders:[{id:"surge",n:"마티스",em:"⚡",gen:1,pokemon:[{k:"voltorb",l:21},{k:"pikachu",l:18},{k:"raichu",l:24}],reward:2400}]},
+     leaders:[{id:"surge",n:"마티스",em:"⚡",gen:1,pokemon:[{k:"voltorb",l:21},{k:"pikachu",l:18},{k:"raichu",l:24}],reward:2400,rewardItems:["carbos"]}]},
     {id:"k_gym4",city:"무지개시티",n:"무지개시티 체육관",type:"grass",badge:"레인보우뱃지",badgeEm:"🌈",
-     leaders:[{id:"erika",n:"민화",em:"🌿",gen:1,pokemon:[{k:"victreebel",l:29},{k:"tangela",l:24},{k:"vileplume",l:29}],reward:2900}]},
+     leaders:[{id:"erika",n:"민화",em:"🌿",gen:1,pokemon:[{k:"victreebel",l:29},{k:"tangela",l:24},{k:"vileplume",l:29}],reward:2900,rewardItems:["rarecandy"]}]},
     {id:"k_gym5",city:"연분홍시티",n:"연분홍시티 체육관",type:"poison",badge:"핑크뱃지",badgeEm:"☠️",
      leaders:[
-        {id:"koga",n:"독",em:"☠️",gen:1,pokemon:[{k:"koffing",l:37},{k:"muk",l:39},{k:"weezing",l:43}],reward:4300},
+        {id:"koga",n:"독",em:"☠️",gen:1,pokemon:[{k:"koffing",l:37},{k:"muk",l:39},{k:"weezing",l:43}],reward:4300,rewardItems:["iron"]},
         {id:"janine",n:"도희",em:"🥷",gen:2,pokemon:[{k:"crobat",l:36},{k:"weezing",l:36},{k:"ariados",l:33},{k:"venomoth",l:39}],reward:3900}
      ]},
     {id:"k_gym6",city:"노란시티",n:"노란시티 체육관",type:"psychic",badge:"골드뱃지",badgeEm:"🔮",
-     leaders:[{id:"sabrina",n:"초련",em:"🔮",gen:1,pokemon:[{k:"kadabra",l:38},{k:"mrmime",l:37},{k:"venomoth",l:38},{k:"alakazam",l:43}],reward:4300}]},
+     leaders:[{id:"sabrina",n:"초련",em:"🔮",gen:1,pokemon:[{k:"kadabra",l:38},{k:"mrmime",l:37},{k:"venomoth",l:38},{k:"alakazam",l:43}],reward:4300,rewardItems:["calcium"]}]},
     {id:"k_gym7",city:"홍련섬",n:"홍련섬 체육관",type:"fire",badge:"크림슨뱃지",badgeEm:"🔥",
-     leaders:[{id:"blaine",n:"강연",em:"🔥",gen:1,pokemon:[{k:"growlithe",l:42},{k:"ponyta",l:40},{k:"rapidash",l:42},{k:"arcanine",l:47}],reward:4700}]},
+     leaders:[{id:"blaine",n:"강연",em:"🔥",gen:1,pokemon:[{k:"growlithe",l:42},{k:"ponyta",l:40},{k:"rapidash",l:42},{k:"arcanine",l:47}],reward:4700,rewardItems:["rarecandy"]}]},
     {id:"k_gym8",city:"상록시티",n:"상록시티 체육관",type:"ground",badge:"그린뱃지",badgeEm:"🌍",
      leaders:[
-        {id:"giovanni",n:"비주기",em:"🦹",gen:1,pokemon:[{k:"rhyhorn",l:45},{k:"dugtrio",l:42},{k:"nidoqueen",l:44},{k:"nidoking",l:45},{k:"rhydon",l:50}],reward:6500},
+        {id:"giovanni",n:"비주기",em:"🦹",gen:1,pokemon:[{k:"rhyhorn",l:45},{k:"dugtrio",l:42},{k:"nidoqueen",l:44},{k:"nidoking",l:45},{k:"rhydon",l:50}],reward:6500,rewardItems:["rarecandy","masterball"]},
         {id:"blue",n:"그린",em:"🏆",gen:2,pokemon:[{k:"pidgeot",l:56},{k:"alakazam",l:54},{k:"rhydon",l:56},{k:"gyarados",l:58},{k:"arcanine",l:58},{k:"exeggutor",l:58}],reward:8000}
      ]}
 ],
 johto: [
     {id:"j_gym1",city:"도라지시티",n:"도라지시티 체육관",type:"flying",badge:"제피르뱃지",badgeEm:"🪶",
-     leaders:[{id:"falkner",n:"비상",em:"🐦",gen:2,pokemon:[{k:"pidgey",l:7},{k:"pidgeotto",l:9}],reward:900}]},
+     leaders:[{id:"falkner",n:"비상",em:"🐦",gen:2,pokemon:[{k:"pidgey",l:7},{k:"pidgeotto",l:9}],reward:900,rewardItems:["protein"]}]},
     {id:"j_gym2",city:"고동마을",n:"고동마을 체육관",type:"bug",badge:"인섹트뱃지",badgeEm:"🐛",
-     leaders:[{id:"bugsy",n:"호일",em:"🐛",gen:2,pokemon:[{k:"metapod",l:14},{k:"kakuna",l:14},{k:"scyther",l:16}],reward:1600}]},
+     leaders:[{id:"bugsy",n:"호일",em:"🐛",gen:2,pokemon:[{k:"metapod",l:14},{k:"kakuna",l:14},{k:"scyther",l:16}],reward:1600,rewardItems:["netball","netball","netball"]}]},
     {id:"j_gym3",city:"금빛시티",n:"금빛시티 체육관",type:"normal",badge:"레귤러뱃지",badgeEm:"⭐",
-     leaders:[{id:"whitney",n:"꼭두",em:"⭐",gen:2,pokemon:[{k:"clefairy",l:18},{k:"miltank",l:20}],reward:2000}]},
+     leaders:[{id:"whitney",n:"꼭두",em:"⭐",gen:2,pokemon:[{k:"clefairy",l:18},{k:"miltank",l:20}],reward:2000,rewardItems:["rarecandy"]}]},
     {id:"j_gym4",city:"인주시티",n:"인주시티 체육관",type:"ghost",badge:"팬텀뱃지",badgeEm:"👻",
-     leaders:[{id:"morty",n:"유빙",em:"👻",gen:2,pokemon:[{k:"gastly",l:21},{k:"haunter",l:21},{k:"gengar",l:25},{k:"haunter",l:23}],reward:2500}]},
+     leaders:[{id:"morty",n:"유빙",em:"👻",gen:2,pokemon:[{k:"gastly",l:21},{k:"haunter",l:21},{k:"gengar",l:25},{k:"haunter",l:23}],reward:2500,rewardItems:["duskball","duskball","duskball"]}]},
     {id:"j_gym5",city:"담청시티",n:"담청시티 체육관",type:"fighting",badge:"쇼크뱃지",badgeEm:"💪",
-     leaders:[{id:"chuck",n:"사도",em:"💪",gen:2,pokemon:[{k:"primeape",l:27},{k:"poliwrath",l:30}],reward:3000}]},
+     leaders:[{id:"chuck",n:"사도",em:"💪",gen:2,pokemon:[{k:"primeape",l:27},{k:"poliwrath",l:30}],reward:3000,rewardItems:["iron"]}]},
     {id:"j_gym6",city:"연고시티",n:"연고시티 체육관",type:"steel",badge:"스틸뱃지",badgeEm:"⚙️",
-     leaders:[{id:"jasmine",n:"미강",em:"⚙️",gen:2,pokemon:[{k:"magnemite",l:30},{k:"magnemite",l:30},{k:"steelix",l:35}],reward:3500}]},
+     leaders:[{id:"jasmine",n:"미강",em:"⚙️",gen:2,pokemon:[{k:"magnemite",l:30},{k:"magnemite",l:30},{k:"steelix",l:35}],reward:3500,rewardItems:["iron"]}]},
     {id:"j_gym7",city:"담홍시티",n:"담홍시티 체육관",type:"ice",badge:"아이스뱃지",badgeEm:"❄️",
-     leaders:[{id:"pryce",n:"류옹",em:"❄️",gen:2,pokemon:[{k:"seel",l:27},{k:"dewgong",l:29},{k:"piloswine",l:31}],reward:3100}]},
+     leaders:[{id:"pryce",n:"류옹",em:"❄️",gen:2,pokemon:[{k:"seel",l:27},{k:"dewgong",l:29},{k:"piloswine",l:31}],reward:3100,rewardItems:["rarecandy"]}]},
     {id:"j_gym8",city:"블랙쏜시티",n:"블랙쏜시티 체육관",type:"dragon",badge:"라이징뱃지",badgeEm:"🐉",
-     leaders:[{id:"clair",n:"이향",em:"🐉",gen:2,pokemon:[{k:"dragonair",l:37},{k:"dragonair",l:37},{k:"dragonair",l:37},{k:"kingdra",l:40}],reward:4000}]}
+     leaders:[{id:"clair",n:"이향",em:"🐉",gen:2,pokemon:[{k:"dragonair",l:37},{k:"dragonair",l:37},{k:"dragonair",l:37},{k:"kingdra",l:40}],reward:4000,rewardItems:["rarecandy","masterball"]}]}
 ],
 hoenn: [
     {id:"h_gym1",city:"금탄시티",n:"금탄시티 체육관",type:"rock",badge:"스톤뱃지",badgeEm:"🪨",
-     leaders:[{id:"roxanne",n:"이즈미",em:"🪨",gen:3,pokemon:[{k:"geodude",l:12},{k:"geodude",l:12},{k:"aron",l:14}],reward:1400}]},
+     leaders:[{id:"roxanne",n:"이즈미",em:"🪨",gen:3,pokemon:[{k:"geodude",l:12},{k:"geodude",l:12},{k:"aron",l:14}],reward:1400,rewardItems:["protein"]}]},
     {id:"h_gym2",city:"무로시티",n:"무로시티 체육관",type:"fighting",badge:"너클뱃지",badgeEm:"🥊",
-     leaders:[{id:"brawly",n:"토키",em:"🥊",gen:3,pokemon:[{k:"machop",l:16},{k:"makuhita",l:18},{k:"meditite",l:17}],reward:1800}]},
+     leaders:[{id:"brawly",n:"토키",em:"🥊",gen:3,pokemon:[{k:"machop",l:16},{k:"makuhita",l:18},{k:"meditite",l:17}],reward:1800,rewardItems:["calcium"]}]},
     {id:"h_gym3",city:"보라시티",n:"보라시티 체육관",type:"electric",badge:"다이나모뱃지",badgeEm:"⚡",
-     leaders:[{id:"wattson",n:"테센",em:"⚡",gen:3,pokemon:[{k:"voltorb",l:20},{k:"electrike",l:20},{k:"magnemite",l:22},{k:"manectric",l:24}],reward:2400}]},
+     leaders:[{id:"wattson",n:"테센",em:"⚡",gen:3,pokemon:[{k:"voltorb",l:20},{k:"electrike",l:20},{k:"magnemite",l:22},{k:"manectric",l:24}],reward:2400,rewardItems:["carbos"]}]},
     {id:"h_gym4",city:"풍연마을",n:"풍연마을 체육관",type:"fire",badge:"히트뱃지",badgeEm:"🔥",
-     leaders:[{id:"flannery",n:"아스나",em:"🔥",gen:3,pokemon:[{k:"slugma",l:26},{k:"slugma",l:26},{k:"ponyta",l:28},{k:"growlithe",l:29}],reward:2900}]},
+     leaders:[{id:"flannery",n:"아스나",em:"🔥",gen:3,pokemon:[{k:"slugma",l:26},{k:"slugma",l:26},{k:"ponyta",l:28},{k:"growlithe",l:29}],reward:2900,rewardItems:["rarecandy"]}]},
     {id:"h_gym5",city:"하절시티",n:"하절시티 체육관",type:"normal",badge:"밸런스뱃지",badgeEm:"⚖️",
-     leaders:[{id:"norman",n:"센리",em:"⚖️",gen:3,pokemon:[{k:"slakoth",l:28},{k:"vigoroth",l:30},{k:"slaking",l:31}],reward:3100}]},
+     leaders:[{id:"norman",n:"센리",em:"⚖️",gen:3,pokemon:[{k:"slakoth",l:28},{k:"vigoroth",l:30},{k:"slaking",l:31}],reward:3100,rewardItems:["protein"]}]},
     {id:"h_gym6",city:"트라이시티",n:"트라이시티 체육관",type:"flying",badge:"페더뱃지",badgeEm:"🪶",
-     leaders:[{id:"winona",n:"나기",em:"🪶",gen:3,pokemon:[{k:"swablu",l:30},{k:"altaria",l:33},{k:"aerodactyl",l:32}],reward:3300}]},
+     leaders:[{id:"winona",n:"나기",em:"🪶",gen:3,pokemon:[{k:"swablu",l:30},{k:"altaria",l:33},{k:"aerodactyl",l:32}],reward:3300,rewardItems:["carbos"]}]},
     {id:"h_gym7",city:"트라이시티",n:"트라이시티 에스퍼 체육관",type:"psychic",badge:"마인드뱃지",badgeEm:"🔮",
-     leaders:[{id:"tateliza",n:"풍&란",em:"🔮",gen:3,pokemon:[{k:"gardevoir",l:36},{k:"medicham",l:35},{k:"alakazam",l:36}],reward:3600}]},
+     leaders:[{id:"tateliza",n:"풍&란",em:"🔮",gen:3,pokemon:[{k:"gardevoir",l:36},{k:"medicham",l:35},{k:"alakazam",l:36}],reward:3600,rewardItems:["rarecandy"]}]},
     {id:"h_gym8",city:"루네시티",n:"루네시티 체육관",type:"water",badge:"레인뱃지",badgeEm:"🌧️",
      leaders:[
-        {id:"wallace",n:"미쿠리",em:"💧",gen:3,pokemon:[{k:"milotic",l:40},{k:"tentacruel",l:38},{k:"gyarados",l:39},{k:"starmie",l:39}],reward:4000},
+        {id:"wallace",n:"미쿠리",em:"💧",gen:3,pokemon:[{k:"milotic",l:40},{k:"tentacruel",l:38},{k:"gyarados",l:39},{k:"starmie",l:39}],reward:4000,rewardItems:["rarecandy","masterball"]},
         {id:"juan",n:"아단",em:"🌊",gen:3,pokemon:[{k:"milotic",l:42},{k:"kingdra",l:41},{k:"tentacruel",l:40}],reward:4100}
      ]}
 ],
 sinnoh: [
     {id:"s_gym1",city:"흑금시티",n:"흑금시티 체육관",type:"rock",badge:"콜뱃지",badgeEm:"🪨",
-     leaders:[{id:"roark",n:"효태",em:"🪨",gen:4,pokemon:[{k:"geodude",l:12},{k:"onix",l:12},{k:"cranidos",l:14}],reward:1400}]},
+     leaders:[{id:"roark",n:"효태",em:"🪨",gen:4,pokemon:[{k:"geodude",l:12},{k:"onix",l:12},{k:"cranidos",l:14}],reward:1400,rewardItems:["protein"]}]},
     {id:"s_gym2",city:"영원시티",n:"영원시티 체육관",type:"grass",badge:"포레스트뱃지",badgeEm:"🌿",
-     leaders:[{id:"gardenia",n:"유채",em:"🌿",gen:4,pokemon:[{k:"oddish",l:19},{k:"shroomish",l:19},{k:"grotle",l:22}],reward:2200}]},
+     leaders:[{id:"gardenia",n:"유채",em:"🌿",gen:4,pokemon:[{k:"oddish",l:19},{k:"shroomish",l:19},{k:"grotle",l:22}],reward:2200,rewardItems:["calcium"]}]},
     {id:"s_gym3",city:"노모세시티",n:"노모세시티 체육관",type:"water",badge:"코볼트뱃지",badgeEm:"💧",
-     leaders:[{id:"crasherwake",n:"맥시",em:"💧",gen:4,pokemon:[{k:"gyarados",l:27},{k:"golduck",l:27},{k:"poliwrath",l:30}],reward:3000}]},
+     leaders:[{id:"crasherwake",n:"맥시",em:"💧",gen:4,pokemon:[{k:"gyarados",l:27},{k:"golduck",l:27},{k:"poliwrath",l:30}],reward:3000,rewardItems:["iron"]}]},
     {id:"s_gym4",city:"요스가시티",n:"요스가시티 체육관",type:"ghost",badge:"렐릭뱃지",badgeEm:"👻",
-     leaders:[{id:"fantina",n:"멜리사",em:"👻",gen:4,pokemon:[{k:"drifloon",l:32},{k:"haunter",l:32},{k:"misdreavus",l:34}],reward:3400}]},
+     leaders:[{id:"fantina",n:"멜리사",em:"👻",gen:4,pokemon:[{k:"drifloon",l:32},{k:"haunter",l:32},{k:"misdreavus",l:34}],reward:3400,rewardItems:["duskball","duskball","duskball"]}]},
     {id:"s_gym5",city:"노모세시티",n:"격투 체육관",type:"fighting",badge:"코볼트뱃지",badgeEm:"💪",
-     leaders:[{id:"maylene",n:"자두",em:"💪",gen:4,pokemon:[{k:"meditite",l:28},{k:"machoke",l:29},{k:"lucario",l:32}],reward:3200}]},
+     leaders:[{id:"maylene",n:"자두",em:"💪",gen:4,pokemon:[{k:"meditite",l:28},{k:"machoke",l:29},{k:"lucario",l:32}],reward:3200,rewardItems:["iron"]}]},
     {id:"s_gym6",city:"미오시티",n:"미오시티 체육관",type:"steel",badge:"마인뱃지",badgeEm:"⚙️",
-     leaders:[{id:"byron",n:"동관",em:"⚙️",gen:4,pokemon:[{k:"shieldon",l:36},{k:"steelix",l:36},{k:"bastiodon",l:39}],reward:3900}]},
+     leaders:[{id:"byron",n:"동관",em:"⚙️",gen:4,pokemon:[{k:"shieldon",l:36},{k:"steelix",l:36},{k:"bastiodon",l:39}],reward:3900,rewardItems:["iron"]}]},
     {id:"s_gym7",city:"키싱시티",n:"키싱시티 체육관",type:"ice",badge:"아이시클뱃지",badgeEm:"❄️",
-     leaders:[{id:"candice",n:"무청",em:"❄️",gen:4,pokemon:[{k:"snover",l:38},{k:"sneasel",l:38},{k:"piloswine",l:40},{k:"abomasnow",l:42}],reward:4200}]},
+     leaders:[{id:"candice",n:"무청",em:"❄️",gen:4,pokemon:[{k:"snover",l:38},{k:"sneasel",l:38},{k:"piloswine",l:40},{k:"abomasnow",l:42}],reward:4200,rewardItems:["rarecandy"]}]},
     {id:"s_gym8",city:"선전시티",n:"선전시티 체육관",type:"electric",badge:"비콘뱃지",badgeEm:"⚡",
-     leaders:[{id:"volkner",n:"전진",em:"⚡",gen:4,pokemon:[{k:"raichu",l:46},{k:"luxray",l:48},{k:"electabuzz",l:47}],reward:4800}]}
+     leaders:[{id:"volkner",n:"전진",em:"⚡",gen:4,pokemon:[{k:"raichu",l:46},{k:"luxray",l:48},{k:"electabuzz",l:47}],reward:4800,rewardItems:["rarecandy","masterball"]}]}
 ]
 };
 
@@ -1216,7 +1216,30 @@ superrepel:  {n:"실버스프레이",desc:"200걸음 야생 포켓몬 조우 방
 maxrepel:    {n:"골드스프레이",desc:"250걸음 야생 포켓몬 조우 방지",type:"etc",value:250,buy:700,sell:350},
 xattack:     {n:"플러스파워",desc:"배틀 중 공격 1단계 상승",type:"battle",value:"atk",buy:500,sell:250},
 xdefense:    {n:"디펜드업",desc:"배틀 중 방어 1단계 상승",type:"battle",value:"def",buy:550,sell:275},
-xspeed:      {n:"스피더",desc:"배틀 중 스피드 1단계 상승",type:"battle",value:"spd",buy:350,sell:175}
+xspeed:      {n:"스피더",desc:"배틀 중 스피드 1단계 상승",type:"battle",value:"spd",buy:350,sell:175},
+xspatk:      {n:"스페셜업",desc:"배틀 중 특수공격 1단계 상승",type:"battle",value:"spatk",buy:350,sell:175},
+xspdef:      {n:"스페셜가드",desc:"배틀 중 특수방어 1단계 상승",type:"battle",value:"spdef",buy:350,sell:175},
+xaccuracy:   {n:"잘맞히기",desc:"배틀 중 명중률 1단계 상승",type:"battle",value:"acc",buy:950,sell:475},
+direhit:     {n:"크리티컬커터",desc:"배틀 중 급소율 상승",type:"battle",value:"crit",buy:650,sell:325},
+guardspec:   {n:"에펙트가드",desc:"5턴간 능력저하 방지",type:"battle",value:"guard",buy:700,sell:350},
+netball:     {n:"네트볼",desc:"물/벌레 타입 포획률 UP (3x)",type:"ball",value:3,buy:1000,sell:500},
+diveball:    {n:"다이브볼",desc:"수중 포켓몬 포획률 UP (3.5x)",type:"ball",value:3.5,buy:1000,sell:500},
+nestball:    {n:"네스트볼",desc:"약한 포켓몬일수록 잘 잡힘",type:"ball",value:1,buy:1000,sell:500},
+repeatball:  {n:"리피트볼",desc:"이미 잡은 종류 포획률 UP (3.5x)",type:"ball",value:3.5,buy:1000,sell:500},
+timerball:   {n:"타이머볼",desc:"턴이 길어질수록 포획률 UP",type:"ball",value:1,buy:1000,sell:500},
+luxuryball:  {n:"럭셔리볼",desc:"친밀도 상승 보너스",type:"ball",value:1,buy:1000,sell:500},
+premierball: {n:"프리미어볼",desc:"기념용 특수 볼 (1x)",type:"ball",value:1,buy:200,sell:100},
+duskball:    {n:"다크볼",desc:"밤/동굴에서 포획률 UP (3.5x)",type:"ball",value:3.5,buy:1000,sell:500},
+quickball:   {n:"퀵볼",desc:"첫 턴 포획률 UP (5x)",type:"ball",value:5,buy:1000,sell:500},
+healball:    {n:"힐볼",desc:"포획 시 HP/상태이상 회복",type:"ball",value:1,buy:300,sell:150},
+rarecandy:   {n:"이상한사탕",desc:"포켓몬 레벨 1 상승",type:"etc",value:1,buy:9999,sell:2400},
+ppup:        {n:"포인트업",desc:"기술 PP 최대치 상승",type:"etc",value:1,buy:9999,sell:4900},
+calcium:     {n:"리소신",desc:"특수공격 노력치 +10",type:"etc",value:1,buy:9800,sell:4900},
+protein:     {n:"타우린",desc:"공격 노력치 +10",type:"etc",value:1,buy:9800,sell:4900},
+iron:        {n:"브로민",desc:"방어 노력치 +10",type:"etc",value:1,buy:9800,sell:4900},
+carbos:      {n:"인돌",desc:"스피드 노력치 +10",type:"etc",value:1,buy:9800,sell:4900},
+zinc:        {n:"키토산",desc:"특수방어 노력치 +10",type:"etc",value:1,buy:9800,sell:4900},
+hpup:        {n:"맥스업",desc:"HP 노력치 +10",type:"etc",value:1,buy:9800,sell:4900}
 };
 
 // ═══════════════════════════════════════════════
@@ -1487,7 +1510,11 @@ sinnoh_fixed: [
     {key:"palkia",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:70,name:"펄기아"},
     {key:"giratina",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:70,name:"기라티나"},
     {key:"heatran",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:50,name:"히드런"},
-    {key:"cresselia",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:50,name:"크레세리아"}
+    {key:"cresselia",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:50,name:"크레세리아"},
+    {key:"uxie",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:50,name:"유크시"},
+    {key:"mesprit",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:50,name:"에무리트"},
+    {key:"azelf",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:50,name:"아그놈"},
+    {key:"regigigas",road:"s_r10",reqRegion:"sinnoh",reqBadges:8,level:70,name:"레지기가스"}
 ],
 // 로밍 (성도 뱃지 3개 이상, 랜덤 도로에 출현)
 roaming: ["raikou","entei","suicune"],
@@ -1499,7 +1526,9 @@ mythical: [
     {key:"deoxys",reqType:"pokedex",reqCount:300,level:50,name:"테오키스"},
     {key:"darkrai",reqType:"totalBadges",reqCount:32,level:50,name:"다크라이"},
     {key:"shaymin",reqType:"pokedex",reqCount:400,level:50,name:"쉐이미"},
-    {key:"arceus",reqType:"totalBadges",reqCount:32,level:80,name:"아르세우스"}
+    {key:"arceus",reqType:"totalBadges",reqCount:32,level:80,name:"아르세우스"},
+    {key:"phione",reqType:"pokedex",reqCount:450,level:30,name:"피오네"},
+    {key:"manaphy",reqType:"totalBadges",reqCount:32,level:50,name:"마나피"}
 ]
 };
 
@@ -1793,6 +1822,7 @@ function startGymBattle(regionKey, gymIdx, leaderIdx) {
         trainerName: "관장 " + leader.n,
         trainerEmoji: leader.em,
         trainerReward: leader.reward,
+        trainerRewardItems: leader.rewardItems,
         trainerKey: gKey,
         isRematch: isRematch,
         enemyParty: enemyParty,
@@ -3375,6 +3405,15 @@ window.poke_acceptReward = async function() {
         player.gold += bd.pendingReward;
         bd.msg.push("💰 ₩" + bd.pendingReward + "을 받았다!");
         addLog("💰 ₩" + bd.pendingReward + " 획득!", "gold");
+        // 체육관 보상 아이템 지급
+        if (bd.trainerRewardItems && bd.isGymBattle && !bd.isRematch) {
+            for (var ri = 0; ri < bd.trainerRewardItems.length; ri++) {
+                var rItem = bd.trainerRewardItems[ri];
+                player.bag[rItem] = (player.bag[rItem] || 0) + 1;
+                bd.msg.push("🎁 " + ITEMS[rItem].n + " 을(를) 받았다!");
+                addLog(ITEMS[rItem].n + " 을(를) 받았다!", "reward");
+            }
+        }
         bd.rewardHandled = true;
     }
     await saveAll();
