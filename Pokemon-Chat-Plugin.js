@@ -2389,6 +2389,7 @@ function injectStyles() {
     s.id = STYLE_ID;
     s.textContent = [
 ".pk-wrap{font-family:'Segoe UI',Arial,sans-serif;color:#e0e0e0;background:#1a1a2e;border-radius:12px;padding:10px;max-width:480px;margin:0 auto;font-size:14px;line-height:1.4;box-sizing:border-box;}",
+"#" + UI_ID + ".hidden{display:none!important;}",
 ".pk-wrap *{box-sizing:border-box;}",
 ".pk-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px;margin:6px 0;}",
 ".pk-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;color:#fff;text-align:center;}",
@@ -3646,27 +3647,41 @@ function bindHandlers(container) {
 
 async function initPlugin() {
     injectStyles();
-    var loaded = await loadAll();
+    isVisible = (await lsGet(KEY_VIS)) !== "false";
+    // ※ API 3.0: registerButton 먼저 등록 (세이브 로드 에러로 버튼 실종 방지)
     if (_hasRisu) {
         try {
-            Risuai.registerButton("🎮 포켓몬", async function() {
+            Risuai.registerButton({
+                name: '🎮 포켓몬',
+                icon: '🎮',
+                iconType: 'html',
+                location: 'action'
+            }, async function() {
                 isVisible = !isVisible;
-                if (isVisible) {
-                    if (!player || !gState) { await loadAll(); }
-                    Risuai.showContainer('fullscreen');
-                    render();
-                } else {
-                    Risuai.hideContainer();
+                await lsSet(KEY_VIS, String(isVisible));
+                var win = document.getElementById(UI_ID);
+                if (win) {
+                    if (isVisible) {
+                        win.classList.remove("hidden");
+                        await Risuai.showContainer('fullscreen');
+                        if (!player || !gState) { await loadAll(); }
+                        render();
+                    } else {
+                        win.classList.add("hidden");
+                        await Risuai.hideContainer();
+                    }
                 }
             });
         } catch(e) { console.error(PLUGIN, "registerButton error:", e); }
     }
-    var savedVis = await lsGet(KEY_VIS);
-    isVisible = savedVis !== "false";
-    if (isVisible) render();
+    // 세이브 로드
+    if (await loadAll()) {
+        console.log(PLUGIN, "세이브 데이터 로드 완료");
+    }
+    render();
 }
 
-initPlugin();
+await initPlugin();
 
 } catch(topErr) {
     console.error("[Pokemon] Fatal error:", topErr);
