@@ -1,5 +1,5 @@
 //@name Pokemon Battle
-//@display-name 🎮 포켓몬 배틀 (Gen 1-2)
+//@display-name 🎮 포켓몬 배틀 (Gen 1-4)
 //@api 3.0
 //@version 2.0
 //@arg pokemon_save string "" "포켓몬 세이브 데이터"
@@ -68,7 +68,7 @@ function getTypeEffect(atkType, defTypes) {
 }
 
 // ═══════════════════════════════════════════════
-// 📖 포켓몬 데이터베이스 (Gen 1-2 확장)
+// 📖 포켓몬 데이터베이스 (Gen 1-4)
 // ═══════════════════════════════════════════════
 var POKEDEX = {
 // ── Gen 1 스타터 ──
@@ -323,7 +323,107 @@ porygon2:   {n:"폴리곤2",id:233,t:["normal"],s:[85,80,90,105,95,60],ml:{1:["t
 smeargle:   {n:"루브도",id:235,t:["normal"],s:[55,20,35,20,45,75],ml:{1:["tackle","sketch"]},e:null,cr:45,xp:88,em:"🎨"},
 smoochum:   {n:"뽀뽀라",id:238,t:["ice","psychic"],s:[45,30,15,85,65,65],ml:{1:["pound","lick"],5:["confusion"],9:["icepunch"]},e:{l:30,to:"jynx"},cr:45,xp:87,em:"💋"},
 elekid:     {n:"에레키드",id:239,t:["electric"],s:[45,63,37,65,55,95],ml:{1:["thundershock","leer"],6:["quickattack"],11:["thunderpunch"]},e:{l:30,to:"electabuzz"},cr:45,xp:72,em:"⚡"},
-magby:      {n:"마그비",id:240,t:["fire"],s:[45,75,37,70,55,83],ml:{1:["ember","leer"],7:["smokescreen"],13:["firepunch"]},e:{l:30,to:"magmar"},cr:45,xp:73,em:"🔥"}
+magby:      {n:"마그비",id:240,t:["fire"],s:[45,75,37,70,55,83],ml:{1:["ember","leer"],7:["smokescreen"],13:["firepunch"]},e:{l:30,to:"magmar"},cr:45,xp:73,em:"🔥"},
+// ── Gen 3: 호엔 지방 포켓몬 ──
+treecko:    {n:"나무지기",id:252,t:["grass"],s:[40,45,35,65,55,70],ml:{1:["pound","absorb"],6:["absorb"],16:["megadrain"],29:["razorleaf"],45:["solarbeam"]},e:{l:16,to:"grovyle"},cr:45,xp:62,em:"🦎"},
+grovyle:    {n:"나무돌이",id:253,t:["grass"],s:[50,65,45,85,65,95],ml:{1:["pound","absorb"],16:["razorleaf"],29:["megadrain"],39:["solarbeam"]},e:{l:36,to:"sceptile"},cr:45,xp:142,em:"🦎"},
+sceptile:   {n:"나무킹",id:254,t:["grass"],s:[70,85,65,105,85,120],ml:{1:["pound","razorleaf"],36:["megadrain"],51:["solarbeam"]},e:null,cr:45,xp:239,em:"🦎"},
+torchic:    {n:"아차모",id:255,t:["fire"],s:[45,60,40,70,50,45],ml:{1:["scratch","ember"],7:["ember"],16:["flamethrower"]},e:{l:16,to:"combusken"},cr:45,xp:62,em:"🐥"},
+combusken:  {n:"영치코",id:256,t:["fire","fighting"],s:[60,85,60,85,60,55],ml:{1:["scratch","ember"],16:["brickbreak"],28:["flamethrower"]},e:{l:36,to:"blaziken"},cr:45,xp:142,em:"🐓"},
+blaziken:   {n:"번치코",id:257,t:["fire","fighting"],s:[80,120,70,110,70,80],ml:{1:["scratch","ember","brickbreak"],36:["closecombat"],54:["fireblast"]},e:null,cr:45,xp:239,em:"🐓"},
+mudkip:     {n:"물짱이",id:258,t:["water"],s:[50,70,50,50,50,40],ml:{1:["tackle","watergun"],6:["mudslap"],16:["waterpulse"]},e:{l:16,to:"marshtomp"},cr:45,xp:62,em:"🐟"},
+marshtomp:  {n:"늪짱이",id:259,t:["water","ground"],s:[70,85,70,60,70,50],ml:{1:["tackle","watergun","mudslap"],16:["mudslap"],25:["surf"]},e:{l:36,to:"swampert"},cr:45,xp:142,em:"🐟"},
+swampert:   {n:"대짱이",id:260,t:["water","ground"],s:[100,110,90,85,90,60],ml:{1:["watergun","mudslap"],36:["earthquake"],52:["hydropump"]},e:null,cr:45,xp:241,em:"🐟"},
+poochyena:  {n:"포챠나",id:261,t:["dark"],s:[35,55,35,30,30,35],ml:{1:["tackle","bite"],13:["crunch"]},e:{l:18,to:"mightyena"},cr:255,xp:56,em:"🐺"},
+mightyena:  {n:"그라에나",id:262,t:["dark"],s:[70,90,70,60,60,70],ml:{1:["tackle","bite"],18:["crunch"],30:["darkpulse"]},e:null,cr:127,xp:147,em:"🐺"},
+zigzagoon:  {n:"지그제구리",id:263,t:["normal"],s:[38,30,41,30,41,60],ml:{1:["tackle","growl"],9:["slam"],25:["bodyslam"]},e:{l:20,to:"linoone"},cr:255,xp:56,em:"🦝"},
+linoone:    {n:"직구리",id:264,t:["normal"],s:[78,70,61,50,61,100],ml:{1:["tackle","slam"],20:["bodyslam"],33:["bodyslam"]},e:null,cr:90,xp:147,em:"🦝"},
+ralts:      {n:"랄토스",id:280,t:["psychic","fairy"],s:[28,25,25,45,35,40],ml:{1:["confusion","growl"],6:["confusion"],11:["psybeam"]},e:{l:20,to:"kirlia"},cr:235,xp:40,em:"🧚"},
+kirlia:     {n:"킬리아",id:281,t:["psychic","fairy"],s:[38,35,35,65,55,50],ml:{1:["confusion","psybeam"],20:["psychic"],26:["dazzlinggleam"]},e:{l:30,to:"gardevoir"},cr:120,xp:97,em:"🧚"},
+gardevoir:  {n:"가디안",id:282,t:["psychic","fairy"],s:[68,65,65,125,115,80],ml:{1:["confusion","psychic"],30:["moonblast"],40:["dazzlinggleam"]},e:null,cr:45,xp:233,em:"🧚"},
+shroomish:  {n:"버섯꼬",id:285,t:["grass"],s:[60,40,60,40,60,35],ml:{1:["tackle","absorb"],7:["absorb"],16:["megadrain"],22:["sleeppowder"]},e:{l:23,to:"breloom"},cr:255,xp:59,em:"🍄"},
+breloom:    {n:"버섯모",id:286,t:["grass","fighting"],s:[60,130,80,60,60,70],ml:{1:["tackle","absorb"],23:["brickbreak"],33:["megadrain"],44:["closecombat"]},e:null,cr:90,xp:161,em:"🍄"},
+slakoth:    {n:"게을로",id:287,t:["normal"],s:[60,60,60,35,35,30],ml:{1:["scratch","tackle"],7:["bodyslam"],13:["bodyslam"]},e:{l:18,to:"vigoroth"},cr:255,xp:83,em:"🦥"},
+vigoroth:   {n:"발바로",id:288,t:["normal"],s:[80,80,80,55,55,90],ml:{1:["scratch","bodyslam"],18:["bodyslam"],25:["closecombat"]},e:{l:36,to:"slaking"},cr:120,xp:154,em:"🦥"},
+slaking:    {n:"게을킹",id:289,t:["normal"],s:[150,160,100,95,65,100],ml:{1:["scratch","bodyslam"],36:["hyperbeam"]},e:null,cr:45,xp:252,em:"🦥"},
+makuhita:   {n:"마크탕",id:296,t:["fighting"],s:[72,60,30,20,30,25],ml:{1:["tackle","lowkick"],10:["brickbreak"],22:["closecombat"]},e:{l:24,to:"hariyama"},cr:180,xp:47,em:"🥊"},
+hariyama:   {n:"하리뭉",id:297,t:["fighting"],s:[144,120,60,40,60,50],ml:{1:["tackle","brickbreak"],24:["closecombat"],38:["crosschop"]},e:null,cr:200,xp:166,em:"🥊"},
+aron:       {n:"코코도라",id:304,t:["steel","rock"],s:[50,70,100,40,40,30],ml:{1:["tackle","metalclaw"],7:["rockthrow"],15:["ironhead"]},e:{l:32,to:"lairon"},cr:180,xp:66,em:"⛏️"},
+lairon:     {n:"코도라",id:305,t:["steel","rock"],s:[60,90,140,50,50,40],ml:{1:["tackle","metalclaw","ironhead"],32:["rockslide"],37:["steelwing"]},e:{l:42,to:"aggron"},cr:90,xp:151,em:"⛏️"},
+aggron:     {n:"보스로라",id:306,t:["steel","rock"],s:[70,110,180,60,60,50],ml:{1:["metalclaw","ironhead"],42:["stoneedge"],51:["hyperbeam"]},e:null,cr:45,xp:239,em:"⛏️"},
+meditite:   {n:"요가랑",id:307,t:["fighting","psychic"],s:[30,40,55,40,55,60],ml:{1:["confusion","lowkick"],9:["brickbreak"],18:["psychic"]},e:{l:37,to:"medicham"},cr:180,xp:56,em:"🧘"},
+medicham:   {n:"요가램",id:308,t:["fighting","psychic"],s:[60,60,75,60,75,80],ml:{1:["confusion","brickbreak"],37:["closecombat"],42:["psychic"]},e:null,cr:90,xp:144,em:"🧘"},
+electrike:  {n:"썬더라이",id:309,t:["electric"],s:[40,45,40,65,40,65],ml:{1:["tackle","thundershock"],12:["spark"],20:["thunderbolt"]},e:{l:26,to:"manectric"},cr:120,xp:59,em:"⚡"},
+manectric:  {n:"썬더볼트",id:310,t:["electric"],s:[70,75,60,105,60,105],ml:{1:["thundershock","spark"],26:["thunderbolt"],44:["thunder"]},e:null,cr:45,xp:166,em:"⚡"},
+carvanha:   {n:"샤프니아",id:318,t:["water","dark"],s:[45,90,20,65,20,65],ml:{1:["bite","watergun"],16:["crunch"],22:["aquatail"]},e:{l:30,to:"sharpedo"},cr:225,xp:88,em:"🦈"},
+sharpedo:   {n:"샤크니아",id:319,t:["water","dark"],s:[70,120,40,95,40,95],ml:{1:["bite","crunch"],30:["aquatail"],38:["hydropump"]},e:null,cr:60,xp:161,em:"🦈"},
+trapinch:   {n:"톱치",id:328,t:["ground"],s:[45,100,45,45,45,10],ml:{1:["bite","mudslap"],9:["dig"],17:["crunch"]},e:{l:35,to:"vibrava"},cr:255,xp:73,em:"🐜"},
+vibrava:    {n:"비브라바",id:329,t:["ground","dragon"],s:[50,70,50,50,50,70],ml:{1:["bite","mudslap","dragonbreath"],35:["dragonclaw"]},e:{l:45,to:"flygon"},cr:120,xp:119,em:"🐉"},
+flygon:     {n:"플라이곤",id:330,t:["ground","dragon"],s:[80,100,80,80,80,100],ml:{1:["dragonbreath","earthquake"],45:["dragonclaw"],55:["outrage"]},e:null,cr:45,xp:234,em:"🐉"},
+swablu:     {n:"파비코",id:333,t:["normal","flying"],s:[45,40,60,40,75,50],ml:{1:["peck","growl"],8:["wingattack"],18:["aerialace"]},e:{l:35,to:"altaria"},cr:255,xp:62,em:"☁️"},
+altaria:    {n:"파비코리",id:334,t:["dragon","flying"],s:[75,70,90,70,105,80],ml:{1:["peck","wingattack"],35:["dragonbreath"],42:["moonblast"],54:["dragonpulse"]},e:null,cr:45,xp:172,em:"☁️"},
+feebas:     {n:"빈티나",id:349,t:["water"],s:[20,15,20,10,55,80],ml:{1:["tackle","watergun"]},e:{l:30,to:"milotic"},cr:255,xp:40,em:"🐟"},
+milotic:    {n:"밀로틱",id:350,t:["water"],s:[95,60,79,100,125,81],ml:{1:["watergun","surf"],30:["hydropump"],40:["icebeam"]},e:null,cr:60,xp:189,em:"🐉"},
+absol:      {n:"앱솔",id:359,t:["dark"],s:[65,130,60,75,60,75],ml:{1:["scratch","bite"],12:["crunch"],25:["darkpulse"],36:["swordsdance"]},e:null,cr:30,xp:163,em:"🌙"},
+bagon:      {n:"아공이",id:371,t:["dragon"],s:[45,75,60,40,30,50],ml:{1:["bite","ember"],9:["dragonbreath"],17:["slam"]},e:{l:30,to:"shelgon"},cr:45,xp:60,em:"🐉"},
+shelgon:    {n:"쉘곤",id:372,t:["dragon"],s:[65,95,100,60,50,50],ml:{1:["bite","dragonbreath"],30:["dragonclaw"],38:["ironhead"]},e:{l:50,to:"salamence"},cr:45,xp:147,em:"🐉"},
+salamence:  {n:"보만다",id:373,t:["dragon","flying"],s:[95,135,80,110,80,100],ml:{1:["dragonbreath","dragonclaw"],50:["outrage"],60:["fireblast"]},e:null,cr:45,xp:270,em:"🐉"},
+beldum:     {n:"메탕",id:374,t:["steel","psychic"],s:[40,55,80,35,60,30],ml:{1:["tackle","metalclaw"]},e:{l:20,to:"metang"},cr:3,xp:60,em:"🤖"},
+metang:     {n:"메탕구",id:375,t:["steel","psychic"],s:[60,75,100,55,80,50],ml:{1:["tackle","metalclaw","confusion"],20:["psychic"],26:["ironhead"]},e:{l:45,to:"metagross"},cr:3,xp:147,em:"🤖"},
+metagross:  {n:"메타그로스",id:376,t:["steel","psychic"],s:[80,135,130,95,90,70],ml:{1:["metalclaw","psychic"],45:["ironhead"],55:["hyperbeam"]},e:null,cr:3,xp:270,em:"🤖"},
+// Gen 3 전설/환상
+regirock:   {n:"레지락",id:377,t:["rock"],s:[80,100,200,50,100,50],ml:{1:["rockthrow","ironhead"],25:["rockslide"],50:["stoneedge"]},e:null,cr:3,xp:261,em:"🪨"},
+regice:     {n:"레지아이스",id:378,t:["ice"],s:[80,50,100,100,200,50],ml:{1:["icebeam","confusion"],33:["blizzard"],50:["hyperbeam"]},e:null,cr:3,xp:261,em:"🧊"},
+registeel:  {n:"레지스틸",id:379,t:["steel"],s:[80,75,150,75,150,50],ml:{1:["metalclaw","ironhead"],33:["flashcannon"],50:["hyperbeam"]},e:null,cr:3,xp:261,em:"⚙️"},
+latias:     {n:"라티아스",id:380,t:["dragon","psychic"],s:[80,80,90,110,130,110],ml:{1:["dragonbreath","psychic"],30:["dragonpulse"],50:["moonblast"]},e:null,cr:3,xp:270,em:"🔴"},
+latios:     {n:"라티오스",id:381,t:["dragon","psychic"],s:[80,90,80,130,110,110],ml:{1:["dragonbreath","psychic"],30:["dragonpulse"],50:["hyperbeam"]},e:null,cr:3,xp:270,em:"🔵"},
+kyogre:     {n:"가이오가",id:382,t:["water"],s:[100,100,90,150,140,90],ml:{1:["watergun","icebeam"],45:["surf"],75:["hydropump"]},e:null,cr:3,xp:302,em:"🌊"},
+groudon:    {n:"그란돈",id:383,t:["ground"],s:[100,150,140,100,90,90],ml:{1:["mudslap","earthquake"],45:["fireblast"],75:["solarbeam"]},e:null,cr:3,xp:302,em:"🌋"},
+rayquaza:   {n:"레쿠쟈",id:384,t:["dragon","flying"],s:[105,150,90,150,90,95],ml:{1:["dragonbreath","aerialace"],45:["outrage"],75:["hyperbeam"]},e:null,cr:3,xp:306,em:"🐲"},
+jirachi:    {n:"지라치",id:385,t:["steel","psychic"],s:[100,100,100,100,100,100],ml:{1:["confusion","psychic"],30:["dazzlinggleam"],50:["moonblast"]},e:null,cr:3,xp:270,em:"⭐"},
+deoxys:     {n:"테오키스",id:386,t:["psychic"],s:[50,150,50,150,50,150],ml:{1:["confusion","psychic"],30:["hyperbeam"],50:["shadowball"]},e:null,cr:3,xp:270,em:"🧬"},
+// ── Gen 4: 신오 지방 포켓몬 ──
+turtwig:    {n:"모부기",id:387,t:["grass"],s:[55,68,64,45,55,31],ml:{1:["tackle","absorb"],9:["razorleaf"],17:["megadrain"]},e:{l:18,to:"grotle"},cr:45,xp:64,em:"🐢"},
+grotle:     {n:"수풀부기",id:388,t:["grass"],s:[75,89,85,55,65,36],ml:{1:["tackle","razorleaf"],18:["megadrain"],27:["crunch"]},e:{l:32,to:"torterra"},cr:45,xp:142,em:"🐢"},
+torterra:   {n:"토대부기",id:389,t:["grass","ground"],s:[95,109,105,75,85,56],ml:{1:["razorleaf","earthquake"],32:["solarbeam"],45:["earthquake"]},e:null,cr:45,xp:236,em:"🐢"},
+chimchar:   {n:"불꽃숭이",id:390,t:["fire"],s:[44,58,44,58,44,61],ml:{1:["scratch","ember"],7:["ember"],14:["flamethrower"]},e:{l:14,to:"monferno"},cr:45,xp:62,em:"🐵"},
+monferno:   {n:"파이숭이",id:391,t:["fire","fighting"],s:[64,78,52,78,52,81],ml:{1:["scratch","ember"],14:["brickbreak"],26:["flamethrower"]},e:{l:36,to:"infernape"},cr:45,xp:142,em:"🐵"},
+infernape:  {n:"초염몽",id:392,t:["fire","fighting"],s:[76,104,71,104,71,108],ml:{1:["ember","brickbreak"],36:["closecombat"],42:["fireblast"]},e:null,cr:45,xp:240,em:"🐵"},
+piplup:     {n:"팽도리",id:393,t:["water"],s:[53,51,53,61,56,40],ml:{1:["pound","watergun"],8:["bubblebeam"],15:["waterpulse"]},e:{l:16,to:"prinplup"},cr:45,xp:63,em:"🐧"},
+prinplup:   {n:"팽태자",id:394,t:["water"],s:[64,66,68,81,76,50],ml:{1:["pound","watergun"],16:["bubblebeam"],24:["surf"]},e:{l:36,to:"empoleon"},cr:45,xp:142,em:"🐧"},
+empoleon:   {n:"엠페르트",id:395,t:["water","steel"],s:[84,86,88,111,101,60],ml:{1:["watergun","metalclaw"],36:["surf","flashcannon"],46:["hydropump"]},e:null,cr:45,xp:239,em:"🐧"},
+starly:     {n:"찌르꼬",id:396,t:["normal","flying"],s:[40,55,30,30,30,60],ml:{1:["tackle","wingattack"],5:["quickattack"],14:["aerialace"]},e:{l:14,to:"staravia"},cr:255,xp:49,em:"🐦"},
+staravia:   {n:"찌르버드",id:397,t:["normal","flying"],s:[55,75,50,40,40,80],ml:{1:["quickattack","wingattack"],14:["aerialace"],25:["doubleedge"]},e:{l:34,to:"staraptor"},cr:120,xp:119,em:"🐦"},
+staraptor:  {n:"찌르호크",id:398,t:["normal","flying"],s:[85,120,70,50,60,100],ml:{1:["wingattack","aerialace"],34:["closecombat"],41:["drillpeck"]},e:null,cr:45,xp:218,em:"🐦"},
+shinx:      {n:"꼬링크",id:403,t:["electric"],s:[45,65,34,40,34,45],ml:{1:["tackle","thundershock"],9:["spark"],18:["bite"]},e:{l:15,to:"luxio"},cr:235,xp:53,em:"⚡"},
+luxio:      {n:"럭시오",id:404,t:["electric"],s:[60,85,49,60,49,60],ml:{1:["spark","bite"],15:["thunderbolt"],26:["crunch"]},e:{l:30,to:"luxray"},cr:120,xp:127,em:"⚡"},
+luxray:     {n:"렌트라",id:405,t:["electric"],s:[80,120,79,95,79,70],ml:{1:["spark","crunch"],30:["thunderbolt"],42:["thunder"]},e:null,cr:45,xp:235,em:"⚡"},
+cranidos:   {n:"두개도스",id:408,t:["rock"],s:[67,125,40,30,30,58],ml:{1:["slam","rockthrow"],10:["rockslide"],19:["stoneedge"]},e:{l:30,to:"rampardos"},cr:45,xp:70,em:"🦕"},
+rampardos:  {n:"램펄드",id:409,t:["rock"],s:[97,165,60,65,50,58],ml:{1:["slam","rockslide"],30:["stoneedge"],43:["earthquake"]},e:null,cr:45,xp:173,em:"🦕"},
+shieldon:   {n:"방패톱스",id:410,t:["rock","steel"],s:[30,42,118,42,88,30],ml:{1:["tackle","metalclaw"],10:["ironhead"],19:["rockslide"]},e:{l:30,to:"bastiodon"},cr:45,xp:70,em:"🛡️"},
+bastiodon:  {n:"바리톱스",id:411,t:["rock","steel"],s:[60,52,168,47,138,30],ml:{1:["metalclaw","ironhead"],30:["flashcannon"],43:["stoneedge"]},e:null,cr:45,xp:173,em:"🛡️"},
+drifloon:   {n:"흘림볼",id:425,t:["ghost","flying"],s:[90,50,34,60,44,70],ml:{1:["confusion","hex"],14:["shadowball"],22:["wingattack"]},e:{l:28,to:"drifblim"},cr:125,xp:70,em:"🎈"},
+drifblim:   {n:"둥실라이드",id:426,t:["ghost","flying"],s:[150,80,44,90,54,80],ml:{1:["hex","shadowball"],28:["wingattack"],40:["explosion"]},e:null,cr:60,xp:174,em:"🎈"},
+gible:      {n:"딥상어동",id:443,t:["dragon","ground"],s:[58,70,45,40,45,42],ml:{1:["tackle","bite"],7:["mudslap"],13:["dragonbreath"]},e:{l:24,to:"gabite"},cr:45,xp:60,em:"🦈"},
+gabite:     {n:"한바이트",id:444,t:["dragon","ground"],s:[68,90,65,50,55,82],ml:{1:["bite","dragonbreath"],24:["dragonclaw"],33:["dig"]},e:{l:48,to:"garchomp"},cr:45,xp:144,em:"🦈"},
+garchomp:   {n:"한카리아스",id:445,t:["dragon","ground"],s:[108,130,95,80,85,102],ml:{1:["dragonclaw","earthquake"],48:["outrage"],55:["fireblast"]},e:null,cr:45,xp:270,em:"🦈"},
+riolu:      {n:"리오루",id:447,t:["fighting"],s:[40,70,40,35,40,60],ml:{1:["quickattack","lowkick"],6:["brickbreak"],11:["counter"]},e:{l:25,to:"lucario"},cr:75,xp:57,em:"🐕"},
+lucario:    {n:"루카리오",id:448,t:["fighting","steel"],s:[70,110,70,115,70,90],ml:{1:["quickattack","brickbreak"],25:["closecombat"],33:["flashcannon"],42:["ironhead"]},e:null,cr:45,xp:184,em:"🐕"},
+skorupi:    {n:"스콜피",id:451,t:["poison","bug"],s:[40,50,90,30,55,65],ml:{1:["poisonsting","bite"],9:["bugbite"],16:["crunch"]},e:{l:40,to:"drapion"},cr:120,xp:66,em:"🦂"},
+drapion:    {n:"드래피온",id:452,t:["poison","dark"],s:[70,90,110,60,75,95],ml:{1:["bite","crunch"],40:["darkpulse"],48:["sludgebomb"]},e:null,cr:45,xp:175,em:"🦂"},
+croagunk:   {n:"삐딱구리",id:453,t:["poison","fighting"],s:[48,61,40,61,40,50],ml:{1:["poisonsting","lowkick"],8:["sludge"],17:["brickbreak"]},e:{l:37,to:"toxicroak"},cr:140,xp:60,em:"🐸"},
+toxicroak:  {n:"독개굴",id:454,t:["poison","fighting"],s:[83,106,65,86,65,85],ml:{1:["poisonsting","brickbreak"],37:["sludgebomb"],44:["closecombat"]},e:null,cr:75,xp:172,em:"🐸"},
+snover:     {n:"눈쓰개",id:459,t:["grass","ice"],s:[60,62,50,62,60,40],ml:{1:["absorb","icebeam"],5:["razorleaf"],13:["icebeam"]},e:{l:40,to:"abomasnow"},cr:120,xp:67,em:"🌲"},
+abomasnow:  {n:"눈설왕",id:460,t:["grass","ice"],s:[90,92,75,92,85,60],ml:{1:["razorleaf","icebeam"],40:["blizzard"],47:["solarbeam"]},e:null,cr:60,xp:173,em:"🌲"},
+// Gen 4 전설/환상
+dialga:     {n:"디아루가",id:483,t:["steel","dragon"],s:[100,120,120,150,100,90],ml:{1:["dragonbreath","metalclaw"],30:["flashcannon"],50:["dragonpulse"],70:["hyperbeam"]},e:null,cr:3,xp:306,em:"💎"},
+palkia:     {n:"펄기아",id:484,t:["water","dragon"],s:[90,120,100,150,120,100],ml:{1:["dragonbreath","watergun"],30:["surf"],50:["dragonpulse"],70:["hydropump"]},e:null,cr:3,xp:306,em:"💜"},
+heatran:    {n:"히드런",id:485,t:["fire","steel"],s:[91,90,106,130,106,77],ml:{1:["ember","metalclaw"],30:["flamethrower"],50:["flashcannon"]},e:null,cr:3,xp:270,em:"🌋"},
+giratina:   {n:"기라티나",id:487,t:["ghost","dragon"],s:[150,100,120,100,120,90],ml:{1:["dragonbreath","shadowball"],30:["dragonclaw"],50:["outrage"]},e:null,cr:3,xp:306,em:"👻"},
+cresselia:  {n:"크레세리아",id:488,t:["psychic"],s:[120,70,120,75,130,85],ml:{1:["confusion","moonlight"],30:["psychic"],50:["moonblast"]},e:null,cr:3,xp:270,em:"🌙"},
+darkrai:    {n:"다크라이",id:491,t:["dark"],s:[70,90,90,135,90,125],ml:{1:["darkpulse","hypnosis"],30:["shadowball"],50:["shadowball"]},e:null,cr:3,xp:270,em:"🌑"},
+shaymin:    {n:"쉐이미",id:492,t:["grass"],s:[100,100,100,100,100,100],ml:{1:["megadrain","razorleaf"],30:["solarbeam"],50:["dazzlinggleam"]},e:null,cr:3,xp:270,em:"🌸"},
+arceus:     {n:"아르세우스",id:493,t:["normal"],s:[120,120,120,120,120,120],ml:{1:["hyperbeam","earthquake"],30:["outrage"],50:["psychic"]},e:null,cr:3,xp:324,em:"✨"}
 };
 
 // ═══════════════════════════════════════════════
@@ -1917,7 +2017,7 @@ function render() {
 function renderTitleScreen() {
     var html = '<div style="text-align:center;padding:20px 0">';
     html += '<div style="font-size:28px;margin:10px 0">🎮 포켓몬 배틀</div>';
-    html += '<div style="color:#aaa;font-size:12px;margin-bottom:20px">Gen 1~2 | 칸토 & 성도</div>';
+    html += '<div style="color:#aaa;font-size:12px;margin-bottom:20px">Gen 1~4 | 칸토 & 성도 & 호엔 & 신오</div>';
     html += '<div style="display:flex;flex-direction:column;gap:8px;max-width:200px;margin:0 auto">';
     html += '<button class="pk-btn pk-btn-red pk-btn-block" data-action="poke_newGame">🆕 새 게임</button>';
     html += '<button class="pk-btn pk-btn-blue pk-btn-block" data-action="poke_continue">📂 이어하기</button>';
