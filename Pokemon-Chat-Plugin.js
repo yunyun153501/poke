@@ -326,7 +326,7 @@ smeargle:   {n:"루브도",id:235,t:["normal"],s:[55,20,35,20,45,75],ml:{1:["tac
 smoochum:   {n:"뽀뽀라",id:238,t:["ice","psychic"],s:[45,30,15,85,65,65],ml:{1:["pound","lick"],5:["confusion"],9:["icepunch"]},e:{l:30,to:"jynx"},cr:45,xp:87,em:"💋"},
 elekid:     {n:"에레키드",id:239,t:["electric"],s:[45,63,37,65,55,95],ml:{1:["thundershock","leer"],6:["quickattack"],11:["thunderpunch"]},e:{l:30,to:"electabuzz"},cr:45,xp:72,em:"⚡"},
 magby:      {n:"마그비",id:240,t:["fire"],s:[45,75,37,70,55,83],ml:{1:["ember","leer"],7:["smokescreen"],13:["firepunch"]},e:{l:30,to:"magmar"},cr:45,xp:73,em:"🔥"},
-// ── Gen 3: 호엔 지방 포켓몬 ──
+// ── Gen 3: 호연 지방 포켓몬 ──
 treecko:    {n:"나무지기",id:252,t:["grass"],s:[40,45,35,65,55,70],ml:{1:["pound","absorb"],6:["quickattack"],16:["megadrain"],29:["razorleaf"],45:["solarbeam"]},e:{l:16,to:"grovyle"},cr:45,xp:62,em:"🦎"},
 grovyle:    {n:"나무돌이",id:253,t:["grass"],s:[50,65,45,85,65,95],ml:{1:["pound","absorb"],16:["razorleaf"],29:["megadrain"],39:["solarbeam"]},e:{l:36,to:"sceptile"},cr:45,xp:142,em:"🦎"},
 sceptile:   {n:"나무킹",id:254,t:["grass"],s:[70,85,65,105,85,120],ml:{1:["pound","razorleaf"],36:["megadrain"],51:["solarbeam"]},e:null,cr:45,xp:239,em:"🦎"},
@@ -384,7 +384,7 @@ groudon:    {n:"그란돈",id:383,t:["ground"],s:[100,150,140,100,90,90],ml:{1:[
 rayquaza:   {n:"레쿠쟈",id:384,t:["dragon","flying"],s:[105,150,90,150,90,95],ml:{1:["dragonbreath","aerialace"],45:["outrage"],75:["hyperbeam"]},e:null,cr:3,xp:306,em:"🐲"},
 jirachi:    {n:"지라치",id:385,t:["steel","psychic"],s:[100,100,100,100,100,100],ml:{1:["confusion","psychic"],30:["dazzlinggleam"],50:["moonblast"]},e:null,cr:3,xp:270,em:"⭐"},
 deoxys:     {n:"테오키스",id:386,t:["psychic"],s:[50,150,50,150,50,150],ml:{1:["confusion","psychic"],30:["hyperbeam"],50:["shadowball"]},e:null,cr:3,xp:270,em:"🧬"},
-// ── Gen 3: 호엔 지방 추가 포켓몬 ──
+// ── Gen 3: 호연 지방 추가 포켓몬 ──
 wurmple:    {n:"개무소",id:265,t:["bug"],s:[45,45,35,20,30,20],ml:{1:["tackle","bugbite"],5:["poisonsting"]},e:{l:7,to:"silcoon"},cr:255,xp:56,em:"🐛"},
 silcoon:    {n:"실쿤",id:266,t:["bug"],s:[50,35,55,25,25,15],ml:{1:["tackle","harden"]},e:{l:10,to:"beautifly"},cr:120,xp:72,em:"🐛"},
 beautifly:  {n:"뷰티플라이",id:267,t:["bug","flying"],s:[60,70,50,100,50,65],ml:{1:["absorb","bugbite"],10:["megadrain"],24:["silverwind"],34:["aerialace"]},e:null,cr:45,xp:178,em:"🦋"},
@@ -981,7 +981,7 @@ playrough:   {n:"자랑부리기",t:"fairy",c:"physical",p:90,a:90,pp:10,ef:"atk
 // ═══════════════════════════════════════════════
 var REGIONS = {
 kanto: {
-    n: "칸토 지방", em: "🗾",
+    n: "관동 지방", em: "🗾",
     roads: [
         {id:"k_r1",n:"1번도로",desc:"태초마을~상록시티",lv:[2,5],pokemon:[{k:"pidgey",w:40},{k:"rattata",w:40},{k:"caterpie",w:15},{k:"weedle",w:5}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote"],encounterRate:0.85,reqBadges:0,
          trainers:[
@@ -1189,7 +1189,7 @@ johto: {
     ]
 },
 hoenn: {
-    n: "호엔 지방", em: "🌴",
+    n: "호연 지방", em: "🌴",
     roads: [
         {id:"h_r1",n:"101번도로",desc:"미시로타운~상록시티",lv:[2,5],pokemon:[{k:"zigzagoon",w:40},{k:"poochyena",w:30},{k:"ralts",w:10},{k:"shroomish",w:10},{k:"treecko",w:10}],hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote"],encounterRate:0.85,reqBadges:0,
          trainers:[
@@ -1263,7 +1263,7 @@ hoenn: {
             {n:"수영선수 미라",em:"🏊",pokemon:[{k:"milotic",l:35},{k:"sharpedo",l:33}],reward:1050},
             {n:"에이스 해나",em:"🎯",pokemon:[{k:"slaking",l:35},{k:"aggron",l:34}],reward:1050}
          ]},
-        {id:"h_r9",n:"챔피언로드",desc:"호엔 리그로 가는 길",lv:[38,48],pokemon:[{k:"vibrava",w:10},{k:"bagon",w:10},{k:"shelgon",w:5},{k:"beldum",w:10},{k:"metang",w:5},{k:"absol",w:10},{k:"aggron",w:5},{k:"hariyama",w:10},{k:"lairon",w:10},{k:"medicham",w:10},{k:"mightyena",w:15}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:7,
+        {id:"h_r9",n:"챔피언로드",desc:"호연 리그로 가는 길",lv:[38,48],pokemon:[{k:"vibrava",w:10},{k:"bagon",w:10},{k:"shelgon",w:5},{k:"beldum",w:10},{k:"metang",w:5},{k:"absol",w:10},{k:"aggron",w:5},{k:"hariyama",w:10},{k:"lairon",w:10},{k:"medicham",w:10},{k:"mightyena",w:15}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:7,
          trainers:[
             {n:"사천왕 카게츠",em:"💀",pokemon:[{k:"absol",l:44},{k:"mightyena",l:43},{k:"sharpedo",l:44}],reward:3000},
             {n:"사천왕 후요",em:"👻",pokemon:[{k:"gengar",l:44},{k:"misdreavus",l:43},{k:"misdreavus",l:43}],reward:3000},
@@ -2044,7 +2044,7 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
 // 🌟 전설/환상 포켓몬 시스템
 // ═══════════════════════════════════════════════
 var LEGENDARY_ENCOUNTERS = {
-// 칸토 전설 (칸토 뱃지 8개 필요, 석영고원에서 조우)
+// 관동 전설 (관동 뱃지 8개 필요, 석영고원에서 조우)
 kanto_fixed: [
     {key:"articuno",road:"k_r12",reqRegion:"kanto",reqBadges:8,level:50,name:"프리져"},
     {key:"zapdos",road:"k_r12",reqRegion:"kanto",reqBadges:8,level:50,name:"썬더"},
@@ -2056,7 +2056,7 @@ johto_fixed: [
     {key:"lugia",road:"j_r9",reqRegion:"johto",reqBadges:8,level:60,name:"루기아"},
     {key:"hooh",road:"j_r9",reqRegion:"johto",reqBadges:8,level:60,name:"호오"}
 ],
-// 호엔 전설 (호엔 뱃지 8개 필요, 공중의 기둥에서 조우)
+// 호연 전설 (호연 뱃지 8개 필요, 공중의 기둥에서 조우)
 hoenn_fixed: [
     {key:"regirock",road:"h_r10",reqRegion:"hoenn",reqBadges:8,level:50,name:"레지락"},
     {key:"regice",road:"h_r10",reqRegion:"hoenn",reqBadges:8,level:50,name:"레지아이스"},
@@ -2123,7 +2123,7 @@ mythical: [
 function getAvailableLegendaries(roadId) {
     if (!player) return [];
     var available = [];
-    // 고정 전설 (칸토)
+    // 고정 전설 (관동)
     for (var i = 0; i < LEGENDARY_ENCOUNTERS.kanto_fixed.length; i++) {
         var le = LEGENDARY_ENCOUNTERS.kanto_fixed[i];
         if (le.road !== roadId) continue;
@@ -2139,7 +2139,7 @@ function getAvailableLegendaries(roadId) {
         var badges = player.badges[le.reqRegion] ? player.badges[le.reqRegion].length : 0;
         if (badges >= le.reqBadges) available.push(le);
     }
-    // 고정 전설 (호엔)
+    // 고정 전설 (호연)
     for (var i = 0; i < LEGENDARY_ENCOUNTERS.hoenn_fixed.length; i++) {
         var le = LEGENDARY_ENCOUNTERS.hoenn_fixed[i];
         if (le.road !== roadId) continue;
@@ -3083,7 +3083,7 @@ function render() {
 function renderTitleScreen() {
     var html = '<div style="text-align:center;padding:20px 0">';
     html += '<div style="font-size:28px;margin:10px 0">🎮 포켓몬 배틀</div>';
-    html += '<div style="color:#aaa;font-size:12px;margin-bottom:20px">Gen 1~6 | 칸토 & 성도 & 호엔 & 신오 & 하나 & 칼로스</div>';
+    html += '<div style="color:#aaa;font-size:12px;margin-bottom:20px">Gen 1~6 | 관동 & 성도 & 호연 & 신오 & 하나 & 칼로스</div>';
     html += '<div style="display:flex;flex-direction:column;gap:8px;max-width:200px;margin:0 auto">';
     html += '<button class="pk-btn pk-btn-red pk-btn-block" data-action="poke_newGame">🆕 새 게임</button>';
     html += '<button class="pk-btn pk-btn-blue pk-btn-block" data-action="poke_continue">📂 이어하기</button>';
@@ -3102,15 +3102,15 @@ function renderStarterSelect() {
         kalos: [{k:"chespin",n:"도치마론",t:"풀",em:"🌰"},{k:"fennekin",n:"푸호꼬",t:"불꽃",em:"🦊"},{k:"froakie",n:"개구마르",t:"물",em:"🐸"}]
     };
     var starters = startersByRegion[region] || startersByRegion.kanto;
-    var regionNameMap = {kanto:"칸토",johto:"성도",hoenn:"호엔",sinnoh:"신오",unova:"하나",kalos:"칼로스"};
+    var regionNameMap = {kanto:"관동",johto:"성도",hoenn:"호연",sinnoh:"신오",unova:"하나",kalos:"칼로스"};
     var html = '<div style="text-align:center;padding:10px 0">';
     html += '<div style="font-size:18px;margin-bottom:4px">🎒 첫 파트너 포켓몬 선택</div>';
-    html += '<div style="color:#aaa;font-size:12px;margin-bottom:12px">' + (regionNameMap[region] || "칸토") + ' 지방에서 모험 시작!</div>';
+    html += '<div style="color:#aaa;font-size:12px;margin-bottom:12px">' + (regionNameMap[region] || "관동") + ' 지방에서 모험 시작!</div>';
     // 지방 선택 탭
     html += '<div style="display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap">';
-    html += '<button class="pk-btn ' + (region==="kanto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="kanto">🗾 칸토</button>';
+    html += '<button class="pk-btn ' + (region==="kanto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="kanto">🗾 관동</button>';
     html += '<button class="pk-btn ' + (region==="johto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="johto">🏔️ 성도</button>';
-    html += '<button class="pk-btn ' + (region==="hoenn"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="hoenn">🌴 호엔</button>';
+    html += '<button class="pk-btn ' + (region==="hoenn"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="hoenn">🌴 호연</button>';
     html += '<button class="pk-btn ' + (region==="sinnoh"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="sinnoh">❄️ 신오</button>';
     html += '<button class="pk-btn ' + (region==="unova"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="unova">🏙️ 하나</button>';
     html += '<button class="pk-btn ' + (region==="kalos"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="kalos">🗼 칼로스</button>';
@@ -3135,9 +3135,9 @@ function renderOverworld() {
     var html = '';
     // 지역 전환 버튼
     html += '<div class="pk-region-switch">';
-    html += '<button class="pk-btn ' + (player.region==="kanto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="kanto">🗾 칸토</button>';
+    html += '<button class="pk-btn ' + (player.region==="kanto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="kanto">🗾 관동</button>';
     html += '<button class="pk-btn ' + (player.region==="johto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="johto">🏔️ 성도</button>';
-    html += '<button class="pk-btn ' + (player.region==="hoenn"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="hoenn">🌴 호엔</button>';
+    html += '<button class="pk-btn ' + (player.region==="hoenn"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="hoenn">🌴 호연</button>';
     html += '<button class="pk-btn ' + (player.region==="sinnoh"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="sinnoh">❄️ 신오</button>';
     html += '<button class="pk-btn ' + (player.region==="unova"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="unova">🏙️ 하나</button>';
     html += '<button class="pk-btn ' + (player.region==="kalos"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="kalos">🗼 칼로스</button>';
@@ -3156,7 +3156,7 @@ function renderOverworld() {
     var uBadges = player.badges.unova ? player.badges.unova.length : 0;
     var xBadges = player.badges.kalos ? player.badges.kalos.length : 0;
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:4px 10px;font-size:10px">';
-    html += '<span>🏅 칸토 ' + kBadges + '/8 | 성도 ' + jBadges + '/8 | 호엔 ' + hBadges + '/8 | 신오 ' + sBadges + '/8 | 하나 ' + uBadges + '/8 | 칼로스 ' + xBadges + '/8</span>';
+    html += '<span>🏅 관동 ' + kBadges + '/8 | 성도 ' + jBadges + '/8 | 호연 ' + hBadges + '/8 | 신오 ' + sBadges + '/8 | 하나 ' + uBadges + '/8 | 칼로스 ' + xBadges + '/8</span>';
     html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_advanceTime">⏰ 다음 시간</button>';
     html += '</div>';
     // 파티 미니바
@@ -3189,8 +3189,8 @@ function renderOverworld() {
         html += '<div class="pk-road-item' + (isActive ? ' active' : '') + (locked ? ' pk-locked' : '') + '" ' + (locked ? '' : 'data-action="poke_selectRoad" data-args="' + i + '"') + ' style="' + (locked ? 'opacity:0.4;pointer-events:none' : '') + '">';
         html += '<div style="display:flex;justify-content:space-between;align-items:center">';
         html += '<div>';
-        html += '<span style="font-weight:bold;font-size:13px">' + road.n + '</span>';
-        html += ' <span style="color:#aaa;font-size:11px">Lv.' + road.lv[0] + '~' + road.lv[1] + '</span>';
+        html += '<span style="font-weight:bold;font-size:13px">' + (road.isCity ? '🏙️ ' : '') + road.n + '</span>';
+        if (!road.isCity && road.lv) html += ' <span style="color:#aaa;font-size:11px">Lv.' + road.lv[0] + '~' + road.lv[1] + '</span>';
         html += '</div>';
         html += '<div style="display:flex;gap:2px">';
         if (road.hasCenter) html += '<span title="포켓몬센터">🏥</span>';
@@ -3220,20 +3220,29 @@ function renderRoadDetail() {
     if (!road) return '';
     var html = '';
     html += '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back" style="margin-bottom:8px">◀ 도로 목록</button>';
-    // 도로 정보
+    // 도로/도시 정보
     html += '<div class="pk-card" style="border-color:rgba(233,69,96,0.4)">';
-    html += '<div style="font-size:16px;font-weight:bold;color:#f5c518">📍 ' + road.n + '</div>';
-    html += '<div style="color:#aaa;font-size:12px">' + road.desc + ' | Lv.' + road.lv[0] + '~' + road.lv[1] + ' | ' + TIME_NAMES[player.timeOfDay] + '</div>';
-    // 출현 포켓몬
-    html += '<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:3px">';
-    for (var i = 0; i < road.pokemon.length; i++) {
-        var pk = POKEDEX[road.pokemon[i].k];
-        if (pk) html += '<span style="font-size:10px;background:rgba(255,255,255,0.08);padding:2px 5px;border-radius:4px">' + pk.em + ' ' + pk.n + '</span>';
+    html += '<div style="font-size:16px;font-weight:bold;color:#f5c518">' + (road.isCity ? '🏙️' : '📍') + ' ' + road.n + '</div>';
+    if (road.isCity) {
+        html += '<div style="color:#aaa;font-size:12px">' + road.desc + ' | ' + TIME_NAMES[player.timeOfDay] + '</div>';
+    } else {
+        html += '<div style="color:#aaa;font-size:12px">' + road.desc + ' | Lv.' + road.lv[0] + '~' + road.lv[1] + ' | ' + TIME_NAMES[player.timeOfDay] + '</div>';
     }
-    html += '</div></div>';
-    // 탐색/배틀 버튼
+    // 출현 포켓몬 (도시가 아닌 경우만)
+    if (!road.isCity && road.pokemon && road.pokemon.length > 0) {
+        html += '<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:3px">';
+        for (var i = 0; i < road.pokemon.length; i++) {
+            var pk = POKEDEX[road.pokemon[i].k];
+            if (pk) html += '<span style="font-size:10px;background:rgba(255,255,255,0.08);padding:2px 5px;border-radius:4px">' + pk.em + ' ' + pk.n + '</span>';
+        }
+        html += '</div>';
+    }
+    html += '</div>';
+    // 탐색/배틀 버튼 (도시가 아닌 경우만)
     html += '<div style="display:flex;flex-direction:column;gap:6px;margin:8px 0">';
-    html += '<button class="pk-btn pk-btn-green pk-btn-block" data-action="poke_explore">🌿 포켓몬 탐색</button>';
+    if (!road.isCity && road.pokemon && road.pokemon.length > 0) {
+        html += '<button class="pk-btn pk-btn-green pk-btn-block" data-action="poke_explore">🌿 포켓몬 탐색</button>';
+    }
     // 전설 포켓몬 조우 버튼
     var legends = getAvailableLegendaries(road.id);
     for (var li = 0; li < legends.length; li++) {
@@ -3855,7 +3864,7 @@ function renderBadgeScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">🏅 뱃지 컬렉션</div>';
     var regions = ["kanto", "johto", "hoenn", "sinnoh", "unova", "kalos"];
-    var regionNames = {kanto: "칸토 지방", johto: "성도 지방", hoenn: "호엔 지방", sinnoh: "신오 지방", unova: "하나 지방", kalos: "칼로스 지방"};
+    var regionNames = {kanto: "관동 지방", johto: "성도 지방", hoenn: "호연 지방", sinnoh: "신오 지방", unova: "하나 지방", kalos: "칼로스 지방"};
     for (var r = 0; r < regions.length; r++) {
         var rk = regions[r];
         var gymList = GYMS[rk];
