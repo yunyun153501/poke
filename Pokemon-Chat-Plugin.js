@@ -2839,7 +2839,7 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
     var biteKeys = {bite:1,crunch:1,poisonfang:1,icefang:1,firefang:1,thunderfang:1};
     if (atkAbKey === "strongjaw" && biteKeys[moveKey]) power = Math.floor(power * 1.5);
     // 특성: ironfist → 펀치 기술 1.2배
-    var punchKeys = {megapunch:1,icepunch:1,firepunch:1,thunderpunch:1,drainpunch:1,focuspunch:1,machpunch:1,skyuppercut:1,hammerarm:1,closecombat:1};
+    var punchKeys = {megapunch:1,icepunch:1,firepunch:1,thunderpunch:1,drainpunch:1,focuspunch:1,machpunch:1,skyuppercut:1,hammerarm:1};
     if (atkAbKey === "ironfist" && punchKeys[moveKey]) power = Math.floor(power * 1.2);
     // 특성: megalauncher → 파동 기술 1.5배
     var pulseKeys = {aurasphere:1,darkpulse:1,waterpulse:1,dragonpulse:1};
@@ -3397,6 +3397,19 @@ function applyMoveEffects(move, attacker, defender, bd) {
                 if (!flinchImmune) {
                     defender._flinched = true;
                 }
+            } else if (mv.ef === "atk_down") {
+                // 특성: clearbody/whitesmoke → 능력치 하락 방지
+                var _defAbType = getAbility(defender) ? getAbility(defender).type : null;
+                if (_defAbType === "prevent_statdown") { bd.msg.push(dn + "의 " + getAbility(defender).n + "! 능력치가 떨어지지 않는다!"); }
+                else { defender.statStages.atk = Math.max(-6, defender.statStages.atk - 1); bd.msg.push(dn + "의 공격이 떨어졌다!"); }
+            } else if (mv.ef === "spdef_down") {
+                var _defAbType2 = getAbility(defender) ? getAbility(defender).type : null;
+                if (_defAbType2 === "prevent_statdown") { bd.msg.push(dn + "의 " + getAbility(defender).n + "! 능력치가 떨어지지 않는다!"); }
+                else { defender.statStages.spdef = Math.max(-6, defender.statStages.spdef - 1); bd.msg.push(dn + "의 특방이 떨어졌다!"); }
+            } else if (mv.ef === "spd_down") {
+                var _defAbType3 = getAbility(defender) ? getAbility(defender).type : null;
+                if (_defAbType3 === "prevent_statdown") { bd.msg.push(dn + "의 " + getAbility(defender).n + "! 능력치가 떨어지지 않는다!"); }
+                else { defender.statStages.spd = Math.max(-6, defender.statStages.spd - 1); bd.msg.push(dn + "의 스피드가 떨어졌다!"); }
             }
             // 특성: synchronize → 상태이상 반사 (독/마비/화상만)
             if (defender.status && getAbilityKey(defender) === "synchronize" && !attacker.status) {
@@ -3933,6 +3946,22 @@ function tryRun() {
     // 특성: runaway → 야생전에서 반드시 도주
     if (getAbilityKey(myPoke) === "runaway") {
         bd.msg.push(myPoke.nickname + "의 도주! 무사히 도망쳤다!"); bd.fled = true;
+        for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
+        return;
+    }
+    // 특성: shadowtag/arenatrap → 상대가 도주 불가
+    var enAb = getAbility(bd.enemy);
+    if (enAb && enAb.type === "notrap") {
+        bd.msg.push("상대의 " + enAb.n + "! 도망칠 수 없다!");
+        var emk = enemyChooseMove(bd.enemy);
+        if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, myPoke, emk, bd);
+        doStatusDamage(bd.enemy, bd);
+        if (myPoke.currentHp <= 0) {
+            bd.msg.push(myPoke.nickname + "이(가) 쓰러졌다!");
+            var alive = false;
+            for (var i = 0; i < player.party.length; i++) { if (player.party[i].currentHp > 0) { alive = true; break; } }
+            if (!alive) { bd.lost = true; bd.msg.push("눈앞이 깜깜해졌다..."); }
+        }
         for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
         return;
     }
