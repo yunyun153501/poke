@@ -2253,7 +2253,7 @@ kanto: [
      ]},
     {id:"k_gym5",city:"세키치쿠시티",n:"세키치쿠시티 체육관",type:"poison",badge:"핑크뱃지",badgeEm:"☠️",
      leaders:[
-        {id:"koga_rgb",n:"쿄우",em:"☠️",gen:1,pokemon:[{k:"koffing",l:37},{k:"muk",l:39},{k:"koffing",l:37},{k:"weezing",l:43}],reward:3700,rewardItems:["tm06_toxic"]},
+        {id:"koga_rgb",n:"쿄우",em:"☠️",gen:1,pokemon:[{k:"koffing",l:37},{k:"muk",l:39},{k:"grimer",l:37},{k:"weezing",l:43}],reward:3700,rewardItems:["tm06_toxic"]},
         {id:"janine_hgss",n:"안즈",em:"🥷",gen:2,pokemon:[{k:"crobat",l:47},{k:"weezing",l:44},{k:"ariados",l:47},{k:"venomoth",l:50}],reward:5000}
      ]},
     {id:"k_gym6",city:"야마부키시티",n:"야마부키시티 체육관",type:"psychic",badge:"골드뱃지",badgeEm:"🔮",
@@ -4627,6 +4627,7 @@ function injectStyles() {
 ".pk-dex-item.pk-dex-caught{border:1px solid rgba(231,76,60,0.5);}",
 ".pk-dex-item.pk-dex-unseen{opacity:0.3;}",
 ".pk-mini-log{background:rgba(0,0,0,0.4);border-top:1px solid rgba(255,255,255,0.1);border-radius:0 0 8px 8px;padding:6px 10px;margin-top:8px;max-height:100px;overflow-y:auto;}",
+"@keyframes pulse{from{opacity:1}to{opacity:0.6}}",
 "@media screen and (max-width:960px){html,body{overflow:auto;} .pk-wrap{top:0;right:0;width:100%;max-height:100vh;border-radius:0;}}"
     ].join("\n");
     document.head.appendChild(s);
@@ -6228,12 +6229,15 @@ window.poke_confirmLoadSlot = async function(slotNum) {
     if (player) {
         var backupSlot = 0;
         for (var bs = 3; bs >= 1; bs--) {
+            if (bs === slotNum) continue; // 불러올 슬롯은 건너뜀
             var binfo = await getSlotInfo(bs);
             if (!binfo.exists) { backupSlot = bs; break; }
         }
-        if (backupSlot > 0 && backupSlot !== slotNum) {
+        if (backupSlot > 0) {
             await saveSlot(backupSlot);
             addLog("💾 현재 상태가 슬롯 " + backupSlot + "에 자동 백업되었습니다.", "info");
+        } else {
+            addLog("⚠️ 빈 슬롯이 없어 자동 백업을 건너뜁니다.", "info");
         }
     }
     var ok = await loadSlot(slotNum);
