@@ -2877,6 +2877,7 @@ awakening:   {n:"잠깨는약",desc:"잠듦 상태 회복",type:"cure",value:"sl
 burnheal:    {n:"화상치료제",desc:"화상 상태 회복",type:"cure",value:"burn",buy:250,sell:125},
 iceheal:     {n:"얼음치료제",desc:"얼음 상태 회복",type:"cure",value:"freeze",buy:250,sell:125},
 fullheal:    {n:"만병통치약",desc:"모든 상태이상 회복",type:"cure",value:"all",buy:600,sell:300},
+escaperope:  {n:"동굴탈출로프",desc:"동굴에서 즉시 탈출",type:"misc",value:0,buy:550,sell:275},
 pokeball:    {n:"몬스터볼",desc:"야생 포켓몬 포획 (1x)",type:"ball",value:1,buy:200,sell:100},
 superball:   {n:"슈퍼볼",desc:"야생 포켓몬 포획 (1.5x)",type:"ball",value:1.5,buy:600,sell:300},
 ultraball:   {n:"하이퍼볼",desc:"야생 포켓몬 포획 (2x)",type:"ball",value:2,buy:1200,sell:600},
