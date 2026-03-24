@@ -4603,8 +4603,8 @@ var FISHING_DATA = {
 };
 
 // ===== 반복 등장 트레이너 시스템 =====
-var RC_MALE = ["사토시","히로시","타이호","슌지","카즈마","소우타"];
-var RC_FEMALE = ["하루카","사쿠라","유이","소라","유나","메구미"];
+var RC_MALE = ["사토시","히로시","타이호","슌지","카즈마","소우타","하루키","료","켄지","유지","마사루","코지"];
+var RC_FEMALE = ["하루카","사쿠라","유이","소라","유나","메구미","리나","미사키","카즈미","아오이","린","세이라"];
 
 var ROUTE_TITLES = {
     grass:  {m:["소년","배낭소년","캠핑소년","에이스트레이너"], f:["소녀","짧은치마","캠프파이어소녀","에이스트레이너"]},
@@ -4647,16 +4647,20 @@ function getRouteTitle(routeType, isMale, routeProgress) {
 
 function generateRecurringTrainers(road, routeIdx) {
     if (!road.pokemon || road.pokemon.length === 0) return [];
-    var rType = inferRouteType(road);
     var lvMin = road.lv ? road.lv[0] : 5;
     var lvMax = road.lv ? road.lv[1] : 10;
     var trainers = [];
-    var mIdx = routeIdx % RC_MALE.length;
-    var fIdx = routeIdx % RC_FEMALE.length;
-    for (var t = 0; t < 2; t++) {
-        var isMale = (t === 0);
-        var charName = isMale ? RC_MALE[mIdx] : RC_FEMALE[fIdx];
-        var title = getRouteTitle(rType, isMale, routeIdx);
+    var groupIdx = routeIdx % 6;
+    var mBase = groupIdx * 2;
+    var fBase = groupIdx * 2;
+    var chars = [
+        {name: RC_MALE[mBase], male: true},
+        {name: RC_MALE[mBase + 1], male: true},
+        {name: RC_FEMALE[fBase], male: false},
+        {name: RC_FEMALE[fBase + 1], male: false}
+    ];
+    for (var t = 0; t < 4; t++) {
+        var ch = chars[t];
         var numPoke = 1 + Math.min(2, Math.floor(routeIdx / 10));
         var pokeArr = [];
         for (var p = 0; p < numPoke; p++) {
@@ -4668,8 +4672,8 @@ function generateRecurringTrainers(road, routeIdx) {
         }
         var reward = Math.floor((lvMin + lvMax) / 2) * 30 + routeIdx * 10;
         trainers.push({
-            n: title + " " + charName,
-            em: isMale ? "👦" : "👧",
+            n: ch.name,
+            em: ch.male ? "👦" : "👧",
             pokemon: pokeArr,
             reward: reward,
             isRecurring: true
@@ -4687,7 +4691,7 @@ function initRecurringTrainers() {
             if (!roads[i].pokemon || roads[i].pokemon.length === 0) continue;
             var recurring = generateRecurringTrainers(roads[i], rIdx);
             var existing = roads[i].trainers || [];
-            roads[i].trainers = recurring.concat(existing);
+            roads[i].trainers = recurring.concat(existing.slice(0, 1));
             rIdx++;
         }
     }
