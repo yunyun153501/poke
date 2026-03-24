@@ -5963,9 +5963,8 @@ function render() {
     if (player && gState && gState.log && gState.log.length > 0 && gState.subScreen !== "log") {
         html += '<div class="pk-mini-log"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><span style="font-size:10px;color:#888">📋 최근 로그</span><button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openLog">전체</button></div>';
         var _mlogs = gState.log;
-        var _mend = _mlogs.length - 1;
         var _mstart = Math.max(0, _mlogs.length - 5);
-        for (var _mi = _mend; _mi >= _mstart; _mi--) {
+        for (var _mi = _mstart; _mi < _mlogs.length; _mi++) {
             html += '<div class="pk-log-entry pk-log-' + _mlogs[_mi].type + '">' + _mlogs[_mi].msg + '</div>';
         }
         html += '</div>';
@@ -6104,7 +6103,7 @@ function renderOverworld() {
     html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><span style="font-size:11px;color:#aaa">📋 로그</span>';
     html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openLog">전체</button></div>';
     var logs = gState.log || [];
-    for (var i = logs.length - 1; i >= Math.max(0, logs.length - 3); i--) {
+    for (var i = Math.max(0, logs.length - 3); i < logs.length; i++) {
         html += '<div class="pk-log-entry pk-log-' + logs[i].type + '">' + logs[i].msg + '</div>';
     }
     html += '</div>';
@@ -6692,7 +6691,7 @@ function renderLogScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">📋 이벤트 로그</div>';
     var logs = gState.log || [];
-    for (var i = logs.length - 1; i >= 0; i--) {
+    for (var i = 0; i < logs.length; i++) {
         html += '<div class="pk-log-entry pk-log-' + logs[i].type + '">' + logs[i].msg + '</div>';
     }
     return html;
