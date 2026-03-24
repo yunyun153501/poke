@@ -2777,23 +2777,23 @@ johto: [
 ],
 hoenn: [
     {id:"h_gym1",city:"카나즈미시티",n:"카나즈미시티 체육관",type:"rock",badge:"스톤뱃지",badgeEm:"🪨",
-     leaders:[{id:"roxanne",n:"츠츠지",em:"🪨",gen:3,pokemon:[{k:"geodude",l:12},{k:"geodude",l:12},{k:"aron",l:14}],reward:1400,rewardItems:["tm39_rockslide"]}]},
+     leaders:[{id:"roxanne",n:"츠츠지",em:"🪨",gen:3,pokemon:[{k:"geodude",l:12},{k:"geodude",l:12},{k:"nosepass",l:15}],reward:1400,rewardItems:["tm39_rockslide"]}]},
     {id:"h_gym2",city:"무로시티",n:"무로시티 체육관",type:"fighting",badge:"너클뱃지",badgeEm:"🥊",
-     leaders:[{id:"brawly",n:"토키",em:"🥊",gen:3,pokemon:[{k:"machop",l:16},{k:"makuhita",l:18},{k:"meditite",l:17}],reward:1800,rewardItems:["tm31_brickbreak"]}]},
+     leaders:[{id:"brawly",n:"토키",em:"🥊",gen:3,pokemon:[{k:"machop",l:16},{k:"meditite",l:16},{k:"makuhita",l:19}],reward:1800,rewardItems:["tm31_brickbreak"]}]},
     {id:"h_gym3",city:"키와시티",n:"키와시티 체육관",type:"electric",badge:"다이나모뱃지",badgeEm:"⚡",
-     leaders:[{id:"wattson",n:"테센",em:"⚡",gen:3,pokemon:[{k:"voltorb",l:20},{k:"electrike",l:20},{k:"magnemite",l:22},{k:"manectric",l:24}],reward:2400,rewardItems:["tm24_thunderbolt"]}]},
+     leaders:[{id:"wattson",n:"테센",em:"⚡",gen:3,pokemon:[{k:"voltorb",l:20},{k:"electrike",l:20},{k:"magneton",l:22},{k:"manectric",l:24}],reward:2400,rewardItems:["tm24_thunderbolt"]}]},
     {id:"h_gym4",city:"후엔타운",n:"후엔타운 체육관",type:"fire",badge:"히트뱃지",badgeEm:"🔥",
-     leaders:[{id:"flannery",n:"아스나",em:"🔥",gen:3,pokemon:[{k:"slugma",l:26},{k:"slugma",l:26},{k:"ponyta",l:28},{k:"growlithe",l:29}],reward:2900,rewardItems:["tm35_flamethrower"]}]},
-    {id:"h_gym5",city:"후엔타운",n:"후엔타운 체육관",type:"normal",badge:"밸런스뱃지",badgeEm:"⚖️",
-     leaders:[{id:"norman",n:"센리",em:"⚖️",gen:3,pokemon:[{k:"slakoth",l:28},{k:"vigoroth",l:30},{k:"slaking",l:31}],reward:3100,rewardItems:["tm42_facade"]}]},
+     leaders:[{id:"flannery",n:"아스나",em:"🔥",gen:3,pokemon:[{k:"numel",l:24},{k:"slugma",l:24},{k:"camerupt",l:26},{k:"torkoal",l:29}],reward:2900,rewardItems:["tm35_flamethrower"]}]},
+    {id:"h_gym5",city:"토우카시티",n:"토우카시티 체육관",type:"normal",badge:"밸런스뱃지",badgeEm:"⚖️",
+     leaders:[{id:"norman",n:"센리",em:"⚖️",gen:3,pokemon:[{k:"spinda",l:27},{k:"vigoroth",l:27},{k:"linoone",l:29},{k:"slaking",l:31}],reward:3100,rewardItems:["tm42_facade"]}]},
     {id:"h_gym6",city:"히와마키시티",n:"히와마키시티 체육관",type:"flying",badge:"페더뱃지",badgeEm:"🪶",
-     leaders:[{id:"winona",n:"나기",em:"🪶",gen:3,pokemon:[{k:"swablu",l:30},{k:"altaria",l:33},{k:"aerodactyl",l:32}],reward:3300,rewardItems:["tm40_aerialace"]}]},
-    {id:"h_gym7",city:"히와마키시티",n:"트라이시티 에스퍼 체육관",type:"psychic",badge:"마인드뱃지",badgeEm:"🔮",
-     leaders:[{id:"tateliza",n:"후우&란",em:"🔮",gen:3,pokemon:[{k:"gardevoir",l:36},{k:"medicham",l:35},{k:"alakazam",l:36}],reward:3600,rewardItems:["tm29_psychic"]}]},
+     leaders:[{id:"winona",n:"나기",em:"🪶",gen:3,pokemon:[{k:"swellow",l:31},{k:"pelipper",l:30},{k:"skarmory",l:32},{k:"altaria",l:33}],reward:3300,rewardItems:["tm40_aerialace"]}]},
+    {id:"h_gym7",city:"토쿠사네시티",n:"토쿠사네시티 체육관",type:"psychic",badge:"마인드뱃지",badgeEm:"🔮",
+     leaders:[{id:"tateliza",n:"후우&란",em:"🔮",gen:3,pokemon:[{k:"claydol",l:41},{k:"xatu",l:41},{k:"lunatone",l:42},{k:"solrock",l:42}],reward:4200,rewardItems:["tm29_psychic"]}]},
     {id:"h_gym8",city:"루네시티",n:"루네시티 체육관",type:"water",badge:"레인뱃지",badgeEm:"🌧️",
      leaders:[
-        {id:"wallace",n:"미쿠리",em:"💧",gen:3,pokemon:[{k:"milotic",l:40},{k:"tentacruel",l:38},{k:"gyarados",l:39},{k:"starmie",l:39}],reward:4000,rewardItems:["tm94_surf","masterball"]},
-        {id:"juan",n:"아단",em:"🌊",gen:3,pokemon:[{k:"milotic",l:42},{k:"kingdra",l:41},{k:"tentacruel",l:40}],reward:4100}
+        {id:"wallace",n:"미쿠리",em:"💧",gen:3,pokemon:[{k:"luvdisc",l:40},{k:"whiscash",l:42},{k:"sealeo",l:40},{k:"seaking",l:42},{k:"milotic",l:43}],reward:4300,rewardItems:["tm94_surf","masterball"]},
+        {id:"juan",n:"아단",em:"🌊",gen:3,pokemon:[{k:"luvdisc",l:41},{k:"whiscash",l:41},{k:"sealeo",l:43},{k:"crawdaunt",l:43},{k:"kingdra",l:46}],reward:4600}
      ]}
 ],
 sinnoh: [
