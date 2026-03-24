@@ -6060,6 +6060,7 @@ function renderOverworld() {
     html += '<button class="pk-btn pk-btn-yellow pk-btn-xs" data-action="poke_openBadges">🏅 뱃지</button>';
     html += '<button class="pk-btn pk-btn-blue pk-btn-xs" data-action="poke_openSaveSlots">💾 슬롯</button>';
     html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openStatus">📊 상태</button>';
+    html += '<button class="pk-btn pk-btn-red pk-btn-xs" data-action="poke_freshStart">🌟 새 시작</button>';
     html += '</div>';
     // 도로 목록
     html += '<div style="font-size:14px;font-weight:bold;color:#f5c518;margin:8px 0 4px">' + region.em + ' ' + region.n + ' 도로 목록</div>';
@@ -7064,6 +7065,28 @@ function statusName(s) {
 // 🎯 이벤트 핸들러
 // ═══════════════════════════════════════════════
 window.poke_newGame = function() {
+    gState = {phase:"overworld", subScreen:"starterSelect", battleData:null, pendingEvo:null, pendingMoveLearn:null, eventLog:[], log:[], starterRegion:"kanto"};
+    render();
+};
+
+window.poke_freshStart = async function() {
+    if (!player) { window.poke_newGame(); return; }
+    // 빈 슬롯 찾아서 현재 진행 자동 저장
+    var savedTo = 0;
+    for (var fs = 1; fs <= 3; fs++) {
+        var finfo = await getSlotInfo(fs);
+        if (!finfo.exists) { savedTo = fs; break; }
+    }
+    if (savedTo > 0) {
+        await saveSlot(savedTo);
+        showToast("💾 현재 진행이 슬롯 " + savedTo + "에 저장되었습니다! 새 모험을 시작하세요!");
+    } else {
+        showToast("⚠️ 빈 슬롯이 없습니다! 저장 슬롯에서 하나를 비워주세요.");
+        gState.subScreen = "saveSlots"; gState._confirmLoadSlot = null;
+        render();
+        return;
+    }
+    player = null;
     gState = {phase:"overworld", subScreen:"starterSelect", battleData:null, pendingEvo:null, pendingMoveLearn:null, eventLog:[], log:[], starterRegion:"kanto"};
     render();
 };
