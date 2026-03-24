@@ -1633,6 +1633,32 @@ johto: {
     {k:"bellsprout",l:6}
   ],reward:180}
 ]},
+{id:"j_r_ruins",n:"알프의유적",desc:"고대의 수수께끼가 잠든 유적",lv:[5,25],pokemon:[
+  {k:"unown",w:60},
+  {k:"natu",w:15},
+  {k:"smeargle",w:10},
+  {k:"wobbuffet",w:10},
+  {k:"qwilfish",w:5}
+],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:0,trainers:[
+  {n:"연구원 카즈키",em:"🔬",pokemon:[
+    {k:"unown",l:8},
+    {k:"natu",l:9}
+  ],reward:270},
+  {n:"사이킥 미유키",em:"🔮",pokemon:[
+    {k:"natu",l:9},
+    {k:"wobbuffet",l:10}
+  ],reward:300},
+  {n:"연구원 마사노리",em:"🔬",pokemon:[
+    {k:"unown",l:10},
+    {k:"unown",l:10},
+    {k:"smeargle",l:11}
+  ],reward:330},
+  {n:"사이킥 사유리",em:"🔮",pokemon:[
+    {k:"natu",l:10},
+    {k:"unown",l:11},
+    {k:"wobbuffet",l:12}
+  ],reward:360}
+]},
 {id:"j_r5",n:"32번도로",desc:"히와다타운로 향하는 긴 도로",lv:[7,12],pokemon:[
   {k:"ekans",w:12},
   {k:"bellsprout",w:18},
@@ -1668,6 +1694,29 @@ johto: {
     {k:"ekans",l:10},
     {k:"mareep",l:11}
   ],reward:330}
+]},
+{id:"j_r_33",n:"33번도로",desc:"연결동굴~히와다타운",lv:[4,8],pokemon:[
+  {k:"hoppip",w:30},
+  {k:"rattata",w:30},
+  {k:"zubat",w:20},
+  {k:"ekans",w:20}
+],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:0,trainers:[
+  {n:"소년 타쿠야",em:"👦",pokemon:[
+    {k:"rattata",l:6},
+    {k:"hoppip",l:7}
+  ],reward:210},
+  {n:"벌레잡이 코이치",em:"🧒",pokemon:[
+    {k:"ekans",l:7},
+    {k:"zubat",l:7}
+  ],reward:210},
+  {n:"소녀 미사키",em:"👧",pokemon:[
+    {k:"hoppip",l:7},
+    {k:"rattata",l:8}
+  ],reward:240},
+  {n:"소년 유우키",em:"👦",pokemon:[
+    {k:"zubat",l:8},
+    {k:"ekans",l:9}
+  ],reward:270}
 ]},
 {id:"j_r6",n:"연결동굴",desc:"32번도로와 히와다타운을 잇는 동굴",lv:[6,12],pokemon:[
   {k:"zubat",w:25},
@@ -1822,6 +1871,38 @@ johto: {
     {k:"pidgey",l:16}
   ],reward:480}
 ]},
+{id:"j_r_park",n:"자연공원",desc:"벌레잡기 대회가 열리는 공원",lv:[12,15],pokemon:[
+  {k:"caterpie",w:15},
+  {k:"weedle",w:15},
+  {k:"paras",w:10},
+  {k:"venonat",w:10},
+  {k:"scyther",w:5},
+  {k:"pinsir",w:5},
+  {k:"sunkern",w:20},
+  {k:"ledyba",w:10},
+  {k:"spinarak",w:10}
+],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:2,trainers:[
+  {n:"벌레잡이 타이세이",em:"🧒",pokemon:[
+    {k:"caterpie",l:12},
+    {k:"weedle",l:12},
+    {k:"paras",l:13}
+  ],reward:390},
+  {n:"벌레잡이 켄타",em:"🧒",pokemon:[
+    {k:"venonat",l:13},
+    {k:"ledyba",l:13}
+  ],reward:390},
+  {n:"벌레잡이 사쿠라",em:"🧒",pokemon:[
+    {k:"spinarak",l:13},
+    {k:"caterpie",l:14}
+  ],reward:420},
+  {n:"벌레잡이 유우지",em:"🧒",pokemon:[
+    {k:"scyther",l:14}
+  ],reward:420},
+  {n:"벌레잡이 마사키",em:"🧒",pokemon:[
+    {k:"pinsir",l:14},
+    {k:"sunkern",l:15}
+  ],reward:450}
+]},
 {id:"j_r11",n:"36번도로",desc:"엔주시티로 이어지는 교차 도로",lv:[13,16],pokemon:[
   {k:"nidoranm",w:14},
   {k:"nidoranf",w:14},
@@ -1885,6 +1966,43 @@ johto: {
   ],reward:480}
 ]},
 {id:"j_c6",n:"엔주시티",desc:"역사와 전통의 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","potion","superpotion","hyperpotion","antidote","paralyzeheal","awakening","burnheal","iceheal"],reqBadges:3,trainers:[]},
+{id:"j_r_belltower",n:"방울탑",desc:"전설의 포켓몬 호우오우가 기다리는 탑",lv:[20,40],pokemon:[
+  {k:"rattata",w:20},
+  {k:"gastly",w:25},
+  {k:"haunter",w:20},
+  {k:"misdreavus",w:15},
+  {k:"duskull",w:10},
+  {k:"shuppet",w:10}
+],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:7,trainers:[
+  {n:"무녀 카스미",em:"⛩️",pokemon:[
+    {k:"gastly",l:30},
+    {k:"haunter",l:32}
+  ],reward:960},
+  {n:"도승 겐카이",em:"🧘",pokemon:[
+    {k:"misdreavus",l:32},
+    {k:"duskull",l:33}
+  ],reward:990},
+  {n:"무녀 사야카",em:"⛩️",pokemon:[
+    {k:"haunter",l:33},
+    {k:"shuppet",l:34}
+  ],reward:1020},
+  {n:"도승 린",em:"🧘",pokemon:[
+    {k:"gastly",l:33},
+    {k:"haunter",l:35},
+    {k:"misdreavus",l:36}
+  ],reward:1080},
+  {n:"도승 엔조",em:"🧘",pokemon:[
+    {k:"duskull",l:35},
+    {k:"shuppet",l:36},
+    {k:"haunter",l:38}
+  ],reward:1140},
+  {n:"무녀 치요",em:"⛩️",pokemon:[
+    {k:"misdreavus",l:37},
+    {k:"haunter",l:38},
+    {k:"gastly",l:35},
+    {k:"duskull",l:40}
+  ],reward:1200}
+]},
 {id:"j_r13",n:"불탄탑",desc:"150년 전 불에 탄 탑",lv:[13,20],pokemon:[
   {k:"rattata",w:20},
   {k:"zubat",w:30},
@@ -2238,6 +2356,39 @@ johto: {
   ],reward:960}
 ]},
 {id:"j_c10",n:"후스베시티",desc:"드래곤 포켓몬 사용자들의 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","potion","superpotion","hyperpotion","maxpotion","fullrestore","antidote","paralyzeheal","awakening","burnheal","iceheal","fullheal","revive","escaperope"],reqBadges:7,trainers:[]},
+{id:"j_r_dragonden",n:"용의굴",desc:"드래곤 사용자들의 수련장",lv:[15,45],pokemon:[
+  {k:"magikarp",w:30},
+  {k:"dratini",w:20},
+  {k:"dragonair",w:10},
+  {k:"horsea",w:20},
+  {k:"seadra",w:10},
+  {k:"bagon",w:10}
+],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:7,trainers:[
+  {n:"드래곤테이머 류헤이",em:"🐉",pokemon:[
+    {k:"dratini",l:35},
+    {k:"horsea",l:36}
+  ],reward:1080},
+  {n:"드래곤테이머 카이",em:"🐉",pokemon:[
+    {k:"dragonair",l:38},
+    {k:"seadra",l:38}
+  ],reward:1140},
+  {n:"드래곤테이머 사쿠",em:"🐉",pokemon:[
+    {k:"bagon",l:37},
+    {k:"dratini",l:38},
+    {k:"horsea",l:39}
+  ],reward:1170},
+  {n:"드래곤테이머 엔",em:"🐉",pokemon:[
+    {k:"dragonair",l:40},
+    {k:"seadra",l:40},
+    {k:"bagon",l:42}
+  ],reward:1260},
+  {n:"드래곤테이머 무겐",em:"🐉",pokemon:[
+    {k:"dragonair",l:42},
+    {k:"seadra",l:43},
+    {k:"dratini",l:40},
+    {k:"bagon",l:45}
+  ],reward:1350}
+]},
 {id:"j_r24",n:"어둠의동굴",desc:"어두컴컴한 미로 같은 동굴",lv:[4,20],pokemon:[
   {k:"zubat",w:30},
   {k:"geodude",w:25},
@@ -2360,6 +2511,82 @@ johto: {
     {k:"geodude",l:4},
     {k:"spearow",l:5}
   ],reward:150}
+]},
+{id:"j_r_47",n:"47번도로",desc:"HGSS에서 추가된 절벽 위의 도로",lv:[28,32],pokemon:[
+  {k:"ditto",w:20},
+  {k:"miltank",w:15},
+  {k:"tauros",w:15},
+  {k:"farfetchd",w:10},
+  {k:"raticate",w:15},
+  {k:"gloom",w:15},
+  {k:"fearow",w:10}
+],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:7,trainers:[
+  {n:"등산가 겐타",em:"🧗",pokemon:[
+    {k:"tauros",l:30},
+    {k:"raticate",l:31}
+  ],reward:930},
+  {n:"파라솔아가씨 유리",em:"☂️",pokemon:[
+    {k:"gloom",l:31},
+    {k:"miltank",l:32}
+  ],reward:960},
+  {n:"소년 토모야",em:"👦",pokemon:[
+    {k:"fearow",l:32},
+    {k:"farfetchd",l:33}
+  ],reward:990},
+  {n:"등산가 슌",em:"🧗",pokemon:[
+    {k:"tauros",l:33},
+    {k:"ditto",l:34}
+  ],reward:1020},
+  {n:"소녀 미나미",em:"👧",pokemon:[
+    {k:"miltank",l:33},
+    {k:"gloom",l:34},
+    {k:"raticate",l:35}
+  ],reward:1050}
+]},
+{id:"j_r_48",n:"48번도로",desc:"사파리존으로 향하는 도로",lv:[22,26],pokemon:[
+  {k:"tauros",w:15},
+  {k:"miltank",w:15},
+  {k:"fearow",w:15},
+  {k:"gloom",w:15},
+  {k:"girafarig",w:20},
+  {k:"hoppip",w:20}
+],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:7,trainers:[
+  {n:"소녀 아야노",em:"👧",pokemon:[
+    {k:"girafarig",l:25},
+    {k:"hoppip",l:26}
+  ],reward:780},
+  {n:"소년 카이토",em:"👦",pokemon:[
+    {k:"tauros",l:26},
+    {k:"fearow",l:27}
+  ],reward:810},
+  {n:"파라솔아가씨 사오리",em:"☂️",pokemon:[
+    {k:"gloom",l:27},
+    {k:"miltank",l:28}
+  ],reward:840},
+  {n:"소년 료",em:"👦",pokemon:[
+    {k:"girafarig",l:28},
+    {k:"hoppip",l:28},
+    {k:"fearow",l:30}
+  ],reward:900}
+]},
+{id:"j_r_safari",n:"사파리존",desc:"다양한 포켓몬이 사는 자연 보호구역",lv:[15,40],pokemon:[
+  {k:"geodude",w:10},{k:"magikarp",w:8},{k:"natu",w:10},{k:"xatu",w:5},
+  {k:"misdreavus",w:8},{k:"stantler",w:8},{k:"girafarig",w:8},{k:"larvitar",w:5},
+  {k:"beedrill",w:6},{k:"hoppip",w:8},{k:"aipom",w:8},{k:"teddiursa",w:5},
+  {k:"mareep",w:8},{k:"wooper",w:8},{k:"quagsire",w:5}
+],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:7,trainers:[
+  {n:"레인저 세이이치",em:"🌿",pokemon:[
+    {k:"stantler",l:30},{k:"girafarig",l:31}
+  ],reward:930},
+  {n:"레인저 유카리",em:"🌿",pokemon:[
+    {k:"teddiursa",l:31},{k:"aipom",l:32}
+  ],reward:960},
+  {n:"레인저 켄지",em:"🌿",pokemon:[
+    {k:"xatu",l:32},{k:"misdreavus",l:33}
+  ],reward:990},
+  {n:"레인저 치요코",em:"🌿",pokemon:[
+    {k:"larvitar",l:33},{k:"quagsire",l:34},{k:"girafarig",l:32}
+  ],reward:1020}
 ]},
 {id:"j_r28",n:"26번도로",desc:"세키에이고원으로 향하는 험준한 도로",lv:[28,35],pokemon:[
   {k:"doduo",w:18},
@@ -2531,233 +2758,6 @@ johto: {
     {k:"donphan",l:48},
     {k:"ursaring",l:50}
   ],reward:1500}
-]},
-{id:"j_r_33",n:"33번도로",desc:"연결동굴~히와다타운",lv:[4,8],pokemon:[
-  {k:"hoppip",w:30},
-  {k:"rattata",w:30},
-  {k:"zubat",w:20},
-  {k:"ekans",w:20}
-],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:0,trainers:[
-  {n:"소년 타쿠야",em:"👦",pokemon:[
-    {k:"rattata",l:6},
-    {k:"hoppip",l:7}
-  ],reward:210},
-  {n:"벌레잡이 코이치",em:"🧒",pokemon:[
-    {k:"ekans",l:7},
-    {k:"zubat",l:7}
-  ],reward:210},
-  {n:"소녀 미사키",em:"👧",pokemon:[
-    {k:"hoppip",l:7},
-    {k:"rattata",l:8}
-  ],reward:240},
-  {n:"소년 유우키",em:"👦",pokemon:[
-    {k:"zubat",l:8},
-    {k:"ekans",l:9}
-  ],reward:270}
-]},
-{id:"j_r_ruins",n:"알프의유적",desc:"고대의 수수께끼가 잠든 유적",lv:[5,25],pokemon:[
-  {k:"unown",w:60},
-  {k:"natu",w:15},
-  {k:"smeargle",w:10},
-  {k:"wobbuffet",w:10},
-  {k:"qwilfish",w:5}
-],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:0,trainers:[
-  {n:"연구원 카즈키",em:"🔬",pokemon:[
-    {k:"unown",l:8},
-    {k:"natu",l:9}
-  ],reward:270},
-  {n:"사이킥 미유키",em:"🔮",pokemon:[
-    {k:"natu",l:9},
-    {k:"wobbuffet",l:10}
-  ],reward:300},
-  {n:"연구원 마사노리",em:"🔬",pokemon:[
-    {k:"unown",l:10},
-    {k:"unown",l:10},
-    {k:"smeargle",l:11}
-  ],reward:330},
-  {n:"사이킥 사유리",em:"🔮",pokemon:[
-    {k:"natu",l:10},
-    {k:"unown",l:11},
-    {k:"wobbuffet",l:12}
-  ],reward:360}
-]},
-{id:"j_r_park",n:"자연공원",desc:"벌레잡기 대회가 열리는 공원",lv:[12,15],pokemon:[
-  {k:"caterpie",w:15},
-  {k:"weedle",w:15},
-  {k:"paras",w:10},
-  {k:"venonat",w:10},
-  {k:"scyther",w:5},
-  {k:"pinsir",w:5},
-  {k:"sunkern",w:20},
-  {k:"ledyba",w:10},
-  {k:"spinarak",w:10}
-],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:2,trainers:[
-  {n:"벌레잡이 타이세이",em:"🧒",pokemon:[
-    {k:"caterpie",l:12},
-    {k:"weedle",l:12},
-    {k:"paras",l:13}
-  ],reward:390},
-  {n:"벌레잡이 켄타",em:"🧒",pokemon:[
-    {k:"venonat",l:13},
-    {k:"ledyba",l:13}
-  ],reward:390},
-  {n:"벌레잡이 사쿠라",em:"🧒",pokemon:[
-    {k:"spinarak",l:13},
-    {k:"caterpie",l:14}
-  ],reward:420},
-  {n:"벌레잡이 유우지",em:"🧒",pokemon:[
-    {k:"scyther",l:14}
-  ],reward:420},
-  {n:"벌레잡이 마사키",em:"🧒",pokemon:[
-    {k:"pinsir",l:14},
-    {k:"sunkern",l:15}
-  ],reward:450}
-]},
-{id:"j_r_belltower",n:"방울탑",desc:"전설의 포켓몬 호우오우가 기다리는 탑",lv:[20,40],pokemon:[
-  {k:"rattata",w:20},
-  {k:"gastly",w:25},
-  {k:"haunter",w:20},
-  {k:"misdreavus",w:15},
-  {k:"duskull",w:10},
-  {k:"shuppet",w:10}
-],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:7,trainers:[
-  {n:"무녀 카스미",em:"⛩️",pokemon:[
-    {k:"gastly",l:30},
-    {k:"haunter",l:32}
-  ],reward:960},
-  {n:"도승 겐카이",em:"🧘",pokemon:[
-    {k:"misdreavus",l:32},
-    {k:"duskull",l:33}
-  ],reward:990},
-  {n:"무녀 사야카",em:"⛩️",pokemon:[
-    {k:"haunter",l:33},
-    {k:"shuppet",l:34}
-  ],reward:1020},
-  {n:"도승 린",em:"🧘",pokemon:[
-    {k:"gastly",l:33},
-    {k:"haunter",l:35},
-    {k:"misdreavus",l:36}
-  ],reward:1080},
-  {n:"도승 엔조",em:"🧘",pokemon:[
-    {k:"duskull",l:35},
-    {k:"shuppet",l:36},
-    {k:"haunter",l:38}
-  ],reward:1140},
-  {n:"무녀 치요",em:"⛩️",pokemon:[
-    {k:"misdreavus",l:37},
-    {k:"haunter",l:38},
-    {k:"gastly",l:35},
-    {k:"duskull",l:40}
-  ],reward:1200}
-]},
-{id:"j_r_dragonden",n:"용의굴",desc:"드래곤 사용자들의 수련장",lv:[15,45],pokemon:[
-  {k:"magikarp",w:30},
-  {k:"dratini",w:20},
-  {k:"dragonair",w:10},
-  {k:"horsea",w:20},
-  {k:"seadra",w:10},
-  {k:"bagon",w:10}
-],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:7,trainers:[
-  {n:"드래곤테이머 류헤이",em:"🐉",pokemon:[
-    {k:"dratini",l:35},
-    {k:"horsea",l:36}
-  ],reward:1080},
-  {n:"드래곤테이머 카이",em:"🐉",pokemon:[
-    {k:"dragonair",l:38},
-    {k:"seadra",l:38}
-  ],reward:1140},
-  {n:"드래곤테이머 사쿠",em:"🐉",pokemon:[
-    {k:"bagon",l:37},
-    {k:"dratini",l:38},
-    {k:"horsea",l:39}
-  ],reward:1170},
-  {n:"드래곤테이머 엔",em:"🐉",pokemon:[
-    {k:"dragonair",l:40},
-    {k:"seadra",l:40},
-    {k:"bagon",l:42}
-  ],reward:1260},
-  {n:"드래곤테이머 무겐",em:"🐉",pokemon:[
-    {k:"dragonair",l:42},
-    {k:"seadra",l:43},
-    {k:"dratini",l:40},
-    {k:"bagon",l:45}
-  ],reward:1350}
-]},
-{id:"j_r_47",n:"47번도로",desc:"HGSS에서 추가된 절벽 위의 도로",lv:[28,32],pokemon:[
-  {k:"ditto",w:20},
-  {k:"miltank",w:15},
-  {k:"tauros",w:15},
-  {k:"farfetchd",w:10},
-  {k:"raticate",w:15},
-  {k:"gloom",w:15},
-  {k:"fearow",w:10}
-],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:7,trainers:[
-  {n:"등산가 겐타",em:"🧗",pokemon:[
-    {k:"tauros",l:30},
-    {k:"raticate",l:31}
-  ],reward:930},
-  {n:"파라솔아가씨 유리",em:"☂️",pokemon:[
-    {k:"gloom",l:31},
-    {k:"miltank",l:32}
-  ],reward:960},
-  {n:"소년 토모야",em:"👦",pokemon:[
-    {k:"fearow",l:32},
-    {k:"farfetchd",l:33}
-  ],reward:990},
-  {n:"등산가 슌",em:"🧗",pokemon:[
-    {k:"tauros",l:33},
-    {k:"ditto",l:34}
-  ],reward:1020},
-  {n:"소녀 미나미",em:"👧",pokemon:[
-    {k:"miltank",l:33},
-    {k:"gloom",l:34},
-    {k:"raticate",l:35}
-  ],reward:1050}
-]},
-{id:"j_r_48",n:"48번도로",desc:"사파리존으로 향하는 도로",lv:[22,26],pokemon:[
-  {k:"tauros",w:15},
-  {k:"miltank",w:15},
-  {k:"fearow",w:15},
-  {k:"gloom",w:15},
-  {k:"girafarig",w:20},
-  {k:"hoppip",w:20}
-],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:7,trainers:[
-  {n:"소녀 아야노",em:"👧",pokemon:[
-    {k:"girafarig",l:25},
-    {k:"hoppip",l:26}
-  ],reward:780},
-  {n:"소년 카이토",em:"👦",pokemon:[
-    {k:"tauros",l:26},
-    {k:"fearow",l:27}
-  ],reward:810},
-  {n:"파라솔아가씨 사오리",em:"☂️",pokemon:[
-    {k:"gloom",l:27},
-    {k:"miltank",l:28}
-  ],reward:840},
-  {n:"소년 료",em:"👦",pokemon:[
-    {k:"girafarig",l:28},
-    {k:"hoppip",l:28},
-    {k:"fearow",l:30}
-  ],reward:900}
-]},
-{id:"j_r_safari",n:"사파리존",desc:"다양한 포켓몬이 사는 자연 보호구역",lv:[15,40],pokemon:[
-  {k:"geodude",w:10},{k:"magikarp",w:8},{k:"natu",w:10},{k:"xatu",w:5},
-  {k:"misdreavus",w:8},{k:"stantler",w:8},{k:"girafarig",w:8},{k:"larvitar",w:5},
-  {k:"beedrill",w:6},{k:"hoppip",w:8},{k:"aipom",w:8},{k:"teddiursa",w:5},
-  {k:"mareep",w:8},{k:"wooper",w:8},{k:"quagsire",w:5}
-],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:7,trainers:[
-  {n:"레인저 세이이치",em:"🌿",pokemon:[
-    {k:"stantler",l:30},{k:"girafarig",l:31}
-  ],reward:930},
-  {n:"레인저 유카리",em:"🌿",pokemon:[
-    {k:"teddiursa",l:31},{k:"aipom",l:32}
-  ],reward:960},
-  {n:"레인저 켄지",em:"🌿",pokemon:[
-    {k:"xatu",l:32},{k:"misdreavus",l:33}
-  ],reward:990},
-  {n:"레인저 치요코",em:"🌿",pokemon:[
-    {k:"larvitar",l:33},{k:"quagsire",l:34},{k:"girafarig",l:32}
-  ],reward:1020}
 ]}
 ]},
 hoenn: {
@@ -2778,6 +2778,7 @@ hoenn: {
 {id:"h_r8",n:"화강동굴",desc:"화강동굴",hasCenter:false,hasShop:false,lv:[7,12],pokemon:[{k:"zubat",w:30},{k:"geodude",w:25},{k:"makuhita",w:15},{k:"abra",w:5},{k:"aron",w:12},{k:"sableye",w:6},{k:"mawile",w:7}],reqBadges:1,trainers:[{n:"블랙벨트 마사지",em:"👤",pokemon:[{k:"makuhita",l:10}],reward:300},{n:"등산가 성훈",em:"👤",pokemon:[{k:"geodude",l:9},{k:"zubat",l:10}],reward:300},{n:"산악인 재혁",em:"👤",pokemon:[{k:"aron",l:11}],reward:330},{n:"사이킥 린",em:"👤",pokemon:[{k:"abra",l:10},{k:"zubat",l:9}],reward:300},{n:"등산가 메이호",em:"👤",pokemon:[{k:"geodude",l:10},{k:"makuhita",l:11},{k:"aron",l:12}],reward:360}]},
 {id:"h_c6",n:"카이나시티",desc:"카이나시티",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","superpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","escaperope"],reqBadges:2,trainers:[]},
 {id:"h_r_sea1",n:"105-109번수로",desc:"카이나시티 남쪽 해역",hasCenter:false,hasShop:false,lv:[5,35],pokemon:[{k:"tentacool",w:40},{k:"wingull",w:30},{k:"pelipper",w:15},{k:"wailmer",w:15}],reqBadges:2,trainers:[{n:"수영선수 아유미",em:"👤",pokemon:[{k:"tentacool",l:24},{k:"wingull",l:25}],reward:750},{n:"낚시꾼 테츠야",em:"👤",pokemon:[{k:"wailmer",l:26}],reward:780},{n:"수영선수 마야",em:"👤",pokemon:[{k:"tentacool",l:25},{k:"pelipper",l:27}],reward:810},{n:"낚시꾼 유타",em:"👤",pokemon:[{k:"wingull",l:26},{k:"wailmer",l:28}],reward:840}]},
+{id:"h_r_ship",n:"버려진배",desc:"버려진 화물선 (ORAS: 시마우빌)",hasCenter:false,hasShop:false,lv:[25,35],pokemon:[{k:"tentacool",w:35},{k:"magnemite",w:20},{k:"magneton",w:10},{k:"grimer",w:15},{k:"muk",w:10},{k:"voltorb",w:10}],reqBadges:5,trainers:[{n:"선원 아키히로",em:"👤",pokemon:[{k:"machoke",l:28},{k:"tentacruel",l:29}],reward:870},{n:"선원 케이스케",em:"👤",pokemon:[{k:"magneton",l:30}],reward:900},{n:"다이버 마리",em:"👤",pokemon:[{k:"grimer",l:28},{k:"tentacruel",l:29}],reward:870},{n:"선원 하진",em:"👤",pokemon:[{k:"machoke",l:29},{k:"magneton",l:30}],reward:900},{n:"연구원 시호",em:"🔬",pokemon:[{k:"magneton",l:30},{k:"muk",l:31}],reward:930}]},
 {id:"h_r9",n:"110번도로",desc:"110번도로",hasCenter:false,hasShop:false,lv:[12,16],pokemon:[{k:"zigzagoon",w:20},{k:"poochyena",w:15},{k:"wingull",w:15},{k:"oddish",w:15},{k:"gulpin",w:10},{k:"minun",w:8},{k:"plusle",w:7},{k:"electrike",w:10}],reqBadges:2,trainers:[{n:"기타리스트 아키토",em:"👤",pokemon:[{k:"electrike",l:13},{k:"plusle",l:14}],reward:420},{n:"배틀걸 아카네",em:"👤",pokemon:[{k:"oddish",l:14},{k:"gulpin",l:14}],reward:420},{n:"풀숲소년 타쿠야",em:"👤",pokemon:[{k:"zigzagoon",l:13},{k:"poochyena",l:14}],reward:420},{n:"짧은치마 소윤",em:"👤",pokemon:[{k:"minun",l:15}],reward:450},{n:"사이킥 슌지",em:"👤",pokemon:[{k:"wingull",l:14},{k:"oddish",l:15}],reward:450},{n:"포켓몬레인저 소라",em:"👤",pokemon:[{k:"electrike",l:14},{k:"gulpin",l:15},{k:"wingull",l:16}],reward:480}]},
 {id:"h_c7",n:"키와시티",desc:"키와시티",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","superpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","escaperope","xattack","xdefense","xspeed","direhit","guardspec"],reqBadges:2,trainers:[]},
 {id:"h_r10",n:"117번도로",desc:"117번도로",hasCenter:false,hasShop:false,lv:[13,18],pokemon:[{k:"zigzagoon",w:25},{k:"oddish",w:20},{k:"marill",w:20},{k:"roselia",w:10},{k:"volbeat",w:10},{k:"illumise",w:10},{k:"seedot",w:10}],reqBadges:3,trainers:[{n:"풀숲소녀 나유",em:"👤",pokemon:[{k:"oddish",l:15},{k:"roselia",l:16}],reward:480},{n:"벌레잡이소년 카즈마",em:"👤",pokemon:[{k:"volbeat",l:15},{k:"illumise",l:15}],reward:450},{n:"풀숲소년 코우야",em:"👤",pokemon:[{k:"seedot",l:14},{k:"zigzagoon",l:15},{k:"marill",l:16}],reward:480},{n:"파라솔아가씨 카구라",em:"👤",pokemon:[{k:"roselia",l:17}],reward:510},{n:"포켓몬레인저 세이지",em:"👤",pokemon:[{k:"oddish",l:16},{k:"marill",l:17}],reward:510}]},
@@ -2785,6 +2786,8 @@ hoenn: {
 {id:"h_c8",n:"시다케타운",desc:"시다케타운",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","superpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","escaperope"],reqBadges:3,trainers:[]},
 {id:"h_r11",n:"111번도로",desc:"111번도로",hasCenter:false,hasShop:false,lv:[19,22],pokemon:[{k:"sandshrew",w:35},{k:"trapinch",w:25},{k:"cacnea",w:20},{k:"baltoy",w:20},{k:"barboach",w:10}],reqBadges:3,trainers:[{n:"산악인 병철",em:"👤",pokemon:[{k:"sandshrew",l:20},{k:"trapinch",l:20}],reward:600},{n:"캠프파이어소녀 카요",em:"👤",pokemon:[{k:"cacnea",l:21}],reward:630},{n:"사이킥 하루키",em:"👤",pokemon:[{k:"baltoy",l:20},{k:"trapinch",l:21}],reward:630},{n:"등산가 케이스케",em:"👤",pokemon:[{k:"sandshrew",l:21},{k:"sandshrew",l:22}],reward:660},{n:"포켓몬레인저 유지",em:"👤",pokemon:[{k:"cacnea",l:20},{k:"baltoy",l:21},{k:"trapinch",l:22}],reward:660}]},
 {id:"h_r12",n:"112번도로",desc:"112번도로",hasCenter:false,hasShop:false,lv:[15,18],pokemon:[{k:"numel",w:40},{k:"machop",w:30},{k:"marill",w:30},{k:"corphish",w:10}],reqBadges:3,trainers:[{n:"등산가 진우",em:"👤",pokemon:[{k:"numel",l:16},{k:"machop",l:16}],reward:480},{n:"캠프파이어소녀 센카",em:"👤",pokemon:[{k:"marill",l:17}],reward:510},{n:"블랙벨트 유키",em:"👤",pokemon:[{k:"machop",l:17},{k:"numel",l:18}],reward:540},{n:"산악인 아키라",em:"👤",pokemon:[{k:"numel",l:16},{k:"machop",l:17},{k:"marill",l:18}],reward:540}]},
+{id:"h_r_jagged",n:"울퉁불퉁고개",desc:"굴뚝산에서 후엔타운으로 내려가는 길",hasCenter:false,hasShop:false,lv:[18,22],pokemon:[{k:"numel",w:35},{k:"machop",w:25},{k:"spoink",w:20},{k:"geodude",w:20}],reqBadges:3,trainers:[{n:"등산가 에릭",em:"👤",pokemon:[{k:"numel",l:19},{k:"machop",l:20}],reward:600},{n:"캠프파이어소녀 리사",em:"👤",pokemon:[{k:"numel",l:20},{k:"spoink",l:20}],reward:600},{n:"등산가 히로시",em:"👤",pokemon:[{k:"geodude",l:19},{k:"machop",l:20},{k:"numel",l:20}],reward:600}]},
+{id:"h_r_chimney",n:"굴뚝산",desc:"활화산 꼭대기의 뜨거운 전장",hasCenter:false,hasShop:false,lv:[18,24],pokemon:[{k:"numel",w:35},{k:"machop",w:25},{k:"geodude",w:20},{k:"koffing",w:15},{k:"slugma",w:5}],reqBadges:3,trainers:[{n:"마그마단원 유키",em:"🔥",pokemon:[{k:"numel",l:20},{k:"poochyena",l:20}],reward:600},{n:"마그마단원 호시",em:"🔥",pokemon:[{k:"numel",l:21},{k:"zubat",l:21}],reward:630},{n:"마그마단원 카이",em:"🔥",pokemon:[{k:"numel",l:22}],reward:660},{n:"마그마단 간부",em:"🔥",pokemon:[{k:"camerupt",l:24},{k:"mightyena",l:24}],reward:720}]},
 {id:"h_r13",n:"화염의 빗길",desc:"화염의 빗길",hasCenter:false,hasShop:false,lv:[15,18],pokemon:[{k:"numel",w:25},{k:"koffing",w:20},{k:"grimer",w:15},{k:"slugma",w:20},{k:"torkoal",w:5},{k:"machop",w:15}],reqBadges:3,trainers:[{n:"등산가 타이시키",em:"👤",pokemon:[{k:"numel",l:16},{k:"slugma",l:16}],reward:480},{n:"블랙벨트 타츠히로",em:"👤",pokemon:[{k:"machop",l:17}],reward:510},{n:"캠프파이어소녀 레이린",em:"👤",pokemon:[{k:"koffing",l:16},{k:"grimer",l:17}],reward:510},{n:"산악인 무네쿤",em:"👤",pokemon:[{k:"slugma",l:17},{k:"torkoal",l:18}],reward:540},{n:"등산가 다이세이",em:"👤",pokemon:[{k:"numel",l:16},{k:"machop",l:17},{k:"slugma",l:18}],reward:540}]},
 {id:"h_r14",n:"113번도로",desc:"113번도로",hasCenter:false,hasShop:false,lv:[15,18],pokemon:[{k:"spinda",w:35},{k:"skarmory",w:10},{k:"sandshrew",w:30},{k:"slugma",w:25}],reqBadges:3,trainers:[{n:"산악인 코우스케",em:"👤",pokemon:[{k:"sandshrew",l:16},{k:"spinda",l:17}],reward:510},{n:"풀숲소녀 치카",em:"👤",pokemon:[{k:"spinda",l:17}],reward:510},{n:"등산가 토모야",em:"👤",pokemon:[{k:"slugma",l:16},{k:"sandshrew",l:17}],reward:510},{n:"조류연구가 미사키",em:"👤",pokemon:[{k:"skarmory",l:18}],reward:540}]},
 {id:"h_c9",n:"하지쓰게타운",desc:"하지쓰게타운",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","superpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","escaperope"],reqBadges:3,trainers:[]},
@@ -2797,36 +2800,33 @@ hoenn: {
 {id:"h_c11",n:"히와마키시티",desc:"히와마키시티",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","hyperpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","escaperope"],reqBadges:5,trainers:[]},
 {id:"h_r20",n:"120번도로",desc:"120번도로",hasCenter:false,hasShop:false,lv:[25,29],pokemon:[{k:"zigzagoon",w:25},{k:"linoone",w:20},{k:"oddish",w:25},{k:"marill",w:20},{k:"absol",w:5},{k:"kecleon",w:5}],reqBadges:6,trainers:[{n:"풀숲소년 유빈",em:"👤",pokemon:[{k:"zigzagoon",l:26},{k:"oddish",l:27}],reward:810},{n:"사이킥 카즈에",em:"👤",pokemon:[{k:"absol",l:28}],reward:840},{n:"배틀걸 유빈",em:"👤",pokemon:[{k:"linoone",l:27},{k:"marill",l:28}],reward:840},{n:"포켓몬레인저 민혁",em:"👤",pokemon:[{k:"oddish",l:27},{k:"kecleon",l:28}],reward:840},{n:"파라솔아가씨 스즈",em:"👤",pokemon:[{k:"linoone",l:28},{k:"absol",l:29}],reward:870}]},
 {id:"h_r21",n:"121번도로",desc:"121번도로",hasCenter:false,hasShop:false,lv:[26,30],pokemon:[{k:"zigzagoon",w:20},{k:"linoone",w:15},{k:"oddish",w:15},{k:"gloom",w:10},{k:"wingull",w:15},{k:"kecleon",w:5},{k:"shuppet",w:10},{k:"duskull",w:10}],reqBadges:6,trainers:[{n:"사이킥 유토",em:"👤",pokemon:[{k:"shuppet",l:27},{k:"duskull",l:28}],reward:840},{n:"풀숲소녀 시안",em:"👤",pokemon:[{k:"oddish",l:28},{k:"gloom",l:29}],reward:870},{n:"기타리스트 코우이치",em:"👤",pokemon:[{k:"zigzagoon",l:27},{k:"linoone",l:28}],reward:840},{n:"배틀걸 하루에",em:"👤",pokemon:[{k:"wingull",l:28},{k:"kecleon",l:29}],reward:870},{n:"캠프파이어소녀 시즈카",em:"👤",pokemon:[{k:"shuppet",l:28},{k:"duskull",l:29}],reward:870},{n:"포켓몬레인저 슌세이",em:"👤",pokemon:[{k:"linoone",l:28},{k:"gloom",l:29},{k:"wingull",l:30}],reward:900}]},
+{id:"h_r_safari",n:"사파리존",desc:"다양한 야생 포켓몬이 사는 보호구역",hasCenter:false,hasShop:false,lv:[25,40],pokemon:[{k:"pikachu",w:10},{k:"oddish",w:10},{k:"gloom",w:8},{k:"doduo",w:10},{k:"dodrio",w:5},{k:"rhyhorn",w:8},{k:"pinsir",w:5},{k:"girafarig",w:8},{k:"wobbuffet",w:5},{k:"heracross",w:5},{k:"miltank",w:5},{k:"natu",w:8},{k:"xatu",w:5},{k:"mareep",w:8}],reqBadges:6,trainers:[{n:"레인저 카즈마",em:"🌿",pokemon:[{k:"dodrio",l:32},{k:"heracross",l:33}],reward:990},{n:"레인저 미키",em:"🌿",pokemon:[{k:"pinsir",l:32},{k:"miltank",l:33}],reward:990},{n:"레인저 료",em:"🌿",pokemon:[{k:"rhyhorn",l:33},{k:"xatu",l:34}],reward:1020},{n:"레인저 사쿠라",em:"🌿",pokemon:[{k:"girafarig",l:33},{k:"gloom",l:32}],reward:990}]},
 {id:"h_r_122",n:"122번수로",desc:"영봉산으로 가는 수로",hasCenter:false,hasShop:false,lv:[25,30],pokemon:[{k:"tentacool",w:40},{k:"wingull",w:30},{k:"pelipper",w:15},{k:"wailmer",w:10},{k:"sharpedo",w:5}],reqBadges:6,trainers:[{n:"수영선수 카오루",em:"👤",pokemon:[{k:"tentacool",l:27},{k:"wingull",l:28}],reward:840},{n:"낚시꾼 사이토",em:"👤",pokemon:[{k:"wailmer",l:28},{k:"sharpedo",l:29}],reward:870},{n:"수영선수 나미",em:"👤",pokemon:[{k:"pelipper",l:29},{k:"tentacool",l:28}],reward:870}]},
 {id:"h_r_123",n:"123번도로",desc:"미나모시티 서쪽 도로",hasCenter:false,hasShop:false,lv:[26,30],pokemon:[{k:"oddish",w:20},{k:"gloom",w:15},{k:"wingull",w:15},{k:"linoone",w:15},{k:"kecleon",w:5},{k:"shuppet",w:10},{k:"duskull",w:10},{k:"absol",w:3},{k:"mightyena",w:7}],reqBadges:6,trainers:[{n:"풀숲소녀 유이",em:"👤",pokemon:[{k:"oddish",l:27},{k:"gloom",l:28}],reward:840},{n:"사이킥 아키토",em:"👤",pokemon:[{k:"shuppet",l:28},{k:"duskull",l:28}],reward:840},{n:"배틀걸 시오리",em:"👤",pokemon:[{k:"linoone",l:28},{k:"kecleon",l:29}],reward:870},{n:"풀숲소년 쇼타",em:"👤",pokemon:[{k:"oddish",l:27},{k:"gloom",l:29}],reward:870},{n:"포켓몬레인저 히카리",em:"👤",pokemon:[{k:"mightyena",l:29},{k:"absol",l:30}],reward:900}]},
 {id:"h_c12",n:"미나모시티",desc:"미나모시티",isCity:true,hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","fullrestore","fullheal","revive"],reqBadges:6,trainers:[]},
 {id:"h_r22",n:"송화산",desc:"포켓몬의 영혼이 잠들어 있는 산",hasCenter:false,hasShop:false,lv:[24,32],pokemon:[{k:"shuppet",w:30},{k:"duskull",w:30},{k:"vulpix",w:15},{k:"wingull",w:10},{k:"chimecho",w:5},{k:"meditite",w:10}],reqBadges:6,trainers:[{n:"사이킥 마코토",em:"👤",pokemon:[{k:"shuppet",l:26},{k:"duskull",l:27}],reward:810},{n:"등산가 쿄타로",em:"👤",pokemon:[{k:"vulpix",l:28},{k:"meditite",l:28}],reward:840},{n:"캠프파이어소녀 아오이",em:"👤",pokemon:[{k:"chimecho",l:29}],reward:870},{n:"산악인 마사루",em:"👤",pokemon:[{k:"meditite",l:28},{k:"shuppet",l:30}],reward:900},{n:"포켓몬레인저 세이야",em:"👤",pokemon:[{k:"duskull",l:29},{k:"vulpix",l:30},{k:"wingull",l:31}],reward:930}]},
+{id:"h_r_slab",n:"그을린바위",desc:"뜨거운 열기가 느껴지는 바위 속 공간",hasCenter:false,hasShop:false,lv:[25,38],pokemon:[{k:"zubat",w:30},{k:"golbat",w:25},{k:"numel",w:20},{k:"slugma",w:15},{k:"magcargo",w:10}],reqBadges:6,trainers:[{n:"등산가 코이치",em:"👤",pokemon:[{k:"numel",l:30},{k:"golbat",l:31}],reward:930},{n:"캠프파이어소녀 미사키",em:"👤",pokemon:[{k:"slugma",l:30},{k:"magcargo",l:32}],reward:960},{n:"블랙벨트 료",em:"👤",pokemon:[{k:"golbat",l:32}],reward:960}]},
 {id:"h_r23",n:"124번수로",desc:"124번수로",hasCenter:false,hasShop:false,lv:[25,35],pokemon:[{k:"tentacool",w:40},{k:"wingull",w:35},{k:"pelipper",w:25},{k:"lileep",w:3},{k:"anorith",w:3}],reqBadges:6,trainers:[{n:"수영선수 쇼고",em:"👤",pokemon:[{k:"tentacool",l:28},{k:"wingull",l:29}],reward:870},{n:"낚시꾼 유시게",em:"👤",pokemon:[{k:"tentacool",l:30}],reward:900},{n:"수영선수 세이카",em:"👤",pokemon:[{k:"pelipper",l:30},{k:"tentacool",l:28}],reward:900},{n:"파라솔아가씨 은비",em:"👤",pokemon:[{k:"wingull",l:29},{k:"pelipper",l:31}],reward:930},{n:"낚시꾼 시게루",em:"👤",pokemon:[{k:"tentacool",l:30},{k:"tentacool",l:32},{k:"pelipper",l:33}],reward:990}]},
 {id:"h_r_125",n:"125번수로",desc:"토쿠사네시티 북쪽 해역",hasCenter:false,hasShop:false,lv:[28,33],pokemon:[{k:"tentacool",w:40},{k:"wingull",w:30},{k:"pelipper",w:15},{k:"wailmer",w:15}],reqBadges:6,trainers:[{n:"수영선수 히로",em:"👤",pokemon:[{k:"tentacool",l:29},{k:"pelipper",l:30}],reward:900},{n:"낚시꾼 켄이치",em:"👤",pokemon:[{k:"wailmer",l:31},{k:"wingull",l:30}],reward:930},{n:"수영선수 아야카",em:"👤",pokemon:[{k:"pelipper",l:31},{k:"tentacool",l:30}],reward:930}]},
 {id:"h_r_126",n:"126번수로",desc:"해저동굴로 가는 수로",hasCenter:false,hasShop:false,lv:[28,35],pokemon:[{k:"tentacool",w:35},{k:"wingull",w:25},{k:"pelipper",w:15},{k:"wailmer",w:15},{k:"sharpedo",w:10}],reqBadges:7,trainers:[{n:"수영선수 카즈야",em:"👤",pokemon:[{k:"tentacool",l:30},{k:"sharpedo",l:32}],reward:960},{n:"낚시꾼 무네하루",em:"👤",pokemon:[{k:"wailmer",l:31},{k:"pelipper",l:31}],reward:930},{n:"수영선수 리에",em:"👤",pokemon:[{k:"sharpedo",l:33}],reward:990},{n:"낚시꾼 세이지",em:"👤",pokemon:[{k:"tentacool",l:31},{k:"wailmer",l:33},{k:"wingull",l:30}],reward:990}]},
+{id:"h_r_127",n:"127번수로",desc:"127번수로",hasCenter:false,hasShop:false,lv:[25,35],pokemon:[{k:"tentacool",w:30},{k:"wingull",w:20},{k:"pelipper",w:15},{k:"wailmer",w:20},{k:"sharpedo",w:10},{k:"staryu",w:5}],reqBadges:7,trainers:[{n:"수영선수 유카",em:"👤",pokemon:[{k:"tentacruel",l:30},{k:"pelipper",l:31}],reward:930},{n:"수영선수 코지",em:"👤",pokemon:[{k:"sharpedo",l:32}],reward:960},{n:"낚시꾼 키미히로",em:"👤",pokemon:[{k:"wailmer",l:30},{k:"wailmer",l:31},{k:"staryu",l:32}],reward:960},{n:"수영선수 마리카",em:"👤",pokemon:[{k:"pelipper",l:31},{k:"tentacruel",l:32}],reward:960}]},
 {id:"h_c13",n:"토쿠사네시티",desc:"토쿠사네시티",isCity:true,hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","fullrestore","fullheal","revive"],reqBadges:6,trainers:[]},
 {id:"h_r24",n:"갯바위동굴",desc:"갯바위동굴",hasCenter:false,hasShop:false,lv:[26,32],pokemon:[{k:"zubat",w:30},{k:"golbat",w:25},{k:"spheal",w:20},{k:"sealeo",w:10},{k:"snorunt",w:15}],reqBadges:7,trainers:[{n:"등산가 세이야",em:"👤",pokemon:[{k:"spheal",l:28},{k:"zubat",l:27}],reward:840},{n:"산악인 쇼이치",em:"👤",pokemon:[{k:"golbat",l:29},{k:"spheal",l:30}],reward:900},{n:"블랙벨트 유지",em:"👤",pokemon:[{k:"sealeo",l:30}],reward:900},{n:"등산가 쿄지",em:"👤",pokemon:[{k:"snorunt",l:29},{k:"spheal",l:30}],reward:900},{n:"포켓몬레인저 치에",em:"👤",pokemon:[{k:"golbat",l:30},{k:"sealeo",l:31},{k:"snorunt",l:32}],reward:960}]},
 {id:"h_r25",n:"해저동굴",desc:"해저동굴",hasCenter:false,hasShop:false,lv:[30,35],pokemon:[{k:"zubat",w:30},{k:"golbat",w:25},{k:"geodude",w:25},{k:"graveler",w:20}],reqBadges:7,trainers:[{n:"등산가 신지",em:"👤",pokemon:[{k:"zubat",l:31},{k:"geodude",l:32}],reward:960},{n:"산악인 카즈테츠",em:"👤",pokemon:[{k:"graveler",l:33}],reward:990},{n:"블랙벨트 모토히로",em:"👤",pokemon:[{k:"golbat",l:32},{k:"graveler",l:33}],reward:990},{n:"등산가 메구루",em:"👤",pokemon:[{k:"geodude",l:32},{k:"golbat",l:34}],reward:1020},{n:"포켓몬레인저 노부히코",em:"👤",pokemon:[{k:"golbat",l:33},{k:"graveler",l:34},{k:"geodude",l:32}],reward:1020}]},
 {id:"h_c14",n:"루네시티",desc:"루네시티",isCity:true,hasCenter:true,hasShop:true,shopItems:["ultraball","hyperpotion","fullrestore","fullheal","revive"],reqBadges:7,trainers:[]},
 {id:"h_r_sea2",n:"128-131번수로",desc:"사이유우시티로 가는 해역",hasCenter:false,hasShop:false,lv:[30,40],pokemon:[{k:"tentacool",w:30},{k:"tentacruel",w:15},{k:"wingull",w:20},{k:"pelipper",w:15},{k:"wailmer",w:10},{k:"sharpedo",w:10}],reqBadges:7,trainers:[{n:"수영선수 타카시",em:"👤",pokemon:[{k:"tentacruel",l:33},{k:"pelipper",l:34}],reward:1020},{n:"낚시꾼 유지",em:"👤",pokemon:[{k:"wailmer",l:34},{k:"sharpedo",l:35}],reward:1050},{n:"수영선수 미나코",em:"👤",pokemon:[{k:"tentacruel",l:35},{k:"sharpedo",l:36}],reward:1080},{n:"낚시꾼 호세이",em:"👤",pokemon:[{k:"pelipper",l:35},{k:"wailmer",l:36},{k:"tentacruel",l:37}],reward:1110}]},
 {id:"h_c_pacifidlog",n:"키나기타운",desc:"바다 위에 떠 있는 뗏목 마을",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","hyperpotion","fullheal","revive"],reqBadges:7,trainers:[]},
-{id:"h_r26",n:"기원의동굴",desc:"기원의동굴",hasCenter:false,hasShop:false,lv:[30,40],pokemon:[{k:"zubat",w:30},{k:"golbat",w:25},{k:"geodude",w:25},{k:"graveler",w:20},{k:"beldum",w:3}],reqBadges:7,trainers:[{n:"등산가 무네지",em:"👤",pokemon:[{k:"zubat",l:32},{k:"geodude",l:34}],reward:1020},{n:"산악인 마사호",em:"👤",pokemon:[{k:"golbat",l:35},{k:"graveler",l:36}],reward:1080},{n:"사이킥 하린",em:"👤",pokemon:[{k:"golbat",l:36}],reward:1080},{n:"블랙벨트 무사시",em:"👤",pokemon:[{k:"graveler",l:35},{k:"golbat",l:37}],reward:1110},{n:"포켓몬레인저 유우마",em:"👤",pokemon:[{k:"golbat",l:36},{k:"graveler",l:37},{k:"geodude",l:35}],reward:1110}]},
-{id:"h_r27",n:"챔피언로드",desc:"챔피언로드",hasCenter:false,hasShop:false,lv:[36,44],pokemon:[{k:"golbat",w:25},{k:"graveler",w:20},{k:"lairon",w:15},{k:"hariyama",w:15},{k:"medicham",w:15},{k:"loudred",w:10}],reqBadges:8,trainers:[{n:"블랙벨트 타카시",em:"👤",pokemon:[{k:"hariyama",l:38},{k:"medicham",l:38}],reward:1140},{n:"등산가 카쿠지",em:"👤",pokemon:[{k:"graveler",l:39},{k:"lairon",l:40}],reward:1200},{n:"사이킥 소이치",em:"👤",pokemon:[{k:"medicham",l:40}],reward:1200},{n:"배틀걸 사에",em:"👤",pokemon:[{k:"hariyama",l:40},{k:"loudred",l:41}],reward:1230},{n:"산악인 대길",em:"👤",pokemon:[{k:"lairon",l:41},{k:"golbat",l:42}],reward:1260},{n:"포켓몬레인저 은총",em:"👤",pokemon:[{k:"golbat",l:42},{k:"graveler",l:43},{k:"medicham",l:43}],reward:1290},{n:"블랙벨트 태웅",em:"👤",pokemon:[{k:"hariyama",l:43},{k:"lairon",l:44}],reward:1320}]},
-{id:"h_c15",n:"사이유우시티",desc:"사이유우시티",isCity:true,hasCenter:true,hasShop:true,shopItems:["ultraball","maxpotion","fullrestore","fullheal","revive"],reqBadges:8,trainers:[]},
-{id:"h_r28",n:"공중의기둥",desc:"공중의기둥",hasCenter:false,hasShop:false,lv:[34,55],pokemon:[{k:"golbat",w:25},{k:"claydol",w:20},{k:"banette",w:20},{k:"altaria",w:15},{k:"dusclops",w:15},{k:"sableye",w:5}],reqBadges:8,trainers:[{n:"사이킥 지원",em:"👤",pokemon:[{k:"claydol",l:40},{k:"banette",l:42}],reward:1260},{n:"등산가 헤이지",em:"👤",pokemon:[{k:"golbat",l:42},{k:"altaria",l:44}],reward:1320},{n:"배틀걸 나레",em:"👤",pokemon:[{k:"dusclops",l:44},{k:"banette",l:45}],reward:1350},{n:"포켓몬레인저 시온",em:"👤",pokemon:[{k:"altaria",l:45},{k:"claydol",l:46}],reward:1380},{n:"블랙벨트 무사시",em:"👤",pokemon:[{k:"golbat",l:46},{k:"dusclops",l:48}],reward:1440},{n:"산악인 카쿠스이",em:"👤",pokemon:[{k:"banette",l:48},{k:"sableye",l:50},{k:"altaria",l:52}],reward:1560}]},
-{id:"h_r_127",n:"127번수로",desc:"127번수로",hasCenter:false,hasShop:false,lv:[25,35],pokemon:[{k:"tentacool",w:30},{k:"wingull",w:20},{k:"pelipper",w:15},{k:"wailmer",w:20},{k:"sharpedo",w:10},{k:"staryu",w:5}],reqBadges:7,trainers:[{n:"수영선수 유카",em:"👤",pokemon:[{k:"tentacruel",l:30},{k:"pelipper",l:31}],reward:930},{n:"수영선수 코지",em:"👤",pokemon:[{k:"sharpedo",l:32}],reward:960},{n:"낚시꾼 키미히로",em:"👤",pokemon:[{k:"wailmer",l:30},{k:"wailmer",l:31},{k:"staryu",l:32}],reward:960},{n:"수영선수 마리카",em:"👤",pokemon:[{k:"pelipper",l:31},{k:"tentacruel",l:32}],reward:960}]},
 {id:"h_r_132",n:"132번수로",desc:"급류가 흐르는 수로",hasCenter:false,hasShop:false,lv:[25,35],pokemon:[{k:"tentacool",w:30},{k:"wingull",w:25},{k:"pelipper",w:15},{k:"wailmer",w:20},{k:"horsea",w:10}],reqBadges:7,trainers:[{n:"수영선수 타쿠야",em:"👤",pokemon:[{k:"tentacruel",l:31},{k:"wailmer",l:32}],reward:960},{n:"수영선수 에미",em:"👤",pokemon:[{k:"pelipper",l:32},{k:"horsea",l:31}],reward:930},{n:"트라이애슬리트 켄",em:"👤",pokemon:[{k:"staryu",l:33}],reward:990}]},
 {id:"h_r_133",n:"133번수로",desc:"133번수로",hasCenter:false,hasShop:false,lv:[25,35],pokemon:[{k:"tentacool",w:30},{k:"wingull",w:25},{k:"pelipper",w:15},{k:"wailmer",w:15},{k:"horsea",w:10},{k:"sharpedo",w:5}],reqBadges:7,trainers:[{n:"수영선수 유이",em:"👤",pokemon:[{k:"sharpedo",l:33}],reward:990},{n:"수영선수 료타",em:"👤",pokemon:[{k:"tentacruel",l:32},{k:"pelipper",l:33}],reward:990},{n:"낚시꾼 타이세이",em:"👤",pokemon:[{k:"wailmer",l:33},{k:"horsea",l:32}],reward:960}]},
 {id:"h_r_134",n:"134번수로",desc:"해류에 의해 강하게 흐르는 수로",hasCenter:false,hasShop:false,lv:[25,35],pokemon:[{k:"tentacool",w:30},{k:"wingull",w:20},{k:"pelipper",w:15},{k:"wailmer",w:15},{k:"horsea",w:10},{k:"relicanth",w:5},{k:"corsola",w:5}],reqBadges:7,trainers:[{n:"수영선수 키호",em:"👤",pokemon:[{k:"pelipper",l:33},{k:"tentacruel",l:34}],reward:1020},{n:"다이버 소라",em:"👤",pokemon:[{k:"horsea",l:32},{k:"clamperl",l:33},{k:"relicanth",l:34}],reward:1020},{n:"수영선수 나호",em:"👤",pokemon:[{k:"sharpedo",l:34}],reward:1020},{n:"낚시꾼 무토",em:"👤",pokemon:[{k:"wailmer",l:33},{k:"corsola",l:34}],reward:1020}]},
-{id:"h_r_ship",n:"버려진배",desc:"버려진 화물선 (ORAS: 시마우빌)",hasCenter:false,hasShop:false,lv:[25,35],pokemon:[{k:"tentacool",w:35},{k:"magnemite",w:20},{k:"magneton",w:10},{k:"grimer",w:15},{k:"muk",w:10},{k:"voltorb",w:10}],reqBadges:5,trainers:[{n:"선원 아키히로",em:"👤",pokemon:[{k:"machoke",l:28},{k:"tentacruel",l:29}],reward:870},{n:"선원 케이스케",em:"👤",pokemon:[{k:"magneton",l:30}],reward:900},{n:"다이버 마리",em:"👤",pokemon:[{k:"grimer",l:28},{k:"tentacruel",l:29}],reward:870},{n:"선원 하진",em:"👤",pokemon:[{k:"machoke",l:29},{k:"magneton",l:30}],reward:900},{n:"연구원 시호",em:"🔬",pokemon:[{k:"magneton",l:30},{k:"muk",l:31}],reward:930}]},
-{id:"h_r_slab",n:"그을린바위",desc:"뜨거운 열기가 느껴지는 바위 속 공간",hasCenter:false,hasShop:false,lv:[25,38],pokemon:[{k:"zubat",w:30},{k:"golbat",w:25},{k:"numel",w:20},{k:"slugma",w:15},{k:"magcargo",w:10}],reqBadges:6,trainers:[{n:"등산가 코이치",em:"👤",pokemon:[{k:"numel",l:30},{k:"golbat",l:31}],reward:930},{n:"캠프파이어소녀 미사키",em:"👤",pokemon:[{k:"slugma",l:30},{k:"magcargo",l:32}],reward:960},{n:"블랙벨트 료",em:"👤",pokemon:[{k:"golbat",l:32}],reward:960}]},
 {id:"h_r_sealed",n:"봉인의석실",desc:"고대 레지 포켓몬의 봉인이 잠든 곳",hasCenter:false,hasShop:false,lv:[30,40],pokemon:[{k:"zubat",w:30},{k:"golbat",w:25},{k:"geodude",w:20},{k:"graveler",w:15},{k:"relicanth",w:5},{k:"wailord",w:5}],reqBadges:7,trainers:[{n:"유적매니아 겐타",em:"🔬",pokemon:[{k:"golbat",l:35},{k:"graveler",l:36}],reward:1080},{n:"유적매니아 사오리",em:"🔬",pokemon:[{k:"relicanth",l:36},{k:"golbat",l:37}],reward:1110},{n:"유적매니아 타카시",em:"🔬",pokemon:[{k:"graveler",l:36},{k:"geodude",l:35},{k:"golbat",l:37}],reward:1110}]},
 {id:"h_r_desert_ruins",n:"사막유적",desc:"레지락이 봉인된 사막의 유적",hasCenter:false,hasShop:false,lv:[35,40],pokemon:[{k:"sandshrew",w:30},{k:"sandslash",w:20},{k:"trapinch",w:20},{k:"baltoy",w:15},{k:"claydol",w:10},{k:"cacturne",w:5}],reqBadges:7,trainers:[{n:"유적매니아 진",em:"🔬",pokemon:[{k:"claydol",l:37},{k:"sandslash",l:38}],reward:1140},{n:"유적매니아 사이코",em:"🔬",pokemon:[{k:"baltoy",l:36},{k:"claydol",l:38}],reward:1140}]},
 {id:"h_r_island_cave",n:"섬의동굴",desc:"레지아이스가 봉인된 외딴 섬의 동굴",hasCenter:false,hasShop:false,lv:[35,40],pokemon:[{k:"zubat",w:30},{k:"golbat",w:20},{k:"spheal",w:20},{k:"sealeo",w:15},{k:"snorunt",w:10},{k:"glalie",w:5}],reqBadges:7,trainers:[{n:"유적매니아 코지",em:"🔬",pokemon:[{k:"sealeo",l:37},{k:"golbat",l:38}],reward:1140},{n:"유적매니아 유미코",em:"🔬",pokemon:[{k:"glalie",l:38},{k:"snorunt",l:36}],reward:1140}]},
 {id:"h_r_ancient_tomb",n:"고대의무덤",desc:"레지스틸이 봉인된 고대 무덤",hasCenter:false,hasShop:false,lv:[35,40],pokemon:[{k:"zubat",w:30},{k:"golbat",w:20},{k:"geodude",w:20},{k:"graveler",w:15},{k:"aron",w:10},{k:"lairon",w:5}],reqBadges:7,trainers:[{n:"유적매니아 테츠",em:"🔬",pokemon:[{k:"lairon",l:37},{k:"golbat",l:38}],reward:1140},{n:"유적매니아 미카",em:"🔬",pokemon:[{k:"aron",l:36},{k:"graveler",l:37},{k:"lairon",l:38}],reward:1140}]},
-{id:"h_r_safari",n:"사파리존",desc:"다양한 야생 포켓몬이 사는 보호구역",hasCenter:false,hasShop:false,lv:[25,40],pokemon:[{k:"pikachu",w:10},{k:"oddish",w:10},{k:"gloom",w:8},{k:"doduo",w:10},{k:"dodrio",w:5},{k:"rhyhorn",w:8},{k:"pinsir",w:5},{k:"girafarig",w:8},{k:"wobbuffet",w:5},{k:"heracross",w:5},{k:"miltank",w:5},{k:"natu",w:8},{k:"xatu",w:5},{k:"mareep",w:8}],reqBadges:6,trainers:[{n:"레인저 카즈마",em:"🌿",pokemon:[{k:"dodrio",l:32},{k:"heracross",l:33}],reward:990},{n:"레인저 미키",em:"🌿",pokemon:[{k:"pinsir",l:32},{k:"miltank",l:33}],reward:990},{n:"레인저 료",em:"🌿",pokemon:[{k:"rhyhorn",l:33},{k:"xatu",l:34}],reward:1020},{n:"레인저 사쿠라",em:"🌿",pokemon:[{k:"girafarig",l:33},{k:"gloom",l:32}],reward:990}]},
-{id:"h_r_jagged",n:"울퉁불퉁고개",desc:"굴뚝산에서 후엔타운으로 내려가는 길",hasCenter:false,hasShop:false,lv:[18,22],pokemon:[{k:"numel",w:35},{k:"machop",w:25},{k:"spoink",w:20},{k:"geodude",w:20}],reqBadges:3,trainers:[{n:"등산가 에릭",em:"👤",pokemon:[{k:"numel",l:19},{k:"machop",l:20}],reward:600},{n:"캠프파이어소녀 리사",em:"👤",pokemon:[{k:"numel",l:20},{k:"spoink",l:20}],reward:600},{n:"등산가 히로시",em:"👤",pokemon:[{k:"geodude",l:19},{k:"machop",l:20},{k:"numel",l:20}],reward:600}]},
-{id:"h_r_chimney",n:"굴뚝산",desc:"활화산 꼭대기의 뜨거운 전장",hasCenter:false,hasShop:false,lv:[18,24],pokemon:[{k:"numel",w:35},{k:"machop",w:25},{k:"geodude",w:20},{k:"koffing",w:15},{k:"slugma",w:5}],reqBadges:3,trainers:[{n:"마그마단원 유키",em:"🔥",pokemon:[{k:"numel",l:20},{k:"poochyena",l:20}],reward:600},{n:"마그마단원 호시",em:"🔥",pokemon:[{k:"numel",l:21},{k:"zubat",l:21}],reward:630},{n:"마그마단원 카이",em:"🔥",pokemon:[{k:"numel",l:22}],reward:660},{n:"마그마단 간부",em:"🔥",pokemon:[{k:"camerupt",l:24},{k:"mightyena",l:24}],reward:720}]}
+{id:"h_r26",n:"기원의동굴",desc:"기원의동굴",hasCenter:false,hasShop:false,lv:[30,40],pokemon:[{k:"zubat",w:30},{k:"golbat",w:25},{k:"geodude",w:25},{k:"graveler",w:20},{k:"beldum",w:3}],reqBadges:7,trainers:[{n:"등산가 무네지",em:"👤",pokemon:[{k:"zubat",l:32},{k:"geodude",l:34}],reward:1020},{n:"산악인 마사호",em:"👤",pokemon:[{k:"golbat",l:35},{k:"graveler",l:36}],reward:1080},{n:"사이킥 하린",em:"👤",pokemon:[{k:"golbat",l:36}],reward:1080},{n:"블랙벨트 무사시",em:"👤",pokemon:[{k:"graveler",l:35},{k:"golbat",l:37}],reward:1110},{n:"포켓몬레인저 유우마",em:"👤",pokemon:[{k:"golbat",l:36},{k:"graveler",l:37},{k:"geodude",l:35}],reward:1110}]},
+{id:"h_r27",n:"챔피언로드",desc:"챔피언로드",hasCenter:false,hasShop:false,lv:[36,44],pokemon:[{k:"golbat",w:25},{k:"graveler",w:20},{k:"lairon",w:15},{k:"hariyama",w:15},{k:"medicham",w:15},{k:"loudred",w:10}],reqBadges:8,trainers:[{n:"블랙벨트 타카시",em:"👤",pokemon:[{k:"hariyama",l:38},{k:"medicham",l:38}],reward:1140},{n:"등산가 카쿠지",em:"👤",pokemon:[{k:"graveler",l:39},{k:"lairon",l:40}],reward:1200},{n:"사이킥 소이치",em:"👤",pokemon:[{k:"medicham",l:40}],reward:1200},{n:"배틀걸 사에",em:"👤",pokemon:[{k:"hariyama",l:40},{k:"loudred",l:41}],reward:1230},{n:"산악인 대길",em:"👤",pokemon:[{k:"lairon",l:41},{k:"golbat",l:42}],reward:1260},{n:"포켓몬레인저 은총",em:"👤",pokemon:[{k:"golbat",l:42},{k:"graveler",l:43},{k:"medicham",l:43}],reward:1290},{n:"블랙벨트 태웅",em:"👤",pokemon:[{k:"hariyama",l:43},{k:"lairon",l:44}],reward:1320}]},
+{id:"h_c15",n:"사이유우시티",desc:"사이유우시티",isCity:true,hasCenter:true,hasShop:true,shopItems:["ultraball","maxpotion","fullrestore","fullheal","revive"],reqBadges:8,trainers:[]},
+{id:"h_r28",n:"공중의기둥",desc:"공중의기둥",hasCenter:false,hasShop:false,lv:[34,55],pokemon:[{k:"golbat",w:25},{k:"claydol",w:20},{k:"banette",w:20},{k:"altaria",w:15},{k:"dusclops",w:15},{k:"sableye",w:5}],reqBadges:8,trainers:[{n:"사이킥 지원",em:"👤",pokemon:[{k:"claydol",l:40},{k:"banette",l:42}],reward:1260},{n:"등산가 헤이지",em:"👤",pokemon:[{k:"golbat",l:42},{k:"altaria",l:44}],reward:1320},{n:"배틀걸 나레",em:"👤",pokemon:[{k:"dusclops",l:44},{k:"banette",l:45}],reward:1350},{n:"포켓몬레인저 시온",em:"👤",pokemon:[{k:"altaria",l:45},{k:"claydol",l:46}],reward:1380},{n:"블랙벨트 무사시",em:"👤",pokemon:[{k:"golbat",l:46},{k:"dusclops",l:48}],reward:1440},{n:"산악인 카쿠스이",em:"👤",pokemon:[{k:"banette",l:48},{k:"sableye",l:50},{k:"altaria",l:52}],reward:1560}]}
 ]},
 sinnoh: {
     n: "신오지방", em: "⛰️",
