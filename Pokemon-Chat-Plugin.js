@@ -4388,6 +4388,27 @@ var SWARM_DATA = {
         {road:"j_r5", pokemon:"dunsparce", lv:[10,14]},
         {road:"j_r6", pokemon:"snubbull", lv:[12,16]},
         {road:"j_r8", pokemon:"marill", lv:[14,18]}
+    ],
+    sinnoh: [
+        {road:"s_r1", pokemon:"doduo", lv:[3,6]},
+        {road:"s_r2", pokemon:"natu", lv:[3,6]},
+        {road:"s_r3", pokemon:"ralts", lv:[5,8]},
+        {road:"s_r6", pokemon:"slakoth", lv:[6,10]},
+        {road:"s_r8", pokemon:"surskit", lv:[10,14]},
+        {road:"s_r9", pokemon:"drowzee", lv:[10,14]},
+        {road:"s_r10", pokemon:"absol", lv:[14,18]},
+        {road:"s_r12", pokemon:"dunsparce", lv:[16,20]},
+        {road:"s_r13", pokemon:"spoink", lv:[16,22]},
+        {road:"s_r14", pokemon:"swablu", lv:[20,25]},
+        {road:"s_r15", pokemon:"makuhita", lv:[22,26]},
+        {road:"s_r16", pokemon:"beldum", lv:[22,28]},
+        {road:"s_r17", pokemon:"nosepass", lv:[22,28]},
+        {road:"s_r21", pokemon:"snorunt", lv:[32,38]},
+        {road:"s_r22", pokemon:"delibird", lv:[34,40]},
+        {road:"s_r26", pokemon:"electabuzz", lv:[38,42]},
+        {road:"s_r31", pokemon:"tyrogue", lv:[50,55]},
+        {road:"s_r34", pokemon:"cacnea", lv:[50,56]},
+        {road:"s_r35", pokemon:"pinsir", lv:[50,56]}
     ]
 };
 
@@ -4464,7 +4485,25 @@ var FISHING_DATA = {
 "h_c6":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"tentacool",w:40},{k:"wailmer",w:35}]},super:{lv:[25,40],pokemon:[{k:"wailmer",w:25},{k:"sharpedo",w:20},{k:"staryu",w:20},{k:"tentacruel",w:20},{k:"gyarados",w:15}]}},
 "h_c12":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"tentacool",w:40},{k:"wailmer",w:35}]},super:{lv:[25,40],pokemon:[{k:"wailmer",w:25},{k:"sharpedo",w:20},{k:"staryu",w:20},{k:"tentacruel",w:20},{k:"gyarados",w:15}]}},
 "h_c_pacifidlog":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"tentacool",w:35},{k:"horsea",w:40}]},super:{lv:[25,40],pokemon:[{k:"horsea",w:20},{k:"wailmer",w:20},{k:"sharpedo",w:15},{k:"corsola",w:15},{k:"relicanth",w:15},{k:"gyarados",w:10},{k:"seadra",w:5}]}},
-"j_r_safari":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[15,25],pokemon:[{k:"goldeen",w:35},{k:"poliwag",w:30},{k:"magikarp",w:20},{k:"psyduck",w:15}]},super:{lv:[25,40],pokemon:[{k:"seaking",w:25},{k:"poliwhirl",w:20},{k:"golduck",w:20},{k:"gyarados",w:15},{k:"dragonair",w:5},{k:"dratini",w:15}]}}
+"j_r_safari":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[15,25],pokemon:[{k:"goldeen",w:35},{k:"poliwag",w:30},{k:"magikarp",w:20},{k:"psyduck",w:15}]},super:{lv:[25,40],pokemon:[{k:"seaking",w:25},{k:"poliwhirl",w:20},{k:"golduck",w:20},{k:"gyarados",w:15},{k:"dragonair",w:5},{k:"dratini",w:15}]}},
+// ── 신오 ──
+"s_r7":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,20],pokemon:[{k:"magikarp",w:30},{k:"goldeen",w:35},{k:"finneon",w:35}]},super:{lv:[20,35],pokemon:[{k:"gyarados",w:15},{k:"seaking",w:20},{k:"lumineon",w:20},{k:"golduck",w:20},{k:"barboach",w:15},{k:"whiscash",w:10}]}},
+"s_r8":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,20],pokemon:[{k:"magikarp",w:30},{k:"goldeen",w:35},{k:"finneon",w:35}]},super:{lv:[20,35],pokemon:[{k:"gyarados",w:15},{k:"seaking",w:20},{k:"lumineon",w:20},{k:"golduck",w:20},{k:"barboach",w:15},{k:"whiscash",w:10}]}},
+"s_r_fuego":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:30},{k:"goldeen",w:35},{k:"finneon",w:35}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"seaking",w:20},{k:"lumineon",w:20},{k:"golduck",w:20},{k:"barboach",w:15},{k:"whiscash",w:10}]}},
+"s_c2":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,20],pokemon:[{k:"magikarp",w:30},{k:"goldeen",w:35},{k:"finneon",w:35}]},super:{lv:[20,35],pokemon:[{k:"gyarados",w:15},{k:"seaking",w:20},{k:"lumineon",w:20},{k:"golduck",w:20},{k:"barboach",w:15},{k:"whiscash",w:10}]}},
+"s_r19":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"barboach",w:40},{k:"goldeen",w:35}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"whiscash",w:20},{k:"seaking",w:20},{k:"golduck",w:15},{k:"feebas",w:15},{k:"barboach",w:15}]}},
+"s_r20":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"tentacool",w:40},{k:"finneon",w:35}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"tentacruel",w:20},{k:"lumineon",w:20},{k:"floatzel",w:20},{k:"gastrodon",w:15},{k:"octillery",w:10}]}},
+"s_c11":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"tentacool",w:40},{k:"finneon",w:35}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"tentacruel",w:20},{k:"lumineon",w:20},{k:"floatzel",w:20},{k:"gastrodon",w:15},{k:"octillery",w:10}]}},
+"s_r23":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"tentacool",w:40},{k:"finneon",w:35}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"tentacruel",w:20},{k:"lumineon",w:20},{k:"floatzel",w:20},{k:"gastrodon",w:15},{k:"octillery",w:10}]}},
+"s_r24":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:25},{k:"tentacool",w:35},{k:"finneon",w:40}]},super:{lv:[30,45],pokemon:[{k:"gyarados",w:15},{k:"tentacruel",w:20},{k:"lumineon",w:15},{k:"sealeo",w:15},{k:"floatzel",w:15},{k:"wailmer",w:10},{k:"mantyke",w:10}]}},
+"s_r27":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:25},{k:"tentacool",w:35},{k:"finneon",w:40}]},super:{lv:[30,45],pokemon:[{k:"gyarados",w:15},{k:"tentacruel",w:20},{k:"lumineon",w:15},{k:"sealeo",w:15},{k:"floatzel",w:15},{k:"wailmer",w:10},{k:"mantyke",w:10}]}},
+"s_r_lakeverity":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,20],pokemon:[{k:"magikarp",w:30},{k:"goldeen",w:40},{k:"finneon",w:30}]},super:{lv:[20,35],pokemon:[{k:"gyarados",w:15},{k:"seaking",w:25},{k:"golduck",w:25},{k:"lumineon",w:20},{k:"barboach",w:15}]}},
+"s_r_lakevalor":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:30},{k:"goldeen",w:35},{k:"finneon",w:35}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"seaking",w:20},{k:"golduck",w:20},{k:"lumineon",w:20},{k:"barboach",w:15},{k:"whiscash",w:10}]}},
+"s_r_lakeacuity":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:30},{k:"goldeen",w:35},{k:"finneon",w:35}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"seaking",w:20},{k:"golduck",w:20},{k:"lumineon",w:20},{k:"barboach",w:15},{k:"whiscash",w:10}]}},
+"s_r_greatmarsh":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"goldeen",w:35},{k:"barboach",w:40}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"whiscash",w:20},{k:"seaking",w:20},{k:"golduck",w:20},{k:"carvanha",w:15},{k:"barboach",w:10}]}},
+"s_c10":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"goldeen",w:35},{k:"barboach",w:40}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"whiscash",w:20},{k:"seaking",w:20},{k:"golduck",w:20},{k:"carvanha",w:15},{k:"barboach",w:10}]}},
+"s_r32":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:20},{k:"tentacool",w:40},{k:"finneon",w:40}]},super:{lv:[30,50],pokemon:[{k:"gyarados",w:15},{k:"tentacruel",w:20},{k:"lumineon",w:15},{k:"sealeo",w:15},{k:"floatzel",w:15},{k:"horsea",w:10},{k:"seadra",w:10}]}},
+"s_r36":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:20},{k:"tentacool",w:40},{k:"finneon",w:40}]},super:{lv:[30,50],pokemon:[{k:"gyarados",w:15},{k:"tentacruel",w:20},{k:"lumineon",w:15},{k:"sealeo",w:15},{k:"wailmer",w:15},{k:"wailord",w:5},{k:"horsea",w:15}]}}
 };
 
 function startWildBattle(road) {
