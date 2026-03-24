@@ -4651,8 +4651,8 @@ function generateRecurringTrainers(road, routeIdx) {
     var lvMin = road.lv ? road.lv[0] : 5;
     var lvMax = road.lv ? road.lv[1] : 10;
     var trainers = [];
-    var mIdx = (routeIdx * 2) % RC_MALE.length;
-    var fIdx = (routeIdx * 2) % RC_FEMALE.length;
+    var mIdx = routeIdx % RC_MALE.length;
+    var fIdx = routeIdx % RC_FEMALE.length;
     for (var t = 0; t < 2; t++) {
         var isMale = (t === 0);
         var charName = isMale ? RC_MALE[mIdx] : RC_FEMALE[fIdx];
