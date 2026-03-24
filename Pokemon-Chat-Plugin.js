@@ -4645,25 +4645,24 @@ function getRouteTitle(routeType, isMale, routeProgress) {
     return arr[stage];
 }
 
-function generateRouteTrainers(road, routeIdx) {
+function generateRecurringTrainers(road, routeIdx) {
     if (!road.pokemon || road.pokemon.length === 0) return [];
     var rType = inferRouteType(road);
     var lvMin = road.lv ? road.lv[0] : 5;
     var lvMax = road.lv ? road.lv[1] : 10;
-    var numT = 3 + Math.min(2, Math.floor(routeIdx / 8));
     var trainers = [];
-    for (var t = 0; t < numT; t++) {
-        var isMale = (t % 2 === 0);
-        var pool = isMale ? RC_MALE : RC_FEMALE;
-        var nIdx = (routeIdx * 2 + Math.floor(t / 2)) % pool.length;
-        var charName = pool[nIdx];
+    var mIdx = (routeIdx * 2) % RC_MALE.length;
+    var fIdx = (routeIdx * 2) % RC_FEMALE.length;
+    for (var t = 0; t < 2; t++) {
+        var isMale = (t === 0);
+        var charName = isMale ? RC_MALE[mIdx] : RC_FEMALE[fIdx];
         var title = getRouteTitle(rType, isMale, routeIdx);
         var numPoke = 1 + Math.min(2, Math.floor(routeIdx / 10));
         var pokeArr = [];
         for (var p = 0; p < numPoke; p++) {
             var pkIdx = (routeIdx * 3 + t * 7 + p * 5) % road.pokemon.length;
             var pk = road.pokemon[pkIdx].k;
-            var lv = lvMin + Math.round((lvMax - lvMin) * (t + p) / (numT + numPoke));
+            var lv = lvMin + Math.round((lvMax - lvMin) * (0.5 + p * 0.2));
             lv = Math.max(lvMin, Math.min(lvMax + 2, lv));
             pokeArr.push({k: pk, l: lv});
         }
@@ -4672,7 +4671,8 @@ function generateRouteTrainers(road, routeIdx) {
             n: title + " " + charName,
             em: isMale ? "👦" : "👧",
             pokemon: pokeArr,
-            reward: reward
+            reward: reward,
+            isRecurring: true
         });
     }
     return trainers;
@@ -4685,7 +4685,9 @@ function initRecurringTrainers() {
         for (var i = 0; i < roads.length; i++) {
             if (roads[i].isCity) continue;
             if (!roads[i].pokemon || roads[i].pokemon.length === 0) continue;
-            roads[i].trainers = generateRouteTrainers(roads[i], rIdx);
+            var recurring = generateRecurringTrainers(roads[i], rIdx);
+            var existing = roads[i].trainers || [];
+            roads[i].trainers = recurring.concat(existing);
             rIdx++;
         }
     }
