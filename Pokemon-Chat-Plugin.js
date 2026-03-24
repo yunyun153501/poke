@@ -6356,8 +6356,6 @@ function renderRoadDetail() {
             // 체육관 트레이너 표시
             var allTrainersDefeated = true;
             if (gym.gymTrainers) {
-                var showGymTrainers = !hasBadge || hasBadge;
-                if (showGymTrainers) {
                     for (var gti = 0; gti < gym.gymTrainers.length; gti++) {
                         var gtKey = gym.id + "_trainer_" + gti;
                         var gtDefVal = player.defeatedGyms[gtKey];
@@ -6384,7 +6382,6 @@ function renderRoadDetail() {
                         }
                         html += '</div>';
                     }
-                }
             }
             var canFightLeaders = !gym.gymTrainers || hasBadge || allTrainersDefeated;
             for (var li = 0; li < gym.leaders.length; li++) {
