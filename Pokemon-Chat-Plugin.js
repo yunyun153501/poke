@@ -5832,7 +5832,7 @@ function injectStyles() {
 ".pk-action-bar{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin:8px 0;}",
 ".pk-battle-msg{background:#000;border-radius:6px;padding:12px;margin:8px 0;max-height:360px;overflow-y:auto;font-size:14px;line-height:1.6;color:#aaa;}",
 ".pk-battle-msg p{margin:3px 0;} .pk-battle-msg p:first-child{color:#fff;}",
-".pk-log-entry{font-size:11px;padding:2px 0;color:#888;}",
+".pk-log-entry{font-size:13px;padding:3px 0;color:#888;}",
 ".pk-log-battle{color:#e74c3c;} .pk-log-exp{color:#f39c12;} .pk-log-levelup{color:#2ecc71;} .pk-log-learn{color:#3498db;} .pk-log-evolution{color:#9b59b6;} .pk-log-capture{color:#e67e22;} .pk-log-gold{color:#f5c518;} .pk-log-heal{color:#1abc9c;} .pk-log-item{color:#1abc9c;}",
 ".pk-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#2ecc71;color:#fff;padding:8px 20px;border-radius:8px;font-size:14px;z-index:9999;animation:pkToastIn .3s;}",
 "@keyframes pkToastIn{from{opacity:0;top:0}to{opacity:1;top:20px}}",
@@ -5842,7 +5842,7 @@ function injectStyles() {
 ".pk-dex-item.pk-dex-seen{border:1px solid rgba(39,174,96,0.4);}",
 ".pk-dex-item.pk-dex-caught{border:1px solid rgba(231,76,60,0.5);}",
 ".pk-dex-item.pk-dex-unseen{opacity:0.3;}",
-".pk-mini-log{background:rgba(0,0,0,0.4);border-top:1px solid rgba(255,255,255,0.1);border-radius:0 0 8px 8px;padding:6px 10px;margin-top:8px;max-height:100px;overflow-y:auto;}",
+".pk-mini-log{background:rgba(0,0,0,0.4);border-top:1px solid rgba(255,255,255,0.1);border-radius:0 0 8px 8px;padding:6px 10px;margin-top:8px;max-height:180px;overflow-y:auto;}",
 "@keyframes pulse{from{opacity:1}to{opacity:0.6}}",
 "@media screen and (max-width:960px){html,body{overflow:auto;} .pk-wrap{top:0;right:0;width:100%;max-height:100vh;border-radius:0;}}"
     ].join("\n");
@@ -5963,8 +5963,9 @@ function render() {
     if (player && gState && gState.log && gState.log.length > 0 && gState.subScreen !== "log") {
         html += '<div class="pk-mini-log"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><span style="font-size:10px;color:#888">📋 최근 로그</span><button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openLog">전체</button></div>';
         var _mlogs = gState.log;
+        var _mend = _mlogs.length - 1;
         var _mstart = Math.max(0, _mlogs.length - 5);
-        for (var _mi = _mstart; _mi < _mlogs.length; _mi++) {
+        for (var _mi = _mend; _mi >= _mstart; _mi--) {
             html += '<div class="pk-log-entry pk-log-' + _mlogs[_mi].type + '">' + _mlogs[_mi].msg + '</div>';
         }
         html += '</div>';
@@ -6099,11 +6100,11 @@ function renderOverworld() {
     }
     html += '</div>';
     // 로그 미니
-    html += '<div class="pk-card" style="max-height:160px;overflow-y:auto">';
+    html += '<div class="pk-card" style="max-height:250px;overflow-y:auto">';
     html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><span style="font-size:11px;color:#aaa">📋 로그</span>';
     html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openLog">전체</button></div>';
     var logs = gState.log || [];
-    for (var i = Math.max(0, logs.length - 3); i < logs.length; i++) {
+    for (var i = logs.length - 1; i >= Math.max(0, logs.length - 3); i--) {
         html += '<div class="pk-log-entry pk-log-' + logs[i].type + '">' + logs[i].msg + '</div>';
     }
     html += '</div>';
@@ -6691,7 +6692,7 @@ function renderLogScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">📋 이벤트 로그</div>';
     var logs = gState.log || [];
-    for (var i = 0; i < logs.length; i++) {
+    for (var i = logs.length - 1; i >= 0; i--) {
         html += '<div class="pk-log-entry pk-log-' + logs[i].type + '">' + logs[i].msg + '</div>';
     }
     return html;
