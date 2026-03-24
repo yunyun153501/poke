@@ -3930,6 +3930,12 @@ function addLog(msg, type) {
     _eventLog.push({msg:msg, type:type});
 }
 
+function rotateBattleMsg(bd) {
+    bd._msgHistory = bd._msgHistory || [];
+    if (bd.msg && bd.msg.length > 0) bd._msgHistory.push(bd.msg);
+    if (bd._msgHistory.length > 5) bd._msgHistory.shift();
+}
+
 // ═══════════════════════════════════════════════
 // 🌟 특성 헬퍼 함수
 // ═══════════════════════════════════════════════
@@ -5062,14 +5068,14 @@ function applyMoveEffects(move, attacker, defender, bd) {
             if (bd.lastPhysDmg && bd.lastPhysDmg > 0) {
                 var cDmg = bd.lastPhysDmg * 2;
                 defender.currentHp = Math.max(0, defender.currentHp - cDmg);
-                bd.msg.push(an + "의 카운터! " + cDmg + " 데미지!");
+                bd.msg.push(an + "의 카운터! " + cDmg + " 데미지! (" + defender.nickname + " " + Math.max(0, defender.currentHp) + "/" + defender.stats[0] + ")");
             } else { bd.msg.push("그러나 실패했다!"); }
         }
         else if (mv.ef === "mirrorcoat") {
             if (bd.lastSpecDmg && bd.lastSpecDmg > 0) {
                 var mcDmg = bd.lastSpecDmg * 2;
                 defender.currentHp = Math.max(0, defender.currentHp - mcDmg);
-                bd.msg.push(an + "의 미러코트! " + mcDmg + " 데미지!");
+                bd.msg.push(an + "의 미러코트! " + mcDmg + " 데미지! (" + defender.nickname + " " + Math.max(0, defender.currentHp) + "/" + defender.stats[0] + ")");
             } else { bd.msg.push("그러나 실패했다!"); }
         }
         else if (mv.ef === "heal" || mv.ef === "rest") {
@@ -5104,7 +5110,7 @@ function canAct(poke, bd) {
             if (Math.random() < 0.33) {
                 var selfDmg = Math.max(1, Math.floor(poke.stats[1] * 0.1));
                 poke.currentHp = Math.max(0, poke.currentHp - selfDmg);
-                bd.msg.push("혼란 속에 스스로를 공격했다! " + selfDmg + " 데미지!");
+                bd.msg.push("혼란 속에 스스로를 공격했다! " + selfDmg + " 데미지! (" + poke.nickname + " " + Math.max(0, poke.currentHp) + "/" + poke.stats[0] + ")");
                 return false;
             }
         }
@@ -5222,7 +5228,7 @@ function executeAttack(attacker, defender, moveKey, bd) {
         else if (result.eff < 1 && result.eff > 0) effMsg = " 효과가 별로였다...";
         else if (result.eff === 0) effMsg = " 효과가 없는 것 같다...";
         var critMsg = result.crit ? " 급소에 맞았다!" : "";
-        bd.msg.push(result.dmg + " 데미지! (" + Math.max(0, defender.currentHp) + "/" + defender.stats[0] + ")" + critMsg + effMsg);
+        bd.msg.push(result.dmg + " 데미지! (" + defender.nickname + " " + Math.max(0, defender.currentHp) + "/" + defender.stats[0] + ")" + critMsg + effMsg);
         checkBerryAfterDamage(defender, bd);
         if (mv.ef === "drain") {
             var heal = Math.max(1, Math.floor(result.dmg / 2));
@@ -5312,6 +5318,7 @@ function executeTurn(playerMoveKey) {
     var bd = gState.battleData;
     var myPoke = player.party[bd.myIdx];
     var enemy = bd.enemy;
+    rotateBattleMsg(bd);
     bd.msg = [];
     bd.turn++;
     var mySpd = myPoke.stats[5] * getStatMult(myPoke.statStages.spd);
@@ -5555,6 +5562,7 @@ function attemptCapture(ballKey) {
     var enemy = bd.enemy;
     var ball = ITEMS[ballKey];
     if (!ball || ball.type !== "ball") return;
+    rotateBattleMsg(bd);
     bd.msg = [];
     player.bag[ballKey] = (player.bag[ballKey] || 0) - 1;
     if (player.bag[ballKey] <= 0) delete player.bag[ballKey];
@@ -5633,10 +5641,12 @@ function tryRun() {
     if (!gState || !gState.battleData) return;
     var bd = gState.battleData;
     if (bd.type === "trainer") {
+        rotateBattleMsg(bd);
         bd.msg = ["트레이너전에서는 도망칠 수 없다!"];
         for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
         return;
     }
+    rotateBattleMsg(bd);
     bd.msg = [];
     var myPoke = player.party[bd.myIdx];
     var mySpd = myPoke.stats[5]; var enSpd = bd.enemy.stats[5];
@@ -5818,8 +5828,8 @@ function injectStyles() {
 ".pk-poke-emoji{font-size:32px;margin:4px 0;}",
 ".pk-move-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:6px 0;}",
 ".pk-action-bar{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin:8px 0;}",
-".pk-battle-msg{background:#000;border-radius:6px;padding:8px;margin:8px 0;max-height:240px;overflow-y:auto;font-size:12px;color:#aaa;}",
-".pk-battle-msg p{margin:2px 0;} .pk-battle-msg p:first-child{color:#fff;}",
+".pk-battle-msg{background:#000;border-radius:6px;padding:12px;margin:8px 0;max-height:360px;overflow-y:auto;font-size:14px;line-height:1.6;color:#aaa;}",
+".pk-battle-msg p{margin:3px 0;} .pk-battle-msg p:first-child{color:#fff;}",
 ".pk-log-entry{font-size:11px;padding:2px 0;color:#888;}",
 ".pk-log-battle{color:#e74c3c;} .pk-log-exp{color:#f39c12;} .pk-log-levelup{color:#2ecc71;} .pk-log-learn{color:#3498db;} .pk-log-evolution{color:#9b59b6;} .pk-log-capture{color:#e67e22;} .pk-log-gold{color:#f5c518;} .pk-log-heal{color:#1abc9c;} .pk-log-item{color:#1abc9c;}",
 ".pk-toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#2ecc71;color:#fff;padding:8px 20px;border-radius:8px;font-size:14px;z-index:9999;animation:pkToastIn .3s;}",
@@ -5951,14 +5961,16 @@ function render() {
     if (player && gState && gState.log && gState.log.length > 0 && gState.subScreen !== "log") {
         html += '<div class="pk-mini-log"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><span style="font-size:10px;color:#888">📋 최근 로그</span><button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openLog">전체</button></div>';
         var _mlogs = gState.log;
-        var _mcount = Math.min(_mlogs.length, 5);
-        for (var _mi = 0; _mi < _mcount; _mi++) {
+        var _mstart = Math.max(0, _mlogs.length - 5);
+        for (var _mi = _mstart; _mi < _mlogs.length; _mi++) {
             html += '<div class="pk-log-entry pk-log-' + _mlogs[_mi].type + '">' + _mlogs[_mi].msg + '</div>';
         }
         html += '</div>';
     }
     body.innerHTML = html;
     bindHandlers(body);
+    var battleMsgEl = body.querySelector(".pk-battle-msg");
+    if (battleMsgEl) battleMsgEl.scrollTop = battleMsgEl.scrollHeight;
 }
 
 function renderTitleScreen() {
@@ -6329,6 +6341,12 @@ function renderBattleScreen() {
     html += '</div></div>';
     // 배틀 메시지
     html += '<div class="pk-battle-msg">';
+    if (bd._msgHistory && bd._msgHistory.length > 0) {
+        for (var hi = 0; hi < bd._msgHistory.length; hi++) {
+            for (var hj = 0; hj < bd._msgHistory[hi].length; hj++) html += '<p style="color:#666">' + bd._msgHistory[hi][hj] + '</p>';
+            html += '<hr style="border:none;border-top:1px solid #333;margin:4px 0">';
+        }
+    }
     for (var i = 0; i < bd.msg.length; i++) html += '<p>' + bd.msg[i] + '</p>';
     html += '</div>';
     if (bd.won || bd.caught || bd.fled) {
@@ -7261,6 +7279,7 @@ window.poke_switchInBattle = async function(idx) {
         }
         if (!alreadyIn) bd.battleParticipants.push(idx);
     }
+    rotateBattleMsg(bd);
     bd.msg = [];
     gState.subScreen = null;
     if (prev && prev.currentHp > 0) {
@@ -7594,6 +7613,7 @@ window.poke_megaEvolve = async function() {
     myPoke.currentHp = Math.max(1, Math.floor(megaStats[0] * hpRatio));
     myPoke.megaTypes = megaForm.t;
     myPoke.megaNickname = megaForm.n;
+    rotateBattleMsg(bd);
     bd.msg = [myPoke.nickname + "이(가) 메가진화했다! → " + megaForm.n + "!"];
     for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
     await saveAll();
@@ -7709,6 +7729,7 @@ window.poke_useBattleItem = async function(itemKey) {
     if (used) {
         var activePoke = player.party[bd.myIdx];
         gState.subScreen = null;
+        rotateBattleMsg(bd);
         bd.msg = [activePoke.nickname + "에게 " + item.n + "을(를) 사용했다!"];
         var emk = enemyChooseMove(bd.enemy);
         if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, player.party[bd.myIdx], emk, bd);
