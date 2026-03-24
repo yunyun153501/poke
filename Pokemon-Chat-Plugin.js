@@ -2232,26 +2232,44 @@ kalos: {
 var GYMS = {
 kanto: [
     {id:"k_gym1",city:"니비시티",n:"니비시티 체육관",type:"rock",badge:"회색뱃지",badgeEm:"🪨",
-     leaders:[{id:"brock",n:"타케시",em:"🏋️",gen:1,pokemon:[{k:"graveler",l:51},{k:"rhyhorn",l:51},{k:"omastar",l:53},{k:"onix",l:54},{k:"kabutops",l:52}],reward:5400,rewardItems:["tm39_rockslide"]}]},
+     leaders:[
+        {id:"brock_rgb",n:"타케시",em:"🏋️",gen:1,pokemon:[{k:"geodude",l:12},{k:"onix",l:14}],reward:1400,rewardItems:["tm39_rockslide"]},
+        {id:"brock_hgss",n:"타케시",em:"🏋️",gen:2,pokemon:[{k:"graveler",l:51},{k:"rhyhorn",l:51},{k:"omastar",l:53},{k:"onix",l:54},{k:"kabutops",l:52}],reward:5400}
+     ]},
     {id:"k_gym2",city:"하나다시티",n:"하나다시티 체육관",type:"water",badge:"블루뱃지",badgeEm:"💧",
-     leaders:[{id:"misty",n:"카스미",em:"💧",gen:1,pokemon:[{k:"golduck",l:49},{k:"quagsire",l:49},{k:"lapras",l:52},{k:"starmie",l:54}],reward:5400,rewardItems:["tm55_scald"]}]},
+     leaders:[
+        {id:"misty_rgb",n:"카스미",em:"💧",gen:1,pokemon:[{k:"staryu",l:18},{k:"starmie",l:21}],reward:2100,rewardItems:["tm55_scald"]},
+        {id:"misty_hgss",n:"카스미",em:"💧",gen:2,pokemon:[{k:"golduck",l:49},{k:"quagsire",l:49},{k:"lapras",l:52},{k:"starmie",l:54}],reward:5400}
+     ]},
     {id:"k_gym3",city:"쿠치바시티",n:"쿠치바시티 체육관",type:"electric",badge:"오렌지뱃지",badgeEm:"⚡",
-     leaders:[{id:"surge",n:"마치스",em:"⚡",gen:1,pokemon:[{k:"raichu",l:51},{k:"electrode",l:47},{k:"magneton",l:47},{k:"electabuzz",l:53}],reward:5300,rewardItems:["tm73_thunderwave"]}]},
+     leaders:[
+        {id:"surge_rgb",n:"마치스",em:"⚡",gen:1,pokemon:[{k:"voltorb",l:21},{k:"pikachu",l:18},{k:"raichu",l:24}],reward:2400,rewardItems:["tm73_thunderwave"]},
+        {id:"surge_hgss",n:"마치스",em:"⚡",gen:2,pokemon:[{k:"raichu",l:51},{k:"electrode",l:47},{k:"magneton",l:47},{k:"electabuzz",l:53}],reward:5300}
+     ]},
     {id:"k_gym4",city:"타마무시시티",n:"타마무시시티 체육관",type:"grass",badge:"레인보우뱃지",badgeEm:"🌈",
-     leaders:[{id:"erika",n:"에리카",em:"🌿",gen:1,pokemon:[{k:"jumpluff",l:51},{k:"tangela",l:52},{k:"victreebel",l:56},{k:"bellossom",l:56}],reward:5600,rewardItems:["tm86_grassknot"]}]},
+     leaders:[
+        {id:"erika_rgb",n:"에리카",em:"🌿",gen:1,pokemon:[{k:"victreebel",l:29},{k:"tangela",l:24},{k:"vileplume",l:29}],reward:2900,rewardItems:["tm86_grassknot"]},
+        {id:"erika_hgss",n:"에리카",em:"🌿",gen:2,pokemon:[{k:"jumpluff",l:51},{k:"tangela",l:52},{k:"victreebel",l:56},{k:"bellossom",l:56}],reward:5600}
+     ]},
     {id:"k_gym5",city:"세키치쿠시티",n:"세키치쿠시티 체육관",type:"poison",badge:"핑크뱃지",badgeEm:"☠️",
      leaders:[
-        {id:"koga",n:"쿄우",em:"☠️",gen:1,pokemon:[{k:"ariados",l:47},{k:"venomoth",l:47},{k:"forretress",l:50},{k:"muk",l:50},{k:"crobat",l:52}],reward:5200,rewardItems:["tm06_toxic"]},
-        {id:"janine",n:"안즈",em:"🥷",gen:2,pokemon:[{k:"crobat",l:47},{k:"weezing",l:44},{k:"ariados",l:47},{k:"venomoth",l:50}],reward:5000}
+        {id:"koga_rgb",n:"쿄우",em:"☠️",gen:1,pokemon:[{k:"koffing",l:37},{k:"muk",l:39},{k:"koffing",l:37},{k:"weezing",l:43}],reward:3700,rewardItems:["tm06_toxic"]},
+        {id:"janine_hgss",n:"안즈",em:"🥷",gen:2,pokemon:[{k:"crobat",l:47},{k:"weezing",l:44},{k:"ariados",l:47},{k:"venomoth",l:50}],reward:5000}
      ]},
     {id:"k_gym6",city:"야마부키시티",n:"야마부키시티 체육관",type:"psychic",badge:"골드뱃지",badgeEm:"🔮",
-     leaders:[{id:"sabrina",n:"나츠메",em:"🔮",gen:1,pokemon:[{k:"espeon",l:53},{k:"mrmime",l:53},{k:"alakazam",l:55}],reward:5500,rewardItems:["tm29_psychic"]}]},
+     leaders:[
+        {id:"sabrina_rgb",n:"나츠메",em:"🔮",gen:1,pokemon:[{k:"kadabra",l:38},{k:"mrmime",l:37},{k:"venomoth",l:38},{k:"alakazam",l:43}],reward:4300,rewardItems:["tm29_psychic"]},
+        {id:"sabrina_hgss",n:"나츠메",em:"🔮",gen:2,pokemon:[{k:"espeon",l:53},{k:"mrmime",l:53},{k:"alakazam",l:55}],reward:5500}
+     ]},
     {id:"k_gym7",city:"구레네섬",n:"구레네섬 체육관",type:"fire",badge:"크림슨뱃지",badgeEm:"🔥",
-     leaders:[{id:"blaine",n:"카츠라",em:"🔥",gen:1,pokemon:[{k:"magcargo",l:54},{k:"magmar",l:54},{k:"rapidash",l:59}],reward:5900,rewardItems:["tm35_flamethrower"]}]},
+     leaders:[
+        {id:"blaine_rgb",n:"카츠라",em:"🔥",gen:1,pokemon:[{k:"growlithe",l:42},{k:"ponyta",l:40},{k:"rapidash",l:42},{k:"arcanine",l:47}],reward:4700,rewardItems:["tm35_flamethrower"]},
+        {id:"blaine_hgss",n:"카츠라",em:"🔥",gen:2,pokemon:[{k:"magcargo",l:54},{k:"magmar",l:54},{k:"rapidash",l:59}],reward:5900}
+     ]},
     {id:"k_gym8",city:"토키와시티",n:"토키와시티 체육관",type:"ground",badge:"그린뱃지",badgeEm:"🌍",
      leaders:[
-        {id:"giovanni",n:"사카키",em:"🦹",gen:1,pokemon:[{k:"nidoking",l:55},{k:"nidoqueen",l:55},{k:"dugtrio",l:53},{k:"rhyhorn",l:52},{k:"rhydon",l:58}],reward:7500,rewardItems:["tm26_earthquake","masterball"]},
-        {id:"blue",n:"그린",em:"🏆",gen:2,pokemon:[{k:"pidgeot",l:56},{k:"alakazam",l:54},{k:"rhydon",l:56},{k:"gyarados",l:58},{k:"arcanine",l:58},{k:"exeggutor",l:58}],reward:8000}
+        {id:"giovanni_rgb",n:"사카키",em:"🦹",gen:1,pokemon:[{k:"rhyhorn",l:45},{k:"dugtrio",l:42},{k:"nidoqueen",l:44},{k:"nidoking",l:45},{k:"rhydon",l:50}],reward:6500,rewardItems:["tm26_earthquake","masterball"]},
+        {id:"blue_hgss",n:"그린",em:"🏆",gen:2,pokemon:[{k:"pidgeot",l:56},{k:"alakazam",l:54},{k:"rhydon",l:56},{k:"gyarados",l:58},{k:"arcanine",l:58},{k:"exeggutor",l:58}],reward:8000}
      ]}
 ],
 johto: [
@@ -6140,11 +6158,12 @@ window.poke_startEvolve = function(idx) {
 };
 
 window.poke_openSaveSlots = function() { 
-    if (gState) gState.subScreen = "saveSlots";
-    else gState = {phase:"overworld", subScreen:"saveSlots", battleData:null, pendingEvo:null, pendingMoveLearn:null, eventLog:[], log:[]};
+    if (gState) { gState.subScreen = "saveSlots"; gState._confirmLoadSlot = null; }
+    else gState = {phase:"overworld", subScreen:"saveSlots", battleData:null, pendingEvo:null, pendingMoveLearn:null, eventLog:[], log:[], _confirmLoadSlot:null};
     render(); 
     (async function() {
         var slotHtml = '';
+        var confirmSlot = gState._confirmLoadSlot;
         for (var si = 1; si <= 3; si++) {
             var info = await getSlotInfo(si);
             slotHtml += '<div class="pk-card" style="margin:6px 0;padding:10px">';
@@ -6159,12 +6178,25 @@ window.poke_openSaveSlots = function() {
             slotHtml += '</div><div style="display:flex;gap:4px">';
             if (player) slotHtml += '<button class="pk-btn pk-btn-blue pk-btn-xs" data-action="poke_saveToSlot" data-args="' + si + '">저장</button>';
             if (info.exists) {
-                slotHtml += '<button class="pk-btn pk-btn-green pk-btn-xs" data-action="poke_loadFromSlot" data-args="' + si + '">불러오기</button>';
+                if (confirmSlot === si) {
+                    slotHtml += '<button class="pk-btn pk-btn-green pk-btn-xs" data-action="poke_confirmLoadSlot" data-args="' + si + '" style="animation:pulse 0.5s infinite alternate">⚠️ 확인! 불러오기</button>';
+                    slotHtml += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_cancelLoadSlot">취소</button>';
+                } else {
+                    slotHtml += '<button class="pk-btn pk-btn-green pk-btn-xs" data-action="poke_loadFromSlot" data-args="' + si + '">불러오기</button>';
+                }
                 slotHtml += '<button class="pk-btn pk-btn-red pk-btn-xs" data-action="poke_deleteSlot" data-args="' + si + '">삭제</button>';
             }
-            slotHtml += '</div></div></div>';
+            slotHtml += '</div></div>';
+            if (confirmSlot === si) {
+                slotHtml += '<div style="font-size:11px;color:#e74c3c;margin-top:4px;padding:4px 8px;background:rgba(231,76,60,0.1);border-radius:4px">⚠️ 현재 진행 상황이 이 슬롯 데이터로 교체됩니다! 현재 상태는 자동 백업됩니다.</div>';
+            }
+            slotHtml += '</div>';
         }
-        slotHtml += '<div style="color:#888;font-size:11px;margin-top:8px">💡 자동 저장은 기존 방식대로 유지됩니다. 슬롯은 별도 백업용입니다.</div>';
+        slotHtml += '<div style="color:#888;font-size:11px;margin-top:8px;line-height:1.5">';
+        slotHtml += '💡 <b>슬롯 사용법:</b> 게임은 항상 자동 저장됩니다.<br>';
+        slotHtml += '슬롯은 <span style="color:#3498db">특정 시점을 기억</span>해두는 체크포인트입니다.<br>';
+        slotHtml += '예: 관장전 전에 저장 → 지면 불러오기로 되돌리기';
+        slotHtml += '</div>';
         var slotEl = document.getElementById("pk-slot-list");
         if (slotEl) { slotEl.innerHTML = slotHtml; var body = slotEl.closest("#pk-body"); if (body) bindHandlers(body); }
     })();
@@ -6177,15 +6209,44 @@ window.poke_saveToSlot = async function(slotNum) {
     window.poke_openSaveSlots();
 };
 
-window.poke_loadFromSlot = async function(slotNum) {
-    var ok = await loadSlot(parseInt(slotNum));
+// 1단계: 불러오기 버튼 클릭 → 확인 상태로 전환
+window.poke_loadFromSlot = function(slotNum) {
+    gState._confirmLoadSlot = parseInt(slotNum);
+    window.poke_openSaveSlots();
+};
+
+// 취소
+window.poke_cancelLoadSlot = function() {
+    gState._confirmLoadSlot = null;
+    window.poke_openSaveSlots();
+};
+
+// 2단계: 확인 클릭 → 현재 상태 자동 백업 후 실제 로드
+window.poke_confirmLoadSlot = async function(slotNum) {
+    slotNum = parseInt(slotNum);
+    // 현재 진행 상태를 빈 슬롯에 자동 백업
+    if (player) {
+        var backupSlot = 0;
+        for (var bs = 3; bs >= 1; bs--) {
+            var binfo = await getSlotInfo(bs);
+            if (!binfo.exists) { backupSlot = bs; break; }
+        }
+        if (backupSlot > 0 && backupSlot !== slotNum) {
+            await saveSlot(backupSlot);
+            addLog("💾 현재 상태가 슬롯 " + backupSlot + "에 자동 백업되었습니다.", "info");
+        }
+    }
+    var ok = await loadSlot(slotNum);
     if (ok) {
         await saveAll();
+        gState._confirmLoadSlot = null;
         showToast("슬롯 " + slotNum + "에서 로드 완료!");
         gState.subScreen = null;
         render();
     } else {
         showToast("로드 실패!");
+        gState._confirmLoadSlot = null;
+        window.poke_openSaveSlots();
     }
 };
 
