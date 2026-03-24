@@ -2651,7 +2651,7 @@ var _eventLog = [];
 function createNewPlayer(name, starterKey, region) {
     var starter = createPokemonInstance(starterKey, 5);
     var dex = {};
-    dex[starterKey] = true;
+    dex[starterKey] = "caught";
     return {
         name: name || "레드",
         party: [starter],
@@ -3367,7 +3367,7 @@ function startLegendaryBattle(legendaryKey, level) {
     if (!player || !gState) return false;
     var wildPoke = createPokemonInstance(legendaryKey, level);
     if (!wildPoke) return false;
-    if (player.pokedex) player.pokedex[legendaryKey] = true;
+    if (player.pokedex) { if (!player.pokedex[legendaryKey]) player.pokedex[legendaryKey] = "seen"; }
     var myIdx = 0;
     for (var i = 0; i < player.party.length; i++) {
         if (player.party[i].currentHp > 0) { myIdx = i; break; }
@@ -3481,7 +3481,7 @@ function startWildBattle(road) {
     var wildPoke = createPokemonInstance(chosen, lv);
     if (!wildPoke) return false;
     // 도감 등록
-    if (player.pokedex) player.pokedex[chosen] = true;
+    if (player.pokedex) { if (!player.pokedex[chosen]) player.pokedex[chosen] = "seen"; }
     var myIdx = 0;
     for (var i = 0; i < player.party.length; i++) {
         if (player.party[i].currentHp > 0) { myIdx = i; break; }
@@ -3563,7 +3563,7 @@ function startTrainerBattle(road, trainerIdx) {
     }
     // 도감 등록
     for (var i = 0; i < enemyParty.length; i++) {
-        if (player.pokedex) player.pokedex[enemyParty[i].key] = true;
+        if (player.pokedex) { if (!player.pokedex[enemyParty[i].key]) player.pokedex[enemyParty[i].key] = "seen"; }
     }
     return true;
 }
@@ -3626,7 +3626,7 @@ function startGymBattle(regionKey, gymIdx, leaderIdx) {
         gState.battleData.msg.push(myFirstG.nickname + "의 위협! " + enemyParty[0].nickname + "의 공격이 떨어졌다!");
     }
     for (var i = 0; i < enemyParty.length; i++) {
-        if (player.pokedex) player.pokedex[enemyParty[i].key] = true;
+        if (player.pokedex) { if (!player.pokedex[enemyParty[i].key]) player.pokedex[enemyParty[i].key] = "seen"; }
     }
     return true;
 }
@@ -3901,7 +3901,7 @@ function executeAttack(attacker, defender, moveKey, bd) {
         else if (result.eff < 1 && result.eff > 0) effMsg = " 효과가 별로였다...";
         else if (result.eff === 0) effMsg = " 효과가 없는 것 같다...";
         var critMsg = result.crit ? " 급소에 맞았다!" : "";
-        bd.msg.push(result.dmg + " 데미지!" + critMsg + effMsg);
+        bd.msg.push(result.dmg + " 데미지! (" + Math.max(0, defender.currentHp) + "/" + defender.stats[0] + ")" + critMsg + effMsg);
         checkBerryAfterDamage(defender, bd);
         if (mv.ef === "drain") {
             var heal = Math.max(1, Math.floor(result.dmg / 2));
@@ -4034,7 +4034,7 @@ function executeTurn(playerMoveKey) {
                 bd.msg.push(bd.trainerName + "은(는) " + bd.enemy.nickname + "을(를) 내보냈다!");
                 grantExp(myPoke, enemy, false);
                 // 도감 등록
-                if (player.pokedex) player.pokedex[bd.enemy.key] = true;
+                if (player.pokedex) { if (!player.pokedex[bd.enemy.key]) player.pokedex[bd.enemy.key] = "seen"; }
             } else {
                 bd.won = true;
                 bd.msg.push(bd.trainerName + "에게 승리했다!");
@@ -4101,7 +4101,6 @@ function grantExp(myPoke, enemy, isTrainerWin) {
             myPoke.exp -= needed;
             myPoke.level++;
             recalcStats(myPoke);
-            myPoke.currentHp = myPoke.stats[0];
             gState.battleData.msg.push("🎉 " + myPoke.nickname + "은(는) Lv." + myPoke.level + "이(가) 되었다!");
             addLog("🎉 " + myPoke.nickname + " Lv." + myPoke.level + "!", "levelup");
             checkNewMoves(myPoke);
@@ -4121,7 +4120,6 @@ function grantExp(myPoke, enemy, isTrainerWin) {
                     player.party[si].exp -= sNeeded;
                     player.party[si].level++;
                     recalcStats(player.party[si]);
-                    player.party[si].currentHp = player.party[si].stats[0];
                     bd.msg.push("🎉 " + player.party[si].nickname + "은(는) Lv." + player.party[si].level + "이(가) 되었다!");
                     addLog("🎉 " + player.party[si].nickname + " Lv." + player.party[si].level + "!", "levelup");
                     checkNewMoves(player.party[si]);
@@ -4185,8 +4183,9 @@ function checkEvolution(poke) {
     var data = POKEDEX[poke.key];
     if (!data || !data.e) return;
     if (poke.level >= data.e.l) {
-        gState.pendingEvo = {pokeIdx: findPartyIdx(poke), from: poke.key, to: data.e.to};
-        if (gState.battleData) gState.battleData.msg.push("✨ 어라...? " + poke.nickname + "의 모습이...?!");
+        poke.canEvolve = true;
+        if (gState.battleData) gState.battleData.msg.push("💡 " + poke.nickname + "은(는) 진화할 수 있게 되었다!");
+        addLog("💡 " + poke.nickname + "은(는) 진화할 수 있게 되었다!", "evolution");
     }
 }
 
@@ -4201,9 +4200,9 @@ function doEvolution() {
     poke.key = evo.to;
     poke.nickname = newData.n;
     recalcStats(poke);
-    poke.currentHp = poke.stats[0];
     addLog("🌟 " + oldName + "이(가) " + newData.n + "(으)로 진화했다!", "evolution");
-    if (player.pokedex) player.pokedex[evo.to] = true;
+    if (player.pokedex) player.pokedex[evo.to] = "caught";
+    poke.canEvolve = false;
     gState.pendingEvo = null;
     checkNewMoves(poke);
 }
@@ -4270,7 +4269,7 @@ function attemptCapture(ballKey) {
 function addCapturedPokemon(poke) {
     poke.statStages = {atk:0,def:0,spatk:0,spdef:0,spd:0,acc:0,eva:0};
     poke.status = null; poke.statusTurns = 0;
-    if (player.pokedex) player.pokedex[poke.key] = true;
+    if (player.pokedex) player.pokedex[poke.key] = "caught";
     // 전설/환상 포켓몬 잡으면 기록
     if (gState.battleData && gState.battleData.isLegendary) {
         player.caughtLegendaries[poke.key] = true;
@@ -4483,6 +4482,7 @@ function injectStyles() {
 ".pk-dex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:4px;}",
 ".pk-dex-item{background:rgba(255,255,255,0.05);border-radius:6px;padding:4px;text-align:center;font-size:10px;}",
 ".pk-dex-item.pk-dex-seen{border:1px solid rgba(39,174,96,0.4);}",
+".pk-dex-item.pk-dex-caught{border:1px solid rgba(231,76,60,0.5);}",
 ".pk-dex-item.pk-dex-unseen{opacity:0.3;}",
 ".pk-mini-log{background:rgba(0,0,0,0.4);border-top:1px solid rgba(255,255,255,0.1);border-radius:0 0 8px 8px;padding:6px 10px;margin-top:8px;max-height:100px;overflow-y:auto;}",
 "@media screen and (max-width:960px){html,body{overflow:auto;} .pk-wrap{top:0;right:0;width:100%;max-height:100vh;border-radius:0;}}"
@@ -4565,6 +4565,8 @@ function render() {
         html = renderItemPartySelect();
     } else if (gState.subScreen === "battlePartySwitch") {
         html = renderBattlePartySwitch();
+    } else if (gState.subScreen === "log") {
+        html = renderLogScreen();
     } else if (gState.phase === "battle") {
         html = renderBattleScreen();
     } else if (gState.subScreen === "party") {
@@ -4575,8 +4577,6 @@ function render() {
         html = renderShopScreen();
     } else if (gState.subScreen === "summary") {
         html = renderSummaryScreen();
-    } else if (gState.subScreen === "log") {
-        html = renderLogScreen();
     } else if (gState.subScreen === "pokedex") {
         html = renderPokedexScreen();
     } else if (gState.subScreen === "gyms") {
@@ -4593,6 +4593,10 @@ function render() {
         html = renderSaveSlots();
     } else if (gState.subScreen === "status") {
         html = renderStatusScreen();
+    } else if (gState.subScreen === "moveRelearner") {
+        html = renderMoveRelearnerScreen();
+    } else if (gState.subScreen === "moveRelearnerMoves") {
+        html = renderMoveRelearnerMovesScreen();
     } else {
         html = renderOverworld();
     }
@@ -4703,7 +4707,6 @@ function renderOverworld() {
     // 도구 버튼
     html += '<div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin:4px 0">';
     html += '<button class="pk-btn pk-btn-purple pk-btn-xs" data-action="poke_openParty">👥 파티</button>';
-    html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openPC">💻 PC</button>';
     html += '<button class="pk-btn pk-btn-yellow pk-btn-xs" data-action="poke_openBag">🎒 가방</button>';
     html += '<button class="pk-btn pk-btn-green pk-btn-xs" data-action="poke_openPokedex">📖 도감</button>';
     html += '<button class="pk-btn pk-btn-red pk-btn-xs" data-action="poke_openGyms">🏟️ 체육관</button>';
@@ -4835,6 +4838,8 @@ function renderRoadDetail() {
     html += '<div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin:8px 0">';
     if (road.hasCenter) html += '<button class="pk-btn pk-btn-blue pk-btn-sm" data-action="poke_center">🏥 포켓몬센터</button>';
     if (road.hasShop) html += '<button class="pk-btn pk-btn-green pk-btn-sm" data-action="poke_openShop">🏪 상점</button>';
+    if (road.isCity) html += '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_openPC">💻 PC</button>';
+    if (road.isCity) html += '<button class="pk-btn pk-btn-purple pk-btn-sm" data-action="poke_openMoveRelearner">📖 기술 생각해내기</button>';
     html += '<button class="pk-btn pk-btn-purple pk-btn-sm" data-action="poke_openParty">👥 파티</button>';
     html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_openBag">🎒 가방</button>';
     html += '</div>';
@@ -5021,8 +5026,14 @@ function renderPartyScreen() {
         if (p.status) html += '<span style="font-size:10px;color:#e74c3c">⚠️ ' + statusName(p.status) + '</span>';
         html += '</div></div>';
         html += '<div style="display:flex;gap:4px;margin:-6px 0 4px 36px">';
+        if (i > 0) html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_partyMoveUp" data-args="' + i + '">⬆️</button>';
+        if (i < player.party.length - 1) html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_partyMoveDown" data-args="' + i + '">⬇️</button>';
         html += '<button class="pk-btn pk-btn-blue pk-btn-xs" data-action="poke_giveBerry" data-args="' + i + '">🫐열매</button>';
         if (p.heldItem) html += '<button class="pk-btn pk-btn-yellow pk-btn-xs" data-action="poke_takeBerry" data-args="' + i + '">열매회수</button>';
+        var pData = POKEDEX[p.key];
+        if (p.canEvolve && pData && pData.e && p.level >= pData.e.l) {
+            html += '<button class="pk-btn pk-btn-green pk-btn-xs" data-action="poke_startEvolve" data-args="' + i + '">✨ 진화하기</button>';
+        }
         html += '</div>';
     }
     return html;
@@ -5275,6 +5286,72 @@ function renderLogScreen() {
     return html;
 }
 
+function getLearnableMoves(poke) {
+    var data = POKEDEX[poke.key];
+    if (!data || !data.ml) return [];
+    var result = [];
+    var levels = Object.keys(data.ml);
+    for (var li = 0; li < levels.length; li++) {
+        var lv = parseInt(levels[li]);
+        if (lv > poke.level) continue;
+        var moveKeys = data.ml[levels[li]];
+        if (typeof moveKeys === "string") moveKeys = [moveKeys];
+        for (var mi = 0; mi < moveKeys.length; mi++) {
+            var mk = moveKeys[mi];
+            var knows = false;
+            for (var j = 0; j < poke.moves.length; j++) {
+                if (poke.moves[j].key === mk) { knows = true; break; }
+            }
+            if (!knows && MOVES[mk]) result.push(mk);
+        }
+    }
+    return result;
+}
+
+function renderMoveRelearnerScreen() {
+    var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
+    html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">📖 기술 생각해내기</div>';
+    html += '<div style="color:#aaa;font-size:12px;margin-bottom:8px">잊어버린 기술을 다시 배울 수 있습니다. 포켓몬을 선택하세요.</div>';
+    for (var i = 0; i < player.party.length; i++) {
+        var p = player.party[i]; var pd = POKEDEX[p.key];
+        if (!pd || !pd.ml) continue;
+        var learnableMoves = getLearnableMoves(p);
+        html += '<button class="pk-btn pk-btn-dark pk-btn-block" style="margin:3px 0;text-align:left" data-action="poke_relearnerSelectPoke" data-args="' + i + '">';
+        html += (pd?pd.em:"?") + ' ' + p.nickname + ' Lv.' + p.level;
+        html += ' <span style="color:#aaa;font-size:10px">(' + learnableMoves.length + '개 배울 수 있음)</span>';
+        html += '</button>';
+    }
+    return html;
+}
+
+function renderMoveRelearnerMovesScreen() {
+    var idx = gState.relearnerPokeIdx;
+    var poke = player.party[idx];
+    if (!poke) return '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_openMoveRelearner">◀ 뒤로</button><div>포켓몬 없음</div>';
+    var pd = POKEDEX[poke.key];
+    var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_openMoveRelearner">◀ 뒤로</button>';
+    html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">📖 ' + poke.nickname + '의 배울 수 있는 기술</div>';
+    html += '<div style="color:#aaa;font-size:11px;margin-bottom:4px">현재 기술: ' + poke.moves.length + '/4</div>';
+    var learnableMoves = getLearnableMoves(poke);
+    if (learnableMoves.length === 0) {
+        html += '<div style="color:#aaa;text-align:center;margin:20px 0">배울 수 있는 기술이 없습니다.</div>';
+        return html;
+    }
+    for (var i = 0; i < learnableMoves.length; i++) {
+        var mk = learnableMoves[i];
+        var mv = MOVES[mk];
+        if (!mv) continue;
+        html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px">';
+        html += '<div>';
+        html += '<div style="font-weight:bold;font-size:13px">' + typeSpan(mv.t) + ' ' + mv.n + '</div>';
+        html += '<div style="font-size:10px;color:#aaa">' + (mv.c==="status"?"변화":mv.c==="physical"?"물리":"특수") + ' | 위력:' + (mv.p||"-") + ' | 명중:' + (mv.a||"-") + ' | PP:' + mv.pp + '</div>';
+        html += '</div>';
+        html += '<button class="pk-btn pk-btn-green pk-btn-xs" data-action="poke_relearnerLearnMove" data-args="' + mk + '">배우기</button>';
+        html += '</div>';
+    }
+    return html;
+}
+
 function renderStatusScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">📊 캐릭터 상태</div>';
@@ -5371,9 +5448,14 @@ function renderSaveSlots() {
 
 function renderPokedexScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
-    var seen = Object.keys(player.pokedex || {}).length;
+    var seen = 0; var caught = 0;
+    var dexKeys = Object.keys(player.pokedex || {});
+    for (var di = 0; di < dexKeys.length; di++) {
+        seen++;
+        if (player.pokedex[dexKeys[di]] === "caught" || player.pokedex[dexKeys[di]] === true) caught++;
+    }
     var total = Object.keys(POKEDEX).length;
-    html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">📖 포켓몬 도감 <span style="font-size:12px;color:#aaa">' + seen + ' / ' + total + '</span></div>';
+    html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">📖 포켓몬 도감 <span style="font-size:12px;color:#aaa">발견 ' + seen + ' | 포획 ' + caught + ' / ' + total + '</span></div>';
     html += '<div class="pk-dex-grid">';
     // 번호순 정렬
     var entries = [];
@@ -5384,10 +5466,13 @@ function renderPokedexScreen() {
     entries.sort(function(a,b){ return a.data.id - b.data.id; });
     for (var i = 0; i < entries.length; i++) {
         var e = entries[i];
-        var isSeen = player.pokedex && player.pokedex[e.k];
-        html += '<div class="pk-dex-item ' + (isSeen ? 'pk-dex-seen' : 'pk-dex-unseen') + '"' + (isSeen ? ' data-action="poke_pokedexDetail" data-args="' + e.k + '" style="cursor:pointer"' : '') + '>';
+        var dexVal = player.pokedex ? player.pokedex[e.k] : null;
+        var isSeen = !!dexVal;
+        var isCaught = (dexVal === "caught" || dexVal === true);
+        var ballIcon = isCaught ? '<span style="color:#e74c3c">●</span>' : (isSeen ? '<span style="color:#333">●</span>' : '');
+        html += '<div class="pk-dex-item ' + (isSeen ? (isCaught ? 'pk-dex-caught' : 'pk-dex-seen') : 'pk-dex-unseen') + '"' + (isSeen ? ' data-action="poke_pokedexDetail" data-args="' + e.k + '" style="cursor:pointer"' : '') + '>';
         html += '<div style="font-size:18px">' + (isSeen ? e.data.em : '?') + '</div>';
-        html += '<div style="font-size:9px">#' + e.data.id + '</div>';
+        html += '<div style="font-size:9px">#' + e.data.id + ' ' + ballIcon + '</div>';
         html += '<div style="font-size:9px">' + (isSeen ? e.data.n : '???') + '</div>';
         html += '</div>';
     }
@@ -5659,9 +5744,9 @@ window.poke_selectRoad = async function(idx) {
     }
     // 맵 이동 시 시간 경과
     if (player.roadIdx !== idx) {
-        advanceTime();
         var _rd = region.roads[idx];
         if (_rd) addLog("🗺️ " + _rd.n + "(으)로 이동했다." + (_rd.isCity ? " [도시]" : ""), "info");
+        advanceTime();
     }
     player.roadIdx = idx;
     gState.subScreen = "roadDetail";
@@ -5870,6 +5955,58 @@ window.poke_openPokedex = function() { gState.subScreen = "pokedex"; render(); }
 window.poke_openGyms = function() { gState.subScreen = "gyms"; render(); };
 window.poke_openBadges = function() { gState.subScreen = "badges"; render(); };
 window.poke_openStatus = function() { gState.subScreen = "status"; render(); };
+window.poke_openMoveRelearner = function() { gState.subScreen = "moveRelearner"; render(); };
+window.poke_relearnerSelectPoke = function(idx) {
+    gState.relearnerPokeIdx = parseInt(idx, 10);
+    gState.subScreen = "moveRelearnerMoves";
+    render();
+};
+window.poke_relearnerLearnMove = async function(moveKey) {
+    var idx = gState.relearnerPokeIdx;
+    var poke = player.party[idx];
+    if (!poke) return;
+    var mv = MOVES[moveKey];
+    if (!mv) return;
+    if (poke.moves.length < 4) {
+        poke.moves.push({key: moveKey, ppLeft: mv.pp});
+        addLog(poke.nickname + "은(는) " + mv.n + "을(를) 다시 배웠다!", "learn");
+        showToast(poke.nickname + "이(가) " + mv.n + "을(를) 배웠다!");
+        await saveAll();
+        render();
+    } else {
+        gState.pendingMoveLearn = {pokeIdx: idx, moveKey: moveKey};
+        gState.subScreen = null;
+        await saveAll();
+        render();
+    }
+};
+window.poke_partyMoveUp = async function(idx) {
+    idx = parseInt(idx, 10);
+    if (idx <= 0 || idx >= player.party.length) return;
+    var temp = player.party[idx];
+    player.party[idx] = player.party[idx - 1];
+    player.party[idx - 1] = temp;
+    await saveAll();
+    render();
+};
+window.poke_partyMoveDown = async function(idx) {
+    idx = parseInt(idx, 10);
+    if (idx < 0 || idx >= player.party.length - 1) return;
+    var temp = player.party[idx];
+    player.party[idx] = player.party[idx + 1];
+    player.party[idx + 1] = temp;
+    await saveAll();
+    render();
+};
+window.poke_startEvolve = function(idx) {
+    idx = parseInt(idx, 10);
+    var poke = player.party[idx];
+    if (!poke) return;
+    var data = POKEDEX[poke.key];
+    if (!data || !data.e || poke.level < data.e.l) return;
+    gState.pendingEvo = {pokeIdx: idx, from: poke.key, to: data.e.to};
+    render();
+};
 
 window.poke_openSaveSlots = function() { 
     if (gState) gState.subScreen = "saveSlots";
@@ -6110,7 +6247,15 @@ window.poke_depositPC = async function(idx) {
     idx = parseInt(idx, 10);
     if (isNaN(idx) || player.party.length <= 1) return;
     var poke = player.party.splice(idx, 1)[0];
-    if (poke) player.pc.push(poke);
+    if (poke) {
+        poke.currentHp = poke.stats[0]; poke.status = null; poke.statusTurns = 0;
+        poke.statStages = {atk:0,def:0,spatk:0,spdef:0,spd:0,acc:0,eva:0};
+        for (var mi = 0; mi < poke.moves.length; mi++) {
+            var mv = MOVES[poke.moves[mi].key];
+            poke.moves[mi].ppLeft = mv ? mv.pp : 10;
+        }
+        player.pc.push(poke);
+    }
     await saveAll();
     render();
 };
