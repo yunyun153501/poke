@@ -5494,7 +5494,7 @@ function tryRun() {
     for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
 }
 
-function healAllPokemon() {
+function healAllPokemon(locName) {
     for (var i = 0; i < player.party.length; i++) {
         var p = player.party[i];
         p.currentHp = p.stats[0]; p.status = null; p.statusTurns = 0;
@@ -5504,7 +5504,11 @@ function healAllPokemon() {
             p.moves[j].ppLeft = mv ? mv.pp : 10;
         }
     }
-    addLog("모든 포켓몬이 회복되었다!", "heal");
+    if (locName) {
+        addLog("🏥 " + locName + " 포켓몬센터에서 휴식했다! 모든 포켓몬이 회복되었다!", "heal");
+    } else {
+        addLog("🏥 포켓몬센터에서 휴식했다! 모든 포켓몬이 회복되었다!", "heal");
+    }
 }
 
 function useItem(itemKey, partyIdx) {
@@ -7166,8 +7170,10 @@ window.poke_blackout = async function() {
 };
 
 window.poke_center = async function() {
-    healAllPokemon();
-    showToast("모든 포켓몬이 회복되었습니다!");
+    var road = getCurrentRoad();
+    var locName = road ? road.n : "";
+    healAllPokemon(locName);
+    showToast(locName + " 포켓몬센터에서 포켓몬이 모두 회복되었습니다!");
     await saveAll();
     render();
 };
