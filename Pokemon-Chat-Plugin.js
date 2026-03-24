@@ -4602,6 +4602,123 @@ var FISHING_DATA = {
 "u_r38":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:20},{k:"basculin",w:40},{k:"frillish",w:40}]},super:{lv:[30,50],pokemon:[{k:"gyarados",w:15},{k:"basculin",w:20},{k:"jellicent",w:20},{k:"alomomola",w:20},{k:"frillish",w:15},{k:"wailmer",w:10}]}}
 };
 
+// ===== 반복 등장 트레이너 시스템 =====
+var RC_MALE = ["사토시","히로시","타이호","슌지","카즈마","소우타","하루키","료","켄지","유지","마사루","코지"];
+var RC_FEMALE = ["하루카","사쿠라","유이","소라","유나","메구미","리나","미사키","카즈미","아오이","린","세이라"];
+
+var ROUTE_TITLES = {
+    grass:  {m:["소년","배낭소년","캠핑소년","에이스트레이너"], f:["소녀","짧은치마","캠프파이어소녀","에이스트레이너"]},
+    forest: {m:["벌레잡이소년","풀숲소년","벌레잡이","에이스트레이너"], f:["벌레잡이소녀","풀숲소녀","벌레잡이","에이스트레이너"]},
+    water:  {m:["수영선수","낚시꾼","수영선수","에이스트레이너"], f:["수영선수","수영소녀","수영선수","에이스트레이너"]},
+    cave:   {m:["등산가","작업원","산악인","에이스트레이너"], f:["등산가","산악인","등산가","에이스트레이너"]},
+    urban:  {m:["신사","에이스트레이너","엘리트트레이너","엘리트트레이너"], f:["아가씨","에이스트레이너","엘리트트레이너","엘리트트레이너"]}
+};
+
+function inferRouteType(road) {
+    var n = road.n || "";
+    var d = road.desc || "";
+    if (n.indexOf("동굴") >= 0 || n.indexOf("터널") >= 0 || n.indexOf("마운틴") >= 0 || n.indexOf("산") >= 0 || n.indexOf("탑") >= 0 || d.indexOf("동굴") >= 0 || n.indexOf("굴") >= 0) return "cave";
+    if (n.indexOf("숲") >= 0 || n.indexOf("포레스트") >= 0 || d.indexOf("숲") >= 0) return "forest";
+    if (!road.pokemon || road.pokemon.length === 0) return "grass";
+    var wc = 0, cc = 0, bc = 0;
+    for (var i = 0; i < road.pokemon.length; i++) {
+        var pd = POKEDEX[road.pokemon[i].k];
+        if (pd && pd.t) {
+            for (var ti = 0; ti < pd.t.length; ti++) {
+                if (pd.t[ti] === "water") wc++;
+                if (pd.t[ti] === "rock" || pd.t[ti] === "ground") cc++;
+                if (pd.t[ti] === "bug") bc++;
+            }
+        }
+    }
+    var total = road.pokemon.length;
+    if (wc > total * 0.5) return "water";
+    if (cc > total * 0.4) return "cave";
+    if (bc > total * 0.4) return "forest";
+    return "grass";
+}
+
+function getRouteTitle(routeType, isMale, routeProgress) {
+    var titles = ROUTE_TITLES[routeType] || ROUTE_TITLES.grass;
+    var arr = isMale ? titles.m : titles.f;
+    var stage = Math.min(arr.length - 1, Math.floor(routeProgress / 8));
+    return arr[stage];
+}
+
+function generateRouteTrainers(road, routeIdx) {
+    if (!road.pokemon || road.pokemon.length === 0) return [];
+    var rType = inferRouteType(road);
+    var lvMin = road.lv ? road.lv[0] : 5;
+    var lvMax = road.lv ? road.lv[1] : 10;
+    var numT = 3 + Math.min(2, Math.floor(routeIdx / 8));
+    var trainers = [];
+    for (var t = 0; t < numT; t++) {
+        var isMale = (t % 2 === 0);
+        var pool = isMale ? RC_MALE : RC_FEMALE;
+        var nIdx = (routeIdx * 2 + Math.floor(t / 2)) % pool.length;
+        var charName = pool[nIdx];
+        var title = getRouteTitle(rType, isMale, routeIdx);
+        var numPoke = 1 + Math.min(2, Math.floor(routeIdx / 10));
+        var pokeArr = [];
+        for (var p = 0; p < numPoke; p++) {
+            var pkIdx = (routeIdx * 3 + t * 7 + p * 5) % road.pokemon.length;
+            var pk = road.pokemon[pkIdx].k;
+            var lv = lvMin + Math.round((lvMax - lvMin) * (t + p) / (numT + numPoke));
+            lv = Math.max(lvMin, Math.min(lvMax + 2, lv));
+            pokeArr.push({k: pk, l: lv});
+        }
+        var reward = Math.floor((lvMin + lvMax) / 2) * 30 + routeIdx * 10;
+        trainers.push({
+            n: title + " " + charName,
+            em: isMale ? "👦" : "👧",
+            pokemon: pokeArr,
+            reward: reward
+        });
+    }
+    return trainers;
+}
+
+function initRecurringTrainers() {
+    for (var rk in REGIONS) {
+        var roads = REGIONS[rk].roads;
+        var rIdx = 0;
+        for (var i = 0; i < roads.length; i++) {
+            if (roads[i].isCity) continue;
+            if (!roads[i].pokemon || roads[i].pokemon.length === 0) continue;
+            roads[i].trainers = generateRouteTrainers(roads[i], rIdx);
+            rIdx++;
+        }
+    }
+}
+initRecurringTrainers();
+
+function getScaledGymTrainer(gt, gym, regionKey) {
+    if (!player) return gt;
+    var regionBadges = (player.badges[regionKey] || []).length;
+    if (regionBadges === 0) return gt;
+    var scaledPoke = [];
+    for (var i = 0; i < gt.pokemon.length; i++) {
+        var tp = gt.pokemon[i];
+        var newLv = tp.l + regionBadges * 3;
+        var newKey = tp.k;
+        var pd = POKEDEX[tp.k];
+        if (pd && pd.e && newLv >= pd.e.l) {
+            var evo = POKEDEX[pd.e.to];
+            if (evo) newKey = pd.e.to;
+        }
+        scaledPoke.push({k: newKey, l: newLv});
+    }
+    if (regionBadges >= 5 && gt.pokemon.length < 3) {
+        var extraLv = gt.pokemon[gt.pokemon.length - 1].l + regionBadges * 3;
+        scaledPoke.push({k: gt.pokemon[0].k, l: extraLv});
+    }
+    return {
+        n: gt.n,
+        pokemon: scaledPoke,
+        reward: Math.floor(gt.reward * (1 + regionBadges * 0.3))
+    };
+}
+
 function startWildBattle(road) {
     if (!player || !gState || !road) return false;
     // 확률 조우
@@ -5440,7 +5557,8 @@ function grantExp(myPoke, enemy, isTrainerWin) {
         if (bd.isGymBattle) {
             player.defeatedGyms[bd.trainerKey] = player.day;
         } else if (bd.isGymTrainer) {
-            player.defeatedGyms[bd.trainerKey] = true;
+            var prevCount = player.defeatedGyms[bd.trainerKey];
+            player.defeatedGyms[bd.trainerKey] = (typeof prevCount === "number" ? prevCount : 0) + 1;
         } else {
             player.defeatedTrainers[bd.trainerKey] = player.day;
         }
@@ -6237,28 +6355,35 @@ function renderRoadDetail() {
             }
             // 체육관 트레이너 표시
             var allTrainersDefeated = true;
-            if (gym.gymTrainers && !hasBadge) {
-                for (var gti = 0; gti < gym.gymTrainers.length; gti++) {
-                    var gtKey = gym.id + "_trainer_" + gti;
-                    var gtDefeated = !!player.defeatedGyms[gtKey];
-                    if (!gtDefeated) allTrainersDefeated = false;
-                    var gt = gym.gymTrainers[gti];
-                    html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;margin-top:3px;border-top:1px solid rgba(255,255,255,0.03)">';
-                    html += '<div>';
-                    html += '<span style="font-size:11px">👤 ' + gt.n + '</span>';
-                    html += '<div style="font-size:10px;color:#aaa">';
-                    for (var gtp = 0; gtp < gt.pokemon.length; gtp++) {
-                        var gtpd = POKEDEX[gt.pokemon[gtp].k];
-                        html += (gtpd ? gtpd.em : "?") + 'Lv.' + gt.pokemon[gtp].l + ' ';
+            if (gym.gymTrainers) {
+                var showGymTrainers = !hasBadge || hasBadge;
+                if (showGymTrainers) {
+                    for (var gti = 0; gti < gym.gymTrainers.length; gti++) {
+                        var gtKey = gym.id + "_trainer_" + gti;
+                        var gtDefVal = player.defeatedGyms[gtKey];
+                        var gtDefeated = !!gtDefVal;
+                        if (!gtDefeated) allTrainersDefeated = false;
+                        var gt = gym.gymTrainers[gti];
+                        var displayGt = (hasBadge && gtDefeated) ? getScaledGymTrainer(gt, gym, regionKey) : gt;
+                        html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;margin-top:3px;border-top:1px solid rgba(255,255,255,0.03)">';
+                        html += '<div>';
+                        html += '<span style="font-size:11px">👤 ' + displayGt.n + (hasBadge && gtDefeated ? ' <span style="color:#e67e22;font-size:9px">★강화</span>' : '') + '</span>';
+                        html += '<div style="font-size:10px;color:#aaa">';
+                        for (var gtp = 0; gtp < displayGt.pokemon.length; gtp++) {
+                            var gtpd = POKEDEX[displayGt.pokemon[gtp].k];
+                            html += (gtpd ? gtpd.em : "?") + 'Lv.' + displayGt.pokemon[gtp].l + ' ';
+                        }
+                        html += '</div>';
+                        html += '</div>';
+                        if (hasBadge && gtDefeated) {
+                            html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_gymTrainerBattle" data-args="' + gi + ',' + gti + '">🔄 재대결</button>';
+                        } else if (gtDefeated) {
+                            html += '<span style="font-size:10px;color:#27ae60">✅</span>';
+                        } else {
+                            html += '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_gymTrainerBattle" data-args="' + gi + ',' + gti + '">⚔️</button>';
+                        }
+                        html += '</div>';
                     }
-                    html += '</div>';
-                    html += '</div>';
-                    if (gtDefeated) {
-                        html += '<span style="font-size:10px;color:#27ae60">✅</span>';
-                    } else {
-                        html += '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_gymTrainerBattle" data-args="' + gi + ',' + gti + '">⚔️</button>';
-                    }
-                    html += '</div>';
                 }
             }
             var canFightLeaders = !gym.gymTrainers || hasBadge || allTrainersDefeated;
@@ -7959,16 +8084,25 @@ window.poke_gymTrainerBattle = async function(args) {
     var gym = gymList[gymIdx];
     if (!gym.gymTrainers || !gym.gymTrainers[trainerIdx]) return;
     var gtKey = gym.id + "_trainer_" + trainerIdx;
-    if (player.defeatedGyms[gtKey]) { showToast("이미 쓰러뜨린 트레이너입니다!"); return; }
+    var hasBadge = player.badges[player.region] && player.badges[player.region].indexOf(gym.id) !== -1;
+    var isGymRematch = false;
+    if (player.defeatedGyms[gtKey]) {
+        if (!hasBadge) {
+            showToast("이미 쓰러뜨린 트레이너입니다!");
+            return;
+        }
+        isGymRematch = true;
+    }
     var alive = false;
     for (var i = 0; i < player.party.length; i++) {
         if (player.party[i].currentHp > 0) { alive = true; break; }
     }
     if (!alive) { showToast("싸울 수 있는 포켓몬이 없습니다!"); return; }
     var gt = gym.gymTrainers[trainerIdx];
+    var useGt = isGymRematch ? getScaledGymTrainer(gt, gym, player.region) : gt;
     var enemyParty = [];
-    for (var i = 0; i < gt.pokemon.length; i++) {
-        var poke = createPokemonInstance(gt.pokemon[i].k, gt.pokemon[i].l);
+    for (var i = 0; i < useGt.pokemon.length; i++) {
+        var poke = createPokemonInstance(useGt.pokemon[i].k, useGt.pokemon[i].l);
         if (poke) enemyParty.push(poke);
     }
     if (enemyParty.length === 0) return;
@@ -7979,12 +8113,12 @@ window.poke_gymTrainerBattle = async function(args) {
     gState.phase = "battle";
     gState.battleData = {
         type: "trainer",
-        trainerName: gt.n,
+        trainerName: useGt.n + (isGymRematch ? " (강화)" : ""),
         trainerEmoji: "👤",
-        trainerReward: gt.reward,
+        trainerReward: useGt.reward,
         trainerKey: gtKey,
         isGymTrainer: true,
-        isRematch: false,
+        isRematch: isGymRematch,
         enemyParty: enemyParty,
         enemyIdx: 0,
         enemy: enemyParty[0],
@@ -7998,9 +8132,9 @@ window.poke_gymTrainerBattle = async function(args) {
         msg: [],
         animating: false
     };
-    addLog("👤 " + gt.n + "이(가) 승부를 걸어왔다!", "battle");
-    gState.battleData.msg.push("👤 " + gt.n + "이(가) 승부를 걸어왔다!");
-    gState.battleData.msg.push(gt.n + "은(는) " + enemyParty[0].nickname + " (Lv." + enemyParty[0].level + ")을(를) 내보냈다!");
+    addLog("👤 " + useGt.n + "이(가) 승부를 걸어왔다!", "battle");
+    gState.battleData.msg.push("👤 " + useGt.n + "이(가) 승부를 걸어왔다!");
+    gState.battleData.msg.push(useGt.n + "은(는) " + enemyParty[0].nickname + " (Lv." + enemyParty[0].level + ")을(를) 내보냈다!");
     var myFirst = player.party[myIdx];
     gState.battleData.msg.push(player.name + "은(는) " + myFirst.nickname + " (Lv." + myFirst.level + ")을(를) 내보냈다!");
     if (getAbilityKey(myFirst) === "intimidate") {
