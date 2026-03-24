@@ -72,15 +72,15 @@ function getTypeEffect(atkType, defTypes) {
 // ═══════════════════════════════════════════════
 var POKEDEX = {
 // ── Gen 1 스타터 ──
-bulbasaur:  {n:"이상해씨",id:1,t:["grass","poison"],s:[45,49,49,65,65,45],ml:{1:["tackle","growl"],7:["vinewhip"],13:["poisonpowder"],20:["razorleaf"],27:["sleeppowder"]},e:{l:16,to:"ivysaur"},ab:"overgrow",cr:45,xp:64,em:"🌿"},
-ivysaur:    {n:"이상해풀",id:2,t:["grass","poison"],s:[60,62,63,80,80,60],ml:{1:["tackle","growl","vinewhip"],20:["razorleaf"],27:["sleeppowder"],34:["solarbeam"]},e:{l:32,to:"venusaur"},ab:"overgrow",cr:45,xp:142,em:"🌿"},
-venusaur:   {n:"이상해꽃",id:3,t:["grass","poison"],s:[80,82,83,100,100,80],ml:{1:["tackle","vinewhip","razorleaf"],34:["solarbeam"],44:["sleeppowder"]},e:null,ab:"overgrow",cr:45,xp:236,em:"🌺"},
+bulbasaur:  {n:"이상해씨",id:1,t:["grass","poison"],s:[45,49,49,65,65,45],ml:{1:["tackle","growl"],7:["vinewhip"],13:["poisonpowder"],20:["razorleaf"],27:["sleeppowder"]},e:{l:16,to:"ivysaur"},ab:["overgrow","chlorophyll"],cr:45,xp:64,em:"🌿"},
+ivysaur:    {n:"이상해풀",id:2,t:["grass","poison"],s:[60,62,63,80,80,60],ml:{1:["tackle","growl","vinewhip"],20:["razorleaf"],27:["sleeppowder"],34:["solarbeam"]},e:{l:32,to:"venusaur"},ab:["overgrow","chlorophyll"],cr:45,xp:142,em:"🌿"},
+venusaur:   {n:"이상해꽃",id:3,t:["grass","poison"],s:[80,82,83,100,100,80],ml:{1:["tackle","vinewhip","razorleaf"],34:["solarbeam"],44:["sleeppowder"]},e:null,ab:["overgrow","chlorophyll"],cr:45,xp:236,em:"🌺"},
 charmander: {n:"파이리",id:4,t:["fire"],s:[39,52,43,60,50,65],ml:{1:["scratch","growl"],7:["ember"],13:["smokescreen"],22:["flamethrower"]},e:{l:16,to:"charmeleon"},ab:"blaze",cr:45,xp:62,em:"🔥"},
 charmeleon: {n:"리자드",id:5,t:["fire"],s:[58,64,58,80,65,80],ml:{1:["scratch","ember"],22:["flamethrower"],34:["slash"]},e:{l:36,to:"charizard"},ab:"blaze",cr:45,xp:142,em:"🔥"},
-charizard:  {n:"리자몽",id:6,t:["fire","flying"],s:[78,84,78,109,85,100],ml:{1:["scratch","ember","flamethrower"],36:["wingattack"],46:["fireblast"],55:["flareblitz"]},e:null,ab:"blaze",cr:45,xp:240,em:"🐉"},
+charizard:  {n:"리자몽",id:6,t:["fire","flying"],s:[78,84,78,109,85,100],ml:{1:["scratch","ember","flamethrower"],36:["wingattack"],46:["fireblast"],55:["flareblitz"]},e:null,ab:["blaze","intimidate"],cr:45,xp:240,em:"🐉"},
 squirtle:   {n:"꼬부기",id:7,t:["water"],s:[44,48,65,50,64,43],ml:{1:["tackle","tailwhip"],7:["watergun"],13:["bite"],22:["waterpulse"]},e:{l:16,to:"wartortle"},ab:"torrent",cr:45,xp:63,em:"🐢"},
 wartortle:  {n:"어니부기",id:8,t:["water"],s:[59,63,80,65,80,58],ml:{1:["tackle","watergun","bite"],22:["waterpulse"],34:["surf"]},e:{l:36,to:"blastoise"},ab:"torrent",cr:45,xp:142,em:"🐢"},
-blastoise:  {n:"거북왕",id:9,t:["water"],s:[79,83,100,85,105,78],ml:{1:["watergun","bite","surf"],42:["hydropump"],55:["icebeam"]},e:null,ab:"torrent",cr:45,xp:239,em:"🐢"},
+blastoise:  {n:"거북왕",id:9,t:["water"],s:[79,83,100,85,105,78],ml:{1:["watergun","bite","surf"],42:["hydropump"],55:["icebeam"]},e:null,ab:["torrent","waterabsorb"],cr:45,xp:239,em:"🐢"},
 // ── Gen 1 초반 ──
 caterpie:   {n:"캐터피",id:10,t:["bug"],s:[45,30,35,20,20,45],ml:{1:["tackle","stringshot"],9:["bugbite"]},e:{l:7,to:"metapod"},ab:"shedskin",cr:255,xp:39,em:"🐛"},
 metapod:    {n:"단데기",id:11,t:["bug"],s:[50,20,55,25,25,30],ml:{1:["tackle","harden"],10:["confusion"]},e:{l:10,to:"butterfree"},ab:"shedskin",cr:120,xp:72,em:"🐛"},
@@ -135,12 +135,12 @@ arcanine:   {n:"윈디",id:59,t:["fire"],s:[90,110,80,100,80,95],ml:{1:["bite","
 poliwag:    {n:"발챙이",id:60,t:["water"],s:[40,50,40,40,40,90],ml:{1:["watergun","bubble"],7:["hypnosis"],13:["waterpulse"]},e:{l:25,to:"poliwhirl"},ab:"waterabsorb",cr:255,xp:60,em:"🌀"},
 poliwhirl:  {n:"슈륙챙이",id:61,t:["water"],s:[65,65,65,50,50,90],ml:{1:["watergun","waterpulse","hypnosis"],25:["surf"],33:["bodyslam"]},e:{l:40,to:"poliwrath"},ab:"waterabsorb",cr:120,xp:135,em:"🌀"},
 poliwrath:  {n:"강챙이",id:62,t:["water","fighting"],s:[90,95,95,70,90,70],ml:{1:["surf","bodyslam","hypnosis"],40:["closecombat"],48:["hydropump"]},e:null,ab:"waterabsorb",cr:45,xp:230,em:"🌀"},
-abra:       {n:"캐이시",id:63,t:["psychic"],s:[25,20,15,105,55,90],ml:{1:["confusion"],12:["psybeam"],21:["psychic"]},e:{l:16,to:"kadabra"},ab:"synchronize",cr:200,xp:62,em:"🔮"},
-kadabra:    {n:"윤겔라",id:64,t:["psychic"],s:[40,35,30,120,70,105],ml:{1:["confusion","psybeam"],16:["psychic"],21:["shadowball"]},e:{l:36,to:"alakazam"},ab:"synchronize",cr:100,xp:140,em:"🔮"},
-alakazam:   {n:"후딘",id:65,t:["psychic"],s:[55,50,45,135,95,120],ml:{1:["confusion","psychic","shadowball"],36:["calmmind"],42:["psychic"]},e:null,ab:"synchronize",cr:50,xp:225,em:"🔮"},
-machop:     {n:"알통몬",id:66,t:["fighting"],s:[70,80,50,35,35,35],ml:{1:["karatechop","growl"],7:["focusenergy"],13:["crosschop"]},e:{l:28,to:"machoke"},ab:"guts",cr:180,xp:61,em:"💪"},
-machoke:    {n:"근육몬",id:67,t:["fighting"],s:[80,100,70,50,60,45],ml:{1:["karatechop","crosschop"],28:["brickbreak"],36:["dynamicpunch"]},e:{l:40,to:"machamp"},ab:"guts",cr:90,xp:142,em:"💪"},
-machamp:    {n:"괴력몬",id:68,t:["fighting"],s:[90,130,80,65,85,55],ml:{1:["karatechop","crosschop","brickbreak"],40:["dynamicpunch"],50:["closecombat"]},e:null,ab:"guts",cr:45,xp:227,em:"💪"},
+abra:       {n:"캐이시",id:63,t:["psychic"],s:[25,20,15,105,55,90],ml:{1:["confusion"],12:["psybeam"],21:["psychic"]},e:{l:16,to:"kadabra"},ab:["synchronize","innerfocus"],cr:200,xp:62,em:"🔮"},
+kadabra:    {n:"윤겔라",id:64,t:["psychic"],s:[40,35,30,120,70,105],ml:{1:["confusion","psybeam"],16:["psychic"],21:["shadowball"]},e:{l:36,to:"alakazam"},ab:["synchronize","innerfocus"],cr:100,xp:140,em:"🔮"},
+alakazam:   {n:"후딘",id:65,t:["psychic"],s:[55,50,45,135,95,120],ml:{1:["confusion","psychic","shadowball"],36:["calmmind"],42:["psychic"]},e:null,ab:["synchronize","innerfocus"],cr:50,xp:225,em:"🔮"},
+machop:     {n:"알통몬",id:66,t:["fighting"],s:[70,80,50,35,35,35],ml:{1:["karatechop","growl"],7:["focusenergy"],13:["crosschop"]},e:{l:28,to:"machoke"},ab:["guts","sturdy"],cr:180,xp:61,em:"💪"},
+machoke:    {n:"근육몬",id:67,t:["fighting"],s:[80,100,70,50,60,45],ml:{1:["karatechop","crosschop"],28:["brickbreak"],36:["dynamicpunch"]},e:{l:40,to:"machamp"},ab:["guts","sturdy"],cr:90,xp:142,em:"💪"},
+machamp:    {n:"괴력몬",id:68,t:["fighting"],s:[90,130,80,65,85,55],ml:{1:["karatechop","crosschop","brickbreak"],40:["dynamicpunch"],50:["closecombat"]},e:null,ab:["guts","sturdy"],cr:45,xp:227,em:"💪"},
 bellsprout: {n:"모다피",id:69,t:["grass","poison"],s:[50,75,35,70,30,40],ml:{1:["vinewhip","growl"],7:["razorleaf"],15:["acid"],21:["sleeppowder"]},e:{l:21,to:"weepinbell"},ab:"chlorophyll",cr:255,xp:60,em:"🌱"},
 weepinbell: {n:"우츠동",id:70,t:["grass","poison"],s:[65,90,50,85,45,55],ml:{1:["vinewhip","razorleaf","acid"],24:["sludgebomb"],30:["solarbeam"]},e:{l:36,to:"victreebel"},ab:"chlorophyll",cr:120,xp:137,em:"🌱"},
 victreebel: {n:"우츠보트",id:71,t:["grass","poison"],s:[80,105,65,100,70,70],ml:{1:["razorleaf","sludgebomb","solarbeam"],36:["sleeppowder"],44:["gigadrain"]},e:null,ab:"chlorophyll",cr:45,xp:221,em:"🌿"},
@@ -164,9 +164,9 @@ grimer:     {n:"질퍽이",id:88,t:["poison"],s:[80,80,50,40,50,25],ml:{1:["tack
 muk:        {n:"질뻐기",id:89,t:["poison"],s:[105,105,75,65,100,50],ml:{1:["acid","sludgebomb","toxic"],30:["sludge"],38:["explosion"],44:["darkpulse"]},e:null,ab:"poisontouch",cr:75,xp:175,em:"💩"},
 shellder:   {n:"셀러",id:90,t:["water"],s:[30,65,100,45,25,40],ml:{1:["tackle","watergun"],8:["iciclespear"],13:["icebeam"]},e:{l:30,to:"cloyster"},ab:"shellarmor",cr:190,xp:61,em:"🐚"},
 cloyster:   {n:"파르셀",id:91,t:["water","ice"],s:[50,95,180,85,45,70],ml:{1:["watergun","icebeam"],30:["surf"],36:["blizzard"],42:["hydropump"]},e:null,ab:"shellarmor",cr:60,xp:184,em:"🐚"},
-gastly:     {n:"고오스",id:92,t:["ghost","poison"],s:[30,35,30,100,35,80],ml:{1:["lick","confuseray"],8:["nightshade"],16:["shadowball"]},e:{l:25,to:"haunter"},ab:"levitate",cr:190,xp:62,em:"👻"},
-haunter:    {n:"고우스트",id:93,t:["ghost","poison"],s:[45,50,45,115,55,95],ml:{1:["lick","nightshade","shadowball"],25:["darkpulse"],33:["dreameater"]},e:{l:38,to:"gengar"},ab:"levitate",cr:90,xp:142,em:"👻"},
-gengar:     {n:"팬텀",id:94,t:["ghost","poison"],s:[60,65,60,130,75,110],ml:{1:["shadowball","darkpulse","sludgebomb"],38:["dreameater"],48:["shadowball"]},e:null,ab:"levitate",cr:45,xp:225,em:"👻"},
+gastly:     {n:"고오스",id:92,t:["ghost","poison"],s:[30,35,30,100,35,80],ml:{1:["lick","confuseray"],8:["nightshade"],16:["shadowball"]},e:{l:25,to:"haunter"},ab:["levitate","cursedbody"],cr:190,xp:62,em:"👻"},
+haunter:    {n:"고우스트",id:93,t:["ghost","poison"],s:[45,50,45,115,55,95],ml:{1:["lick","nightshade","shadowball"],25:["darkpulse"],33:["dreameater"]},e:{l:38,to:"gengar"},ab:["levitate","cursedbody"],cr:90,xp:142,em:"👻"},
+gengar:     {n:"팬텀",id:94,t:["ghost","poison"],s:[60,65,60,130,75,110],ml:{1:["shadowball","darkpulse","sludgebomb"],38:["dreameater"],48:["shadowball"]},e:null,ab:["levitate","cursedbody"],cr:45,xp:225,em:"👻"},
 onix:       {n:"롱스톤",id:95,t:["rock","ground"],s:[35,45,160,30,45,70],ml:{1:["tackle","rockthrow"],9:["bind"],15:["rockslide"],23:["earthquake"]},e:{l:36,to:"steelix"},ab:"sturdy",cr:45,xp:77,em:"🐍"},
 drowzee:    {n:"슬리프",id:96,t:["psychic"],s:[60,48,45,43,90,42],ml:{1:["confusion","hypnosis"],12:["psybeam"],22:["psychic"]},e:{l:26,to:"hypno"},ab:"insomnia",cr:190,xp:66,em:"💤"},
 hypno:      {n:"슬리퍼",id:97,t:["psychic"],s:[85,73,70,73,115,67],ml:{1:["confusion","psybeam","psychic"],26:["hypnosis"],33:["dreameater"],40:["psychic"]},e:null,ab:"insomnia",cr:75,xp:169,em:"💤"},
@@ -195,17 +195,17 @@ seaking:    {n:"왕콘치",id:119,t:["water"],s:[80,92,65,65,80,68],ml:{1:["wate
 staryu:     {n:"별가사리",id:120,t:["water"],s:[30,45,55,70,55,85],ml:{1:["watergun","tackle"],7:["waterpulse"],13:["psychic"]},e:{l:30,to:"starmie"},ab:"naturalcure",cr:225,xp:68,em:"⭐"},
 starmie:    {n:"아쿠스타",id:121,t:["water","psychic"],s:[60,75,85,100,85,115],ml:{1:["watergun","psychic","surf"],30:["icebeam"],36:["thunderbolt"],42:["hydropump"]},e:null,ab:"naturalcure",cr:60,xp:182,em:"⭐"},
 mrmime:     {n:"마임맨",id:122,t:["psychic","fairy"],s:[40,45,65,100,120,90],ml:{1:["confusion","dazzlinggleam"],10:["psybeam"],20:["psychic"],30:["moonblast"]},e:null,ab:"filter",cr:45,xp:136,em:"🤹"},
-scyther:    {n:"스라크",id:123,t:["bug","flying"],s:[70,110,80,55,80,105],ml:{1:["quickattack","slash"],10:["wingattack"],18:["xscissor"],25:["aerialace"],30:["swordsdance"]},e:{l:40,to:"scizor"},ab:"technician",cr:45,xp:100,em:"🦗"},
+scyther:    {n:"스라크",id:123,t:["bug","flying"],s:[70,110,80,55,80,105],ml:{1:["quickattack","slash"],10:["wingattack"],18:["xscissor"],25:["aerialace"],30:["swordsdance"]},e:{l:40,to:"scizor"},ab:["swarm","technician"],cr:45,xp:100,em:"🦗"},
 jynx:       {n:"루주라",id:124,t:["ice","psychic"],s:[65,50,35,115,95,95],ml:{1:["confusion","icepunch"],12:["psychic"],20:["icebeam"],28:["blizzard"]},e:null,ab:"oblivious",cr:45,xp:137,em:"💋"},
 electabuzz: {n:"에레브",id:125,t:["electric"],s:[65,83,57,95,85,105],ml:{1:["thundershock","quickattack"],9:["thunderpunch"],17:["thunderbolt"],25:["thunder"]},e:null,ab:"vitalspirit",cr:45,xp:172,em:"⚡"},
 magmar:     {n:"마그마",id:126,t:["fire"],s:[65,95,57,100,85,93],ml:{1:["ember","smokescreen"],9:["firepunch"],17:["flamethrower"],25:["fireblast"]},e:null,ab:"flamebody",cr:45,xp:173,em:"🔥"},
 pinsir:     {n:"쁘사이저",id:127,t:["bug"],s:[65,125,100,55,70,85],ml:{1:["tackle","focusenergy"],7:["xscissor"],18:["brickbreak"],25:["megahorn"],30:["swordsdance"]},e:null,ab:"moldbreaker",cr:45,xp:175,em:"🪲"},
 tauros:     {n:"켄타로스",id:128,t:["normal"],s:[75,100,95,40,70,110],ml:{1:["tackle","hornattack"],10:["stomp"],19:["bodyslam"],28:["earthquake"]},e:null,ab:"intimidate",cr:45,xp:172,em:"🐂"},
 magikarp:   {n:"잉어킹",id:129,t:["water"],s:[20,10,55,15,20,80],ml:{1:["splash","tackle"],15:["watergun"]},e:{l:20,to:"gyarados"},ab:"swiftswim",cr:255,xp:40,em:"🐟"},
-gyarados:   {n:"갸라도스",id:130,t:["water","flying"],s:[95,125,79,60,100,81],ml:{1:["bite","watergun"],20:["surf"],28:["crunch"],36:["hydropump"],44:["hyperbeam"]},e:null,ab:"intimidate",cr:45,xp:189,em:"🐉"},
+gyarados:   {n:"갸라도스",id:130,t:["water","flying"],s:[95,125,79,60,100,81],ml:{1:["bite","watergun"],20:["surf"],28:["crunch"],36:["hydropump"],44:["hyperbeam"]},e:null,ab:["intimidate","moxie"],cr:45,xp:189,em:"🐉"},
 lapras:     {n:"라프라스",id:131,t:["water","ice"],s:[130,85,80,85,95,60],ml:{1:["watergun","icebeam"],15:["surf"],25:["icebeam"],35:["hydropump"],45:["blizzard"]},e:null,ab:"waterabsorb",cr:45,xp:187,em:"🐋"},
 ditto:      {n:"메타몽",id:132,t:["normal"],s:[48,48,48,48,48,48],ml:{1:["tackle"],10:["headbutt"],15:["bodyslam"],25:["slam"]},e:null,ab:"limber",cr:35,xp:101,em:"🟣"},
-eevee:      {n:"이브이",id:133,t:["normal"],s:[55,55,50,45,65,55],ml:{1:["tackle","tailwhip"],8:["quickattack"],16:["bite"]},e:null,ab:"adaptability",cr:45,xp:65,em:"🦊"},
+eevee:      {n:"이브이",id:133,t:["normal"],s:[55,55,50,45,65,55],ml:{1:["tackle","tailwhip"],8:["quickattack"],16:["bite"]},e:null,ab:["adaptability","runaway"],cr:45,xp:65,em:"🦊"},
 vaporeon:   {n:"샤미드",id:134,t:["water"],s:[130,65,60,110,95,65],ml:{1:["tackle","watergun"],10:["waterpulse"],20:["surf"],30:["icebeam"],40:["hydropump"]},e:null,ab:"waterabsorb",cr:45,xp:184,em:"💧"},
 jolteon:    {n:"쥬피썬더",id:135,t:["electric"],s:[65,65,60,110,95,130],ml:{1:["tackle","thundershock"],10:["quickattack"],20:["thunderbolt"],30:["thunder"],40:["thunderwave"]},e:null,ab:"voltabsorb",cr:45,xp:184,em:"⚡"},
 flareon:    {n:"부스터",id:136,t:["fire"],s:[65,130,60,95,110,65],ml:{1:["tackle","ember"],10:["bite"],20:["flamethrower"],30:["fireblast"],40:["flareblitz"]},e:null,ab:"flashfire",cr:45,xp:184,em:"🔥"},
@@ -215,13 +215,13 @@ omastar:    {n:"암스타",id:139,t:["rock","water"],s:[70,60,125,115,70,55],ml:
 kabuto:     {n:"투구",id:140,t:["rock","water"],s:[30,80,90,55,45,55],ml:{1:["scratch","watergun"],6:["mudshot"],16:["rockslide"],21:["slash"]},e:{l:40,to:"kabutops"},ab:"swiftswim",cr:45,xp:71,em:"🐚"},
 kabutops:   {n:"투구푸스",id:141,t:["rock","water"],s:[60,115,105,65,70,80],ml:{1:["slash","rockslide","surf"],40:["stoneedge"],46:["xscissor"]},e:null,ab:"swiftswim",cr:45,xp:199,em:"🐚"},
 aerodactyl: {n:"프테라",id:142,t:["rock","flying"],s:[80,105,65,60,75,130],ml:{1:["wingattack","rockthrow"],10:["bite"],20:["aerialace"],28:["stoneedge"],36:["fly"]},e:null,ab:"rockhead",cr:45,xp:180,em:"🦕"},
-snorlax:    {n:"잠만보",id:143,t:["normal"],s:[160,110,65,65,110,30],ml:{1:["tackle","bodyslam"],12:["bite"],20:["rest"],30:["hyperbeam"],40:["earthquake"]},e:null,ab:"thickfat",cr:25,xp:189,em:"😴"},
+snorlax:    {n:"잠만보",id:143,t:["normal"],s:[160,110,65,65,110,30],ml:{1:["tackle","bodyslam"],12:["bite"],20:["rest"],30:["hyperbeam"],40:["earthquake"]},e:null,ab:["immunity","thickfat"],cr:25,xp:189,em:"😴"},
 articuno:   {n:"프리져",id:144,t:["ice","flying"],s:[90,85,100,95,125,85],ml:{1:["icebeam","gust"],30:["blizzard"],40:["fly"],50:["hyperbeam"]},e:null,ab:"pressure",cr:3,xp:261,em:"❄️"},
 zapdos:     {n:"썬더",id:145,t:["electric","flying"],s:[90,90,85,125,90,100],ml:{1:["thunderbolt","gust"],30:["thunder"],40:["fly"],50:["hyperbeam"]},e:null,ab:"pressure",cr:3,xp:261,em:"⚡"},
 moltres:    {n:"파이어",id:146,t:["fire","flying"],s:[90,100,90,125,85,90],ml:{1:["flamethrower","gust"],30:["fireblast"],40:["fly"],50:["hyperbeam"]},e:null,ab:"pressure",cr:3,xp:261,em:"🔥"},
-dratini:    {n:"미뇽",id:147,t:["dragon"],s:[41,64,45,50,50,50],ml:{1:["tackle","dragonrage"],11:["thunderwave"],20:["slam"]},e:{l:30,to:"dragonair"},ab:"shedskin",cr:45,xp:60,em:"🐲"},
-dragonair:  {n:"신뇽",id:148,t:["dragon"],s:[61,84,65,70,70,70],ml:{1:["dragonrage","slam"],30:["dragonclaw"],38:["thunderbolt"]},e:{l:55,to:"dragonite"},ab:"shedskin",cr:45,xp:147,em:"🐲"},
-dragonite:  {n:"망나뇽",id:149,t:["dragon","flying"],s:[91,134,95,100,100,80],ml:{1:["dragonclaw","slam","thunderbolt"],55:["outrage"],63:["hyperbeam"],70:["fly"]},e:null,ab:"multiscale",cr:45,xp:270,em:"🐲"},
+dratini:    {n:"미뇽",id:147,t:["dragon"],s:[41,64,45,50,50,50],ml:{1:["tackle","dragonrage"],11:["thunderwave"],20:["slam"]},e:{l:30,to:"dragonair"},ab:["shedskin","innerfocus"],cr:45,xp:60,em:"🐲"},
+dragonair:  {n:"신뇽",id:148,t:["dragon"],s:[61,84,65,70,70,70],ml:{1:["dragonrage","slam"],30:["dragonclaw"],38:["thunderbolt"]},e:{l:55,to:"dragonite"},ab:["shedskin","innerfocus"],cr:45,xp:147,em:"🐲"},
+dragonite:  {n:"망나뇽",id:149,t:["dragon","flying"],s:[91,134,95,100,100,80],ml:{1:["dragonclaw","slam","thunderbolt"],55:["outrage"],63:["hyperbeam"],70:["fly"]},e:null,ab:["innerfocus","multiscale"],cr:45,xp:270,em:"🐲"},
 mewtwo:     {n:"뮤츠",id:150,t:["psychic"],s:[106,110,90,154,90,130],ml:{1:["confusion","psychic","shadowball","icebeam"],50:["psychic"],60:["calmmind"],70:["hyperbeam"]},e:null,ab:"pressure",cr:3,xp:306,em:"🧬"},
 mew:        {n:"뮤",id:151,t:["psychic"],s:[100,100,100,100,100,100],ml:{1:["psychic","flamethrower","surf","thunderbolt"],30:["icebeam"],40:["earthquake"],50:["calmmind"],60:["shadowball"]},e:null,ab:"synchronize",cr:3,xp:270,em:"🩷"},
 // ── Gen 2 스타터 ──
@@ -296,8 +296,8 @@ blissey:    {n:"해피너스",id:242,t:["normal"],s:[255,10,10,75,135,55],ml:{1:
 raikou:     {n:"라이코",id:243,t:["electric"],s:[90,85,75,115,100,115],ml:{1:["thundershock","quickattack","thunderbolt"],30:["thunder"],40:["calmmind"],50:["hyperbeam"]},e:null,ab:"pressure",cr:3,xp:261,em:"⚡"},
 entei:      {n:"앤테이",id:244,t:["fire"],s:[115,115,85,90,75,100],ml:{1:["ember","bite","flamethrower"],30:["fireblast"],40:["calmmind"],50:["hyperbeam"]},e:null,ab:"pressure",cr:3,xp:261,em:"🔥"},
 suicune:    {n:"스이쿤",id:245,t:["water"],s:[100,75,115,90,115,85],ml:{1:["watergun","bite","surf"],30:["icebeam"],40:["calmmind"],50:["hyperbeam"]},e:null,ab:"pressure",cr:3,xp:261,em:"💧"},
-larvitar:   {n:"애버라스",id:246,t:["rock","ground"],s:[50,64,50,45,50,41],ml:{1:["tackle","bite"],5:["rockthrow"],10:["mudshot"]},e:{l:30,to:"pupitar"},ab:"guts",cr:45,xp:60,em:"🪨"},
-pupitar:    {n:"데기라스",id:247,t:["rock","ground"],s:[70,84,70,65,70,51],ml:{1:["tackle","bite","rockthrow"],30:["rockslide"],36:["earthquake"]},e:{l:55,to:"tyranitar"},ab:"shedskin",cr:45,xp:144,em:"🪨"},
+larvitar:   {n:"애버라스",id:246,t:["rock","ground"],s:[50,64,50,45,50,41],ml:{1:["tackle","bite"],5:["rockthrow"],10:["mudshot"]},e:{l:30,to:"pupitar"},ab:["guts","sandstream"],cr:45,xp:60,em:"🪨"},
+pupitar:    {n:"데기라스",id:247,t:["rock","ground"],s:[70,84,70,65,70,51],ml:{1:["tackle","bite","rockthrow"],30:["rockslide"],36:["earthquake"]},e:{l:55,to:"tyranitar"},ab:["shedskin","sandstream"],cr:45,xp:144,em:"🪨"},
 tyranitar:  {n:"마기라스",id:248,t:["rock","dark"],s:[100,134,110,95,100,61],ml:{1:["bite","rockslide","earthquake","crunch"],55:["stoneedge"],63:["hyperbeam"]},e:null,ab:"sandstream",cr:45,xp:270,em:"🦖"},
 lugia:      {n:"루기아",id:249,t:["psychic","flying"],s:[106,90,130,90,154,110],ml:{1:["psychic","aerialace","icebeam","surf"],50:["calmmind"],60:["hyperbeam"]},e:null,ab:"multiscale",cr:3,xp:306,em:"🌊"},
 hooh:       {n:"호오",id:250,t:["fire","flying"],s:[106,130,90,110,154,90],ml:{1:["flamethrower","aerialace","earthquake","thunderbolt"],50:["fireblast"],60:["hyperbeam"]},e:null,ab:"pressure",cr:3,xp:306,em:"🌈"},
@@ -315,7 +315,7 @@ unown:      {n:"안농",id:201,t:["psychic"],s:[48,72,48,72,48,48],ml:{1:["confu
 wobbuffet:  {n:"마자용",id:202,t:["psychic"],s:[190,33,58,33,58,33],ml:{1:["counter","mirrorcoat"],15:["encore"],25:["lightscreen"]},e:null,ab:"shadowtag",cr:45,xp:177,em:"🤡"},
 qwilfish:   {n:"침바루",id:211,t:["water","poison"],s:[65,95,75,55,55,85],ml:{1:["tackle","poisonsting"],9:["bite"],13:["watergun"],21:["sludgebomb"]},e:null,ab:"poisonpoint",cr:45,xp:88,em:"🐡"},
 shuckle:    {n:"단단지",id:213,t:["bug","rock"],s:[20,10,230,10,230,5],ml:{1:["tackle","wrap"],9:["encore"],14:["rockthrow"]},e:null,ab:"sturdy",cr:190,xp:177,em:"🪨"},
-heracross:  {n:"헤라크로스",id:214,t:["bug","fighting"],s:[80,125,75,40,95,85],ml:{1:["tackle","hornattack"],7:["furyattack"],13:["brickbreak"],19:["megahorn"]},e:null,ab:"guts",cr:45,xp:175,em:"🪲"},
+heracross:  {n:"헤라크로스",id:214,t:["bug","fighting"],s:[80,125,75,40,95,85],ml:{1:["tackle","hornattack"],7:["furyattack"],13:["brickbreak"],19:["megahorn"]},e:null,ab:["swarm","guts"],cr:45,xp:175,em:"🪲"},
 remoraid:   {n:"총어",id:223,t:["water"],s:[35,65,35,65,35,65],ml:{1:["watergun"],6:["lockon"],11:["psybeam"],22:["icebeam"]},e:{l:25,to:"octillery"},ab:"keeneye",cr:190,xp:78,em:"🐟"},
 octillery:  {n:"대포무노",id:224,t:["water"],s:[75,105,75,105,75,45],ml:{1:["watergun","psybeam"],25:["icebeam"],33:["hydropump"]},e:null,ab:"keeneye",cr:75,xp:168,em:"🐙"},
 delibird:   {n:"딜리버드",id:225,t:["ice","flying"],s:[45,55,45,65,45,75],ml:{1:["icebeam","aerialace","quickattack"],15:["icepunch"],20:["blizzard"],30:["bravebird"]},e:null,ab:"vitalspirit",cr:45,xp:116,em:"🎅"},
@@ -340,9 +340,9 @@ poochyena:  {n:"포챠나",id:261,t:["dark"],s:[35,55,35,30,30,35],ml:{1:["tackl
 mightyena:  {n:"그라에나",id:262,t:["dark"],s:[70,90,70,60,60,70],ml:{1:["tackle","bite"],18:["crunch"],30:["darkpulse"]},e:null,ab:"intimidate",cr:127,xp:147,em:"🐺"},
 zigzagoon:  {n:"지그제구리",id:263,t:["normal"],s:[38,30,41,30,41,60],ml:{1:["tackle","growl"],9:["slam"],25:["bodyslam"]},e:{l:20,to:"linoone"},ab:"pickup",cr:255,xp:56,em:"🦝"},
 linoone:    {n:"직구리",id:264,t:["normal"],s:[78,70,61,50,61,100],ml:{1:["tackle","slam"],20:["bodyslam"],33:["bodyslam"]},e:null,ab:"pickup",cr:90,xp:147,em:"🦝"},
-ralts:      {n:"랄토스",id:280,t:["psychic","fairy"],s:[28,25,25,45,35,40],ml:{1:["confusion","growl"],6:["confusion"],11:["psybeam"]},e:{l:20,to:"kirlia"},ab:"synchronize",cr:235,xp:40,em:"🧚"},
-kirlia:     {n:"킬리아",id:281,t:["psychic","fairy"],s:[38,35,35,65,55,50],ml:{1:["confusion","psybeam"],20:["psychic"],26:["dazzlinggleam"]},e:{l:30,to:"gardevoir"},ab:"synchronize",cr:120,xp:97,em:"🧚"},
-gardevoir:  {n:"가디안",id:282,t:["psychic","fairy"],s:[68,65,65,125,115,80],ml:{1:["confusion","psychic"],30:["moonblast"],40:["dazzlinggleam"]},e:null,ab:"synchronize",cr:45,xp:233,em:"🧚"},
+ralts:      {n:"랄토스",id:280,t:["psychic","fairy"],s:[28,25,25,45,35,40],ml:{1:["confusion","growl"],6:["confusion"],11:["psybeam"]},e:{l:20,to:"kirlia"},ab:["synchronize","trace"],cr:235,xp:40,em:"🧚"},
+kirlia:     {n:"킬리아",id:281,t:["psychic","fairy"],s:[38,35,35,65,55,50],ml:{1:["confusion","psybeam"],20:["psychic"],26:["dazzlinggleam"]},e:{l:30,to:"gardevoir"},ab:["synchronize","trace"],cr:120,xp:97,em:"🧚"},
+gardevoir:  {n:"가디안",id:282,t:["psychic","fairy"],s:[68,65,65,125,115,80],ml:{1:["confusion","psychic"],30:["moonblast"],40:["dazzlinggleam"]},e:null,ab:["synchronize","trace"],cr:45,xp:233,em:"🧚"},
 shroomish:  {n:"버섯꼬",id:285,t:["grass"],s:[60,40,60,40,60,35],ml:{1:["tackle","absorb"],7:["absorb"],16:["megadrain"],22:["sleeppowder"]},e:{l:23,to:"breloom"},ab:"effectspore",cr:255,xp:59,em:"🍄"},
 breloom:    {n:"버섯모",id:286,t:["grass","fighting"],s:[60,130,80,60,60,70],ml:{1:["tackle","absorb"],23:["brickbreak"],33:["megadrain"],44:["closecombat"]},e:null,ab:"effectspore",cr:90,xp:161,em:"🍄"},
 slakoth:    {n:"게을로",id:287,t:["normal"],s:[60,60,60,35,35,30],ml:{1:["scratch","tackle"],7:["bodyslam"],13:["bodyslam"]},e:{l:18,to:"vigoroth"},ab:"insomnia",cr:255,xp:83,em:"🦥"},
@@ -369,7 +369,7 @@ milotic:    {n:"밀로틱",id:350,t:["water"],s:[95,60,79,100,125,81],ml:{1:["wa
 absol:      {n:"앱솔",id:359,t:["dark"],s:[65,130,60,75,60,75],ml:{1:["scratch","bite"],12:["crunch"],25:["darkpulse"],36:["swordsdance"]},e:null,ab:"superluck",cr:30,xp:163,em:"🌙"},
 bagon:      {n:"아공이",id:371,t:["dragon"],s:[45,75,60,40,30,50],ml:{1:["bite","ember"],9:["dragonbreath"],17:["slam"]},e:{l:30,to:"shelgon"},ab:"rockhead",cr:45,xp:60,em:"🐉"},
 shelgon:    {n:"쉘곤",id:372,t:["dragon"],s:[65,95,100,60,50,50],ml:{1:["bite","dragonbreath"],30:["dragonclaw"],38:["ironhead"]},e:{l:50,to:"salamence"},ab:"rockhead",cr:45,xp:147,em:"🐉"},
-salamence:  {n:"보만다",id:373,t:["dragon","flying"],s:[95,135,80,110,80,100],ml:{1:["dragonbreath","dragonclaw"],50:["outrage"],60:["fireblast"]},e:null,ab:"intimidate",cr:45,xp:270,em:"🐉"},
+salamence:  {n:"보만다",id:373,t:["dragon","flying"],s:[95,135,80,110,80,100],ml:{1:["dragonbreath","dragonclaw"],50:["outrage"],60:["fireblast"]},e:null,ab:["intimidate","moxie"],cr:45,xp:270,em:"🐉"},
 beldum:     {n:"메탕",id:374,t:["steel","psychic"],s:[40,55,80,35,60,30],ml:{1:["tackle","metalclaw"],20:["confusion"],30:["ironhead"]},e:{l:20,to:"metang"},ab:"clearbody",cr:3,xp:60,em:"🤖"},
 metang:     {n:"메탕구",id:375,t:["steel","psychic"],s:[60,75,100,55,80,50],ml:{1:["tackle","metalclaw","confusion"],20:["psychic"],26:["ironhead"]},e:{l:45,to:"metagross"},ab:"clearbody",cr:3,xp:147,em:"🤖"},
 metagross:  {n:"메타그로스",id:376,t:["steel","psychic"],s:[80,135,130,95,90,70],ml:{1:["metalclaw","psychic"],45:["ironhead"],55:["hyperbeam"]},e:null,ab:"clearbody",cr:3,xp:270,em:"🤖"},
@@ -488,9 +488,9 @@ drifloon:   {n:"흘림볼",id:425,t:["ghost","flying"],s:[90,50,34,60,44,70],ml:
 drifblim:   {n:"둥실라이드",id:426,t:["ghost","flying"],s:[150,80,44,90,54,80],ml:{1:["hex","shadowball"],28:["wingattack"],40:["explosion"]},e:null,ab:"levitate",cr:60,xp:174,em:"🎈"},
 gible:      {n:"딥상어동",id:443,t:["dragon","ground"],s:[58,70,45,40,45,42],ml:{1:["tackle","bite"],7:["mudslap"],13:["dragonbreath"]},e:{l:24,to:"gabite"},ab:"roughskin",cr:45,xp:60,em:"🦈"},
 gabite:     {n:"한바이트",id:444,t:["dragon","ground"],s:[68,90,65,50,55,82],ml:{1:["bite","dragonbreath"],24:["dragonclaw"],33:["dig"]},e:{l:48,to:"garchomp"},ab:"roughskin",cr:45,xp:144,em:"🦈"},
-garchomp:   {n:"한카리아스",id:445,t:["dragon","ground"],s:[108,130,95,80,85,102],ml:{1:["dragonclaw","earthquake"],48:["outrage"],55:["fireblast"]},e:null,ab:"roughskin",cr:45,xp:270,em:"🦈"},
-riolu:      {n:"리오루",id:447,t:["fighting"],s:[40,70,40,35,40,60],ml:{1:["quickattack","lowkick"],6:["brickbreak"],11:["counter"]},e:{l:25,to:"lucario"},ab:"innerfocus",cr:75,xp:57,em:"🐕"},
-lucario:    {n:"루카리오",id:448,t:["fighting","steel"],s:[70,110,70,115,70,90],ml:{1:["quickattack","brickbreak"],25:["closecombat"],33:["flashcannon"],42:["ironhead"]},e:null,ab:"innerfocus",cr:45,xp:184,em:"🐕"},
+garchomp:   {n:"한카리아스",id:445,t:["dragon","ground"],s:[108,130,95,80,85,102],ml:{1:["dragonclaw","earthquake"],48:["outrage"],55:["fireblast"]},e:null,ab:["sandveil","roughskin"],cr:45,xp:270,em:"🦈"},
+riolu:      {n:"리오루",id:447,t:["fighting"],s:[40,70,40,35,40,60],ml:{1:["quickattack","lowkick"],6:["brickbreak"],11:["counter"]},e:{l:25,to:"lucario"},ab:["steadfast","innerfocus"],cr:75,xp:57,em:"🐕"},
+lucario:    {n:"루카리오",id:448,t:["fighting","steel"],s:[70,110,70,115,70,90],ml:{1:["quickattack","brickbreak"],25:["closecombat"],33:["flashcannon"],42:["ironhead"]},e:null,ab:["steadfast","innerfocus"],cr:45,xp:184,em:"🐕"},
 skorupi:    {n:"스콜피",id:451,t:["poison","bug"],s:[40,50,90,30,55,65],ml:{1:["poisonsting","bite"],9:["bugbite"],16:["crunch"]},e:{l:40,to:"drapion"},ab:"battlearmor",cr:120,xp:66,em:"🦂"},
 drapion:    {n:"드래피온",id:452,t:["poison","dark"],s:[70,90,110,60,75,95],ml:{1:["bite","crunch"],40:["darkpulse"],48:["sludgebomb"]},e:null,ab:"battlearmor",cr:45,xp:175,em:"🦂"},
 croagunk:   {n:"삐딱구리",id:453,t:["poison","fighting"],s:[48,61,40,61,40,50],ml:{1:["poisonsting","lowkick"],8:["sludge"],17:["brickbreak"]},e:{l:37,to:"toxicroak"},ab:"poisontouch",cr:140,xp:60,em:"🐸"},
@@ -739,7 +739,7 @@ braixen:    {n:"테르나",id:654,t:["fire"],s:[59,59,58,90,70,73],ml:{1:["scrat
 delphox:    {n:"마폭시",id:655,t:["fire","psychic"],s:[75,69,72,114,100,104],ml:{1:["ember","flamethrower"],36:["psychic"],47:["fireblast"]},e:null,ab:"blaze",cr:45,xp:240,em:"🦊"},
 froakie:    {n:"개구마르",id:656,t:["water"],s:[41,56,40,62,44,71],ml:{1:["pound","watergun"],10:["bubblebeam"],18:["quickattack"]},e:{l:16,to:"frogadier"},ab:"torrent",cr:45,xp:63,em:"🐸"},
 frogadier:    {n:"개굴반장",id:657,t:["water"],s:[54,63,52,83,56,97],ml:{1:["pound","watergun"],16:["bubblebeam"],25:["waterpulse"]},e:{l:36,to:"greninja"},ab:"torrent",cr:45,xp:142,em:"🐸"},
-greninja:    {n:"개굴닌자",id:658,t:["water","dark"],s:[72,95,67,103,71,122],ml:{1:["watergun","darkpulse"],36:["surf"],49:["hydropump"]},e:null,ab:"protean",cr:45,xp:239,em:"🥷"},
+greninja:    {n:"개굴닌자",id:658,t:["water","dark"],s:[72,95,67,103,71,122],ml:{1:["watergun","darkpulse"],36:["surf"],49:["hydropump"]},e:null,ab:["torrent","protean"],cr:45,xp:239,em:"🥷"},
 bunnelby:    {n:"파르빗",id:659,t:["normal"],s:[38,36,38,32,36,57],ml:{1:["tackle","leer"],7:["mudslap"],15:["quickattack"]},e:{l:20,to:"diggersby"},ab:"pickup",cr:255,xp:47,em:"🐰"},
 diggersby:    {n:"파르토",id:660,t:["normal","ground"],s:[85,56,77,50,77,78],ml:{1:["tackle","mudslap"],20:["dig"],30:["earthquake"]},e:null,ab:"hugpower",cr:127,xp:148,em:"🐰"},
 fletchling:    {n:"화살꼬빈",id:661,t:["normal","flying"],s:[45,50,43,40,38,62],ml:{1:["tackle","growl"],10:["quickattack"],17:["aerialace"]},e:{l:17,to:"fletchinder"},ab:"keeneye",cr:255,xp:56,em:"🐦"},
@@ -988,16 +988,16 @@ kanto: {
 {id:"k_c2",n:"토키와시티",desc:"상록빛 영원의 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote","paralyzeheal"],reqBadges:0,trainers:[]},
 {id:"k_r2",n:"2번도로",desc:"토키와시티~니비시티",lv:[2,5],pokemon:[{k:"pidgey",w:25},{k:"rattata",w:25},{k:"caterpie",w:15},{k:"weedle",w:15},{k:"nidoranm",w:10},{k:"nidoranf",w:10}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:0,trainers:[{n:"소년 타쿠야",em:"👦",pokemon:[{k:"caterpie",l:3},{k:"weedle",l:4}],reward:120},{n:"소녀 아카네",em:"👧",pokemon:[{k:"pidgey",l:4},{k:"nidoranf",l:5}],reward:150},{n:"소년 코우타",em:"👦",pokemon:[{k:"rattata",l:5}],reward:150},{n:"소녀 미사키",em:"👧",pokemon:[{k:"nidoranm",l:4},{k:"pidgey",l:3}],reward:120}]},
 {id:"k_r3",n:"상록숲",desc:"벌레 포켓몬이 가득한 숲",lv:[3,7],pokemon:[{k:"caterpie",w:25},{k:"metapod",w:10},{k:"weedle",w:25},{k:"kakuna",w:10},{k:"pikachu",w:5},{k:"pidgey",w:25}],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:0,trainers:[{n:"벌레잡이 하루키",em:"🧒",pokemon:[{k:"caterpie",l:3},{k:"weedle",l:3}],reward:90},{n:"벌레잡이 소우타",em:"🧒",pokemon:[{k:"weedle",l:4},{k:"kakuna",l:5}],reward:150},{n:"벌레잡이 쇼우",em:"🧒",pokemon:[{k:"caterpie",l:5},{k:"metapod",l:6}],reward:180},{n:"벌레잡이 타케루",em:"🧒",pokemon:[{k:"weedle",l:5},{k:"caterpie",l:4},{k:"metapod",l:6}],reward:180},{n:"벌레잡이 나오키",em:"🧒",pokemon:[{k:"kakuna",l:6},{k:"weedle",l:5}],reward:180},{n:"벌레잡이 렌",em:"🧒",pokemon:[{k:"caterpie",l:5},{k:"weedle",l:5},{k:"pikachu",l:7}],reward:210}]},
-{id:"k_c3",n:"니비시티",desc:"돌빛 회색의 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote","paralyzeheal","awakening","repel"],reqBadges:0,trainers:[]},
+{id:"k_c3",n:"니비시티",desc:"돌빛 회색의 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","potion","antidote","paralyzeheal","awakening","repel","cheriberry","chestoberry","pechaberry","rawstberry","aspearberry","oranberry"],reqBadges:0,trainers:[]},
 {id:"k_r4",n:"3번도로",desc:"니비시티~달맞이산 입구",lv:[6,12],pokemon:[{k:"pidgey",w:20},{k:"spearow",w:30},{k:"jigglypuff",w:10},{k:"nidoranm",w:15},{k:"nidoranf",w:15},{k:"mankey",w:10}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:1,trainers:[{n:"소년 료우",em:"👦",pokemon:[{k:"spearow",l:7},{k:"nidoranm",l:8}],reward:240},{n:"소녀 나나미",em:"👧",pokemon:[{k:"jigglypuff",l:9},{k:"pidgey",l:8}],reward:270},{n:"소년 다이스케",em:"👦",pokemon:[{k:"mankey",l:10},{k:"spearow",l:9}],reward:300},{n:"소녀 유이",em:"👧",pokemon:[{k:"nidoranf",l:10},{k:"pidgey",l:8}],reward:300},{n:"소년 켄타",em:"👦",pokemon:[{k:"spearow",l:11},{k:"nidoranm",l:10}],reward:330},{n:"소녀 코토네",em:"👧",pokemon:[{k:"jigglypuff",l:12},{k:"mankey",l:11},{k:"pidgey",l:10}],reward:360}]},
 {id:"k_r5",n:"달맞이산",desc:"달의 돌이 잠든 동굴",lv:[7,12],pokemon:[{k:"zubat",w:40},{k:"geodude",w:30},{k:"paras",w:20},{k:"clefairy",w:10}],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:1,trainers:[{n:"등산가 하야토",em:"🧔",pokemon:[{k:"geodude",l:8},{k:"zubat",l:9}],reward:270},{n:"이과생 쇼고",em:"🔬",pokemon:[{k:"zubat",l:9},{k:"geodude",l:10}],reward:300},{n:"등산가 신이치",em:"🧔",pokemon:[{k:"geodude",l:10},{k:"paras",l:10}],reward:300},{n:"소년 마사루",em:"👦",pokemon:[{k:"zubat",l:10},{k:"clefairy",l:11}],reward:330},{n:"이과생 아키라",em:"🔬",pokemon:[{k:"paras",l:11},{k:"zubat",l:10}],reward:330},{n:"등산가 류지",em:"🧔",pokemon:[{k:"geodude",l:11},{k:"zubat",l:10},{k:"paras",l:12}],reward:360}]},
 {id:"k_r6",n:"4번도로",desc:"달맞이산~하나다시티",lv:[8,12],pokemon:[{k:"rattata",w:20},{k:"spearow",w:30},{k:"ekans",w:15},{k:"sandshrew",w:15},{k:"mankey",w:20}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:1,trainers:[{n:"소년 유우키",em:"👦",pokemon:[{k:"rattata",l:8},{k:"spearow",l:9}],reward:270},{n:"소녀 린",em:"👧",pokemon:[{k:"ekans",l:10},{k:"sandshrew",l:10}],reward:300},{n:"소년 카즈마",em:"👦",pokemon:[{k:"mankey",l:11},{k:"spearow",l:10}],reward:330},{n:"소녀 아오이",em:"👧",pokemon:[{k:"rattata",l:11},{k:"ekans",l:12}],reward:360}]},
-{id:"k_c4",n:"하나다시티",desc:"물빛 푸른 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","antidote","paralyzeheal","awakening","repel"],reqBadges:1,trainers:[]},
+{id:"k_c4",n:"하나다시티",desc:"물빛 푸른 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","antidote","paralyzeheal","awakening","repel","cheriberry","chestoberry","pechaberry","rawstberry","aspearberry","oranberry"],reqBadges:1,trainers:[]},
 {id:"k_r7",n:"24번도로",desc:"너겟브릿지",lv:[10,14],pokemon:[{k:"caterpie",w:10},{k:"weedle",w:10},{k:"pidgey",w:20},{k:"oddish",w:20},{k:"bellsprout",w:20},{k:"abra",w:20}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:2,trainers:[{n:"소년 시우",em:"👦",pokemon:[{k:"caterpie",l:10},{k:"weedle",l:11}],reward:330},{n:"소녀 하린",em:"👧",pokemon:[{k:"oddish",l:11},{k:"bellsprout",l:12}],reward:360},{n:"소년 소라",em:"👦",pokemon:[{k:"pidgey",l:12},{k:"abra",l:11}],reward:360},{n:"소녀 치카라",em:"👧",pokemon:[{k:"bellsprout",l:12},{k:"oddish",l:13}],reward:390},{n:"소년 유토",em:"👦",pokemon:[{k:"pidgey",l:13},{k:"abra",l:13}],reward:390},{n:"소녀 소라",em:"👧",pokemon:[{k:"oddish",l:13},{k:"bellsprout",l:14},{k:"caterpie",l:12}],reward:420}]},
 {id:"k_r8",n:"25번도로",desc:"하나다시티 북쪽의 곶",lv:[10,14],pokemon:[{k:"pidgey",w:20},{k:"oddish",w:25},{k:"bellsprout",w:25},{k:"abra",w:15},{k:"venonat",w:15}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:2,trainers:[{n:"소년 진우",em:"👦",pokemon:[{k:"oddish",l:10},{k:"venonat",l:11}],reward:330},{n:"소녀 나에",em:"👧",pokemon:[{k:"bellsprout",l:11},{k:"pidgey",l:12}],reward:360},{n:"소년 유타카",em:"👦",pokemon:[{k:"abra",l:12},{k:"oddish",l:13}],reward:390},{n:"소녀 미즈키",em:"👧",pokemon:[{k:"venonat",l:13},{k:"bellsprout",l:13}],reward:390},{n:"소년 타이요",em:"👦",pokemon:[{k:"pidgey",l:13},{k:"oddish",l:14},{k:"abra",l:12}],reward:420}]},
 {id:"k_r9",n:"5번도로",desc:"하나다시티~쿠치바시티",lv:[13,16],pokemon:[{k:"pidgey",w:20},{k:"oddish",w:20},{k:"bellsprout",w:20},{k:"meowth",w:15},{k:"mankey",w:15},{k:"abra",w:10}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:2,trainers:[{n:"소년 히데키",em:"👦",pokemon:[{k:"pidgey",l:13},{k:"meowth",l:14}],reward:420},{n:"소녀 레이린",em:"👧",pokemon:[{k:"oddish",l:14},{k:"bellsprout",l:14}],reward:420},{n:"소년 아키토",em:"👦",pokemon:[{k:"mankey",l:15},{k:"pidgey",l:14}],reward:450},{n:"소녀 시즈요",em:"👧",pokemon:[{k:"abra",l:15},{k:"meowth",l:15}],reward:450},{n:"소년 나오",em:"👦",pokemon:[{k:"oddish",l:15},{k:"bellsprout",l:16},{k:"mankey",l:14}],reward:480}]},
 {id:"k_r10",n:"6번도로",desc:"쿠치바시티 남쪽 도로",lv:[13,16],pokemon:[{k:"pidgey",w:20},{k:"oddish",w:20},{k:"bellsprout",w:20},{k:"meowth",w:15},{k:"mankey",w:15},{k:"abra",w:10}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:2,trainers:[{n:"소년 민혁",em:"👦",pokemon:[{k:"meowth",l:13},{k:"pidgey",l:14}],reward:420},{n:"소녀 메구미",em:"👧",pokemon:[{k:"bellsprout",l:14},{k:"oddish",l:15}],reward:450},{n:"소년 하준",em:"👦",pokemon:[{k:"mankey",l:15},{k:"abra",l:14}],reward:450},{n:"소녀 유나",em:"👧",pokemon:[{k:"pidgey",l:15},{k:"meowth",l:16}],reward:480},{n:"소년 토오루",em:"👦",pokemon:[{k:"oddish",l:16},{k:"bellsprout",l:15},{k:"mankey",l:14}],reward:480}]},
-{id:"k_c5",n:"쿠치바시티",desc:"석양빛 오렌지의 항구",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","antidote","paralyzeheal","awakening","repel"],reqBadges:2,trainers:[]},
+{id:"k_c5",n:"쿠치바시티",desc:"석양빛 오렌지의 항구",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","potion","superpotion","antidote","paralyzeheal","awakening","repel","persimberry","sitrusberry","lumberry","leppaberry"],reqBadges:2,trainers:[]},
 {id:"k_r11",n:"디그다의 굴",desc:"디그다가 파놓은 긴 동굴",lv:[15,31],pokemon:[{k:"diglett",w:85},{k:"dugtrio",w:15}],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:2,trainers:[{n:"등산가 은호",em:"🧔",pokemon:[{k:"diglett",l:15},{k:"diglett",l:17}],reward:510},{n:"소년 코우야",em:"👦",pokemon:[{k:"diglett",l:18},{k:"dugtrio",l:20}],reward:600},{n:"등산가 슈이치",em:"🧔",pokemon:[{k:"diglett",l:19},{k:"diglett",l:20},{k:"dugtrio",l:21}],reward:630},{n:"소녀 미치",em:"👧",pokemon:[{k:"dugtrio",l:22},{k:"diglett",l:18}],reward:660}]},
 {id:"k_r12",n:"11번도로",desc:"쿠치바시티 동쪽 도로",lv:[13,17],pokemon:[{k:"ekans",w:25},{k:"sandshrew",w:25},{k:"spearow",w:25},{k:"drowzee",w:25}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:2,trainers:[{n:"소년 유지",em:"👦",pokemon:[{k:"ekans",l:13},{k:"spearow",l:14}],reward:420},{n:"소녀 코하루",em:"👧",pokemon:[{k:"drowzee",l:14},{k:"sandshrew",l:15}],reward:450},{n:"소년 노부유키",em:"👦",pokemon:[{k:"spearow",l:15},{k:"ekans",l:16}],reward:480},{n:"소녀 하루에",em:"👧",pokemon:[{k:"sandshrew",l:16},{k:"drowzee",l:16}],reward:480},{n:"소년 카즈호",em:"👦",pokemon:[{k:"ekans",l:16},{k:"spearow",l:17},{k:"drowzee",l:15}],reward:510}]},
 {id:"k_r13",n:"9번도로",desc:"하나다시티~돌산터널 입구",lv:[15,20],pokemon:[{k:"rattata",w:15},{k:"spearow",w:20},{k:"ekans",w:15},{k:"sandshrew",w:15},{k:"nidoranm",w:17},{k:"nidoranf",w:18}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:3,trainers:[{n:"소년 마사아키",em:"👦",pokemon:[{k:"spearow",l:15},{k:"nidoranm",l:16}],reward:480},{n:"소녀 사린",em:"👧",pokemon:[{k:"nidoranf",l:16},{k:"ekans",l:17}],reward:510},{n:"등산가 히데요시",em:"🧔",pokemon:[{k:"sandshrew",l:17},{k:"rattata",l:18}],reward:540},{n:"소녀 카구라",em:"👧",pokemon:[{k:"spearow",l:18},{k:"nidoranm",l:19}],reward:570},{n:"소년 세이쿤",em:"👦",pokemon:[{k:"ekans",l:19},{k:"sandshrew",l:19},{k:"nidoranf",l:20}],reward:600},{n:"등산가 슌에이",em:"🧔",pokemon:[{k:"rattata",l:18},{k:"spearow",l:20},{k:"sandshrew",l:19}],reward:600}]},
@@ -1007,8 +1007,8 @@ kanto: {
 {id:"k_r16",n:"포켓몬타워",desc:"포켓몬의 영혼이 잠든 탑",lv:[13,25],pokemon:[{k:"gastly",w:50},{k:"haunter",w:30},{k:"cubone",w:20}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:3,trainers:[{n:"무녀 마사미",em:"🔮",pokemon:[{k:"gastly",l:15},{k:"gastly",l:17}],reward:510},{n:"기도사 노부오",em:"🔮",pokemon:[{k:"gastly",l:18},{k:"haunter",l:20}],reward:600},{n:"무녀 카요",em:"🔮",pokemon:[{k:"cubone",l:19},{k:"gastly",l:21}],reward:630},{n:"기도사 카쿠지",em:"🔮",pokemon:[{k:"haunter",l:22},{k:"gastly",l:20}],reward:660},{n:"무녀 레이나",em:"🔮",pokemon:[{k:"gastly",l:21},{k:"haunter",l:23},{k:"cubone",l:22}],reward:690},{n:"기도사 무네카즈",em:"🔮",pokemon:[{k:"haunter",l:24},{k:"cubone",l:25}],reward:750}]},
 {id:"k_r17",n:"8번도로",desc:"시온타운~야마부키시티",lv:[18,22],pokemon:[{k:"pidgey",w:10},{k:"vulpix",w:15},{k:"growlithe",w:15},{k:"meowth",w:15},{k:"jigglypuff",w:15},{k:"abra",w:15},{k:"kadabra",w:15}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:3,trainers:[{n:"소년 마사히로",em:"👦",pokemon:[{k:"meowth",l:18},{k:"vulpix",l:19}],reward:570},{n:"소녀 세이지",em:"👧",pokemon:[{k:"jigglypuff",l:19},{k:"growlithe",l:19}],reward:570},{n:"사이킥 야스이시",em:"🧠",pokemon:[{k:"abra",l:19},{k:"kadabra",l:20}],reward:600},{n:"미녀 시즈쿠",em:"💃",pokemon:[{k:"vulpix",l:20},{k:"jigglypuff",l:21}],reward:630},{n:"소년 노리유키",em:"👦",pokemon:[{k:"growlithe",l:21},{k:"meowth",l:21}],reward:630},{n:"사이킥 현지",em:"🧠",pokemon:[{k:"kadabra",l:22},{k:"abra",l:20},{k:"pidgey",l:19}],reward:660}]},
 {id:"k_r18",n:"7번도로",desc:"타마무시시티~야마부키시티",lv:[18,22],pokemon:[{k:"pidgey",w:15},{k:"vulpix",w:15},{k:"growlithe",w:15},{k:"meowth",w:20},{k:"oddish",w:17},{k:"bellsprout",w:18}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:3,trainers:[{n:"소년 유우마",em:"👦",pokemon:[{k:"meowth",l:18},{k:"pidgey",l:19}],reward:570},{n:"소녀 미라이",em:"👧",pokemon:[{k:"oddish",l:19},{k:"bellsprout",l:20}],reward:600},{n:"미녀 카즈미",em:"💃",pokemon:[{k:"vulpix",l:20},{k:"growlithe",l:21}],reward:630},{n:"소년 메이지",em:"👦",pokemon:[{k:"meowth",l:21},{k:"oddish",l:22},{k:"pidgey",l:20}],reward:660}]},
-{id:"k_c7",n:"타마무시시티",desc:"무지개빛 꿈의 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","superpotion","hyperpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","revive","superrepel"],reqBadges:3,trainers:[]},
-{id:"k_c8",n:"야마부키시티",desc:"빛나는 황금의 대도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","superpotion","hyperpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","fullheal","revive","superrepel"],reqBadges:4,trainers:[]},
+{id:"k_c7",n:"타마무시시티",desc:"무지개빛 꿈의 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","superpotion","hyperpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","revive","superrepel","persimberry","sitrusberry","lumberry","leppaberry"],reqBadges:3,trainers:[]},
+{id:"k_c8",n:"야마부키시티",desc:"빛나는 황금의 대도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","superpotion","hyperpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","fullheal","revive","superrepel","persimberry","sitrusberry","lumberry","leppaberry"],reqBadges:4,trainers:[]},
 {id:"k_r19",n:"16번도로",desc:"타마무시시티 서쪽 도로",lv:[20,25],pokemon:[{k:"rattata",w:30},{k:"spearow",w:30},{k:"doduo",w:35},{k:"snorlax",w:5}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:4,trainers:[{n:"소년 유이치",em:"👦",pokemon:[{k:"rattata",l:20},{k:"spearow",l:21}],reward:630},{n:"소녀 레이카",em:"👧",pokemon:[{k:"doduo",l:22},{k:"rattata",l:21}],reward:660},{n:"소년 슌지",em:"👦",pokemon:[{k:"spearow",l:23},{k:"doduo",l:23}],reward:690},{n:"소녀 미유",em:"👧",pokemon:[{k:"rattata",l:23},{k:"spearow",l:24}],reward:720},{n:"소년 무네노부",em:"👦",pokemon:[{k:"doduo",l:24},{k:"spearow",l:25},{k:"rattata",l:22}],reward:750}]},
 {id:"k_r20",n:"사이클링로드",desc:"자전거 전용 도로",lv:[20,29],pokemon:[{k:"spearow",w:20},{k:"doduo",w:25},{k:"rattata",w:20},{k:"raticate",w:20},{k:"fearow",w:15}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:4,trainers:[{n:"폭주족 지민",em:"🏍️",pokemon:[{k:"rattata",l:20},{k:"raticate",l:22}],reward:660},{n:"폭주족 세이이치",em:"🏍️",pokemon:[{k:"spearow",l:22},{k:"doduo",l:23}],reward:690},{n:"폭주족 유이시",em:"🏍️",pokemon:[{k:"raticate",l:24},{k:"fearow",l:24}],reward:720},{n:"폭주족 카즈아키",em:"🏍️",pokemon:[{k:"doduo",l:24},{k:"rattata",l:25}],reward:750},{n:"폭주족 켄지",em:"🏍️",pokemon:[{k:"fearow",l:25},{k:"raticate",l:26}],reward:780},{n:"폭주족 노부히코",em:"🏍️",pokemon:[{k:"spearow",l:25},{k:"doduo",l:27},{k:"rattata",l:24}],reward:810},{n:"폭주족 타츠지",em:"��️",pokemon:[{k:"raticate",l:28},{k:"fearow",l:29}],reward:870}]},
 {id:"k_r21",n:"18번도로",desc:"사이클링로드~세키치쿠시티",lv:[20,29],pokemon:[{k:"spearow",w:25},{k:"doduo",w:25},{k:"fearow",w:25},{k:"raticate",w:25}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:4,trainers:[{n:"소년 쿄스케",em:"👦",pokemon:[{k:"spearow",l:22},{k:"doduo",l:24}],reward:720},{n:"소녀 나리",em:"👧",pokemon:[{k:"fearow",l:25},{k:"raticate",l:26}],reward:780},{n:"소년 오사무",em:"👦",pokemon:[{k:"doduo",l:27},{k:"spearow",l:27}],reward:810},{n:"소녀 하루카",em:"👧",pokemon:[{k:"raticate",l:28},{k:"fearow",l:29}],reward:870}]},
@@ -1022,7 +1022,7 @@ kanto: {
 {id:"k_r28",n:"19번수로",desc:"세키치쿠시티 남쪽 바다",lv:[27,31],pokemon:[{k:"tentacool",w:70},{k:"tentacruel",w:30}],hasCenter:false,hasShop:false,encounterRate:0.8,reqBadges:5,trainers:[{n:"수영선수 카즈미치",em:"🏊",pokemon:[{k:"tentacool",l:27},{k:"tentacool",l:28}],reward:840},{n:"수영선수 카쿠스이",em:"🏊",pokemon:[{k:"tentacool",l:28},{k:"tentacruel",l:29}],reward:870},{n:"수영선수 미츠루",em:"🏊",pokemon:[{k:"tentacool",l:29},{k:"tentacruel",l:30}],reward:900},{n:"수영선수 무네토시",em:"🏊",pokemon:[{k:"tentacruel",l:30},{k:"tentacool",l:30}],reward:900},{n:"수영선수 나츠키",em:"🏊",pokemon:[{k:"tentacruel",l:31},{k:"tentacool",l:29},{k:"tentacool",l:28}],reward:930}]},
 {id:"k_r29",n:"20번수로",desc:"쌍둥이섬 근처 바다",lv:[27,33],pokemon:[{k:"tentacool",w:65},{k:"tentacruel",w:35}],hasCenter:false,hasShop:false,encounterRate:0.8,reqBadges:5,trainers:[{n:"수영선수 쇼토",em:"🏊",pokemon:[{k:"tentacool",l:28},{k:"tentacruel",l:30}],reward:900},{n:"수영선수 메구미",em:"🏊",pokemon:[{k:"tentacruel",l:30},{k:"tentacool",l:29}],reward:900},{n:"수영선수 신고",em:"🏊",pokemon:[{k:"tentacool",l:30},{k:"tentacruel",l:31}],reward:930},{n:"수영선수 유지",em:"🏊",pokemon:[{k:"tentacruel",l:32},{k:"tentacool",l:31}],reward:960},{n:"수영선수 치카즈",em:"🏊",pokemon:[{k:"tentacruel",l:33},{k:"tentacool",l:30},{k:"tentacruel",l:31}],reward:990}]},
 {id:"k_r30",n:"쌍둥이섬",desc:"전설의 포켓몬이 잠든 얼음 동굴",lv:[26,36],pokemon:[{k:"zubat",w:15},{k:"golbat",w:10},{k:"psyduck",w:15},{k:"golduck",w:8},{k:"slowpoke",w:15},{k:"slowbro",w:7},{k:"seel",w:12},{k:"dewgong",w:5},{k:"shellder",w:13},{k:"lapras",w:3},{k:"omanyte",w:3},{k:"kabuto",w:3}],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:5,trainers:[{n:"등산가 쇼야",em:"🧔",pokemon:[{k:"seel",l:28},{k:"zubat",l:29}],reward:870},{n:"수영선수 사린",em:"🏊",pokemon:[{k:"psyduck",l:29},{k:"slowpoke",l:30}],reward:900},{n:"등산가 타이호",em:"🧔",pokemon:[{k:"golbat",l:30},{k:"shellder",l:31}],reward:930},{n:"수영선수 엔코",em:"🏊",pokemon:[{k:"slowbro",l:32},{k:"dewgong",l:33}],reward:990},{n:"등산가 병호",em:"🧔",pokemon:[{k:"golduck",l:33},{k:"golbat",l:34}],reward:1020},{n:"수영선수 마사코",em:"🏊",pokemon:[{k:"seel",l:33},{k:"dewgong",l:36},{k:"psyduck",l:31}],reward:1080}]},
-{id:"k_c10",n:"구레네섬",desc:"불꽃타는 연구의 섬",isCity:true,hasCenter:true,hasShop:true,shopItems:["superball","ultraball","hyperpotion","maxpotion","fullheal","fullrestore","revive","maxrepel"],reqBadges:6,trainers:[]},
+{id:"k_c10",n:"구레네섬",desc:"불꽃타는 연구의 섬",isCity:true,hasCenter:true,hasShop:true,shopItems:["superball","ultraball","hyperpotion","maxpotion","fullheal","fullrestore","revive","maxrepel","liechiberry","ganlonberry","salacberry","petayaberry","apicotberry"],reqBadges:6,trainers:[]},
 {id:"k_r31",n:"포켓몬저택",desc:"버려진 연구소",lv:[28,42],pokemon:[{k:"growlithe",w:15},{k:"ponyta",w:15},{k:"grimer",w:12},{k:"muk",w:8},{k:"koffing",w:15},{k:"weezing",w:8},{k:"vulpix",w:15},{k:"ditto",w:12}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:6,trainers:[{n:"도둑 쇼지",em:"🥷",pokemon:[{k:"koffing",l:28},{k:"grimer",l:30}],reward:900},{n:"과학자 민호",em:"👨‍🔬",pokemon:[{k:"growlithe",l:30},{k:"ponyta",l:31}],reward:930},{n:"도둑 철민",em:"🥷",pokemon:[{k:"grimer",l:32},{k:"koffing",l:33}],reward:990},{n:"과학자 마사쿤",em:"👨‍🔬",pokemon:[{k:"vulpix",l:33},{k:"ponyta",l:35}],reward:1050},{n:"도둑 유타",em:"🥷",pokemon:[{k:"muk",l:35},{k:"weezing",l:36}],reward:1080},{n:"과학자 쇼키",em:"👨‍🔬",pokemon:[{k:"growlithe",l:36},{k:"ditto",l:38}],reward:1140},{n:"도둑 시게루",em:"🥷",pokemon:[{k:"weezing",l:38},{k:"muk",l:40},{k:"koffing",l:36}],reward:1200}]},
 {id:"k_r32",n:"21번수로",desc:"구레네섬~마사라타운",lv:[21,30],pokemon:[{k:"rattata",w:15},{k:"pidgey",w:20},{k:"pidgeotto",w:20},{k:"tangela",w:20},{k:"tentacool",w:25}],hasCenter:false,hasShop:false,encounterRate:0.8,reqBadges:6,trainers:[{n:"수영선수 영식",em:"🏊",pokemon:[{k:"tentacool",l:22},{k:"pidgeotto",l:24}],reward:720},{n:"낚시꾼 만지",em:"🎣",pokemon:[{k:"tangela",l:25},{k:"tentacool",l:27}],reward:810},{n:"수영선수 현정",em:"🏊",pokemon:[{k:"pidgeotto",l:27},{k:"tentacool",l:28}],reward:840},{n:"낚시꾼 무네히로",em:"🎣",pokemon:[{k:"tangela",l:28},{k:"pidgeotto",l:30},{k:"rattata",l:25}],reward:900}]},
 {id:"k_r33",n:"22번도로",desc:"토키와시티~세키에이고원 입구",lv:[28,33],pokemon:[{k:"rattata",w:10},{k:"spearow",w:15},{k:"nidoranm",w:15},{k:"nidoranf",w:15},{k:"nidorino",w:12},{k:"nidorina",w:13},{k:"mankey",w:20},{k:"flareon",w:2}],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:7,trainers:[{n:"소년 무네노리",em:"👦",pokemon:[{k:"nidorino",l:28},{k:"mankey",l:29}],reward:870},{n:"소녀 슈카",em:"👧",pokemon:[{k:"nidorina",l:29},{k:"spearow",l:30}],reward:900},{n:"소년 아키카즈",em:"👦",pokemon:[{k:"mankey",l:31},{k:"nidorino",l:31}],reward:930},{n:"소녀 카즈미",em:"👧",pokemon:[{k:"nidorina",l:32},{k:"rattata",l:30}],reward:960},{n:"소년 야스히데",em:"👦",pokemon:[{k:"mankey",l:32},{k:"nidorino",l:33},{k:"spearow",l:31}],reward:990}]},
@@ -1626,7 +1626,7 @@ johto: {
     {k:"golbat",l:30}
   ],reward:900}
 ]},
-{id:"j_c9",n:"쵸우지타운",desc:"닌자마을이라고 불리는 작은 마을",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","potion","superpotion","hyperpotion","maxpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","fullheal","revive","repel","superrepel","maxrepel"],reqBadges:5,trainers:[]},
+{id:"j_c9",n:"쵸우지타운",desc:"닌자마을이라고 불리는 작은 마을",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","potion","superpotion","hyperpotion","maxpotion","antidote","paralyzeheal","awakening","burnheal","iceheal","fullheal","revive","repel","superrepel","maxrepel","liechiberry","ganlonberry","salacberry","petayaberry","apicotberry"],reqBadges:5,trainers:[]},
 {id:"j_r20",n:"분노의호수",desc:"붉은 갸라도스의 전설이 깃든 호수",lv:[20,30],pokemon:[
   {k:"magikarp",w:60},
   {k:"gyarados",w:40}
@@ -2396,6 +2396,22 @@ iron:        {n:"브로민",desc:"방어 노력치 +10",type:"etc",value:1,buy:9
 carbos:      {n:"인돌",desc:"스피드 노력치 +10",type:"etc",value:1,buy:9800,sell:4900},
 zinc:        {n:"키토산",desc:"특수방어 노력치 +10",type:"etc",value:1,buy:9800,sell:4900},
 hpup:        {n:"맥스업",desc:"HP 노력치 +10",type:"etc",value:1,buy:9800,sell:4900},
+// ── 열매 (Berries) ──
+cheriberry:   {n:"체리열매",desc:"지닌 포켓몬 마비 시 자동 회복",type:"berry",berryType:"cure",value:"paralyze",buy:80,sell:40},
+chestoberry:  {n:"체스열매",desc:"지닌 포켓몬 잠듦 시 자동 회복",type:"berry",berryType:"cure",value:"sleep",buy:80,sell:40},
+pechaberry:   {n:"복숭열매",desc:"지닌 포켓몬 독 시 자동 회복",type:"berry",berryType:"cure",value:"poison",buy:80,sell:40},
+rawstberry:   {n:"키열매",desc:"지닌 포켓몬 화상 시 자동 회복",type:"berry",berryType:"cure",value:"burn",buy:80,sell:40},
+aspearberry:  {n:"복분열매",desc:"지닌 포켓몬 얼음 시 자동 회복",type:"berry",berryType:"cure",value:"freeze",buy:80,sell:40},
+persimberry:  {n:"감열매",desc:"지닌 포켓몬 혼란 시 자동 회복",type:"berry",berryType:"cure",value:"confuse",buy:120,sell:60},
+oranberry:    {n:"오랭열매",desc:"HP 50% 이하 시 HP 10 회복",type:"berry",berryType:"hp",value:10,buy:100,sell:50},
+sitrusberry:  {n:"자뭉열매",desc:"HP 50% 이하 시 최대HP 25% 회복",type:"berry",berryType:"hppct",value:25,buy:500,sell:250},
+lumberry:     {n:"리쥬열매",desc:"지닌 포켓몬 모든 상태이상 자동 회복",type:"berry",berryType:"cure_all",value:0,buy:800,sell:400},
+liechiberry:  {n:"치리열매",desc:"HP 25% 이하 시 공격 1단계 상승",type:"berry",berryType:"pinch",value:"atk",buy:2000,sell:1000},
+ganlonberry:  {n:"용아열매",desc:"HP 25% 이하 시 방어 1단계 상승",type:"berry",berryType:"pinch",value:"def",buy:2000,sell:1000},
+salacberry:   {n:"캄라열매",desc:"HP 25% 이하 시 스피드 1단계 상승",type:"berry",berryType:"pinch",value:"spd",buy:2000,sell:1000},
+petayaberry:  {n:"야타비열매",desc:"HP 25% 이하 시 특공 1단계 상승",type:"berry",berryType:"pinch",value:"spatk",buy:2000,sell:1000},
+apicotberry:  {n:"슈캄열매",desc:"HP 25% 이하 시 특방 1단계 상승",type:"berry",berryType:"pinch",value:"spdef",buy:2000,sell:1000},
+leppaberry:   {n:"래프열매",desc:"PP가 0이 된 기술의 PP 10 회복",type:"berry",berryType:"pp",value:10,buy:300,sell:150},
 // ── 키 아이템 (Key Items) ──
 expshare:    {n:"학습장치",desc:"전투 후 경험치를 팀 전체가 나눠 받는다",type:"key",value:"expshare",buy:0,sell:0},
 luckyegg:    {n:"행운의알",desc:"보유 포켓몬의 경험치 1.5배",type:"key",value:"luckyegg",buy:0,sell:0},
@@ -2523,51 +2539,56 @@ synchronize:{n:"싱크로",desc:"상태이상을 상대에게도 전달",type:"s
 innerfocus:{n:"정신력",desc:"풀죽지 않음",type:"noflinch"},
 scrappy:{n:"배짱",desc:"노말/격투 기술이 고스트에 적중",type:"scrappy"},
 defiant:{n:"오기",desc:"능력 하락 시 공격 2단계 상승",type:"defiant"},
-competitive:{n:"승부근성",desc:"능력 하락 시 특공 2단계 상승",type:"none"},
+competitive:{n:"승부근성",desc:"능력 하락 시 특공 2단계 상승",type:"competitive"},
 toughclaws:{n:"단단한손톱",desc:"접촉 기술 1.3배",type:"toughclaws"},
 parentalbond:{n:"부자유친",desc:"기술을 2번 발동 (2번째 위력 25%)",type:"none"},
-pixilate:{n:"페어리스킨",desc:"노말 기술이 페어리 타입+1.2배",type:"none"},
-aerilate:{n:"스카이스킨",desc:"노말 기술이 비행 타입+1.2배",type:"none"},
-refrigerate:{n:"프리즈스킨",desc:"노말 기술이 얼음 타입+1.2배",type:"none"},
+pixilate:{n:"페어리스킨",desc:"노말 기술이 페어리 타입+1.2배",type:"skin",skinType:"fairy"},
+aerilate:{n:"스카이스킨",desc:"노말 기술이 비행 타입+1.2배",type:"skin",skinType:"flying"},
+refrigerate:{n:"프리즈스킨",desc:"노말 기술이 얼음 타입+1.2배",type:"skin",skinType:"ice"},
 strongjaw:{n:"단단한턱",desc:"물기 기술 1.5배",type:"strongjaw"},
 ironfist:{n:"철주먹",desc:"펀치 기술 1.2배",type:"ironfist"},
 megalauncher:{n:"메가런처",desc:"파동 기술 1.5배",type:"megalauncher"},
 serenegrace:{n:"천의은총",desc:"추가효과 확률 2배",type:"serenegrace"},
 poisontouch:{n:"독수",desc:"접촉 기술에 30% 독",type:"contact_status",status:"poison",chance:30},
 effectspore:{n:"포자",desc:"접촉 시 11% 독/마비/잠듦",type:"contact_status",status:"poison",chance:11},
-cutecharm:{n:"헤롱헤롱바디",desc:"접촉 시 30% 헤롱헤롱",type:"none"},
-chlorophyll:{n:"엽록소",desc:"쾌청 시 스피드 2배",type:"none"},
-swiftswim:{n:"쓱쓱",desc:"비 올 때 스피드 2배",type:"none"},
-sandrush:{n:"모래헤치기",desc:"모래바람 시 스피드 2배",type:"none"},
-slushrush:{n:"눈치우기",desc:"싸라기눈 시 스피드 2배",type:"none"},
-sandveil:{n:"모래숨기",desc:"모래바람 시 회피율 상승",type:"none"},
-snowcloak:{n:"눈숨기",desc:"싸라기눈 시 회피율 상승",type:"none"},
+cutecharm:{n:"헤롱헤롱바디",desc:"접촉 시 30% 헤롱헤롱",type:"cutecharm"},
+chlorophyll:{n:"엽록소",desc:"쾌청 시 스피드 2배",type:"weather_speed",weather:"sun"},
+swiftswim:{n:"쓱쓱",desc:"비 올 때 스피드 2배",type:"weather_speed",weather:"rain"},
+sandrush:{n:"모래헤치기",desc:"모래바람 시 스피드 2배",type:"weather_speed",weather:"sand"},
+slushrush:{n:"눈치우기",desc:"싸라기눈 시 스피드 2배",type:"weather_speed",weather:"hail"},
+sandveil:{n:"모래숨기",desc:"모래바람 시 회피율 상승",type:"weather_evasion",weather:"sand"},
+snowcloak:{n:"눈숨기",desc:"싸라기눈 시 회피율 상승",type:"weather_evasion",weather:"hail"},
 oblivious:{n:"둔감",desc:"헤롱헤롱에 걸리지 않음",type:"none"},
-owntempo:{n:"마이페이스",desc:"혼란에 걸리지 않음",type:"none"},
-earlybird:{n:"일찍기상",desc:"잠듦에서 빨리 깬다",type:"none"},
+owntempo:{n:"마이페이스",desc:"혼란에 걸리지 않음",type:"owntempo"},
+earlybird:{n:"일찍기상",desc:"잠듦에서 빨리 깬다",type:"earlybird"},
 colorchange:{n:"변색",desc:"맞은 기술 타입으로 변한다",type:"none"},
 trace:{n:"트레이스",desc:"상대 특성을 복사",type:"none"},
 shadowtag:{n:"그림자밟기",desc:"상대가 도주 불가",type:"notrap"},
 arenatrap:{n:"개미지옥",desc:"상대가 도주 불가",type:"notrap"},
-stench:{n:"악취",desc:"접촉 시 10% 풀죽음",type:"none"},
-dryskin:{n:"건조피부",desc:"물 기술로 회복, 불에 약함",type:"none"},
+stench:{n:"악취",desc:"접촉 시 10% 풀죽음",type:"stench"},
+dryskin:{n:"건조피부",desc:"물 기술로 회복, 불에 약함",type:"dryskin"},
 rivalry:{n:"투쟁심",desc:"동성 상대에게 1.25배",type:"none"},
 reckless:{n:"무모한",desc:"반동기 위력 1.2배",type:"reckless"},
-sheerforce:{n:"우격다짐",desc:"추가효과 제거 대신 1.3배",type:"none"},
-contrary:{n:"심술꾸러기",desc:"능력변화가 반대로 적용",type:"none"},
-prankster:{n:"짓궂은마음",desc:"변화기술 우선도+1",type:"none"},
+sheerforce:{n:"우격다짐",desc:"추가효과 제거 대신 1.3배",type:"sheerforce"},
+contrary:{n:"심술꾸러기",desc:"능력변화가 반대로 적용",type:"contrary"},
+prankster:{n:"짓궂은마음",desc:"변화기술 우선도+1",type:"prankster"},
 justified:{n:"정의의마음",desc:"악 기술에 공격 1단계 상승",type:"justified"},
-overcoat:{n:"방진",desc:"날씨 데미지/가루 기술 무효",type:"none"},
-cursedbody:{n:"저주받은바디",desc:"접촉 시 30% 기술봉인",type:"none"},
+overcoat:{n:"방진",desc:"날씨 데미지/가루 기술 무효",type:"overcoat"},
+cursedbody:{n:"저주받은바디",desc:"접촉 시 30% 기술봉인",type:"cursedbody"},
 aromaveil:{n:"아로마베일",desc:"정신 기술에 면역",type:"none"},
 furcoat:{n:"퍼코트",desc:"물리 데미지 반감",type:"furcoat"},
-protean:{n:"변환자재",desc:"기술 타입으로 자신의 타입이 변한다",type:"none"},
-galewings:{n:"질풍날개",desc:"HP만땅 시 비행 기술 우선도+1",type:"none"},
-bulletproof:{n:"방탄",desc:"구/탄 기술에 면역",type:"none"},
-darkaura:{n:"다크오라",desc:"모든 악 기술 위력 4/3배",type:"none"},
-fairyaura:{n:"페어리오라",desc:"모든 페어리 기술 위력 4/3배",type:"none"},
-sandforce:{n:"모래의힘",desc:"모래바람 시 바위/땅/강철 기술 1.3배",type:"none"},
-noflinch:{n:"정신력",desc:"풀죽지 않음",type:"noflinch"}
+protean:{n:"변환자재",desc:"기술 타입으로 자신의 타입이 변한다",type:"protean"},
+galewings:{n:"질풍날개",desc:"HP만땅 시 비행 기술 우선도+1",type:"galewings"},
+bulletproof:{n:"방탄",desc:"구/탄 기술에 면역",type:"bulletproof"},
+darkaura:{n:"다크오라",desc:"모든 악 기술 위력 4/3배",type:"aura",auraType:"dark"},
+fairyaura:{n:"페어리오라",desc:"모든 페어리 기술 위력 4/3배",type:"aura",auraType:"fairy"},
+sandforce:{n:"모래의힘",desc:"모래바람 시 바위/땅/강철 기술 1.3배",type:"sandforce"},
+noflinch:{n:"정신력",desc:"풀죽지 않음",type:"noflinch"},
+gluttony:{n:"먹보",desc:"HP 열매를 50% 이하에서 사용",type:"gluttony"},
+cheekpouch:{n:"볼주머니",desc:"열매를 먹으면 HP도 회복",type:"cheekpouch"},
+unburden:{n:"경쾌함",desc:"아이템 소비 시 스피드 2배",type:"unburden"},
+harvest:{n:"수확",desc:"턴 종료 시 50% 확률로 열매 재생",type:"harvest"},
+steadfast:{n:"불굴의마음",desc:"풀죽을 때 스피드 1단계 상승",type:"steadfast"}
 };
 
 // ═══════════════════════════════════════════════
@@ -2655,6 +2676,14 @@ function createPokemonInstance(key, level) {
     for (var i = 0; i < 6; i++) iv.push(rng(0,15));
     var stats = calcStats(data.s, level, iv);
     var moves = getMovesAtLevel(data.ml, level);
+    var abKey = null;
+    if (data.ab) {
+        if (Array.isArray(data.ab)) {
+            abKey = data.ab[rng(0, data.ab.length - 1)];
+        } else {
+            abKey = data.ab;
+        }
+    }
     return {
         key: key,
         nickname: data.n,
@@ -2666,7 +2695,9 @@ function createPokemonInstance(key, level) {
         moves: moves,
         status: null,
         statusTurns: 0,
-        statStages: {atk:0,def:0,spatk:0,spdef:0,spd:0,acc:0,eva:0}
+        statStages: {atk:0,def:0,spatk:0,spdef:0,spd:0,acc:0,eva:0},
+        heldItem: null,
+        ab: abKey
     };
 }
 
@@ -2778,6 +2809,21 @@ async function loadAll() {
                 player.roadIdx = player.routeIdx;
                 delete player.routeIdx;
             }
+            // heldItem/ab 마이그레이션
+            for (var mi = 0; mi < player.party.length; mi++) {
+                if (player.party[mi].heldItem === undefined) player.party[mi].heldItem = null;
+                if (player.party[mi].ab === undefined) {
+                    var _pd = POKEDEX[player.party[mi].key];
+                    if (_pd && _pd.ab) player.party[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
+                }
+            }
+            for (var mi = 0; mi < player.pc.length; mi++) {
+                if (player.pc[mi].heldItem === undefined) player.pc[mi].heldItem = null;
+                if (player.pc[mi].ab === undefined) {
+                    var _pd = POKEDEX[player.pc[mi].key];
+                    if (_pd && _pd.ab) player.pc[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
+                }
+            }
             return true;
         }
     } catch(e) { console.error(PLUGIN, "load fail:", e); }
@@ -2798,18 +2844,91 @@ function addLog(msg, type) {
 // ═══════════════════════════════════════════════
 function getAbility(poke) {
     if (!poke) return null;
-    // 메가진화 시 메가폼 특성 우선
     if (poke.isMega && poke.megaForm && poke.megaForm.ab) return ABILITIES[poke.megaForm.ab] || null;
+    if (poke.ab) return ABILITIES[poke.ab] || null;
     var pd = POKEDEX[poke.key];
     if (!pd || !pd.ab) return null;
-    return ABILITIES[pd.ab] || null;
+    var abKey = Array.isArray(pd.ab) ? pd.ab[0] : pd.ab;
+    return ABILITIES[abKey] || null;
 }
 function getAbilityKey(poke) {
     if (!poke) return null;
-    // 메가진화 시 메가폼 특성 우선
     if (poke.isMega && poke.megaForm && poke.megaForm.ab) return poke.megaForm.ab;
+    if (poke.ab) return poke.ab;
     var pd = POKEDEX[poke.key];
-    return pd ? pd.ab : null;
+    if (!pd || !pd.ab) return null;
+    return Array.isArray(pd.ab) ? pd.ab[0] : pd.ab;
+}
+
+// ═══════════════════════════════════════════════
+// 🫐 열매 시스템
+// ═══════════════════════════════════════════════
+function checkBerryAfterDamage(poke, bd) {
+    if (!poke || !poke.heldItem || poke.currentHp <= 0) return;
+    var berry = ITEMS[poke.heldItem];
+    if (!berry || berry.type !== "berry") return;
+    var pn = poke.nickname;
+    var maxHp = poke.stats[0];
+    var gluttony = (getAbilityKey(poke) === "gluttony");
+    // HP 회복 열매
+    if (berry.berryType === "hp" && poke.currentHp <= maxHp / 2) {
+        var heal = berry.value;
+        poke.currentHp = Math.min(maxHp, poke.currentHp + heal);
+        bd.msg.push(pn + "은(는) " + berry.n + "으로 HP를 회복했다!");
+        consumeBerry(poke, bd);
+    } else if (berry.berryType === "hppct" && poke.currentHp <= maxHp / 2) {
+        var heal = Math.max(1, Math.floor(maxHp * berry.value / 100));
+        poke.currentHp = Math.min(maxHp, poke.currentHp + heal);
+        bd.msg.push(pn + "은(는) " + berry.n + "으로 HP를 회복했다!");
+        consumeBerry(poke, bd);
+    }
+    // 핀치 스탯 열매 (HP 25% 이하, 먹보 특성이면 50% 이하)
+    else if (berry.berryType === "pinch") {
+        var threshold = gluttony ? maxHp / 2 : maxHp / 4;
+        if (poke.currentHp <= threshold) {
+            poke.statStages[berry.value] = Math.min(6, poke.statStages[berry.value] + 1);
+            var statNames = {atk:"공격",def:"방어",spatk:"특공",spdef:"특방",spd:"스피드"};
+            bd.msg.push(pn + "은(는) " + berry.n + "으로 " + statNames[berry.value] + "이(가) 올라갔다!");
+            consumeBerry(poke, bd);
+        }
+    }
+}
+
+function checkBerryAfterStatus(poke, bd) {
+    if (!poke || !poke.heldItem || poke.currentHp <= 0) return;
+    var berry = ITEMS[poke.heldItem];
+    if (!berry || berry.type !== "berry") return;
+    var pn = poke.nickname;
+    if (berry.berryType === "cure" && poke.status === berry.value) {
+        poke.status = null; poke.statusTurns = 0;
+        bd.msg.push(pn + "은(는) " + berry.n + "으로 상태가 회복됐다!");
+        consumeBerry(poke, bd);
+    } else if (berry.berryType === "cure" && berry.value === "confuse" && poke.status === "confuse") {
+        poke.status = null; poke.statusTurns = 0;
+        bd.msg.push(pn + "은(는) " + berry.n + "으로 혼란이 풀렸다!");
+        consumeBerry(poke, bd);
+    } else if (berry.berryType === "cure_all" && poke.status) {
+        poke.status = null; poke.statusTurns = 0;
+        bd.msg.push(pn + "은(는) " + berry.n + "으로 상태가 회복됐다!");
+        consumeBerry(poke, bd);
+    }
+}
+
+function consumeBerry(poke, bd) {
+    var berryKey = poke.heldItem;
+    poke._lastBerry = berryKey;
+    poke.heldItem = null;
+    // 특성: cheekpouch → 열매 먹을 때 HP도 회복
+    if (getAbilityKey(poke) === "cheekpouch") {
+        var cheekHeal = Math.max(1, Math.floor(poke.stats[0] / 8));
+        poke.currentHp = Math.min(poke.stats[0], poke.currentHp + cheekHeal);
+        bd.msg.push(poke.nickname + "의 볼주머니! HP가 조금 회복됐다!");
+    }
+    // 특성: unburden → 아이템 소비 시 스피드 2배
+    if (getAbilityKey(poke) === "unburden") {
+        poke._unburden = true;
+        bd.msg.push(poke.nickname + "의 경쾌함! 스피드가 올라갔다!");
+    }
 }
 
 // ═══════════════════════════════════════════════
@@ -2824,15 +2943,23 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
 
     var atkAbKey = getAbilityKey(attackerPoke);
     var defAbKey = getAbilityKey(defenderPoke);
+    var atkAb = getAbility(attackerPoke);
+    var defAb = getAbility(defenderPoke);
 
     var level = attackerPoke.level;
     var power = move.p;
+    var moveType = move.t;
+
+    // 특성: 스킨 계열 → 노말 기술 타입변환 + 1.2배
+    if (atkAb && atkAb.type === "skin" && moveType === "normal") {
+        moveType = atkAb.skinType;
+        power = Math.floor(power * 1.2);
+    }
 
     // 특성: technician → 위력60이하 1.5배
     if (atkAbKey === "technician" && power <= 60) power = Math.floor(power * 1.5);
     // 특성: pinch (심록/맹화/급류/벌레의알림)
-    var atkAb = getAbility(attackerPoke);
-    if (atkAb && atkAb.type === "pinch" && atkAb.boostType === move.t && attackerPoke.currentHp <= Math.floor(attackerPoke.stats[0] / 3)) power = Math.floor(power * 1.5);
+    if (atkAb && atkAb.type === "pinch" && atkAb.boostType === moveType && attackerPoke.currentHp <= Math.floor(attackerPoke.stats[0] / 3)) power = Math.floor(power * 1.5);
     // 특성: toughclaws → 접촉(physical) 기술 1.3배
     if (atkAbKey === "toughclaws" && move.c === "physical") power = Math.floor(power * 1.3);
     // 특성: strongjaw → 물기 기술 1.5배 (bite, crunch, firefang, etc.)
@@ -2846,6 +2973,28 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
     if (atkAbKey === "megalauncher" && pulseKeys[moveKey]) power = Math.floor(power * 1.5);
     // 특성: reckless → 반동기 위력 1.2배
     if (atkAbKey === "reckless" && move.ef === "recoil") power = Math.floor(power * 1.2);
+
+    // 특성: darkaura/fairyaura → 해당 타입 기술 4/3배
+    if (moveType === "dark" && (atkAbKey === "darkaura" || defAbKey === "darkaura")) power = Math.floor(power * 4 / 3);
+    if (moveType === "fairy" && (atkAbKey === "fairyaura" || defAbKey === "fairyaura")) power = Math.floor(power * 4 / 3);
+
+    // 특성: sheerforce → 추가효과 제거 대신 1.3배
+    if (atkAbKey === "sheerforce" && move.ef && move.ec) power = Math.floor(power * 1.3);
+
+    // 특성: sandforce → 모래바람 시 바위/땅/강철 기술 1.3배
+    if (atkAbKey === "sandforce" && (moveType === "rock" || moveType === "ground" || moveType === "steel")) power = Math.floor(power * 1.3);
+
+    // 특성: bulletproof → 구/탄 기술 무효
+    var ballMoves = {shadowball:1,sludgebomb:1,energyball:1,aurasphere:1,focusblast:1,gyroball:1,weatherball:1};
+    if (defAbKey === "bulletproof" && ballMoves[moveKey]) {
+        return {dmg:0, eff:0, crit:false, bulletproof:true};
+    }
+
+    // 특성: dryskin → 물 기술 흡수 회복, 불 기술 1.25배
+    if (defAbKey === "dryskin" && moveType === "water") {
+        return {dmg:0, eff:0, crit:false, dryskin:true};
+    }
+    if (defAbKey === "dryskin" && moveType === "fire") power = Math.floor(power * 1.25);
 
     // HP비례기: 분화(eruption)는 현재HP/최대HP 비율로 위력이 변동 (최대150→최소1)
     if (moveKey === "eruption") {
@@ -2880,37 +3029,37 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
     var stab = 1;
     var atkTypes = attackerPoke.megaTypes || atkData.t;
     for (var i = 0; i < atkTypes.length; i++) {
-        if (atkTypes[i] === move.t) { stab = 1.5; break; }
+        if (atkTypes[i] === moveType) { stab = 1.5; break; }
     }
     // 특성: adaptability → STAB 2배
     if (atkAbKey === "adaptability" && stab > 1) stab = 2;
 
     // 타입 상성
     var defTypes = defenderPoke.megaTypes || defData.t;
-    var eff = getTypeEffect(move.t, defTypes);
+    var eff = getTypeEffect(moveType, defTypes);
 
     // 특성: scrappy → 노말/격투가 고스트에 적중
-    if (atkAbKey === "scrappy" && (move.t === "normal" || move.t === "fighting") && eff === 0) eff = 1;
+    if (atkAbKey === "scrappy" && (moveType === "normal" || moveType === "fighting") && eff === 0) eff = 1;
 
     // 특성: wonderguard → 효과 좋은 기술만 맞음
     if (defAbKey === "wonderguard" && eff <= 1 && eff > 0) return {dmg:0, eff:0, crit:false, blocked:"wonderguard"};
     // 특성: 타입 면역 특성들
-    if (defAbKey === "levitate" && move.t === "ground") return {dmg:0, eff:0, crit:false, absorbed:"levitate"};
-    if (defAbKey === "flashfire" && move.t === "fire") { defenderPoke.flashFireBoost = true; return {dmg:0, eff:0, crit:false, absorbed:"flashfire"}; }
-    if (defAbKey === "waterabsorb" && move.t === "water") return {dmg:0, eff:0, crit:false, absorbed:"waterabsorb"};
-    if (defAbKey === "voltabsorb" && move.t === "electric") return {dmg:0, eff:0, crit:false, absorbed:"voltabsorb"};
-    if ((defAbKey === "lightningrod" || defAbKey === "motordrive") && move.t === "electric") return {dmg:0, eff:0, crit:false, absorbed:defAbKey};
-    if (defAbKey === "sapsipper" && move.t === "grass") return {dmg:0, eff:0, crit:false, absorbed:"sapsipper"};
+    if (defAbKey === "levitate" && moveType === "ground") return {dmg:0, eff:0, crit:false, absorbed:"levitate"};
+    if (defAbKey === "flashfire" && moveType === "fire") { defenderPoke.flashFireBoost = true; return {dmg:0, eff:0, crit:false, absorbed:"flashfire"}; }
+    if (defAbKey === "waterabsorb" && moveType === "water") return {dmg:0, eff:0, crit:false, absorbed:"waterabsorb"};
+    if (defAbKey === "voltabsorb" && moveType === "electric") return {dmg:0, eff:0, crit:false, absorbed:"voltabsorb"};
+    if ((defAbKey === "lightningrod" || defAbKey === "motordrive") && moveType === "electric") return {dmg:0, eff:0, crit:false, absorbed:defAbKey};
+    if (defAbKey === "sapsipper" && moveType === "grass") return {dmg:0, eff:0, crit:false, absorbed:"sapsipper"};
 
     // 특성: thickfat → 불/얼음 반감
-    if (defAbKey === "thickfat" && (move.t === "fire" || move.t === "ice")) eff *= 0.5;
+    if (defAbKey === "thickfat" && (moveType === "fire" || moveType === "ice")) eff *= 0.5;
     // 특성: filter/solidrock → 효과 좋은 기술 3/4
     if ((defAbKey === "filter" || defAbKey === "solidrock") && eff > 1) eff *= 0.75;
     // 특성: multiscale → HP만땅 시 반감
     if (defAbKey === "multiscale" && defenderPoke.currentHp >= defenderPoke.stats[0]) eff *= 0.5;
 
     // 특성: flashfire boost for attacker
-    if (atkAbKey === "flashfire" && move.t === "fire" && attackerPoke.flashFireBoost) power = Math.floor(power * 1.5);
+    if (atkAbKey === "flashfire" && moveType === "fire" && attackerPoke.flashFireBoost) power = Math.floor(power * 1.5);
 
     // 급소
     var critChance = (move.ef === "highcrit") ? 0.125 : (attackerPoke.critBoost ? 0.125 : (1/24));
@@ -3372,6 +3521,9 @@ function applyMoveEffects(move, attacker, defender, bd) {
     var an = attacker.nickname;
     var dn = defender.nickname;
     if (mv.ef && mv.ec) {
+        // 특성: sheerforce → 추가효과 제거 대신 위력 1.3배 (calcDamage에서 처리)
+        if (getAbilityKey(attacker) === "sheerforce") { /* 추가효과 스킵 */ }
+        else {
         // 특성: serenegrace → 추가효과 확률 2배
         var effChance = mv.ec;
         if (getAbilityKey(attacker) === "serenegrace") effChance = Math.min(100, effChance * 2);
@@ -3387,7 +3539,10 @@ function applyMoveEffects(move, attacker, defender, bd) {
             } else if (mv.ef === "freeze" && !defender.status) {
                 defender.status = "freeze"; bd.msg.push(dn + "은(는) 얼어붙었다!");
             } else if (mv.ef === "confuse") {
-                if (defender.status !== "confuse") {
+                // 특성: owntempo → 혼란 면역
+                if (getAbilityKey(defender) === "owntempo") {
+                    bd.msg.push(dn + "의 마이페이스! 혼란에 걸리지 않는다!");
+                } else if (defender.status !== "confuse") {
                     defender.status = "confuse"; defender.statusTurns = rng(2,5); bd.msg.push(dn + "은(는) 혼란에 빠졌다!");
                 }
             } else if (mv.ef === "flinch") {
@@ -3401,15 +3556,25 @@ function applyMoveEffects(move, attacker, defender, bd) {
                 // 특성: clearbody/whitesmoke → 능력치 하락 방지
                 var _defAbType = getAbility(defender) ? getAbility(defender).type : null;
                 if (_defAbType === "prevent_statdown") { bd.msg.push(dn + "의 " + getAbility(defender).n + "! 능력치가 떨어지지 않는다!"); }
-                else { defender.statStages.atk = Math.max(-6, defender.statStages.atk - 1); bd.msg.push(dn + "의 공격이 떨어졌다!"); }
+                else {
+                    defender.statStages.atk = Math.max(-6, defender.statStages.atk - 1); bd.msg.push(dn + "의 공격이 떨어졌다!");
+                    // 특성: competitive → 능력치 하락 시 특공 +2
+                    if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+                }
             } else if (mv.ef === "spdef_down") {
                 var _defAbType2 = getAbility(defender) ? getAbility(defender).type : null;
                 if (_defAbType2 === "prevent_statdown") { bd.msg.push(dn + "의 " + getAbility(defender).n + "! 능력치가 떨어지지 않는다!"); }
-                else { defender.statStages.spdef = Math.max(-6, defender.statStages.spdef - 1); bd.msg.push(dn + "의 특방이 떨어졌다!"); }
+                else {
+                    defender.statStages.spdef = Math.max(-6, defender.statStages.spdef - 1); bd.msg.push(dn + "의 특방이 떨어졌다!");
+                    if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+                }
             } else if (mv.ef === "spd_down") {
                 var _defAbType3 = getAbility(defender) ? getAbility(defender).type : null;
                 if (_defAbType3 === "prevent_statdown") { bd.msg.push(dn + "의 " + getAbility(defender).n + "! 능력치가 떨어지지 않는다!"); }
-                else { defender.statStages.spd = Math.max(-6, defender.statStages.spd - 1); bd.msg.push(dn + "의 스피드가 떨어졌다!"); }
+                else {
+                    defender.statStages.spd = Math.max(-6, defender.statStages.spd - 1); bd.msg.push(dn + "의 스피드가 떨어졌다!");
+                    if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+                }
             }
             // 특성: synchronize → 상태이상 반사 (독/마비/화상만)
             if (defender.status && getAbilityKey(defender) === "synchronize" && !attacker.status) {
@@ -3419,11 +3584,13 @@ function applyMoveEffects(move, attacker, defender, bd) {
                     bd.msg.push(dn + "의 싱크로! " + an + "도 " + statusName(attacker.status) + " 상태가 되었다!");
                 }
             }
+            checkBerryAfterStatus(defender, bd);
+        }
         }
     }
     if (mv.c === "status" && mv.p === 0) {
         // guardSpec blocks stat drops
-        var isStatDown = (mv.ef === "atk_down" || mv.ef === "atk_down2" || mv.ef === "def_down" || mv.ef === "acc_down" || mv.ef === "spd_down");
+        var isStatDown = (mv.ef === "atk_down" || mv.ef === "atk_down2" || mv.ef === "def_down" || mv.ef === "acc_down" || mv.ef === "spd_down" || mv.ef === "spdef_down");
         // 특성: clearbody/whitesmoke → 능력치 하락 방지
         var defAbType = getAbility(defender) ? getAbility(defender).type : null;
         if (isStatDown && defAbType === "prevent_statdown") {
@@ -3433,15 +3600,40 @@ function applyMoveEffects(move, attacker, defender, bd) {
             bd.msg.push(dn + "의 날카로운눈! 명중률이 떨어지지 않는다!");
         } else if (defender.guardSpec && defender.guardSpec > 0 && isStatDown) {
             bd.msg.push(dn + "은(는) 에펙트가드로 보호받고 있다!");
-        } else if (mv.ef === "atk_down") { defender.statStages.atk = Math.max(-6, defender.statStages.atk - 1); bd.msg.push(dn + "의 공격이 떨어졌다!"); }
-        else if (mv.ef === "atk_down2") { defender.statStages.atk = Math.max(-6, defender.statStages.atk - 2); bd.msg.push(dn + "의 공격이 크게 떨어졌다!"); }
-        else if (mv.ef === "def_down") { defender.statStages.def = Math.max(-6, defender.statStages.def - 1); bd.msg.push(dn + "의 방어가 떨어졌다!"); }
+        } else if (mv.ef === "atk_down") {
+            defender.statStages.atk = Math.max(-6, defender.statStages.atk - 1); bd.msg.push(dn + "의 공격이 떨어졌다!");
+            if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+        }
+        else if (mv.ef === "atk_down2") {
+            defender.statStages.atk = Math.max(-6, defender.statStages.atk - 2); bd.msg.push(dn + "의 공격이 크게 떨어졌다!");
+            if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+        }
+        else if (mv.ef === "def_down") {
+            defender.statStages.def = Math.max(-6, defender.statStages.def - 1); bd.msg.push(dn + "의 방어가 떨어졌다!");
+            if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+        }
         else if (mv.ef === "acc_down") { defender.statStages.acc = Math.max(-6, defender.statStages.acc - 1); bd.msg.push(dn + "의 명중률이 떨어졌다!"); }
-        else if (mv.ef === "spd_down") { defender.statStages.spd = Math.max(-6, defender.statStages.spd - 1); bd.msg.push(dn + "의 스피드가 떨어졌다!"); }
+        else if (mv.ef === "spd_down") {
+            defender.statStages.spd = Math.max(-6, defender.statStages.spd - 1); bd.msg.push(dn + "의 스피드가 떨어졌다!");
+            if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+        }
+        else if (mv.ef === "spdef_down") {
+            defender.statStages.spdef = Math.max(-6, defender.statStages.spdef - 1); bd.msg.push(dn + "의 특방이 떨어졌다!");
+            if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+        }
         else if (mv.ef === "def_up") { attacker.statStages.def = Math.min(6, attacker.statStages.def + 1); bd.msg.push(an + "의 방어가 올라갔다!"); }
         else if (mv.ef === "spdef_up") { attacker.statStages.spdef = Math.min(6, attacker.statStages.spdef + 1); bd.msg.push(an + "의 특방이 올라갔다!"); }
-        else if (mv.ef === "swordsdance") { attacker.statStages.atk = Math.min(6, attacker.statStages.atk + 2); bd.msg.push(an + "의 공격이 크게 올라갔다!"); }
-        else if (mv.ef === "calmmind") { attacker.statStages.spatk = Math.min(6, attacker.statStages.spatk + 1); attacker.statStages.spdef = Math.min(6, attacker.statStages.spdef + 1); bd.msg.push(an + "의 특공과 특방이 올라갔다!"); }
+        else if (mv.ef === "swordsdance") {
+            var sStages = (getAbilityKey(attacker) === "contrary") ? -2 : 2;
+            attacker.statStages.atk = Math.max(-6, Math.min(6, attacker.statStages.atk + sStages));
+            bd.msg.push(an + "의 공격이 " + (sStages > 0 ? "크게 올라갔다!" : "크게 떨어졌다!"));
+        }
+        else if (mv.ef === "calmmind") {
+            var cmStages = (getAbilityKey(attacker) === "contrary") ? -1 : 1;
+            attacker.statStages.spatk = Math.max(-6, Math.min(6, attacker.statStages.spatk + cmStages));
+            attacker.statStages.spdef = Math.max(-6, Math.min(6, attacker.statStages.spdef + cmStages));
+            bd.msg.push(an + "의 특공과 특방이 " + (cmStages > 0 ? "올라갔다!" : "떨어졌다!"));
+        }
         else if (mv.ef === "focusenergy") { bd.msg.push(an + "은(는) 기합을 모으고 있다!"); }
         else if (mv.ef === "heal" || mv.ef === "rest") {
             var healAmt = Math.floor(attacker.stats[0] / 2);
@@ -3455,7 +3647,8 @@ function applyMoveEffects(move, attacker, defender, bd) {
 function canAct(poke, bd) {
     if (poke.currentHp <= 0) return false;
     if (poke.status === "sleep") {
-        poke.statusTurns--;
+        if (getAbilityKey(poke) === "earlybird") poke.statusTurns -= 2;
+        else poke.statusTurns--;
         if (poke.statusTurns <= 0) { poke.status = null; bd.msg.push(poke.nickname + "은(는) 눈을 떴다!"); return true; }
         bd.msg.push(poke.nickname + "은(는) 깊이 잠들어 있다..."); return false;
     }
@@ -3508,12 +3701,25 @@ function doStatusDamage(poke, bd) {
         bd.msg.push(poke.nickname + "의 탈피! 상태이상이 회복되었다!");
         poke.status = null; poke.statusTurns = 0;
     }
+    // 특성: harvest → 50% 확률 열매 재생
+    if (abKey === "harvest" && !poke.heldItem && poke._lastBerry && Math.random() < 0.5) {
+        poke.heldItem = poke._lastBerry;
+        bd.msg.push(poke.nickname + "의 수확! " + (ITEMS[poke._lastBerry] ? ITEMS[poke._lastBerry].n : "열매") + "이(가) 되살아났다!");
+    }
 }
 
 function executeAttack(attacker, defender, moveKey, bd) {
     var mv = MOVES[moveKey];
     if (!mv) return;
-    bd.msg.push(attacker.nickname + "의 " + mv.n + "!");
+    var an = attacker.nickname;
+    var dn = defender.nickname;
+    bd.msg.push(an + "의 " + mv.n + "!");
+    // 특성: protean → 기술 사용 전 타입 변환
+    if (getAbilityKey(attacker) === "protean" && MOVES[moveKey]) {
+        var newType = MOVES[moveKey].t;
+        attacker.megaTypes = [newType];
+        bd.msg.push(an + "의 변환자재! " + an + "의 타입이 변했다!");
+    }
     // 명중률 체크
     if (mv.a > 0 && mv.a < 100) {
         var accMult = getStatMult(attacker.statStages.acc) / getStatMult(defender.statStages.eva);
@@ -3528,22 +3734,22 @@ function executeAttack(attacker, defender, moveKey, bd) {
         // 특성: 타입 흡수
         if (result.absorbed) {
             var absAb = ABILITIES[result.absorbed];
-            bd.msg.push(defender.nickname + "의 " + (absAb?absAb.n:result.absorbed) + "!");
+            bd.msg.push(dn + "의 " + (absAb?absAb.n:result.absorbed) + "!");
             if (result.absorbed === "waterabsorb" || result.absorbed === "voltabsorb") {
                 var aheal = Math.max(1, Math.floor(defender.stats[0] / 4));
                 defender.currentHp = Math.min(defender.stats[0], defender.currentHp + aheal);
-                bd.msg.push(defender.nickname + "은(는) HP를 회복했다! (+" + aheal + ")");
+                bd.msg.push(dn + "은(는) HP를 회복했다! (+" + aheal + ")");
             } else if (result.absorbed === "flashfire") {
-                bd.msg.push(defender.nickname + "의 불꽃 기술 위력이 올라갔다!");
+                bd.msg.push(dn + "의 불꽃 기술 위력이 올라갔다!");
             } else if (result.absorbed === "lightningrod") {
                 defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 1);
-                bd.msg.push(defender.nickname + "의 특수공격이 올라갔다!");
+                bd.msg.push(dn + "의 특수공격이 올라갔다!");
             } else if (result.absorbed === "motordrive") {
                 defender.statStages.spd = Math.min(6, defender.statStages.spd + 1);
-                bd.msg.push(defender.nickname + "의 스피드가 올라갔다!");
+                bd.msg.push(dn + "의 스피드가 올라갔다!");
             } else if (result.absorbed === "sapsipper") {
                 defender.statStages.atk = Math.min(6, defender.statStages.atk + 1);
-                bd.msg.push(defender.nickname + "의 공격이 올라갔다!");
+                bd.msg.push(dn + "의 공격이 올라갔다!");
             } else {
                 bd.msg.push("효과가 없는 것 같다...");
             }
@@ -3554,10 +3760,22 @@ function executeAttack(attacker, defender, moveKey, bd) {
         }
         if (result.blocked) {
             var blkAb = ABILITIES[result.blocked];
-            bd.msg.push(defender.nickname + "의 " + (blkAb?blkAb.n:result.blocked) + "! 효과가 없는 것 같다...");
+            bd.msg.push(dn + "의 " + (blkAb?blkAb.n:result.blocked) + "! 효과가 없는 것 같다...");
             for (var i = 0; i < attacker.moves.length; i++) {
                 if (attacker.moves[i].key === moveKey) { attacker.moves[i].ppLeft = Math.max(0, attacker.moves[i].ppLeft - 1); break; }
             }
+            return;
+        }
+        // 특성: dryskin → 물 기술 흡수 회복
+        if (result.dryskin) {
+            var dryskinHeal = Math.max(1, Math.floor(defender.stats[0] / 4));
+            defender.currentHp = Math.min(defender.stats[0], defender.currentHp + dryskinHeal);
+            bd.msg.push(dn + "의 건조피부! HP가 회복됐다!");
+            return;
+        }
+        // 특성: bulletproof → 구/탄 기술 무효
+        if (result.bulletproof) {
+            bd.msg.push(dn + "의 방탄! 기술이 통하지 않았다!");
             return;
         }
         defender.currentHp = Math.max(0, defender.currentHp - result.dmg);
@@ -3568,22 +3786,24 @@ function executeAttack(attacker, defender, moveKey, bd) {
         else if (result.eff === 0) effMsg = " 효과가 없는 것 같다...";
         var critMsg = result.crit ? " 급소에 맞았다!" : "";
         bd.msg.push(result.dmg + " 데미지!" + critMsg + effMsg);
+        checkBerryAfterDamage(defender, bd);
         if (mv.ef === "drain") {
             var heal = Math.max(1, Math.floor(result.dmg / 2));
             attacker.currentHp = Math.min(attacker.stats[0], attacker.currentHp + heal);
-            bd.msg.push(attacker.nickname + "은(는) " + heal + " HP를 흡수했다!");
+            bd.msg.push(an + "은(는) " + heal + " HP를 흡수했다!");
         }
         if (mv.ef === "recoil") {
             // 특성: rockhead → 반동 데미지 없음
             if (getAbilityKey(attacker) !== "rockhead") {
                 var recoil = Math.max(1, Math.floor(result.dmg / 3));
                 attacker.currentHp = Math.max(0, attacker.currentHp - recoil);
-                bd.msg.push(attacker.nickname + "은(는) 반동으로 " + recoil + " 데미지를 받았다!");
+                bd.msg.push(an + "은(는) 반동으로 " + recoil + " 데미지를 받았다!");
+                checkBerryAfterDamage(attacker, bd);
             }
         }
         if (mv.ef === "selfdestruct") {
             attacker.currentHp = 0;
-            bd.msg.push(attacker.nickname + "은(는) 쓰러졌다!");
+            bd.msg.push(an + "은(는) 쓰러졌다!");
         }
         // 특성: 접촉 반사 (roughskin/ironbarbs)
         if (mv.c === "physical" && result.dmg > 0 && defender.currentHp > 0) {
@@ -3591,7 +3811,7 @@ function executeAttack(attacker, defender, moveKey, bd) {
             if (defAbKey === "roughskin" || defAbKey === "ironbarbs") {
                 var rsDmg = Math.max(1, Math.floor(attacker.stats[0] / 8));
                 attacker.currentHp = Math.max(0, attacker.currentHp - rsDmg);
-                bd.msg.push(defender.nickname + "의 " + ABILITIES[defAbKey].n + "! " + attacker.nickname + "에게 " + rsDmg + " 데미지!");
+                bd.msg.push(dn + "의 " + ABILITIES[defAbKey].n + "! " + an + "에게 " + rsDmg + " 데미지!");
             }
             // 특성: 접촉 상태이상 (staticbody/poisonpoint/flamebody)
             var defAb = getAbility(defender);
@@ -3603,20 +3823,24 @@ function executeAttack(attacker, defender, moveKey, bd) {
                     if (!immune) {
                         attacker.status = defAb.status;
                         attacker.statusTurns = 0;
-                        bd.msg.push(defender.nickname + "의 " + defAb.n + "! " + attacker.nickname + "은(는) " + statusName(attacker.status) + " 상태가 되었다!");
+                        bd.msg.push(dn + "의 " + defAb.n + "! " + an + "은(는) " + statusName(attacker.status) + " 상태가 되었다!");
                     }
                 }
+            }
+            // 특성: stench → 접촉 시 10% 풀죽음
+            if (getAbilityKey(attacker) === "stench" && !defender._flinched && Math.random() < 0.1) {
+                defender._flinched = true;
             }
         }
         // 특성: moxie → 쓰러뜨리면 공격+1
         if (defender.currentHp <= 0 && getAbilityKey(attacker) === "moxie") {
             attacker.statStages.atk = Math.min(6, attacker.statStages.atk + 1);
-            bd.msg.push(attacker.nickname + "의 자신감! 공격이 올라갔다!");
+            bd.msg.push(an + "의 자신감! 공격이 올라갔다!");
         }
         // 특성: justified → 악 기술에 맞으면 공격+1
         if (result.dmg > 0 && mv.t === "dark" && getAbilityKey(defender) === "justified" && defender.currentHp > 0) {
             defender.statStages.atk = Math.min(6, defender.statStages.atk + 1);
-            bd.msg.push(defender.nickname + "의 정의의마음! 공격이 올라갔다!");
+            bd.msg.push(dn + "의 정의의마음! 공격이 올라갔다!");
         }
     }
     // PP 감소
@@ -3657,11 +3881,20 @@ function executeTurn(playerMoveKey) {
     var enSpd = enemy.stats[5] * getStatMult(enemy.statStages.spd);
     if (myPoke.status === "paralyze") mySpd *= 0.5;
     if (enemy.status === "paralyze") enSpd *= 0.5;
+    // 특성: unburden → 아이템 소비 후 스피드 2배
+    if (myPoke._unburden) mySpd *= 2;
+    if (enemy._unburden) enSpd *= 2;
     var playerMove = MOVES[playerMoveKey];
     var enemyMoveKey = enemyChooseMove(enemy);
     var enemyMove = MOVES[enemyMoveKey];
     var pPri = (playerMove && playerMove.priority) ? playerMove.priority : 0;
     var ePri = (enemyMove && enemyMove.priority) ? enemyMove.priority : 0;
+    // 특성: prankster → 변화기술 우선도+1
+    if (getAbilityKey(myPoke) === "prankster" && playerMove && playerMove.c === "status") pPri += 1;
+    if (getAbilityKey(enemy) === "prankster" && enemyMove && enemyMove.c === "status") ePri += 1;
+    // 특성: galewings → HP만땅 시 비행 기술 우선도+1
+    if (getAbilityKey(myPoke) === "galewings" && myPoke.currentHp >= myPoke.stats[0] && playerMove && playerMove.t === "flying") pPri += 1;
+    if (getAbilityKey(enemy) === "galewings" && enemy.currentHp >= enemy.stats[0] && enemyMove && enemyMove.t === "flying") ePri += 1;
     var playerFirst = (pPri > ePri) || (pPri === ePri && mySpd >= enSpd);
     if (pPri === ePri && mySpd === enSpd) playerFirst = Math.random() < 0.5;
     var first, second, firstMove, secondMove;
@@ -3880,6 +4113,13 @@ function attemptCapture(ballKey) {
     }
     var maxHp = enemy.stats[0]; var curHp = enemy.currentHp;
     var catchRate = data.cr; var ballBonus = ball.value;
+    // 특수볼 보정
+    if (ballKey === "nestball") { ballBonus = Math.max(1, (41 - enemy.level) / 10); }
+    else if (ballKey === "timerball") { ballBonus = Math.min(4, 1 + (bd.turn || 0) * 0.3); }
+    else if (ballKey === "duskball" && player.timeOfDay === 4) { ballBonus = 3.5; }
+    else if (ballKey === "quickball" && (!bd.turn || bd.turn <= 1)) { ballBonus = 5; }
+    else if (ballKey === "repeatball" && player.pokedex && player.pokedex[enemy.key]) { ballBonus = 3.5; }
+    else if (ballKey === "netball") { var et = POKEDEX[enemy.key] ? POKEDEX[enemy.key].t : []; if (et.indexOf("water") >= 0 || et.indexOf("bug") >= 0) ballBonus = 3; else ballBonus = 1; }
     var statusBonus = 1;
     if (enemy.status === "sleep" || enemy.status === "freeze") statusBonus = 2;
     else if (enemy.status === "paralyze" || enemy.status === "burn" || enemy.status === "poison") statusBonus = 1.5;
@@ -4177,6 +4417,23 @@ function render() {
     var container = createUI();
     var body = container.querySelector("#pk-body") || container;
     var html = '';
+    if (gState && gState.subScreen === "berrySelect") {
+        var berryHtml = '<div style="padding:10px"><h3>🫐 열매 선택</h3>';
+        var hasBerries = false;
+        var bagKeys = Object.keys(player.bag);
+        for (var bi = 0; bi < bagKeys.length; bi++) {
+            var bk = bagKeys[bi];
+            var bItem = ITEMS[bk];
+            if (bItem && bItem.type === "berry" && player.bag[bk] > 0) {
+                hasBerries = true;
+                berryHtml += '<div style="margin:3px 0"><button data-action="poke_selectBerry" data-args="' + bk + '" style="width:100%;text-align:left;padding:6px;background:#3a6;color:#fff;border:none;border-radius:4px;cursor:pointer">' + bItem.n + ' x' + player.bag[bk] + ' <span style="font-size:0.85em;color:#cfc">(' + bItem.desc + ')</span></button></div>';
+            }
+        }
+        if (!hasBerries) berryHtml += '<p>가방에 열매가 없습니다.</p>';
+        berryHtml += '<button data-action="poke_cancelBerrySelect" style="margin-top:8px;padding:6px 16px;background:#666;color:#fff;border:none;border-radius:4px;cursor:pointer">취소</button></div>';
+        body.innerHTML = berryHtml;
+        bindHandlers(body); return;
+    }
     if (gState && gState.subScreen === "starterSelect") {
         html = renderStarterSelect();
     } else if (!player || !gState) {
@@ -4624,11 +4881,15 @@ function renderPartyScreen() {
         html += '<div class="pk-card" style="display:flex;align-items:center;gap:8px;cursor:pointer" data-action="poke_showSummary" data-args="' + i + '">';
         html += '<div style="font-size:24px">' + (pd?pd.em:"?") + '</div>';
         html += '<div style="flex:1">';
-        html += '<div style="font-weight:bold">' + p.nickname + ' <span style="color:#aaa;font-size:11px">Lv.' + p.level + '</span></div>';
+        html += '<div style="font-weight:bold">' + p.nickname + (p.heldItem && ITEMS[p.heldItem] ? ' 🫐' + ITEMS[p.heldItem].n : '') + ' <span style="color:#aaa;font-size:11px">Lv.' + p.level + '</span></div>';
         html += '<div style="font-size:11px">HP: ' + p.currentHp + '/' + p.stats[0] + '</div>';
         html += hpBar(p.currentHp, p.stats[0]);
         if (p.status) html += '<span style="font-size:10px;color:#e74c3c">⚠️ ' + statusName(p.status) + '</span>';
         html += '</div></div>';
+        html += '<div style="display:flex;gap:4px;margin:-6px 0 4px 36px">';
+        html += '<button class="pk-btn pk-btn-blue pk-btn-xs" data-action="poke_giveBerry" data-args="' + i + '">🫐열매</button>';
+        if (p.heldItem) html += '<button class="pk-btn pk-btn-yellow pk-btn-xs" data-action="poke_takeBerry" data-args="' + i + '">열매회수</button>';
+        html += '</div>';
     }
     return html;
 }
@@ -4788,8 +5049,13 @@ function renderSummaryScreen() {
     html += '<div style="color:#aaa;font-size:12px">Lv.' + poke.level + ' | EXP: ' + poke.exp + ' / ' + (getExpForLevel(poke.level+1)-getExpForLevel(poke.level)) + '</div>';
     if (pd) { for (var i = 0; i < pd.t.length; i++) html += typeSpan(pd.t[i]); }
     // 특성 표시
-    if (pd && pd.ab && ABILITIES[pd.ab]) {
-        html += '<div style="margin-top:4px"><span style="font-size:11px;color:#9b59b6">⭐ 특성: ' + ABILITIES[pd.ab].n + '</span> <span style="font-size:10px;color:#777">' + ABILITIES[pd.ab].desc + '</span></div>';
+    var _abKey = getAbilityKey(poke);
+    var _ab = _abKey ? ABILITIES[_abKey] : null;
+    if (_ab) {
+        html += '<div style="margin-top:4px"><span style="font-size:11px;color:#9b59b6">⭐ 특성: ' + _ab.n + '</span> <span style="font-size:10px;color:#777">' + _ab.desc + '</span></div>';
+    }
+    if (poke.heldItem && ITEMS[poke.heldItem]) {
+        html += '<div style="margin-top:2px"><span style="font-size:11px;color:#27ae60">🫐 지닌물건: ' + ITEMS[poke.heldItem].n + '</span></div>';
     }
     html += '</div>';
     // 스탯
@@ -5442,6 +5708,47 @@ window.poke_sellItem = async function(key) {
     showToast(item.n + " 판매!");
     await saveAll();
     render();
+};
+
+window.poke_giveBerry = async function(idx) {
+    if (!player || !gState) return;
+    gState.subScreen = "berrySelect";
+    gState.berryTargetIdx = parseInt(idx);
+    await saveAll(); render();
+};
+window.poke_selectBerry = async function(berryKey) {
+    if (!player || !gState) return;
+    var idx = gState.berryTargetIdx;
+    if (idx === undefined || idx === null) return;
+    var poke = player.party[idx];
+    if (!poke) return;
+    if (poke.heldItem) {
+        player.bag[poke.heldItem] = (player.bag[poke.heldItem] || 0) + 1;
+        addLog(poke.nickname + "에게서 " + ITEMS[poke.heldItem].n + "을(를) 회수했다!", "item");
+    }
+    poke.heldItem = berryKey;
+    player.bag[berryKey]--;
+    if (player.bag[berryKey] <= 0) delete player.bag[berryKey];
+    addLog(poke.nickname + "에게 " + ITEMS[berryKey].n + "을(를) 지니게 했다!", "item");
+    gState.subScreen = "party";
+    gState.berryTargetIdx = null;
+    await saveAll(); render();
+};
+window.poke_takeBerry = async function(idx) {
+    if (!player || !gState) return;
+    var poke = player.party[parseInt(idx)];
+    if (!poke || !poke.heldItem) return;
+    var berryName = ITEMS[poke.heldItem] ? ITEMS[poke.heldItem].n : poke.heldItem;
+    player.bag[poke.heldItem] = (player.bag[poke.heldItem] || 0) + 1;
+    addLog(poke.nickname + "에게서 " + berryName + "을(를) 회수했다!", "item");
+    poke.heldItem = null;
+    await saveAll(); render();
+};
+window.poke_cancelBerrySelect = async function() {
+    if (!gState) return;
+    gState.subScreen = "party";
+    gState.berryTargetIdx = null;
+    await saveAll(); render();
 };
 
 window.poke_useItemSelect = async function(itemKey) {
