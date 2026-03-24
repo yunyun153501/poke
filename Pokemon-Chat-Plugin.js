@@ -2876,6 +2876,11 @@ async function saveAll() {
         if (_hasRisu) {
             await Risuai.setArgument(KEY_SAVE, saveData);
             await Risuai.setArgument(KEY_STATE, stateData);
+            // safeLocalStorage 백업 (플러그인 업데이트 시 데이터 보존)
+            try {
+                await lsSet(KEY_SAVE, saveData);
+                await lsSet(KEY_STATE, stateData);
+            } catch(e2) {}
         } else {
             localStorage.setItem(KEY_SAVE, saveData);
             localStorage.setItem(KEY_STATE, stateData);
@@ -2889,6 +2894,20 @@ async function loadAll() {
         if (_hasRisu) {
             p = await Risuai.getArgument(KEY_SAVE);
             s = await Risuai.getArgument(KEY_STATE);
+            // 기본 저장소에 없으면 safeLocalStorage 백업에서 복구 시도
+            if ((!p || !s) && _ls) {
+                try {
+                    var bp = await lsGet(KEY_SAVE);
+                    var bs = await lsGet(KEY_STATE);
+                    if (bp && bs) {
+                        p = bp; s = bs;
+                        // 복구된 데이터를 기본 저장소에 다시 저장
+                        await Risuai.setArgument(KEY_SAVE, p);
+                        await Risuai.setArgument(KEY_STATE, s);
+                        console.log(PLUGIN, "safeLocalStorage 백업에서 세이브 복구 완료");
+                    }
+                } catch(e2) {}
+            }
         } else {
             p = localStorage.getItem(KEY_SAVE);
             s = localStorage.getItem(KEY_STATE);
