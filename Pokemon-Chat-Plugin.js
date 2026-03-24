@@ -3925,8 +3925,8 @@ function addLog(msg, type) {
     type = type || "info";
     if (!gState) return;
     gState.log = gState.log || [];
-    gState.log.unshift({msg:msg, type:type, t:Date.now()});
-    if (gState.log.length > 35) gState.log.pop();
+    gState.log.push({msg:msg, type:type, t:Date.now()});
+    if (gState.log.length > 35) gState.log.shift();
     _eventLog.push({msg:msg, type:type});
 }
 
@@ -6089,7 +6089,7 @@ function renderOverworld() {
     html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><span style="font-size:11px;color:#aaa">📋 로그</span>';
     html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openLog">전체</button></div>';
     var logs = gState.log || [];
-    for (var i = 0; i < Math.min(3, logs.length); i++) {
+    for (var i = Math.max(0, logs.length - 3); i < logs.length; i++) {
         html += '<div class="pk-log-entry pk-log-' + logs[i].type + '">' + logs[i].msg + '</div>';
     }
     html += '</div>';
