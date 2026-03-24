@@ -5573,6 +5573,7 @@ function attemptCapture(ballKey) {
         bd.msg.push("잡았다! " + enemy.nickname + "을(를) 잡았다!");
         bd.caught = true;
         addCapturedPokemon(enemy);
+        grantExp(player.party[bd.myIdx], enemy, false);
         for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "capture");
         return;
     }
@@ -5597,6 +5598,7 @@ function attemptCapture(ballKey) {
         bd.msg.push("잡았다! " + enemy.nickname + "을(를) 잡았다!");
         bd.caught = true;
         addCapturedPokemon(enemy);
+        grantExp(player.party[bd.myIdx], enemy, false);
     } else {
         var shakeMsg = ["앗! 빠져나왔다!", "아쉽다! 조금만 더!", "흔들 흔들... 탈출!", "거의 다 잡았는데...!"];
         bd.msg.push(shakeMsg[Math.min(shakes, shakeMsg.length - 1)]);
