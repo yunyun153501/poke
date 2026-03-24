@@ -3169,6 +3169,11 @@ amuletcoin:  {n:"부적금화",desc:"트레이너전 상금 2배",type:"key",val
 soothebell:  {n:"평온의방울",desc:"포켓몬의 친밀도가 더 빨리 오른다",type:"key",value:"soothebell",buy:0,sell:0},
 cleansetag:  {n:"클린스태그",desc:"야생 포켓몬 조우율 감소",type:"key",value:"cleansetag",buy:0,sell:0},
 megaring:    {n:"메가링",desc:"메가진화를 사용할 수 있게 해주는 팔찌",type:"key",value:"megaring",buy:0,sell:0},
+diveset:     {n:"다이빙세트",desc:"수중 탐사가 가능해진다. 깊은 바다 도로에 접근 가능",type:"key",value:"diveset",buy:0,sell:0},
+gogoogoggles:{n:"사막고글",desc:"모래바람 속에서도 시야를 확보한다. 사막 지대 접근 가능",type:"key",value:"gogoogoggles",buy:0,sell:0},
+devonscope:  {n:"디본스코프",desc:"투명한 포켓몬의 모습을 비춘다",type:"key",value:"devonscope",buy:0,sell:0},
+squirtbottle:{n:"물뿌리개",desc:"수도배지와 함께 사용하여 너도밤나무에 물을 줄 수 있다",type:"key",value:"squirtbottle",buy:0,sell:0},
+secretpotion:{n:"비약",desc:"아사기 등대의 전룡에게 줄 약",type:"key",value:"secretpotion",buy:0,sell:0},
 // ── 기술머신 (TM) ──
 tm01_focuspunch: {n:"기술머신01 [기합펀치]",desc:"기합펀치를 가르친다",type:"tm",value:"focuspunch",buy:3000,sell:1500},
 tm02_dragonclaw: {n:"기술머신02 [용의발톱]",desc:"용의발톱을 가르친다",type:"tm",value:"dragonclaw",buy:3000,sell:1500},
