@@ -2951,7 +2951,7 @@ function addLog(msg, type) {
     if (!gState) return;
     gState.log = gState.log || [];
     gState.log.unshift({msg:msg, type:type, t:Date.now()});
-    if (gState.log.length > 50) gState.log.pop();
+    if (gState.log.length > 35) gState.log.pop();
     _eventLog.push({msg:msg, type:type});
 }
 
@@ -3447,7 +3447,7 @@ function startWildBattle(road) {
     if (!player || !gState || !road) return false;
     // 확률 조우
     if (Math.random() > road.encounterRate) {
-        addLog("풀숲을 탐색했지만 포켓몬이 나타나지 않았다...", "info");
+        addLog((road.n||"") + " 풀숲을 탐색했지만 포켓몬이 나타나지 않았다...", "info");
         return false;
     }
     // 시간대별 포켓몬 필터링
@@ -3500,7 +3500,7 @@ function startWildBattle(road) {
         animating: false
     };
     var dn = POKEDEX[chosen] ? POKEDEX[chosen].n : chosen;
-    addLog("야생 " + dn + " (Lv." + lv + ")이(가) 나타났다!", "battle");
+    addLog("야생 " + dn + " (Lv." + lv + ")이(가) " + (road.n||"") + "에서 나타났다!", "battle");
     gState.battleData.msg.push("야생 " + dn + " (Lv." + lv + ")이(가) 나타났다!");
     // 특성: intimidate (내 포켓몬)
     var myFirst = player.party[gState.battleData.myIdx];
@@ -4591,6 +4591,8 @@ function render() {
         html = renderPokedexDetail();
     } else if (gState.subScreen === "saveSlots") {
         html = renderSaveSlots();
+    } else if (gState.subScreen === "status") {
+        html = renderStatusScreen();
     } else {
         html = renderOverworld();
     }
@@ -4707,6 +4709,7 @@ function renderOverworld() {
     html += '<button class="pk-btn pk-btn-red pk-btn-xs" data-action="poke_openGyms">🏟️ 체육관</button>';
     html += '<button class="pk-btn pk-btn-yellow pk-btn-xs" data-action="poke_openBadges">🏅 뱃지</button>';
     html += '<button class="pk-btn pk-btn-blue pk-btn-xs" data-action="poke_openSaveSlots">💾 슬롯</button>';
+    html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openStatus">📊 상태</button>';
     html += '</div>';
     // 도로 목록
     html += '<div style="font-size:14px;font-weight:bold;color:#f5c518;margin:8px 0 4px">' + region.em + ' ' + region.n + ' 도로 목록</div>';
@@ -5272,6 +5275,93 @@ function renderLogScreen() {
     return html;
 }
 
+function renderStatusScreen() {
+    var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
+    html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">📊 캐릭터 상태</div>';
+    if (!player) { html += '<div style="color:#aaa">세이브 없음</div>'; return html; }
+    // 기본 정보
+    var regionData = REGIONS[player.region];
+    var regionName = regionData ? regionData.n : player.region;
+    var curRoad = (regionData && regionData.roads[player.roadIdx]) ? regionData.roads[player.roadIdx].n : "???";
+    var totalBadges = 0;
+    var badgeList = [];
+    for (var rk in player.badges) {
+        if (player.badges[rk] && player.badges[rk].length > 0) {
+            totalBadges += player.badges[rk].length;
+            badgeList.push(rk + ": " + player.badges[rk].length);
+        }
+    }
+    html += '<div class="pk-card">';
+    html += '<div style="font-size:13px;font-weight:bold;margin-bottom:4px">👤 기본 정보</div>';
+    html += '<div style="font-size:12px;color:#ccc">이름: ' + player.name + '</div>';
+    html += '<div style="font-size:12px;color:#ccc">💰 소지금: ₩' + (player.gold||0).toLocaleString() + '</div>';
+    html += '<div style="font-size:12px;color:#ccc">📍 현재 위치: ' + regionName + ' - ' + curRoad + '</div>';
+    html += '<div style="font-size:12px;color:#ccc">📅 ' + (player.day||1) + '일차 / ' + (TIME_NAMES[player.timeOfDay]||"???") + '</div>';
+    html += '<div style="font-size:12px;color:#ccc">🏅 뱃지: ' + totalBadges + '개' + (badgeList.length > 0 ? ' (' + badgeList.join(', ') + ')' : '') + '</div>';
+    html += '<div style="font-size:12px;color:#ccc">⚔️ 총 배틀: ' + (player.battleCount||0) + '회</div>';
+    html += '</div>';
+    // 도감
+    var dexCount = 0;
+    if (player.pokedex) { for (var dk in player.pokedex) dexCount++; }
+    html += '<div class="pk-card">';
+    html += '<div style="font-size:13px;font-weight:bold;margin-bottom:4px">📖 도감: ' + dexCount + ' / 721</div>';
+    html += '</div>';
+    // 파티
+    html += '<div class="pk-card">';
+    html += '<div style="font-size:13px;font-weight:bold;margin-bottom:4px">👥 파티 (' + player.party.length + '/' + MAX_PARTY + ')</div>';
+    for (var pi = 0; pi < player.party.length; pi++) {
+        var p = player.party[pi];
+        var pData = POKEDEX[p.key];
+        var types = pData ? (pData.t2 ? pData.t1 + "/" + pData.t2 : pData.t1) : "???";
+        html += '<div style="font-size:11px;color:#ccc;padding:1px 0">';
+        html += (pi+1) + '. ' + p.nickname + ' Lv.' + p.level + ' (' + types + ') HP:' + p.currentHp + '/' + p.stats[0];
+        if (p.status) html += ' [' + p.status + ']';
+        if (p.heldItem && ITEMS[p.heldItem]) html += ' 🫐' + ITEMS[p.heldItem].n;
+        html += '</div>';
+    }
+    html += '</div>';
+    // PC
+    html += '<div class="pk-card">';
+    html += '<div style="font-size:13px;font-weight:bold;margin-bottom:4px">💻 PC (' + (player.pc ? player.pc.length : 0) + '마리)</div>';
+    if (player.pc && player.pc.length > 0) {
+        var pcGroups = {};
+        for (var ci = 0; ci < player.pc.length; ci++) {
+            var ck = player.pc[ci].nickname + " Lv." + player.pc[ci].level;
+            pcGroups[ck] = (pcGroups[ck]||0) + 1;
+        }
+        var pcList = [];
+        for (var gk in pcGroups) {
+            pcList.push(gk + (pcGroups[gk] > 1 ? ' x' + pcGroups[gk] : ''));
+        }
+        html += '<div style="font-size:11px;color:#aaa;max-height:120px;overflow-y:auto">' + pcList.join(', ') + '</div>';
+    } else {
+        html += '<div style="font-size:11px;color:#666">비어 있음</div>';
+    }
+    html += '</div>';
+    // 가방
+    html += '<div class="pk-card">';
+    var bagCount = 0;
+    var bagHtml = '';
+    if (player.bag) {
+        var bagKeys = Object.keys(player.bag).sort();
+        for (var bi = 0; bi < bagKeys.length; bi++) {
+            var bk = bagKeys[bi];
+            if (player.bag[bk] > 0 && ITEMS[bk]) {
+                bagHtml += '<div style="font-size:11px;color:#ccc;padding:1px 0">' + ITEMS[bk].n + ' x' + player.bag[bk] + '</div>';
+                bagCount += player.bag[bk];
+            }
+        }
+    }
+    html += '<div style="font-size:13px;font-weight:bold;margin-bottom:4px">🎒 가방 (총 ' + bagCount + '개)</div>';
+    if (bagHtml) {
+        html += '<div style="max-height:150px;overflow-y:auto">' + bagHtml + '</div>';
+    } else {
+        html += '<div style="font-size:11px;color:#666">비어 있음</div>';
+    }
+    html += '</div>';
+    return html;
+}
+
 function renderSaveSlots() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">💾 저장 슬롯</div>';
@@ -5570,6 +5660,8 @@ window.poke_selectRoad = async function(idx) {
     // 맵 이동 시 시간 경과
     if (player.roadIdx !== idx) {
         advanceTime();
+        var _rd = region.roads[idx];
+        if (_rd) addLog("🗺️ " + _rd.n + "(으)로 이동했다." + (_rd.isCity ? " [도시]" : ""), "info");
     }
     player.roadIdx = idx;
     gState.subScreen = "roadDetail";
@@ -5777,6 +5869,7 @@ window.poke_openLog = function() { gState.subScreen = "log"; render(); };
 window.poke_openPokedex = function() { gState.subScreen = "pokedex"; render(); };
 window.poke_openGyms = function() { gState.subScreen = "gyms"; render(); };
 window.poke_openBadges = function() { gState.subScreen = "badges"; render(); };
+window.poke_openStatus = function() { gState.subScreen = "status"; render(); };
 
 window.poke_openSaveSlots = function() { 
     if (gState) gState.subScreen = "saveSlots";
@@ -5888,6 +5981,7 @@ window.poke_buyItem = async function(key) {
     if (!item || player.gold < item.buy) return;
     player.gold -= item.buy;
     player.bag[key] = (player.bag[key] || 0) + 1;
+    addLog("🛒 " + item.n + " 구매 (₩" + item.buy + ") → 잔액 ₩" + player.gold, "gold");
     showToast(item.n + " 구매!");
     await saveAll();
     render();
@@ -5899,6 +5993,7 @@ window.poke_sellItem = async function(key) {
     player.gold += item.sell;
     player.bag[key]--;
     if (player.bag[key] <= 0) delete player.bag[key];
+    addLog("💸 " + item.n + " 판매 (₩" + item.sell + ") → 잔액 ₩" + player.gold, "gold");
     showToast(item.n + " 판매!");
     await saveAll();
     render();
