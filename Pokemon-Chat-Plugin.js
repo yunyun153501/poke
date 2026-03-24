@@ -910,7 +910,7 @@ stoneedge:   {n:"스톤에지",t:"rock",c:"physical",p:100,a:80,pp:5,ef:"highcri
 lick:        {n:"핥기",t:"ghost",c:"physical",p:30,a:100,pp:30,ef:"paralyze",ec:30},
 nightshade:  {n:"나이트헤드",t:"ghost",c:"special",p:50,a:100,pp:15},
 shadowball:  {n:"섀도볼",t:"ghost",c:"special",p:80,a:100,pp:15},
-confuseray:  {n:"도깨비불",t:"ghost",c:"status",p:0,a:100,pp:10,ef:"confuse",ec:100},
+confuseray:  {n:"이상한빛",t:"ghost",c:"status",p:0,a:100,pp:10,ef:"confuse",ec:100},
 dragonrage:  {n:"용의분노",t:"dragon",c:"special",p:40,a:100,pp:10},
 dragonclaw:  {n:"드래곤클로",t:"dragon",c:"physical",p:80,a:100,pp:15},
 dragonpulse: {n:"용의파동",t:"dragon",c:"special",p:85,a:100,pp:10},
@@ -940,7 +940,7 @@ sketch:      {n:"스케치",t:"normal",c:"status",p:0,a:100,pp:1},
 counter:     {n:"카운터",t:"fighting",c:"physical",p:0,a:100,pp:20,ef:"counter"},
 mirrorcoat:  {n:"미러코트",t:"psychic",c:"special",p:0,a:100,pp:20,ef:"mirrorcoat"},
 encore:      {n:"앙코르",t:"normal",c:"status",p:0,a:100,pp:5,ef:"encore"},
-mudslap:     {n:"머드숏",t:"ground",c:"special",p:20,a:100,pp:10},
+mudslap:     {n:"흙뿌리기",t:"ground",c:"special",p:20,a:100,pp:10,ef:"acc_down",ec:100},
 megadrain:   {n:"메가드레인",t:"grass",c:"special",p:40,a:100,pp:15},
 ironhead:    {n:"아이언헤드",t:"steel",c:"physical",p:80,a:100,pp:15},
 dragonbreath:{n:"용의숨결",t:"dragon",c:"special",p:60,a:100,pp:20},
@@ -950,7 +950,7 @@ doubleedge:  {n:"이판사판박치기",t:"normal",c:"physical",p:120,a:100,pp:1
 hex:         {n:"주술",t:"ghost",c:"special",p:65,a:100,pp:10},
 aquatail:    {n:"아쿠아테일",t:"water",c:"physical",p:90,a:90,pp:10},
 sludge:      {n:"오물공격",t:"poison",c:"special",p:65,a:100,pp:20},
-lowkick:     {n:"로킥",t:"fighting",c:"physical",p:60,a:100,pp:20},
+lowkick:     {n:"발밑차기",t:"fighting",c:"physical",p:60,a:100,pp:20},
 silverwind:  {n:"은빛바람",t:"bug",c:"special",p:60,a:100,pp:5},
 furycutter:  {n:"연속자르기",t:"bug",c:"physical",p:40,a:95,pp:20},
 leer:        {n:"째려보기",t:"normal",c:"status",p:0,a:100,pp:30},
@@ -999,7 +999,7 @@ roost:       {n:"깃털쉬기",t:"flying",c:"status",p:0,a:100,pp:10,ef:"heal"},
 shockwave:   {n:"전격파",t:"electric",c:"special",p:60,a:0,pp:20},
 // ═══ 추가 기술 (Gen 1-6 원작 기반) ═══
 // ── Normal ──
-doublekick:  {n:"이판사판",t:"fighting",c:"physical",p:30,a:100,pp:30},
+doublekick:  {n:"이중차기",t:"fighting",c:"physical",p:30,a:100,pp:30},
 doubleslap:  {n:"연속뺨치기",t:"normal",c:"physical",p:15,a:85,pp:10},
 doubleteam:  {n:"그림자분신",t:"normal",c:"status",p:0,a:100,pp:15,ef:"eva_up"},
 rage:        {n:"분노",t:"normal",c:"physical",p:20,a:100,pp:20},
@@ -1064,7 +1064,7 @@ electroball: {n:"일렉트로볼",t:"electric",c:"special",p:60,a:100,pp:10},
 thunderfang: {n:"번개엄니",t:"electric",c:"physical",p:65,a:95,pp:15,ef:"paralyze",ec:10},
 nuzzle:      {n:"볼부비부비",t:"electric",c:"physical",p:20,a:100,pp:20,ef:"paralyze",ec:100},
 zapcannon:   {n:"전자포",t:"electric",c:"special",p:120,a:50,pp:5,ef:"paralyze",ec:100},
-boltstrike:  {n:"볼트태클",t:"electric",c:"physical",p:130,a:85,pp:5,ef:"paralyze",ec:20},
+boltstrike:  {n:"뇌격",t:"electric",c:"physical",p:130,a:85,pp:5,ef:"paralyze",ec:20},
 // ── Grass ──
 seedbomb:    {n:"씨폭탄",t:"grass",c:"physical",p:80,a:100,pp:15},
 leafblade:   {n:"리프블레이드",t:"grass",c:"physical",p:90,a:100,pp:15,ef:"highcrit"},
@@ -1085,7 +1085,7 @@ icefang:     {n:"얼음엄니",t:"ice",c:"physical",p:65,a:95,pp:15,ef:"freeze",
 avalanche:   {n:"눈사태",t:"ice",c:"physical",p:60,a:100,pp:10},
 iciclecrash: {n:"고드름떨구기",t:"ice",c:"physical",p:85,a:90,pp:10,ef:"flinch",ec:30},
 freezedry:   {n:"프리즈드라이",t:"ice",c:"special",p:70,a:100,pp:20,ef:"freeze",ec:10},
-glaciate:    {n:"콜드플레어",t:"ice",c:"special",p:65,a:95,pp:10,ef:"spd_down",ec:100},
+glaciate:    {n:"글래셜레이트",t:"ice",c:"special",p:65,a:95,pp:10,ef:"spd_down",ec:100},
 haze:        {n:"흑안개",t:"ice",c:"status",p:0,a:100,pp:30},
 mist:        {n:"흰안개",t:"ice",c:"status",p:0,a:100,pp:30},
 // ── Fighting ──
@@ -1113,7 +1113,6 @@ gunkshot:    {n:"더스트슈트",t:"poison",c:"physical",p:120,a:80,pp:5,ef:"po
 poisontail:  {n:"포이즌테일",t:"poison",c:"physical",p:50,a:100,pp:25,ef:"poison",ec:10},
 coil:        {n:"똬리틀기",t:"poison",c:"status",p:0,a:100,pp:20},
 // ── Ground ──
-mudslap_:    {n:"흙뿌리기",t:"ground",c:"special",p:20,a:100,pp:10,ef:"acc_down",ec:100},
 drillrun:    {n:"드릴라이너",t:"ground",c:"physical",p:80,a:95,pp:10,ef:"highcrit"},
 highhorsepower:{n:"10만마력",t:"ground",c:"physical",p:95,a:95,pp:10},
 sandtomb:    {n:"모래지옥",t:"ground",c:"physical",p:35,a:85,pp:15},
@@ -1147,7 +1146,6 @@ gravity:     {n:"중력",t:"psychic",c:"status",p:0,a:100,pp:5},
 healingwish: {n:"치유소원",t:"psychic",c:"status",p:0,a:100,pp:10},
 // ── Bug ──
 leechlife:   {n:"흡혈",t:"bug",c:"physical",p:80,a:100,pp:10,ef:"drain"},
-uturn_:      {n:"유턴",t:"bug",c:"physical",p:70,a:100,pp:20},
 pinmissile:  {n:"바늘미사일",t:"bug",c:"physical",p:25,a:95,pp:20},
 bugbuzz:     {n:"벌레의야단법석",t:"bug",c:"special",p:90,a:100,pp:10,ef:"spdef_down",ec:10},
 quiverdance: {n:"나비춤",t:"bug",c:"status",p:0,a:100,pp:20},
@@ -1157,7 +1155,6 @@ powergem:    {n:"파워젬",t:"rock",c:"special",p:80,a:100,pp:20},
 ancientpower:{n:"원시의힘",t:"rock",c:"special",p:60,a:100,pp:5},
 smackdown:   {n:"떨어뜨리기",t:"rock",c:"physical",p:50,a:100,pp:15},
 rockpolish:  {n:"록폴리시",t:"rock",c:"status",p:0,a:100,pp:20,ef:"spd_up2"},
-sandstorm_:  {n:"스텔스록",t:"rock",c:"status",p:0,a:100,pp:20},
 headsmash:   {n:"모로꼬박기",t:"rock",c:"physical",p:150,a:80,pp:5,ef:"recoil"},
 diamondstorm:{n:"다이아스톰",t:"rock",c:"physical",p:100,a:95,pp:5,ef:"def_up",ec:50},
 // ── Ghost ──
@@ -1180,8 +1177,8 @@ roaroftime:  {n:"시간의포효",t:"dragon",c:"special",p:150,a:90,pp:5},
 knockoff:    {n:"탈취",t:"dark",c:"physical",p:65,a:100,pp:20},
 suckerpunch: {n:"기습",t:"dark",c:"physical",p:70,a:100,pp:5,priority:1},
 nightslash:  {n:"밤베기",t:"dark",c:"physical",p:70,a:100,pp:15,ef:"highcrit"},
-assurance:   {n:"보복",t:"dark",c:"physical",p:60,a:100,pp:10},
-payback:     {n:"보복",t:"dark",c:"physical",p:50,a:100,pp:10},
+assurance:   {n:"다짐",t:"dark",c:"physical",p:60,a:100,pp:10},
+payback:     {n:"보복짓",t:"dark",c:"physical",p:50,a:100,pp:10},
 foulplay:    {n:"이판사판",t:"dark",c:"physical",p:95,a:100,pp:15},
 snarl:       {n:"짖어대기",t:"dark",c:"special",p:55,a:95,pp:15,ef:"spa_down",ec:100},
 taunt:       {n:"도발",t:"dark",c:"status",p:0,a:100,pp:20},
@@ -1204,9 +1201,7 @@ fairywind:   {n:"요정의바람",t:"fairy",c:"special",p:40,a:100,pp:30},
 // ── Legendary / Signature ──
 aeroblast:   {n:"에어로블라스트",t:"flying",c:"special",p:100,a:95,pp:5,ef:"highcrit"},
 psychoboost: {n:"사이코부스트",t:"psychic",c:"special",p:140,a:90,pp:5},
-doomdesire_: {n:"파멸의소원",t:"steel",c:"special",p:140,a:100,pp:5},
 judgment:    {n:"심판의뭉치",t:"normal",c:"special",p:100,a:100,pp:10},
-seedflare_:  {n:"시드플레어",t:"grass",c:"special",p:120,a:85,pp:5,ef:"spdef_down",ec:40},
 magmastorm:  {n:"마그마스톰",t:"fire",c:"special",p:100,a:75,pp:5},
 fusionflare: {n:"크로스플레임",t:"fire",c:"special",p:100,a:100,pp:5},
 fusionbolt:  {n:"크로스썬더",t:"electric",c:"physical",p:100,a:100,pp:5},
@@ -1218,7 +1213,7 @@ hail:        {n:"싸라기눈",t:"ice",c:"status",p:0,a:100,pp:10},
 shellsmash:  {n:"껍질깨기",t:"normal",c:"status",p:0,a:100,pp:15},
 cottonguard: {n:"코튼가드",t:"grass",c:"status",p:0,a:100,pp:10,ef:"def_up2"},
 minimize:    {n:"작아지기",t:"normal",c:"status",p:0,a:100,pp:10,ef:"eva_up"},
-howl:        {n:"짖기",t:"normal",c:"status",p:0,a:100,pp:40,ef:"atk_up"},
+howl:        {n:"울부짖기",t:"normal",c:"status",p:0,a:100,pp:40,ef:"atk_up"},
 flash:       {n:"플래시",t:"normal",c:"status",p:0,a:100,pp:20,ef:"acc_down",ec:100},
 glare:       {n:"뱀눈초리",t:"normal",c:"status",p:0,a:100,pp:30,ef:"paralyze",ec:100},
 // ── Unique/Utility ──
@@ -1227,8 +1222,236 @@ rockclimb:   {n:"록클라임",t:"normal",c:"physical",p:90,a:85,pp:20,ef:"confu
 extremespeed:{n:"신속",t:"normal",c:"physical",p:80,a:100,pp:5,priority:2},
 dualchop:    {n:"더블촙",t:"dragon",c:"physical",p:40,a:90,pp:15},
 wakeupslap:  {n:"눈깨우기뺨치기",t:"fighting",c:"physical",p:70,a:100,pp:10},
-paraboliccharge:{n:"플라잉프레스",t:"electric",c:"special",p:65,a:100,pp:20,ef:"drain"},
-eerieimpulse:{n:"괴전파",t:"electric",c:"status",p:0,a:100,pp:15,ef:"spa_down2"}
+paraboliccharge:{n:"뿌링클전류",t:"electric",c:"special",p:65,a:100,pp:20,ef:"drain"},
+eerieimpulse:{n:"괴전파",t:"electric",c:"status",p:0,a:100,pp:15,ef:"spa_down2"},
+// ═══ 추가 기술 (Gen 1-6 완전판) ═══
+guillotine:{n:"가위자르기",t:"normal",c:"physical",p:1,a:30,pp:5},
+hornDrill:{n:"뿔드릴",t:"normal",c:"physical",p:1,a:30,pp:5},
+fissure:{n:"지각변동",t:"ground",c:"physical",p:1,a:30,pp:5},
+sheercold:{n:"절대영도",t:"ice",c:"special",p:1,a:30,pp:5},
+payday:{n:"고양이돈받기",t:"normal",c:"physical",p:40,a:100,pp:20},
+cometpunch:{n:"연속펀치",t:"normal",c:"physical",p:18,a:85,pp:15},
+doublehit:{n:"더블어택",t:"normal",c:"physical",p:35,a:90,pp:10},
+mimic:{n:"흉내내기",t:"normal",c:"status",p:0,a:100,pp:10},
+metronome:{n:"손가락흔들기",t:"normal",c:"status",p:0,a:100,pp:10},
+skullbash:{n:"로켓두뇌",t:"normal",c:"physical",p:130,a:100,pp:10},
+spikecannon:{n:"가시대포",t:"normal",c:"physical",p:20,a:100,pp:15},
+constrict:{n:"조여오기",t:"normal",c:"physical",p:10,a:100,pp:35,ef:"spd_down",ec:10},
+barrage:{n:"구슬던지기",t:"normal",c:"physical",p:15,a:85,pp:20},
+transform:{n:"변신",t:"normal",c:"status",p:0,a:100,pp:10},
+superfang:{n:"분노의앞니",t:"normal",c:"physical",p:1,a:90,pp:10},
+sleeptalk:{n:"잠꼬대",t:"normal",c:"status",p:0,a:100,pp:10},
+healbell:{n:"치유방울",t:"normal",c:"status",p:0,a:100,pp:5},
+snore:{n:"코골기",t:"normal",c:"special",p:50,a:100,pp:15,ef:"flinch",ec:30},
+scaryface:{n:"무서운얼굴",t:"normal",c:"status",p:0,a:100,pp:10,ef:"spd_down2",ec:100},
+sweetscent:{n:"달콤한향기",t:"normal",c:"status",p:0,a:100,pp:20},
+morningsun:{n:"아침햇살",t:"normal",c:"status",p:0,a:100,pp:5,ef:"heal"},
+meanlook:{n:"검은눈빛",t:"normal",c:"status",p:0,a:100,pp:5},
+batonpass:{n:"바톤터치",t:"normal",c:"status",p:0,a:100,pp:40},
+rapidspin:{n:"고속회전",t:"normal",c:"physical",p:50,a:100,pp:40},
+perishsong:{n:"멸망의노래",t:"normal",c:"status",p:0,a:100,pp:5},
+followme:{n:"따라와",t:"normal",c:"status",p:0,a:100,pp:20},
+helpinghand:{n:"도우미",t:"normal",c:"status",p:0,a:100,pp:20},
+recycle:{n:"재활용",t:"normal",c:"status",p:0,a:100,pp:10},
+secretpower:{n:"비밀의힘",t:"normal",c:"physical",p:70,a:100,pp:20},
+tailslap:{n:"스위프뺨치기",t:"normal",c:"physical",p:25,a:85,pp:10},
+technoblast:{n:"테크노버스터",t:"normal",c:"special",p:120,a:100,pp:5},
+relicsong:{n:"옛노래",t:"normal",c:"special",p:75,a:100,pp:10,ef:"sleep",ec:10},
+naturepower:{n:"자연의힘",t:"normal",c:"status",p:0,a:100,pp:20},
+chipaway:{n:"깨트려부수기",t:"normal",c:"physical",p:70,a:100,pp:20},
+entrainment:{n:"동조",t:"normal",c:"status",p:0,a:100,pp:15},
+afteryou:{n:"먼저어서",t:"normal",c:"status",p:0,a:100,pp:15},
+crushgrip:{n:"악력쥐기",t:"normal",c:"physical",p:1,a:100,pp:5},
+wringout:{n:"짜내기",t:"normal",c:"special",p:1,a:100,pp:5},
+hyperFang:{n:"이빨로물기",t:"normal",c:"physical",p:80,a:90,pp:15,ef:"flinch",ec:10},
+weatherball:{n:"웨더볼",t:"normal",c:"special",p:50,a:100,pp:10},
+smellingsalts:{n:"기상천외",t:"normal",c:"physical",p:70,a:100,pp:10},
+luckychant:{n:"행운기원",t:"normal",c:"status",p:0,a:100,pp:30},
+safeguard:{n:"신비한부적",t:"normal",c:"status",p:0,a:100,pp:25},
+crushclaw:{n:"크러시클로",t:"normal",c:"physical",p:75,a:95,pp:10,ef:"def_down",ec:50},
+razorwind:{n:"칼바람",t:"normal",c:"special",p:80,a:100,pp:10,ef:"highcrit"},
+camouflage:{n:"보호색",t:"normal",c:"status",p:0,a:100,pp:20},
+naturalgift:{n:"자연의은혜",t:"normal",c:"physical",p:80,a:100,pp:15},
+conversion:{n:"타입체인지",t:"normal",c:"status",p:0,a:100,pp:30},
+conversion2:{n:"타입체인지2",t:"normal",c:"status",p:0,a:100,pp:30},
+teleport:{n:"순간이동",t:"psychic",c:"status",p:0,a:100,pp:20},
+firepledge:{n:"불꽃맹세",t:"fire",c:"special",p:80,a:100,pp:10},
+heatcrash:{n:"히트스탬프",t:"fire",c:"physical",p:1,a:100,pp:10},
+searingshot:{n:"화염탄",t:"fire",c:"special",p:100,a:100,pp:5,ef:"burn",ec:30},
+flameburst:{n:"불꽃파열",t:"fire",c:"special",p:70,a:100,pp:15},
+burnup:{n:"불사르기",t:"fire",c:"special",p:130,a:100,pp:5},
+dive:{n:"다이빙",t:"water",c:"physical",p:80,a:100,pp:10},
+clamp:{n:"껍질끼우기",t:"water",c:"physical",p:35,a:85,pp:15},
+octazooka:{n:"옥타포탄",t:"water",c:"special",p:65,a:85,pp:10,ef:"acc_down",ec:50},
+waterspout:{n:"해수스파우팅",t:"water",c:"special",p:150,a:100,pp:5},
+aquaring:{n:"아쿠아링",t:"water",c:"status",p:0,a:100,pp:20},
+steameruption:{n:"스팀버스트",t:"water",c:"special",p:110,a:95,pp:5,ef:"burn",ec:30},
+withdraw:{n:"껍질에숨기",t:"water",c:"status",p:0,a:100,pp:40,ef:"def_up"},
+sparklingaria:{n:"물거품아리아",t:"water",c:"special",p:90,a:100,pp:10},
+electroweb:{n:"일렉트릭네트",t:"electric",c:"special",p:55,a:95,pp:15,ef:"spd_down",ec:100},
+voltTackle:{n:"볼트태클",t:"electric",c:"physical",p:120,a:100,pp:15,ef:"recoil"},
+charge:{n:"충전",t:"electric",c:"status",p:0,a:100,pp:20,ef:"spdef_up"},
+iondeluge:{n:"플라스마샤워",t:"electric",c:"status",p:0,a:100,pp:25},
+electroterrain:{n:"일렉트릭필드",t:"electric",c:"status",p:0,a:100,pp:10},
+magneticflux:{n:"자기장조작",t:"electric",c:"status",p:0,a:100,pp:20},
+needlearm:{n:"바늘팔",t:"grass",c:"physical",p:60,a:100,pp:15,ef:"flinch",ec:30},
+worryseed:{n:"고민씨",t:"grass",c:"status",p:0,a:100,pp:10},
+ingrain:{n:"뿌리박기",t:"grass",c:"status",p:0,a:100,pp:20},
+petalDance:{n:"꽃잎댄스",t:"grass",c:"special",p:120,a:100,pp:10},
+bulletseed:{n:"씨기관총",t:"grass",c:"physical",p:25,a:100,pp:30},
+hornLeech:{n:"우드혼",t:"grass",c:"physical",p:75,a:100,pp:10,ef:"drain"},
+spikyshield:{n:"니들가드",t:"grass",c:"status",p:0,a:100,pp:10},
+grassyterrain:{n:"그래스필드",t:"grass",c:"status",p:0,a:100,pp:10},
+auroraveil:{n:"오로라베일",t:"ice",c:"status",p:0,a:100,pp:20},
+iceburn:{n:"콜드플레어2",t:"ice",c:"special",p:140,a:90,pp:5,ef:"burn",ec:30},
+powdersnow:{n:"가루눈",t:"ice",c:"special",p:40,a:100,pp:25,ef:"freeze",ec:10},
+freezebolt:{n:"프리즈볼트",t:"ice",c:"physical",p:140,a:90,pp:5,ef:"paralyze",ec:30},
+forcepalm:{n:"장풍",t:"fighting",c:"physical",p:60,a:100,pp:10,ef:"paralyze",ec:30},
+stormthrow:{n:"야마타로스",t:"fighting",c:"physical",p:60,a:100,pp:10,ef:"highcrit"},
+vitalthrow:{n:"지옥떨기",t:"fighting",c:"physical",p:70,a:0,pp:10},
+armthrust:{n:"밀어펀치",t:"fighting",c:"physical",p:15,a:100,pp:20},
+rocksmash:{n:"바위깨기",t:"fighting",c:"physical",p:40,a:100,pp:15,ef:"def_down",ec:50},
+highjumpkick:{n:"무릎차기",t:"fighting",c:"physical",p:130,a:90,pp:10},
+jumpkick:{n:"뛰어올라차기",t:"fighting",c:"physical",p:100,a:95,pp:10},
+flyingpress:{n:"플라잉프레스",t:"fighting",c:"physical",p:100,a:95,pp:10},
+poweruppunch:{n:"업펀치",t:"fighting",c:"physical",p:40,a:100,pp:20,ef:"atk_up",ec:100},
+matblock:{n:"돗자리뒤집기",t:"fighting",c:"status",p:0,a:100,pp:10},
+quickguard:{n:"패스트가드",t:"fighting",c:"status",p:0,a:100,pp:15},
+acidspray:{n:"산성액",t:"poison",c:"special",p:40,a:100,pp:20,ef:"spdef_down",ec:100},
+belch:{n:"게워내기",t:"poison",c:"special",p:120,a:90,pp:10},
+spikes:{n:"압정뿌리기",t:"ground",c:"status",p:0,a:100,pp:20},
+toxicspikes:{n:"독압정",t:"poison",c:"status",p:0,a:100,pp:20},
+mudbomb:{n:"진흙폭탄",t:"ground",c:"special",p:65,a:85,pp:10,ef:"acc_down",ec:30},
+magnitude:{n:"매그니튀드",t:"ground",c:"physical",p:70,a:100,pp:30},
+thousandwaves:{n:"사우전드웨이브",t:"ground",c:"physical",p:90,a:100,pp:10},
+thousandarrows:{n:"사우전드애로우",t:"ground",c:"physical",p:90,a:100,pp:10},
+landswrath:{n:"그라운드포스",t:"ground",c:"physical",p:90,a:100,pp:10},
+bonerush:{n:"뼈다귀부메랑",t:"ground",c:"physical",p:25,a:90,pp:10},
+dragonascent:{n:"화룡점정",t:"flying",c:"physical",p:120,a:100,pp:5},
+featherdance:{n:"깃털댄스",t:"flying",c:"status",p:0,a:100,pp:15,ef:"atk_down2",ec:100},
+skyDrop:{n:"프리폴",t:"flying",c:"physical",p:60,a:100,pp:10},
+mirrormove:{n:"거울반사",t:"flying",c:"status",p:0,a:100,pp:20},
+hyperspacefury:{n:"초차원러시",t:"dark",c:"physical",p:100,a:100,pp:5},
+hyperspacehole:{n:"초차원홀",t:"psychic",c:"special",p:80,a:100,pp:5},
+synchronoise:{n:"싱크로노이즈",t:"psychic",c:"special",p:120,a:100,pp:10},
+lusterpurge:{n:"래스터퍼지",t:"psychic",c:"special",p:70,a:100,pp:5,ef:"spdef_down",ec:50},
+mistball:{n:"미스트볼",t:"psychic",c:"special",p:70,a:100,pp:5,ef:"spa_down",ec:50},
+imprison:{n:"기술봉인",t:"psychic",c:"status",p:0,a:100,pp:10},
+kinesis:{n:"스푼구부리기",t:"psychic",c:"status",p:0,a:80,pp:15,ef:"acc_down",ec:100},
+heartStamp:{n:"하트스탬프",t:"psychic",c:"physical",p:60,a:100,pp:25,ef:"flinch",ec:30},
+psychicterrain:{n:"사이코필드",t:"psychic",c:"status",p:0,a:100,pp:10},
+magiccoat:{n:"매직코트",t:"psychic",c:"status",p:0,a:100,pp:15},
+magicroom:{n:"매직룸",t:"psychic",c:"status",p:0,a:100,pp:10},
+wonderroom:{n:"원더룸",t:"psychic",c:"status",p:0,a:100,pp:10},
+skillswap:{n:"스킬스왑",t:"psychic",c:"status",p:0,a:100,pp:10},
+roleplay:{n:"흉내쟁이",t:"psychic",c:"status",p:0,a:100,pp:10},
+guardswap:{n:"가드쉐어",t:"psychic",c:"status",p:0,a:100,pp:10},
+powerswap:{n:"파워쉐어",t:"psychic",c:"status",p:0,a:100,pp:10},
+heartswap:{n:"하트스왑",t:"psychic",c:"status",p:0,a:100,pp:10},
+healblock:{n:"회복봉인",t:"psychic",c:"status",p:0,a:100,pp:15},
+healpulse:{n:"치유파동",t:"psychic",c:"status",p:0,a:100,pp:10},
+powertrick:{n:"파워트릭",t:"psychic",c:"status",p:0,a:100,pp:10},
+attackorder:{n:"공격지령",t:"bug",c:"physical",p:90,a:100,pp:15,ef:"highcrit"},
+defendorder:{n:"방어지령",t:"bug",c:"status",p:0,a:100,pp:10},
+healorder:{n:"회복지령",t:"bug",c:"status",p:0,a:100,pp:10,ef:"heal"},
+ragepowder:{n:"분노가루",t:"bug",c:"status",p:0,a:100,pp:20},
+stickyWeb:{n:"끈적끈적네트",t:"bug",c:"status",p:0,a:100,pp:20},
+fellstinger:{n:"치명적찌르기",t:"bug",c:"physical",p:50,a:100,pp:25},
+spiderweb:{n:"거미줄",t:"bug",c:"status",p:0,a:100,pp:10},
+accelerock:{n:"가속록",t:"rock",c:"physical",p:40,a:100,pp:20,priority:1},
+wideGuard:{n:"와이드가드",t:"rock",c:"status",p:0,a:100,pp:10},
+nightdaze:{n:"나이트버스트",t:"dark",c:"special",p:85,a:95,pp:10,ef:"acc_down",ec:40},
+trickortreat:{n:"핼러윈",t:"ghost",c:"status",p:0,a:100,pp:20},
+punishment:{n:"처벌",t:"dark",c:"physical",p:60,a:100,pp:5},
+beatup:{n:"집단구타",t:"dark",c:"physical",p:1,a:100,pp:10},
+memento:{n:"추억의선물",t:"dark",c:"status",p:0,a:100,pp:10},
+snatch:{n:"가로채기",t:"dark",c:"status",p:0,a:100,pp:10},
+flatter:{n:"부추기기",t:"dark",c:"status",p:0,a:100,pp:15,ef:"confuse",ec:100},
+quash:{n:"뒤로미루기",t:"dark",c:"status",p:0,a:100,pp:15},
+darkVoid:{n:"다크홀",t:"dark",c:"status",p:0,a:50,pp:10,ef:"sleep",ec:100},
+partingshot:{n:"회전인사",t:"dark",c:"status",p:0,a:100,pp:20},
+topsyturvy:{n:"뒤집기",t:"dark",c:"status",p:0,a:100,pp:20},
+geargrind:{n:"기어소서",t:"steel",c:"physical",p:50,a:85,pp:15},
+shiftgear:{n:"기어체인지",t:"steel",c:"status",p:0,a:100,pp:10},
+smartstrike:{n:"스마트혼",t:"steel",c:"physical",p:70,a:0,pp:10},
+metalSound:{n:"금속소리",t:"steel",c:"status",p:0,a:85,pp:40,ef:"spdef_down",ec:100},
+magnetbomb:{n:"자석폭탄",t:"steel",c:"physical",p:60,a:0,pp:20},
+geomancy:{n:"지오컨트롤",t:"fairy",c:"status",p:0,a:100,pp:10},
+mistyterrain:{n:"미스트필드",t:"fairy",c:"status",p:0,a:100,pp:10},
+disarmingvoice:{n:"감미로운목소리",t:"fairy",c:"special",p:40,a:0,pp:15},
+babydolleyes:{n:"아기인형눈",t:"fairy",c:"status",p:0,a:100,pp:30,ef:"atk_down",ec:100},
+lightofRuin:{n:"파멸의빛",t:"fairy",c:"special",p:140,a:90,pp:5,ef:"recoil"},
+floralhealing:{n:"플로럴치유",t:"fairy",c:"status",p:0,a:100,pp:10,ef:"heal"},
+aromaticmist:{n:"아로마미스트",t:"fairy",c:"status",p:0,a:100,pp:20},
+craftyshield:{n:"트릭가드",t:"fairy",c:"status",p:0,a:100,pp:10},
+flowershield:{n:"플라워가드",t:"fairy",c:"status",p:0,a:100,pp:10},
+poisongas:{n:"독가스",t:"poison",c:"status",p:0,a:90,pp:40,ef:"poison",ec:100},
+bide:{n:"참기",t:"normal",c:"physical",p:1,a:100,pp:10},
+dizzypunch:{n:"피바라펀치",t:"normal",c:"physical",p:70,a:100,pp:10,ef:"confuse",ec:20},
+eggbomb:{n:"에그폭탄",t:"normal",c:"physical",p:100,a:75,pp:10},
+boneclub:{n:"뼈다귀치기",t:"ground",c:"physical",p:65,a:85,pp:20},
+lovelyKiss:{n:"악마의키스",t:"normal",c:"status",p:0,a:75,pp:10,ef:"sleep",ec:100},
+rockWrecker:{n:"록블라스트",t:"rock",c:"physical",p:150,a:90,pp:5},
+snipeshot:{n:"저격",t:"water",c:"special",p:80,a:100,pp:15,ef:"highcrit"},
+astonish:{n:"놀래키기",t:"ghost",c:"physical",p:30,a:100,pp:15,ef:"flinch",ec:30},
+rockTomb:{n:"암석봉인",t:"rock",c:"physical",p:60,a:95,pp:15,ef:"spd_down",ec:100},
+shadowstrike:{n:"섀도스트라이크",t:"ghost",c:"physical",p:80,a:95,pp:10,ef:"def_down",ec:50},
+miracleEye:{n:"기적의눈",t:"psychic",c:"status",p:0,a:100,pp:40},
+fling:{n:"내다꽂기",t:"dark",c:"physical",p:1,a:100,pp:10},
+gastroAcid:{n:"위산",t:"poison",c:"status",p:0,a:100,pp:10},
+meFirst:{n:"대타먼저",t:"normal",c:"status",p:0,a:100,pp:20},
+copycat:{n:"따라쟁이",t:"normal",c:"status",p:0,a:100,pp:20},
+trumpCard:{n:"트럼프카드",t:"normal",c:"special",p:1,a:100,pp:5},
+allySwitch:{n:"사이드체인지",t:"psychic",c:"status",p:0,a:100,pp:15},
+incinerate:{n:"소각",t:"fire",c:"special",p:60,a:100,pp:15},
+reflectType:{n:"트레이스",t:"normal",c:"status",p:0,a:100,pp:15},
+finalGambit:{n:"죽기살기",t:"fighting",c:"special",p:1,a:100,pp:5},
+psystrike:{n:"사이코브레이크",t:"psychic",c:"special",p:100,a:100,pp:10},
+forestsCurse:{n:"숲의저주",t:"grass",c:"status",p:0,a:100,pp:20},
+oceanicoperetta:{n:"해양오페레타",t:"water",c:"special",p:195,a:100,pp:1},
+steelbeam:{n:"철갑빔",t:"steel",c:"special",p:140,a:95,pp:5,ef:"recoil"},
+acidArmor:{n:"녹기",t:"poison",c:"status",p:0,a:100,pp:20,ef:"def_up2"},
+psychUp:{n:"사이코업",t:"normal",c:"status",p:0,a:100,pp:10},
+simplebeam:{n:"심플빔",t:"normal",c:"status",p:0,a:100,pp:15},
+soak:{n:"물붓기",t:"water",c:"status",p:0,a:100,pp:20},
+torchsong:{n:"열창",t:"fire",c:"special",p:80,a:100,pp:10,ef:"spa_up",ec:100},
+trailblaze:{n:"풀타기",t:"grass",c:"physical",p:50,a:100,pp:20,ef:"spd_up",ec:100},
+icespinner:{n:"아이스스피너",t:"ice",c:"physical",p:80,a:100,pp:15},
+temperflare:{n:"분기",t:"fire",c:"physical",p:75,a:100,pp:10},
+ragingbull:{n:"격노의황소",t:"normal",c:"physical",p:90,a:100,pp:10},
+kowtowcleave:{n:"고두참",t:"dark",c:"physical",p:85,a:100,pp:10},
+lumacurse:{n:"소금절이기",t:"ghost",c:"physical",p:75,a:100,pp:10},
+silktrap:{n:"실크트랩",t:"bug",c:"status",p:0,a:100,pp:10},
+axekick:{n:"도끼발차기",t:"fighting",c:"physical",p:120,a:90,pp:10},
+lastrespects:{n:"엄동설한",t:"ghost",c:"physical",p:50,a:100,pp:10},
+filletaway:{n:"나누기",t:"normal",c:"status",p:0,a:100,pp:10},
+collision:{n:"충돌과정",t:"fighting",c:"physical",p:100,a:100,pp:5},
+jetpunch:{n:"제트펀치",t:"water",c:"physical",p:60,a:100,pp:15,priority:1},
+spicyextract:{n:"매운추출물",t:"grass",c:"status",p:0,a:100,pp:15},
+spinout:{n:"스핀아웃",t:"steel",c:"physical",p:100,a:100,pp:5},
+populationbomb:{n:"인해전술",t:"normal",c:"physical",p:20,a:90,pp:10},
+glaiverush:{n:"글레이브러쉬",t:"dragon",c:"physical",p:120,a:100,pp:5},
+revivalblessing:{n:"부활축복",t:"normal",c:"status",p:0,a:100,pp:1},
+headlongrush:{n:"돌격",t:"ground",c:"physical",p:120,a:100,pp:5},
+ragefist:{n:"분노의주먹",t:"ghost",c:"physical",p:50,a:100,pp:10},
+armorcannon:{n:"아머캐논",t:"fire",c:"special",p:120,a:100,pp:5},
+bitterblade:{n:"원한칼",t:"fire",c:"physical",p:90,a:100,pp:10,ef:"drain"},
+doubleshock:{n:"이중충격",t:"electric",c:"physical",p:120,a:100,pp:5},
+bittermalice:{n:"원한의일격",t:"ghost",c:"special",p:75,a:100,pp:10},
+infernalparade:{n:"원혼의행렬",t:"ghost",c:"special",p:60,a:100,pp:15},
+ceaselessedge:{n:"비장의일격",t:"dark",c:"physical",p:65,a:90,pp:15},
+stoneaxe:{n:"바위도끼",t:"rock",c:"physical",p:65,a:90,pp:15},
+springtidestorm:{n:"봄바람",t:"fairy",c:"special",p:100,a:80,pp:5},
+mysticalpower:{n:"신비한힘",t:"psychic",c:"special",p:70,a:90,pp:10},
+tripledive:{n:"트리플다이브",t:"water",c:"physical",p:30,a:95,pp:10},
+twinbeam:{n:"트윈빔",t:"psychic",c:"special",p:40,a:100,pp:10},
+mortalSpin:{n:"데스스핀",t:"poison",c:"physical",p:30,a:100,pp:15},
+makeitrain:{n:"돈나무흔들기",t:"steel",c:"special",p:120,a:100,pp:5},
+psyblade:{n:"사이코블레이드",t:"psychic",c:"physical",p:80,a:100,pp:15},
+hydrosteam:{n:"하이드로스팀",t:"water",c:"special",p:80,a:100,pp:15},
+ruination:{n:"황폐",t:"dark",c:"special",p:1,a:90,pp:10},
+comeuppance:{n:"앙갚음",t:"dark",c:"physical",p:1,a:100,pp:10},
+electroDrift:{n:"일렉트로드리프트",t:"electric",c:"special",p:100,a:100,pp:5},
 };
 
 // ═══════════════════════════════════════════════
@@ -4133,7 +4356,7 @@ function applyMoveEffects(move, attacker, defender, bd) {
     }
     if (mv.c === "status" && mv.p === 0) {
         // guardSpec blocks stat drops
-        var isStatDown = (mv.ef === "atk_down" || mv.ef === "atk_down2" || mv.ef === "def_down" || mv.ef === "acc_down" || mv.ef === "spd_down" || mv.ef === "spdef_down");
+        var isStatDown = (mv.ef === "atk_down" || mv.ef === "atk_down2" || mv.ef === "def_down" || mv.ef === "def_down2" || mv.ef === "acc_down" || mv.ef === "spd_down" || mv.ef === "spd_down2" || mv.ef === "spdef_down" || mv.ef === "spa_down" || mv.ef === "spa_down2");
         // 특성: clearbody/whitesmoke → 능력치 하락 방지
         var defAbType = getAbility(defender) ? getAbility(defender).type : null;
         if (isStatDown && defAbType === "prevent_statdown") {
@@ -4164,8 +4387,69 @@ function applyMoveEffects(move, attacker, defender, bd) {
             defender.statStages.spdef = Math.max(-6, defender.statStages.spdef - 1); bd.msg.push(dn + "의 특방이 떨어졌다!");
             if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
         }
-        else if (mv.ef === "def_up") { attacker.statStages.def = Math.min(6, attacker.statStages.def + 1); bd.msg.push(an + "의 방어가 올라갔다!"); }
-        else if (mv.ef === "spdef_up") { attacker.statStages.spdef = Math.min(6, attacker.statStages.spdef + 1); bd.msg.push(an + "의 특방이 올라갔다!"); }
+        else if (mv.ef === "def_down2") {
+            defender.statStages.def = Math.max(-6, defender.statStages.def - 2); bd.msg.push(dn + "의 방어가 크게 떨어졌다!");
+            if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+        }
+        else if (mv.ef === "spd_down2") {
+            defender.statStages.spd = Math.max(-6, defender.statStages.spd - 2); bd.msg.push(dn + "의 스피드가 크게 떨어졌다!");
+            if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+        }
+        else if (mv.ef === "spa_down") {
+            defender.statStages.spatk = Math.max(-6, defender.statStages.spatk - 1); bd.msg.push(dn + "의 특공이 떨어졌다!");
+        }
+        else if (mv.ef === "spa_down2") {
+            defender.statStages.spatk = Math.max(-6, defender.statStages.spatk - 2); bd.msg.push(dn + "의 특공이 크게 떨어졌다!");
+        }
+        else if (mv.ef === "atk_up") {
+            var auS = (getAbilityKey(attacker) === "contrary") ? -1 : 1;
+            attacker.statStages.atk = Math.max(-6, Math.min(6, attacker.statStages.atk + auS));
+            bd.msg.push(an + "의 공격이 " + (auS > 0 ? "올라갔다!" : "떨어졌다!"));
+        }
+        else if (mv.ef === "def_up") {
+            var duS = (getAbilityKey(attacker) === "contrary") ? -1 : 1;
+            attacker.statStages.def = Math.max(-6, Math.min(6, attacker.statStages.def + duS));
+            bd.msg.push(an + "의 방어가 " + (duS > 0 ? "올라갔다!" : "떨어졌다!"));
+        }
+        else if (mv.ef === "def_up2") {
+            var du2S = (getAbilityKey(attacker) === "contrary") ? -2 : 2;
+            attacker.statStages.def = Math.max(-6, Math.min(6, attacker.statStages.def + du2S));
+            bd.msg.push(an + "의 방어가 " + (du2S > 0 ? "크게 올라갔다!" : "크게 떨어졌다!"));
+        }
+        else if (mv.ef === "spa_up") {
+            var saS = (getAbilityKey(attacker) === "contrary") ? -1 : 1;
+            attacker.statStages.spatk = Math.max(-6, Math.min(6, attacker.statStages.spatk + saS));
+            bd.msg.push(an + "의 특공이 " + (saS > 0 ? "올라갔다!" : "떨어졌다!"));
+        }
+        else if (mv.ef === "spa_up2") {
+            var sa2S = (getAbilityKey(attacker) === "contrary") ? -2 : 2;
+            attacker.statStages.spatk = Math.max(-6, Math.min(6, attacker.statStages.spatk + sa2S));
+            bd.msg.push(an + "의 특공이 " + (sa2S > 0 ? "크게 올라갔다!" : "크게 떨어졌다!"));
+        }
+        else if (mv.ef === "spd_up") {
+            var sdS = (getAbilityKey(attacker) === "contrary") ? -1 : 1;
+            attacker.statStages.spd = Math.max(-6, Math.min(6, attacker.statStages.spd + sdS));
+            bd.msg.push(an + "의 스피드가 " + (sdS > 0 ? "올라갔다!" : "떨어졌다!"));
+        }
+        else if (mv.ef === "spd_up2") {
+            var sd2S = (getAbilityKey(attacker) === "contrary") ? -2 : 2;
+            attacker.statStages.spd = Math.max(-6, Math.min(6, attacker.statStages.spd + sd2S));
+            bd.msg.push(an + "의 스피드가 " + (sd2S > 0 ? "크게 올라갔다!" : "크게 떨어졌다!"));
+        }
+        else if (mv.ef === "spdef_up") {
+            var seS = (getAbilityKey(attacker) === "contrary") ? -1 : 1;
+            attacker.statStages.spdef = Math.max(-6, Math.min(6, attacker.statStages.spdef + seS));
+            bd.msg.push(an + "의 특방이 " + (seS > 0 ? "올라갔다!" : "떨어졌다!"));
+        }
+        else if (mv.ef === "spdef_up2") {
+            var se2S = (getAbilityKey(attacker) === "contrary") ? -2 : 2;
+            attacker.statStages.spdef = Math.max(-6, Math.min(6, attacker.statStages.spdef + se2S));
+            bd.msg.push(an + "의 특방이 " + (se2S > 0 ? "크게 올라갔다!" : "크게 떨어졌다!"));
+        }
+        else if (mv.ef === "eva_up") {
+            attacker.statStages.eva = Math.min(6, (attacker.statStages.eva || 0) + 1);
+            bd.msg.push(an + "의 회피율이 올라갔다!");
+        }
         else if (mv.ef === "swordsdance") {
             var sStages = (getAbilityKey(attacker) === "contrary") ? -2 : 2;
             attacker.statStages.atk = Math.max(-6, Math.min(6, attacker.statStages.atk + sStages));
@@ -4177,7 +4461,34 @@ function applyMoveEffects(move, attacker, defender, bd) {
             attacker.statStages.spdef = Math.max(-6, Math.min(6, attacker.statStages.spdef + cmStages));
             bd.msg.push(an + "의 특공과 특방이 " + (cmStages > 0 ? "올라갔다!" : "떨어졌다!"));
         }
-        else if (mv.ef === "focusenergy") { bd.msg.push(an + "은(는) 기합을 모으고 있다!"); }
+        else if (mv.ef === "bulkup") {
+            var buS = (getAbilityKey(attacker) === "contrary") ? -1 : 1;
+            attacker.statStages.atk = Math.max(-6, Math.min(6, attacker.statStages.atk + buS));
+            attacker.statStages.def = Math.max(-6, Math.min(6, attacker.statStages.def + buS));
+            bd.msg.push(an + "의 공격과 방어가 " + (buS > 0 ? "올라갔다!" : "떨어졌다!"));
+        }
+        else if (mv.ef === "dragondance") {
+            var ddS = (getAbilityKey(attacker) === "contrary") ? -1 : 1;
+            attacker.statStages.atk = Math.max(-6, Math.min(6, attacker.statStages.atk + ddS));
+            attacker.statStages.spd = Math.max(-6, Math.min(6, attacker.statStages.spd + ddS));
+            bd.msg.push(an + "의 공격과 스피드가 " + (ddS > 0 ? "올라갔다!" : "떨어졌다!"));
+        }
+        else if (mv.ef === "focusenergy") { attacker.critBoost = true; bd.msg.push(an + "은(는) 기합을 모으고 있다!"); }
+        else if (mv.ef === "encore") { bd.msg.push(an + "은(는) 앙코르를 사용했다!"); }
+        else if (mv.ef === "counter") {
+            if (bd.lastPhysDmg && bd.lastPhysDmg > 0) {
+                var cDmg = bd.lastPhysDmg * 2;
+                defender.currentHp = Math.max(0, defender.currentHp - cDmg);
+                bd.msg.push(an + "의 카운터! " + cDmg + " 데미지!");
+            } else { bd.msg.push("그러나 실패했다!"); }
+        }
+        else if (mv.ef === "mirrorcoat") {
+            if (bd.lastSpecDmg && bd.lastSpecDmg > 0) {
+                var mcDmg = bd.lastSpecDmg * 2;
+                defender.currentHp = Math.max(0, defender.currentHp - mcDmg);
+                bd.msg.push(an + "의 미러코트! " + mcDmg + " 데미지!");
+            } else { bd.msg.push("그러나 실패했다!"); }
+        }
         else if (mv.ef === "heal" || mv.ef === "rest") {
             var healAmt = Math.floor(attacker.stats[0] / 2);
             if (mv.ef === "rest") { healAmt = attacker.stats[0]; attacker.status = "sleep"; attacker.statusTurns = 2; }
