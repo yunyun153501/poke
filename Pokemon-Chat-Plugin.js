@@ -3641,6 +3641,7 @@ function createNewPlayer(name, starterKey, region) {
         pokedex: dex,
         defeatedTrainers: {},
         defeatedGyms: {},
+        lostToTrainers: {},
         day: 1,
         timeOfDay: 480,
         battleCount: 0,
@@ -4654,6 +4655,29 @@ var FISHING_DATA = {
 var RC_MALE = ["사토시","히로시","타이호","슌지","카즈마","소우타","하루키","료","켄지","유지","마사루","코지"];
 var RC_FEMALE = ["하루카","사쿠라","유이","소라","유나","메구미","리나","미사키","카즈미","아오이","린","세이라"];
 
+// 시그니처 포켓몬: 각 반복 트레이너의 고유 포켓몬 (진화 가능)
+var RC_SIGNATURE = {
+    "사토시":"pikachu","히로시":"eevee","타이호":"machop","슌지":"magnemite",
+    "카즈마":"growlithe","소우타":"abra","하루키":"geodude","료":"gastly",
+    "켄지":"poliwag","유지":"oddish","마사루":"ponyta","코지":"nidoranm",
+    "하루카":"vulpix","사쿠라":"clefairy","유이":"jigglypuff","소라":"staryu",
+    "유나":"psyduck","메구미":"bulbasaur","리나":"meowth","미사키":"marill",
+    "카즈미":"horsea","아오이":"ralts","린":"shinx","세이라":"piplup"
+};
+
+// 시그니처 포켓몬을 레벨에 맞게 진화시키기
+function getSignatureAtLevel(sigKey, level) {
+    var key = sigKey;
+    for (var i = 0; i < 3; i++) {
+        var pd = POKEDEX[key];
+        if (!pd || !pd.e || !pd.e.l) break;
+        if (level >= pd.e.l && POKEDEX[pd.e.to]) {
+            key = pd.e.to;
+        } else break;
+    }
+    return key;
+}
+
 var ROUTE_TITLES = {
     grass:  {m:["소년","배낭소년","캠핑소년","에이스트레이너"], f:["소녀","짧은치마","캠프파이어소녀","에이스트레이너"]},
     forest: {m:["벌레잡이소년","풀숲소년","벌레잡이","에이스트레이너"], f:["벌레잡이소녀","풀숲소녀","벌레잡이","에이스트레이너"]},
@@ -4707,14 +4731,36 @@ function generateRecurringTrainers(road, routeIdx) {
         {name: RC_FEMALE[fBase], male: false},
         {name: RC_FEMALE[fBase + 1], male: false}
     ];
+    // 각 트레이너에 사용된 포켓몬 추적 (중복 방지)
+    var usedKeys = {};
     for (var t = 0; t < 4; t++) {
         var ch = chars[t];
-        var numPoke = 1 + Math.min(2, Math.floor(routeIdx / 10));
+        var numLocal = Math.min(2, Math.floor(routeIdx / 10));
         var pokeArr = [];
-        for (var p = 0; p < numPoke; p++) {
-            var pkIdx = (routeIdx * 3 + t * 7 + p * 5) % road.pokemon.length;
+        // 시그니처 포켓몬 (항상 첫번째, 레벨에 맞게 진화)
+        var sigBase = RC_SIGNATURE[ch.name];
+        if (sigBase) {
+            var sigLv = lvMax;
+            var sigKey = getSignatureAtLevel(sigBase, sigLv);
+            pokeArr.push({k: sigKey, l: sigLv});
+            usedKeys[sigKey] = true;
+        }
+        // 지역 포켓몬 추가 (소수 해시로 다양성 확보)
+        var primes = [2, 3, 5, 11, 13, 17, 19, 23];
+        for (var p = 0; p < numLocal; p++) {
+            var hash = (routeIdx * primes[t % primes.length] + (t + 1) * primes[(p + 3) % primes.length] + p * 31 + 1);
+            var poolLen = road.pokemon.length;
+            var pkIdx = ((hash % poolLen) + poolLen) % poolLen;
             var pk = road.pokemon[pkIdx].k;
-            var lv = lvMin + Math.round((lvMax - lvMin) * (0.5 + p * 0.2));
+            // 중복 방지: 같은 포켓몬이 이미 있으면 다음 것 선택
+            var attempts = 0;
+            while ((usedKeys[pk] || pk === (sigBase && getSignatureAtLevel(sigBase, sigLv))) && attempts < poolLen) {
+                pkIdx = (pkIdx + 1) % poolLen;
+                pk = road.pokemon[pkIdx].k;
+                attempts++;
+            }
+            usedKeys[pk] = true;
+            var lv = lvMin + Math.round((lvMax - lvMin) * (0.4 + p * 0.3));
             lv = Math.max(lvMin, Math.min(lvMax + 2, lv));
             pokeArr.push({k: pk, l: lv});
         }
@@ -5806,11 +5852,12 @@ function grantExp(myPoke, enemy, isTrainerWin) {
         if (player.bag.amuletcoin && player.bag.amuletcoin > 0 && !isRematch) reward = reward * 2;
         bd.pendingReward = reward;
         bd.msg.push("💰 상금 ₩" + reward + rewardLabel + "을 받을 수 있다!");
+        // 승리 시 패배 기록 초기화
+        if (bd.trainerKey && player.lostToTrainers) delete player.lostToTrainers[bd.trainerKey];
         if (bd.isGymBattle) {
             player.defeatedGyms[bd.trainerKey] = player.day;
         } else if (bd.isGymTrainer) {
-            var prevCount = player.defeatedGyms[bd.trainerKey];
-            player.defeatedGyms[bd.trainerKey] = (typeof prevCount === "number" ? prevCount : 0) + 1;
+            player.defeatedGyms[bd.trainerKey] = {day: player.day};
         } else {
             // 트레이너 승리 기록 (성장 시스템)
             var prevData = getTrainerDefeatData(bd.trainerKey);
@@ -6795,7 +6842,18 @@ function renderBattleScreen() {
     } else if (bd.lost) {
         html += '<button class="pk-btn pk-btn-red pk-btn-block" data-action="poke_blackout">😵 패배 확인</button>';
     } else if (myPoke.currentHp <= 0) {
-        html += renderBattlePartySwitch();
+        // 안전장치: 살아있는 포켓몬이 없으면 전멸 처리
+        var hasAlive = false;
+        for (var si = 0; si < player.party.length; si++) {
+            if (player.party[si].currentHp > 0) { hasAlive = true; break; }
+        }
+        if (!hasAlive) {
+            bd.lost = true;
+            bd.msg.push("눈앞이 깜깜해졌다...");
+            html += '<button class="pk-btn pk-btn-red pk-btn-block" data-action="poke_blackout">😵 패배 확인</button>';
+        } else {
+            html += renderBattlePartySwitch();
+        }
     } else {
         html += '<div style="font-size:11px;color:#aaa;margin:4px 0">⚔️ 기술 선택:</div>';
         html += '<div class="pk-move-grid">';
@@ -6830,6 +6888,7 @@ function renderBattleScreen() {
             }
         }
         if (bd.type === "wild") html += '<button class="pk-btn pk-btn-gray pk-btn-xs" data-action="poke_run">🏃 도주</button>';
+        if (bd.type === "trainer") html += '<button class="pk-btn pk-btn-red pk-btn-xs" data-action="poke_forfeit">🏳️ 기권</button>';
         html += '</div>';
     }
     return html;
@@ -7765,22 +7824,31 @@ window.poke_trainerBattle = async function(trainerIdx) {
 
 window.poke_attack = async function(moveKey) {
     if (!gState || !gState.battleData || gState.battleData.won || gState.battleData.lost || gState.battleData.caught || gState.battleData.fled) return;
+    if (gState.battleData.animating) return;
+    gState.battleData.animating = true;
     sfxAttack();
     executeTurn(moveKey);
+    gState.battleData.animating = false;
     await saveAll();
     render();
 };
 
 window.poke_throwBall = async function(ballKey) {
     if (!gState || !gState.battleData || gState.battleData.type !== "wild") return;
+    if (gState.battleData.animating) return;
+    gState.battleData.animating = true;
     attemptCapture(ballKey);
+    gState.battleData.animating = false;
     await saveAll();
     render();
 };
 
 window.poke_run = async function() {
     if (!gState || !gState.battleData) return;
+    if (gState.battleData.animating) return;
+    gState.battleData.animating = true;
     tryRun();
+    gState.battleData.animating = false;
     await saveAll();
     render();
 };
@@ -7788,6 +7856,18 @@ window.poke_run = async function() {
 window.poke_battleParty = function() {
     if (!gState || !gState.battleData) return;
     gState.subScreen = "battlePartySwitch";
+    render();
+};
+
+window.poke_forfeit = async function() {
+    if (!gState || !gState.battleData) return;
+    var bd = gState.battleData;
+    if (bd.won || bd.lost || bd.caught || bd.fled) return;
+    bd.lost = true;
+    rotateBattleMsg(bd);
+    bd.msg = ["🏳️ 기권했다..."];
+    addLog("🏳️ 기권했다...", "battle");
+    await saveAll();
     render();
 };
 
@@ -7890,9 +7970,20 @@ window.poke_blackout = async function() {
     var bd = gState.battleData;
     if (bd && bd.type === "trainer") {
         var baseReward = bd.trainerReward || 500;
-        var fullPenalty = bd.isRechallenge ? baseReward : (bd.isRematch ? Math.floor(baseReward * 0.2) : baseReward);
-        var penalty = Math.floor(fullPenalty * 0.5);
+        if (!player.lostToTrainers) player.lostToTrainers = {};
+        var tKey = bd.trainerKey;
+        var repeatLoss = tKey && player.lostToTrainers[tKey];
+        var penalty;
+        if (repeatLoss) {
+            // 같은 트레이너에게 재패배: 원래 보상의 20%만 차감
+            penalty = Math.floor(baseReward * 0.2);
+        } else {
+            // 첫 패배: 보상금 전액 차감
+            penalty = baseReward;
+        }
+        if (bd.isRematch) penalty = Math.floor(penalty * 0.2);
         player.gold = Math.max(0, player.gold - penalty);
+        if (tKey) player.lostToTrainers[tKey] = true;
         var penaltyLabel = bd.isRechallenge ? " (재도전)" : (bd.isRematch ? " (재대결)" : "");
         addLog("😵 패배... ₩" + penalty + "을 잃었다." + penaltyLabel, "battle");
     } else {
@@ -8485,7 +8576,14 @@ window.poke_gymTrainerBattle = async function(args) {
     var gtKey = gym.id + "_trainer_" + trainerIdx;
     var hasBadge = player.badges[player.region] && player.badges[player.region].indexOf(gym.id) !== -1;
     var isGymRematch = false;
-    if (player.defeatedGyms[gtKey]) {
+    var gtDefeat = player.defeatedGyms[gtKey];
+    if (gtDefeat) {
+        // 하루 1회 제한: 오늘 이미 이긴 체육관 트레이너는 재대결 불가
+        var lastDay = (typeof gtDefeat === "object" && gtDefeat.day) ? gtDefeat.day : gtDefeat;
+        if (lastDay === player.day) {
+            showToast("오늘은 이미 이 트레이너를 이겼습니다! (하루 1회)");
+            return;
+        }
         isGymRematch = true;
     }
     var alive = false;
