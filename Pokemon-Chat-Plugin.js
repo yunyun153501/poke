@@ -3188,22 +3188,22 @@ alola:{n:"알로라지방",em:"🌴",roads:[
 var GYMS = {
 kanto: [
     {id:"k_gym1",city:"니비시티",n:"니비시티 체육관",type:"rock",badge:"회색뱃지",badgeEm:"🪨",
-     gymTrainers:[{n:"등산가",pokemon:[{k:"geodude",l:10}],reward:200},{n:"등산가",pokemon:[{k:"sandshrew",l:11}],reward:220}],
+     gymTrainers:[{n:"등산가",pokemon:[{k:"geodude",l:10},{k:"sandshrew",l:9}],reward:200},{n:"등산가",pokemon:[{k:"sandshrew",l:11},{k:"geodude",l:10}],reward:220}],
      leaders:[
         {id:"brock_lge",reqBadges:0,n:"타케시",em:"🏋️",pokemon:[{k:"geodude",l:11},{k:"onix",l:12}],reward:1200,rewardItems:["tm39_rocktomb"]}
      ]},
     {id:"k_gym2",city:"하나다시티",n:"하나다시티 체육관",type:"water",badge:"블루뱃지",badgeEm:"💧",
-     gymTrainers:[{n:"수영선수",pokemon:[{k:"horsea",l:16},{k:"shellder",l:16}],reward:320},{n:"수영선수",pokemon:[{k:"goldeen",l:18}],reward:360}],
+     gymTrainers:[{n:"수영선수",pokemon:[{k:"horsea",l:16},{k:"shellder",l:16}],reward:320},{n:"수영선수",pokemon:[{k:"goldeen",l:18},{k:"horsea",l:17}],reward:360}],
      leaders:[
         {id:"misty_lge",reqBadges:1,n:"카스미",em:"💧",pokemon:[{k:"psyduck",l:18},{k:"starmie",l:19}],reward:1900,rewardItems:["tm55_scald"]}
      ]},
     {id:"k_gym3",city:"쿠치바시티",n:"쿠치바시티 체육관",type:"electric",badge:"오렌지뱃지",badgeEm:"⚡",
-     gymTrainers:[{n:"선원",pokemon:[{k:"voltorb",l:18},{k:"magnemite",l:18}],reward:360},{n:"신사",pokemon:[{k:"pikachu",l:20}],reward:400}],
+     gymTrainers:[{n:"선원",pokemon:[{k:"voltorb",l:18},{k:"magnemite",l:18}],reward:360},{n:"신사",pokemon:[{k:"pikachu",l:20},{k:"voltorb",l:19}],reward:400}],
      leaders:[
         {id:"surge_lge",reqBadges:2,n:"마치스",em:"⚡",pokemon:[{k:"voltorb",l:25},{k:"magnemite",l:25},{k:"raichu",l:26}],reward:2600,rewardItems:["tm73_thunderwave"]}
      ]},
     {id:"k_gym4",city:"타마무시시티",n:"타마무시시티 체육관",type:"grass",badge:"레인보우뱃지",badgeEm:"🌈",
-     gymTrainers:[{n:"아가씨",pokemon:[{k:"oddish",l:24},{k:"bellsprout",l:24}],reward:480},{n:"미녀",pokemon:[{k:"weepinbell",l:26}],reward:520},{n:"아가씨",pokemon:[{k:"gloom",l:26}],reward:520}],
+     gymTrainers:[{n:"아가씨",pokemon:[{k:"oddish",l:24},{k:"bellsprout",l:24}],reward:480},{n:"미녀",pokemon:[{k:"weepinbell",l:26},{k:"oddish",l:25}],reward:520},{n:"아가씨",pokemon:[{k:"gloom",l:26},{k:"bellsprout",l:25}],reward:520}],
      leaders:[
         {id:"erika_lge",reqBadges:3,n:"에리카",em:"🌿",pokemon:[{k:"tangela",l:33},{k:"weepinbell",l:33},{k:"vileplume",l:34}],reward:3400,rewardItems:["tm86_grassknot"]}
      ]},
@@ -3213,17 +3213,17 @@ kanto: [
         {id:"koga_lge",reqBadges:4,n:"쿄우",em:"☠️",pokemon:[{k:"weezing",l:43},{k:"muk",l:43},{k:"golbat",l:43},{k:"venomoth",l:44}],reward:4400,rewardItems:["tm06_toxic"]}
      ]},
     {id:"k_gym6",city:"야마부키시티",n:"야마부키시티 체육관",type:"psychic",badge:"골드뱃지",badgeEm:"🔮",
-     gymTrainers:[{n:"심령술사",pokemon:[{k:"kadabra",l:36},{k:"slowpoke",l:36}],reward:720},{n:"초능력자",pokemon:[{k:"mrmime",l:38}],reward:760}],
+     gymTrainers:[{n:"심령술사",pokemon:[{k:"kadabra",l:36},{k:"slowpoke",l:36}],reward:720},{n:"초능력자",pokemon:[{k:"mrmime",l:38},{k:"jynx",l:37}],reward:760}],
      leaders:[
         {id:"sabrina_lge",reqBadges:5,n:"나츠메",em:"🔮",pokemon:[{k:"mrmime",l:43},{k:"slowbro",l:43},{k:"jynx",l:43},{k:"alakazam",l:44}],reward:4400,rewardItems:["tm29_psychic"]}
      ]},
     {id:"k_gym7",city:"구레네섬",n:"구레네섬 체육관",type:"fire",badge:"크림슨뱃지",badgeEm:"🔥",
-     gymTrainers:[{n:"마니아",pokemon:[{k:"ponyta",l:38},{k:"growlithe",l:40}],reward:800},{n:"머리짱",pokemon:[{k:"rapidash",l:40}],reward:800}],
+     gymTrainers:[{n:"마니아",pokemon:[{k:"ponyta",l:38},{k:"growlithe",l:40}],reward:800},{n:"머리짱",pokemon:[{k:"rapidash",l:40},{k:"magmar",l:39}],reward:800}],
      leaders:[
         {id:"blaine_lge",reqBadges:6,n:"카츠라",em:"🔥",pokemon:[{k:"magmar",l:47},{k:"rapidash",l:47},{k:"ninetales",l:47},{k:"arcanine",l:48}],reward:4800,rewardItems:["tm35_flamethrower"]}
      ]},
     {id:"k_gym8",city:"토키와시티",n:"토키와시티 체육관",type:"ground",badge:"그린뱃지",badgeEm:"🌍",
-     gymTrainers:[{n:"쿨트레이너",pokemon:[{k:"nidorino",l:42},{k:"nidorina",l:42}],reward:840},{n:"쿨트레이너",pokemon:[{k:"rhyhorn",l:43},{k:"sandslash",l:43}],reward:860},{n:"쿨트레이너",pokemon:[{k:"dugtrio",l:44}],reward:880}],
+     gymTrainers:[{n:"쿨트레이너",pokemon:[{k:"nidorino",l:42},{k:"nidorina",l:42}],reward:840},{n:"쿨트레이너",pokemon:[{k:"rhyhorn",l:43},{k:"sandslash",l:43}],reward:860},{n:"쿨트레이너",pokemon:[{k:"dugtrio",l:44},{k:"nidoking",l:43}],reward:880}],
      leaders:[
         {id:"giovanni_lge",reqBadges:7,n:"사카키",em:"🦹",pokemon:[{k:"dugtrio",l:49},{k:"nidoqueen",l:49},{k:"nidoking",l:49},{k:"rhydon",l:50}],reward:6500,rewardItems:["tm26_earthquake","masterball"]}
      ]}
@@ -7325,6 +7325,9 @@ function renderRoadDetail() {
             }
             // 체육관 트레이너 표시
             var allTrainersDefeated = true;
+            var gymReqBadges = 0;
+            if (gym.leaders) { for (var lri = 0; lri < gym.leaders.length; lri++) { if (gym.leaders[lri].reqBadges) gymReqBadges = Math.max(gymReqBadges, gym.leaders[lri].reqBadges); } }
+            var gymBadgeLocked = (gymReqBadges > 0 && badges.length < gymReqBadges);
             if (gym.gymTrainers) {
                     for (var gti = 0; gti < gym.gymTrainers.length; gti++) {
                         var gtKey = gym.id + "_trainer_" + gti;
@@ -7343,7 +7346,9 @@ function renderRoadDetail() {
                         }
                         html += '</div>';
                         html += '</div>';
-                        if (hasBadge && gtDefeated) {
+                        if (gymBadgeLocked) {
+                            html += '<span style="font-size:11px;color:#e74c3c">🔒 뱃지 ' + gymReqBadges + '개</span>';
+                        } else if (hasBadge && gtDefeated) {
                             html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_gymTrainerBattle" data-args="' + gi + ',' + gti + '">🔄 재대결</button>';
                         } else if (gtDefeated) {
                             html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_gymTrainerBattle" data-args="' + gi + ',' + gti + '">🔄 재대결</button>';
@@ -9367,6 +9372,20 @@ window.poke_gymTrainerBattle = async function(args) {
     if (!gymList || !gymList[gymIdx]) return;
     var gym = gymList[gymIdx];
     if (!gym.gymTrainers || !gym.gymTrainers[trainerIdx]) return;
+    // 체육관 트레이너도 관장과 같은 뱃지 요구 (예: 사카키 체육관 = 7개)
+    var leaderReqBadges = 0;
+    if (gym.leaders && gym.leaders.length > 0) {
+        for (var li = 0; li < gym.leaders.length; li++) {
+            if (gym.leaders[li].reqBadges) { leaderReqBadges = Math.max(leaderReqBadges, gym.leaders[li].reqBadges); }
+        }
+    }
+    if (leaderReqBadges > 0) {
+        var curBadges = player.badges[player.region] ? player.badges[player.region].length : 0;
+        if (curBadges < leaderReqBadges) {
+            showToast("🔒 뱃지 " + leaderReqBadges + "개가 필요합니다!");
+            return;
+        }
+    }
     var gtKey = gym.id + "_trainer_" + trainerIdx;
     var hasBadge = player.badges[player.region] && player.badges[player.region].indexOf(gym.id) !== -1;
     var isGymRematch = false;
