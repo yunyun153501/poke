@@ -5683,6 +5683,14 @@ function grantExp(myPoke, enemy, isTrainerWin) {
             if (badgeList && badgeList.indexOf(bd.gymId) === -1) {
                 badgeList.push(bd.gymId);
                 bd.msg.push("🏅 " + bd.gymBadgeEm + " " + bd.gymBadge + "을(를) 획득했다!");
+                // 체육관 보상 아이템 지급 (기술머신 등)
+                if (bd.trainerRewardItems) {
+                    for (var ri = 0; ri < bd.trainerRewardItems.length; ri++) {
+                        var rItem = bd.trainerRewardItems[ri];
+                        player.bag[rItem] = (player.bag[rItem] || 0) + 1;
+                        bd.msg.push("🎁 " + ITEMS[rItem].n + " 을(를) 받았다!");
+                    }
+                }
                 checkKeyItemReward(bd);
             }
         }
@@ -6598,6 +6606,12 @@ function renderBattleScreen() {
         if (bd.pendingReward && !bd.rewardHandled) {
             html += '<div class="pk-card" style="text-align:center;border-color:#f5c518">';
             html += '<div style="font-size:14px;font-weight:bold;color:#f5c518;margin-bottom:6px">💰 상금 ₩' + bd.pendingReward.toLocaleString() + '</div>';
+            if (bd.trainerRewardItems && bd.isGymBattle && !bd.isRematch) {
+                for (var ri = 0; ri < bd.trainerRewardItems.length; ri++) {
+                    var rItem = bd.trainerRewardItems[ri];
+                    if (ITEMS[rItem]) html += '<div style="font-size:12px;color:#27ae60;margin-bottom:4px">🎁 ' + ITEMS[rItem].n + ' 획득!</div>';
+                }
+            }
             html += '<div style="display:flex;gap:8px;justify-content:center">';
             html += '<button class="pk-btn pk-btn-green" data-action="poke_acceptReward">💰 받기</button>';
             html += '<button class="pk-btn pk-btn-gray" data-action="poke_declineReward">🚫 거절</button>';
@@ -8136,15 +8150,6 @@ window.poke_acceptReward = async function() {
         player.gold += bd.pendingReward;
         bd.msg.push("💰 ₩" + bd.pendingReward + "을 받았다!");
         addLog("💰 ₩" + bd.pendingReward + " 획득!", "gold");
-        // 체육관 보상 아이템 지급
-        if (bd.trainerRewardItems && bd.isGymBattle && !bd.isRematch) {
-            for (var ri = 0; ri < bd.trainerRewardItems.length; ri++) {
-                var rItem = bd.trainerRewardItems[ri];
-                player.bag[rItem] = (player.bag[rItem] || 0) + 1;
-                bd.msg.push("🎁 " + ITEMS[rItem].n + " 을(를) 받았다!");
-                addLog(ITEMS[rItem].n + " 을(를) 받았다!", "reward");
-            }
-        }
         bd.rewardHandled = true;
     }
     await saveAll();
