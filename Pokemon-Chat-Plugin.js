@@ -5614,9 +5614,11 @@ function startGymBattle(regionKey, gymIdx, leaderIdx) {
     if (player.defeatedGyms[gKey] === player.day) return false; // 오늘 이미 이김
     var hasBadge = (player.badges[regionKey] && player.badges[regionKey].indexOf(gym.id) !== -1);
     var isRematch = (player.defeatedGyms[gKey] !== undefined) || hasBadge;
+    // 관장도 재대결 시 성장 (처음에는 본가 그대로, 재대결 시 뱃지 기반 스케일링)
+    var useLeader = isRematch ? getScaledGymTrainer(leader, gym, regionKey) : leader;
     var enemyParty = [];
-    for (var i = 0; i < leader.pokemon.length; i++) {
-        var tp = leader.pokemon[i];
+    for (var i = 0; i < useLeader.pokemon.length; i++) {
+        var tp = useLeader.pokemon[i];
         var poke = createPokemonInstance(tp.k, tp.l);
         if (poke) enemyParty.push(poke);
     }
@@ -5633,9 +5635,9 @@ function startGymBattle(regionKey, gymIdx, leaderIdx) {
         gymRegion: regionKey,
         gymBadge: gym.badge,
         gymBadgeEm: gym.badgeEm,
-        trainerName: "관장 " + leader.n,
+        trainerName: "관장 " + leader.n + (isRematch ? " (강화)" : ""),
         trainerEmoji: leader.em,
-        trainerReward: leader.reward,
+        trainerReward: isRematch ? useLeader.reward : leader.reward,
         trainerRewardItems: leader.rewardItems,
         trainerKey: gKey,
         isRematch: isRematch,
@@ -7394,18 +7396,19 @@ function renderRoadDetail() {
                 var gKey = gym.id + "_" + leader.id;
                 var defeatedToday = (player.defeatedGyms[gKey] === player.day);
                 var defeatedBefore = (player.defeatedGyms[gKey] !== undefined && !defeatedToday) || hasBadge;
+                var displayLeader = defeatedBefore ? getScaledGymTrainer(leader, gym, player.region) : leader;
                 html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;margin-top:4px;border-top:1px solid rgba(255,255,255,0.05)">';
                 html += '<div>';
                 html += '<span style="font-size:14px">' + leader.em + '</span> ';
-                html += '<span style="font-size:12px;font-weight:bold">' + leader.n + '</span>';
+                html += '<span style="font-size:12px;font-weight:bold">' + leader.n + (defeatedBefore ? ' <span style="color:#e67e22;font-size:9px">★강화</span>' : '') + '</span>';
                 if (gym.leaders.length > 1) html += ' <span style="font-size:10px;color:#888">(Gen ' + leader.gen + ')</span>';
                 html += '<div style="font-size:10px;color:#aaa">';
-                for (var lp = 0; lp < leader.pokemon.length; lp++) {
-                    var tpd = POKEDEX[leader.pokemon[lp].k];
-                    html += (tpd ? tpd.em : "?") + 'Lv.' + leader.pokemon[lp].l + ' ';
+                for (var lp = 0; lp < displayLeader.pokemon.length; lp++) {
+                    var tpd = POKEDEX[displayLeader.pokemon[lp].k];
+                    html += (tpd ? tpd.em : "?") + 'Lv.' + displayLeader.pokemon[lp].l + ' ';
                 }
                 html += '</div>';
-                html += '<div style="font-size:10px;color:#f5c518">💰 ₩' + leader.reward + '</div>';
+                html += '<div style="font-size:10px;color:#f5c518">💰 ₩' + displayLeader.reward + '</div>';
                 html += '</div>';
                 if (leader.reqBadges && badges.length < leader.reqBadges) {
                     html += '<span style="font-size:11px;color:#e74c3c">🔒 뱃지 ' + leader.reqBadges + '개 필요</span>';
