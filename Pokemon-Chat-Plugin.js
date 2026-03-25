@@ -5465,33 +5465,6 @@ function calcTrainerGrowth(trainerPokemon, daysElapsed) {
     return { levelBonuses: levelBonuses, extraCount: extraCount, totalBonusLevels: totalBonusLevels };
 }
 
-// 트레이너 성장시 추가되는 비지역 포켓몬 풀 (레벨 구간별)
-var GROWTH_POKEMON_POOL = {
-    low: ["eevee","pikachu","clefairy","jigglypuff","meowth","psyduck","growlithe","poliwag","abra","machop","geodude","magnemite","gastly","ponyta","slowpoke","shellder","krabby","cubone","rhyhorn","horsea","staryu","scyther","pinsir","magikarp","dratini"],
-    mid: ["pidgeotto","nidorina","nidorino","kadabra","machoke","graveler","haunter","magneton","dewgong","kingler","electrode","exeggcute","hitmonlee","hitmonchan","lickitung","tangela","kangaskhan","seadra","goldeen","starmie","electabuzz","magmar","tauros","porygon","lapras"],
-    high: ["pidgeot","nidoqueen","nidoking","arcanine","alakazam","machamp","golem","gengar","rhydon","snorlax","dragonair","dragonite","aerodactyl","gyarados","vaporeon","jolteon","flareon","omastar","kabutops"]
-};
-
-function getGrowthPoolPokemon(road, level, seed) {
-    // 지역 포켓몬 키 목록
-    var regionalKeys = {};
-    if (road && road.pokemon) {
-        for (var i = 0; i < road.pokemon.length; i++) regionalKeys[road.pokemon[i].k] = true;
-    }
-    // 레벨에 맞는 풀 선택
-    var pool;
-    if (level <= 20) pool = GROWTH_POKEMON_POOL.low;
-    else if (level <= 40) pool = GROWTH_POKEMON_POOL.mid;
-    else pool = GROWTH_POKEMON_POOL.high;
-    // 지역 포켓몬 제외
-    var filtered = [];
-    for (var j = 0; j < pool.length; j++) {
-        if (!regionalKeys[pool[j]]) filtered.push(pool[j]);
-    }
-    if (filtered.length === 0) filtered = pool;
-    return filtered[seed % filtered.length];
-}
-
 function getGrownTrainerData(trainer, road, tKey) {
     var defData = getTrainerDefeatData(tKey);
     if (!defData) return { pokemon: trainer.pokemon, reward: trainer.reward, growthTier: 0, isRechallenge: false };
@@ -5505,14 +5478,22 @@ function getGrownTrainerData(trainer, road, tKey) {
         var newLv = Math.min(MAX_LEVEL, trainer.pokemon[i].l + growth.levelBonuses[i]);
         grownPokemon.push({ k: trainer.pokemon[i].k, l: newLv });
     }
-    // 추가 포켓몬 (7일마다 +1, 최대 3마리 추가) - 지역에 없는 포켓몬 추가
-    if (growth.extraCount > 0) {
-        var extras = Math.min(growth.extraCount, 3);
+    // 추가 포켓몬 (7일마다 +1) - 지역포켓몬 중 이미 가지고있지 않은 포켓몬 추가, 최대 6마리
+    if (growth.extraCount > 0 && road && road.pokemon && road.pokemon.length > 0) {
+        var maxTotal = 6;
+        var ownedKeys = {};
+        for (var j = 0; j < grownPokemon.length; j++) ownedKeys[grownPokemon[j].k] = true;
+        // 지역포켓몬 중 아직 안 가진 것 필터링
+        var candidates = [];
+        for (var p = 0; p < road.pokemon.length; p++) {
+            if (!ownedKeys[road.pokemon[p].k]) candidates.push(road.pokemon[p].k);
+        }
+        var extras = Math.min(growth.extraCount, maxTotal - grownPokemon.length, candidates.length);
         for (var e = 0; e < extras; e++) {
+            var seed = (defData.firstDay * 7 + e * 13) % candidates.length;
+            var pick = candidates.splice(seed, 1)[0];
             var extraLv = grownPokemon[grownPokemon.length - 1].l;
-            var seed = defData.firstDay * 7 + e * 13;
-            var extraKey = getGrowthPoolPokemon(road, extraLv, seed);
-            grownPokemon.push({ k: extraKey, l: Math.min(MAX_LEVEL, extraLv) });
+            grownPokemon.push({ k: pick, l: Math.min(MAX_LEVEL, extraLv) });
         }
     }
     // 성장에 따라 보상금도 증가
