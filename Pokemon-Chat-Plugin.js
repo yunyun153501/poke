@@ -5555,9 +5555,9 @@ function executeTurn(playerMoveKey) {
         if (bd.type === "trainer" && bd.enemyParty) {
             bd.enemyIdx++;
             if (bd.enemyIdx < bd.enemyParty.length) {
+                grantExp(myPoke, enemy, false);
                 bd.enemy = bd.enemyParty[bd.enemyIdx];
                 bd.msg.push(bd.trainerName + "은(는) " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")을(를) 내보냈다!");
-                grantExp(myPoke, enemy, false);
                 // 도감 등록
                 if (player.pokedex) { if (!player.pokedex[bd.enemy.key]) player.pokedex[bd.enemy.key] = "seen"; }
             } else {
@@ -7530,10 +7530,6 @@ window.poke_switchInBattle = async function(idx) {
             prev.currentHp = Math.min(prev.stats[0], prev.currentHp + rHeal);
             bd.msg.push(prev.nickname + "의 재생력! HP가 회복되었다! (+" + rHeal + ")");
         }
-        // 교체 시 적이 공격
-        var emk = enemyChooseMove(bd.enemy, player.party[bd.myIdx], bd.type === "trainer");
-        if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, player.party[bd.myIdx], emk, bd);
-        doStatusDamage(bd.enemy, bd);
     }
     var curPoke = player.party[bd.myIdx];
     bd.msg.push(player.name + "은(는) " + curPoke.nickname + " (Lv." + curPoke.level + ")을(를) 내보냈다!");
@@ -7541,6 +7537,12 @@ window.poke_switchInBattle = async function(idx) {
     if (getAbilityKey(curPoke) === "intimidate") {
         bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
         bd.msg.push(curPoke.nickname + "의 위협! " + bd.enemy.nickname + "의 공격이 떨어졌다!");
+    }
+    // 교체 시 적이 공격
+    if (prev && prev.currentHp > 0) {
+        var emk = enemyChooseMove(bd.enemy, player.party[bd.myIdx], bd.type === "trainer");
+        if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, player.party[bd.myIdx], emk, bd);
+        doStatusDamage(bd.enemy, bd);
     }
     for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
     await saveAll();
