@@ -8315,9 +8315,11 @@ window.poke_renamePokemon = async function(idx) {
     idx = parseInt(idx, 10);
     var poke = player.party[idx];
     if (!poke) return;
-    var newName = prompt('새로운 이름을 입력하세요:', poke.nickname);
+    var newName = prompt('새로운 이름을 입력하세요 (최대 12자):', poke.nickname);
     if (newName === null || newName.trim() === '') return;
-    poke.nickname = newName.trim();
+    newName = newName.trim().substring(0, 12).replace(/[<>"&]/g, '');
+    if (newName === '') return;
+    poke.nickname = newName;
     await saveAll();
     render();
 };
