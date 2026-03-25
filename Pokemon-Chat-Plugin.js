@@ -6751,7 +6751,8 @@ function renderBattleScreen() {
     html += '<div class="pk-poke-card" style="border-left:3px solid #e74c3c">';
     html += '<div style="font-size:11px;color:#e74c3c">' + (bd.type==="trainer"?"상대":"야생") + ' 포켓몬</div>';
     html += '<div class="pk-poke-emoji">' + (enData?enData.em:"?") + '</div>';
-    html += '<div style="font-weight:bold">' + enemy.nickname + ' <span style="color:#aaa;font-size:11px">Lv.' + enemy.level + '</span></div>';
+    var _caughtIcon = (player.pokedex && (player.pokedex[enemy.key] === "caught" || player.pokedex[enemy.key] === true)) ? "🔴" : "⚫";
+    html += '<div style="font-weight:bold">' + _caughtIcon + ' ' + enemy.nickname + ' <span style="color:#aaa;font-size:11px">Lv.' + enemy.level + '</span></div>';
     var enTypes = enemy.megaTypes || (enData ? enData.t : []);
     for (var i = 0; i < enTypes.length; i++) html += typeSpan(enTypes[i]);
     html += '<div style="font-size:11px;margin-top:4px">HP: ' + Math.max(0,enemy.currentHp) + '/' + enemy.stats[0] + '</div>';
@@ -6879,19 +6880,53 @@ function renderPartyScreen() {
 }
 
 function renderPCScreen() {
+    if (!gState.pcBoxOpen) gState.pcBoxOpen = {};
+    if (!gState.pcSearch) gState.pcSearch = "";
+    var BOX_SIZE = 50;
+    var BOX_COUNT = 40;
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">💻 PC 보관함 (' + player.pc.length + ')</div>';
+    // search bar
+    html += '<div style="margin:6px 0"><input type="text" id="pk-pc-search" placeholder="검색 (이름/종류)" value="' + gState.pcSearch.replace(/"/g, '&quot;') + '" style="width:100%;padding:4px 8px;border:1px solid #555;border-radius:4px;background:#222;color:#eee;font-size:12px" oninput="poke_pcSearch(this.value)" /></div>';
     if (player.pc.length === 0) { html += '<div style="color:#aaa;text-align:center;margin:20px 0">비어있습니다</div>'; return html; }
-    for (var i = 0; i < player.pc.length; i++) {
-        var p = player.pc[i]; var pd = POKEDEX[p.key];
-        html += '<div class="pk-card" style="display:flex;align-items:center;justify-content:space-between;gap:8px">';
-        html += '<div style="display:flex;align-items:center;gap:8px">';
-        html += '<div style="font-size:20px">' + (pd?pd.em:"?") + '</div>';
-        html += '<div><div style="font-weight:bold;font-size:13px">' + p.nickname + ' Lv.' + p.level + '</div>';
-        html += '<div style="font-size:11px">HP: ' + p.currentHp + '/' + p.stats[0] + '</div></div>';
+    var searchTerm = gState.pcSearch.toLowerCase();
+    for (var box = 0; box < BOX_COUNT; box++) {
+        var startIdx = box * BOX_SIZE;
+        var endIdx = Math.min(startIdx + BOX_SIZE, player.pc.length);
+        if (startIdx >= player.pc.length) break;
+        // collect visible pokemon in this box (after search filter)
+        var boxItems = [];
+        for (var i = startIdx; i < endIdx; i++) {
+            var p = player.pc[i]; var pd = POKEDEX[p.key];
+            var speciesName = pd ? pd.n : "";
+            if (searchTerm && p.nickname.toLowerCase().indexOf(searchTerm) === -1 && speciesName.toLowerCase().indexOf(searchTerm) === -1) continue;
+            boxItems.push(i);
+        }
+        if (searchTerm && boxItems.length === 0) continue;
+        var isOpen = !!gState.pcBoxOpen[box];
+        html += '<div class="pk-card" style="padding:6px 8px;margin-bottom:4px">';
+        html += '<div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="poke_togglePCBox(' + box + ')">';
+        html += '<span style="font-weight:bold;font-size:13px">' + (isOpen ? '▼' : '▶') + ' 보관함 ' + (box + 1) + ' <span style="color:#aaa;font-size:11px">(' + (endIdx - startIdx) + ')</span></span>';
         html += '</div>';
-        if (player.party.length < MAX_PARTY) {
-            html += '<button class="pk-btn pk-btn-blue pk-btn-xs" data-action="poke_withdrawPC" data-args="' + i + '">가져오기</button>';
+        if (isOpen) {
+            for (var bi = 0; bi < boxItems.length; bi++) {
+                var ri = boxItems[bi];
+                var p = player.pc[ri]; var pd = POKEDEX[p.key];
+                var speciesName = pd ? pd.n : "";
+                html += '<div class="pk-card" style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin:4px 0">';
+                html += '<div style="display:flex;align-items:center;gap:8px">';
+                html += '<div style="font-size:20px">' + (pd?pd.em:"?") + '</div>';
+                html += '<div><div style="font-weight:bold;font-size:13px">' + p.nickname + (p.nickname !== speciesName ? ' <span style="color:#888;font-size:10px">(' + speciesName + ')</span>' : '') + ' Lv.' + p.level + '</div>';
+                html += '<div style="font-size:11px">HP: ' + p.currentHp + '/' + p.stats[0] + '</div></div>';
+                html += '</div>';
+                html += '<div style="display:flex;gap:4px">';
+                if (player.party.length < MAX_PARTY) {
+                    html += '<button class="pk-btn pk-btn-blue pk-btn-xs" data-action="poke_withdrawPC" data-args="' + ri + '">가져오기</button>';
+                }
+                html += '<button class="pk-btn pk-btn-xs" style="background:#e74c3c;color:#fff" data-action="poke_releasePC" data-args="' + ri + '">놓아주기</button>';
+                html += '</div>';
+                html += '</div>';
+            }
         }
         html += '</div>';
     }
@@ -7031,6 +7066,10 @@ function renderSummaryScreen() {
     html += '<div class="pk-card" style="text-align:center">';
     html += '<div style="font-size:36px">' + (pd?pd.em:"?") + '</div>';
     html += '<div style="font-size:18px;font-weight:bold">' + poke.nickname + '</div>';
+    if (pd && poke.nickname !== pd.n) {
+        html += '<div style="font-size:11px;color:#888">(' + pd.n + ')</div>';
+    }
+    html += '<button class="pk-btn pk-btn-dark pk-btn-xs" style="margin-top:4px" data-action="poke_renamePokemon" data-args="' + idx + '">✏️ 이름변경</button>';
     html += '<div style="color:#aaa;font-size:12px">Lv.' + poke.level + ' | EXP: ' + poke.exp + ' / ' + (getExpForLevel(poke.level+1)-getExpForLevel(poke.level)) + '</div>';
     if (pd) { for (var i = 0; i < pd.t.length; i++) html += typeSpan(pd.t[i]); }
     // 특성 표시
@@ -8254,9 +8293,43 @@ window.poke_depositPC = async function(idx) {
     render();
 };
 
+window.poke_releasePC = async function(idx) {
+    idx = parseInt(idx, 10);
+    if (isNaN(idx) || idx < 0 || idx >= player.pc.length) return;
+    var poke = player.pc[idx];
+    var pd = POKEDEX[poke.key];
+    var name = poke.nickname + (pd && poke.nickname !== pd.n ? ' (' + pd.n + ')' : '');
+    if (!confirm(name + '을(를) 정말 놓아주시겠습니까?')) return;
+    player.pc.splice(idx, 1);
+    await saveAll();
+    render();
+};
+
 window.poke_showSummary = function(idx) {
     gState.summaryIdx = parseInt(idx, 10);
     gState.subScreen = "summary";
+    render();
+};
+
+window.poke_renamePokemon = async function(idx) {
+    idx = parseInt(idx, 10);
+    var poke = player.party[idx];
+    if (!poke) return;
+    var newName = prompt('새로운 이름을 입력하세요:', poke.nickname);
+    if (newName === null || newName.trim() === '') return;
+    poke.nickname = newName.trim();
+    await saveAll();
+    render();
+};
+
+window.poke_togglePCBox = function(box) {
+    if (!gState.pcBoxOpen) gState.pcBoxOpen = {};
+    gState.pcBoxOpen[box] = !gState.pcBoxOpen[box];
+    render();
+};
+
+window.poke_pcSearch = function(val) {
+    gState.pcSearch = val || "";
     render();
 };
 
