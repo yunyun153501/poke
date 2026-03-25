@@ -3316,6 +3316,7 @@ secretpotion:{n:"비약",desc:"아사기 등대의 전룡에게 줄 약",type:"k
 oldrod:      {n:"낡은낚시대",desc:"낡은 낚시대. 잉어킹만 낚을 수 있다",type:"key",value:"oldrod",buy:0,sell:0},
 goodrod:     {n:"좋은낚시대",desc:"좋은 낚시대. 다양한 물 포켓몬을 낚을 수 있다",type:"key",value:"goodrod",buy:0,sell:0},
 superrod:    {n:"대단한낚시대",desc:"최고급 낚시대. 희귀한 물 포켓몬을 낚을 수 있다",type:"key",value:"superrod",buy:0,sell:0},
+hm_fly:      {n:"비전머신02 [공중날기]",desc:"하늘을 날아 방문했던 도시로 즉시 이동할 수 있다 (2시간 소요)",type:"key",sell:0},
 // ── 기술머신 (TM) ──
 tm01_focuspunch: {n:"기술머신01 [기합펀치]",desc:"기합펀치를 가르친다",type:"tm",value:"focuspunch",buy:3000,sell:1500},
 tm02_dragonclaw: {n:"기술머신02 [용의발톱]",desc:"용의발톱을 가르친다",type:"tm",value:"dragonclaw",buy:3000,sell:1500},
@@ -3600,6 +3601,24 @@ diancie:     {n:"메가디안시",t:["rock","fairy"],s:[50,160,110,160,110,110],
 // ═══════════════════════════════════════════════
 var TIME_NAMES = ["🌙 새벽","🌅 아침","☀️ 점심","🌇 오후","🌃 밤"];
 var TIME_KEYS = ["dawn","morning","noon","afternoon","night"];
+function getTimePeriodIdx(mins) {
+    var h = Math.floor(mins / 60) % 24;
+    if (h >= 0 && h < 5) return 0;   // 새벽 00:00~04:59
+    if (h >= 5 && h < 10) return 1;  // 아침 05:00~09:59
+    if (h >= 10 && h < 14) return 2; // 점심 10:00~13:59
+    if (h >= 14 && h < 19) return 3; // 오후 14:00~18:59
+    return 4;                         // 밤 19:00~23:59
+}
+function formatGameTime(mins) {
+    var totalMins = ((mins % 1440) + 1440) % 1440;
+    var h = Math.floor(totalMins / 60);
+    var m = totalMins % 60;
+    return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+}
+function getTimeEmoji(mins) {
+    var idx = getTimePeriodIdx(mins);
+    return TIME_NAMES[idx];
+}
 
 var player = null;
 var gState = null;
@@ -3623,10 +3642,11 @@ function createNewPlayer(name, starterKey, region) {
         defeatedTrainers: {},
         defeatedGyms: {},
         day: 1,
-        timeOfDay: 1,
+        timeOfDay: 480,
         battleCount: 0,
         caughtLegendaries: {},
-        roamingLocation: null
+        roamingLocation: null,
+        visitedRoads: {}
     };
 }
 
@@ -3780,10 +3800,14 @@ async function loadAll() {
             if (!player.defeatedGyms) player.defeatedGyms = {};
             if (player.day === undefined) player.day = 1;
             // 시간 시스템 마이그레이션
-            if (player.timeOfDay === undefined) player.timeOfDay = 1;
+            if (player.timeOfDay === undefined || player.timeOfDay < 60) player.timeOfDay = 480;
             if (player.battleCount === undefined) player.battleCount = 0;
             if (!player.caughtLegendaries) player.caughtLegendaries = {};
             if (player.roamingLocation === undefined) player.roamingLocation = null;
+            if (!player.visitedRoads) {
+                player.visitedRoads = {};
+                player.visitedRoads[player.region + "_" + player.roadIdx] = true;
+            }
             // badges 형식 마이그레이션 (숫자→객체)
             if (typeof player.badges === 'number' || !player.badges) {
                 player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[]};
@@ -3869,10 +3893,14 @@ async function loadSlot(slotNum) {
             }
             if (!player.defeatedGyms) player.defeatedGyms = {};
             if (player.day === undefined) player.day = 1;
-            if (player.timeOfDay === undefined) player.timeOfDay = 1;
+            if (player.timeOfDay === undefined || player.timeOfDay < 60) player.timeOfDay = 480;
             if (player.battleCount === undefined) player.battleCount = 0;
             if (!player.caughtLegendaries) player.caughtLegendaries = {};
             if (player.roamingLocation === undefined) player.roamingLocation = null;
+            if (!player.visitedRoads) {
+                player.visitedRoads = {};
+                player.visitedRoads[player.region + "_" + player.roadIdx] = true;
+            }
             if (typeof player.badges === 'number' || !player.badges) {
                 player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[]};
             }
@@ -4396,17 +4424,19 @@ function startLegendaryBattle(legendaryKey, level) {
 // ═══════════════════════════════════════════════
 // ⏰ 시간 시스템
 // ═══════════════════════════════════════════════
-function advanceTime() {
+function advanceTime(minutes) {
     if (!player) return;
-    player.timeOfDay++;
-    player.battleCount = 0;
-    if (player.timeOfDay >= 5) {
-        player.timeOfDay = 0;
+    minutes = minutes || 60;
+    var oldDay = player.day;
+    player.timeOfDay = (player.timeOfDay || 0) + minutes;
+    while (player.timeOfDay >= 1440) {
+        player.timeOfDay -= 1440;
         player.day++;
+    }
+    if (player.day > oldDay) {
         addLog("🌅 " + player.day + "일차가 밝았다!", "system");
     }
-    addLog("⏰ 시간이 흘러 " + TIME_NAMES[player.timeOfDay] + " 이(가) 되었다.", "system");
-    // 로밍 전설 포켓몬 위치 재배치 (낮→밤, 밤→새벽 등 시간 변할 때마다)
+    addLog("⏰ " + formatGameTime(player.timeOfDay) + " " + getTimeEmoji(player.timeOfDay), "system");
     randomizeRoamingLocation();
 }
 
@@ -4430,8 +4460,8 @@ function randomizeRoamingLocation() {
     player.roamingLocation = {region: player.region, roadIdx: rIdx, pokemon: active};
 }
 
-function isNightTime() { return player && player.timeOfDay === 4; }
-function isDawnTime() { return player && player.timeOfDay === 0; }
+function isNightTime() { return player && getTimePeriodIdx(player.timeOfDay) === 4; }
+function isDawnTime() { return player && getTimePeriodIdx(player.timeOfDay) === 0; }
 
 // ═══════════════════════════════════════════════
 // ⚔️ 배틀 시스템
@@ -5847,6 +5877,7 @@ function checkKeyItemReward(bd) {
         {count:3, item:"expshare"},
         {count:4, item:"goodrod"},
         {count:5, item:"luckyegg"},
+        {count:6, item:"hm_fly"},
         {count:7, item:"superrod"}
     ];
     for (var i = 0; i < rewards.length; i++) {
@@ -5940,7 +5971,7 @@ function attemptCapture(ballKey) {
     // 특수볼 보정
     if (ballKey === "nestball") { ballBonus = Math.max(1, (41 - enemy.level) / 10); }
     else if (ballKey === "timerball") { ballBonus = Math.min(4, 1 + (bd.turn || 0) * 0.3); }
-    else if (ballKey === "duskball" && player.timeOfDay === 4) { ballBonus = 3.5; }
+    else if (ballKey === "duskball" && isNightTime()) { ballBonus = 3.5; }
     else if (ballKey === "quickball" && (!bd.turn || bd.turn <= 1)) { ballBonus = 5; }
     else if (ballKey === "repeatball" && player.pokedex && player.pokedex[enemy.key]) { ballBonus = 3.5; }
     else if (ballKey === "netball") { var et = POKEDEX[enemy.key] ? POKEDEX[enemy.key].t : []; if (et.indexOf("water") >= 0 || et.indexOf("bug") >= 0) ballBonus = 3; else ballBonus = 1; }
@@ -6401,7 +6432,7 @@ function renderOverworld() {
     // 상단 상태바
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px">';
     html += '<span style="font-size:13px;cursor:pointer" data-action="poke_changeName" title="이름 변경">👤 ' + player.name + ' ✏️</span>';
-    html += '<span style="font-size:12px">📅 ' + player.day + '일차 ' + TIME_NAMES[player.timeOfDay] + '</span>';
+    html += '<span style="font-size:12px">📅 ' + player.day + '일차 ' + formatGameTime(player.timeOfDay) + ' ' + getTimeEmoji(player.timeOfDay) + '</span>';
     html += '<span class="pk-gold" style="font-size:13px">💰 ₩' + player.gold.toLocaleString() + '</span>';
     html += '</div>';
     // 뱃지 미니바
@@ -6413,8 +6444,18 @@ function renderOverworld() {
     var xBadges = player.badges.kalos ? player.badges.kalos.length : 0;
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:4px 10px;font-size:10px">';
     html += '<span>🏅 관동 ' + kBadges + '/8 | 성도 ' + jBadges + '/8 | 호연 ' + hBadges + '/8 | 신오 ' + sBadges + '/8 | 하나 ' + uBadges + '/8 | 칼로스 ' + xBadges + '/8</span>';
-    html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_advanceTime">⏰ 다음 시간</button>';
+    html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_toggleClock">🕐 시계</button>';
     html += '</div>';
+    // 시계 패널
+    if (gState.showClock) {
+        html += '<div class="pk-card" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;padding:6px">';
+        html += '<span style="font-size:13px;color:#f5c518;width:100%;text-align:center;margin-bottom:2px">⏰ ' + formatGameTime(player.timeOfDay) + ' ' + getTimeEmoji(player.timeOfDay) + ' (' + player.day + '일차)</span>';
+        html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_advanceTimeBy" data-args="30">30분 경과</button>';
+        html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_advanceTimeBy" data-args="60">1시간 경과</button>';
+        html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_advanceTimeBy" data-args="240">4시간 경과</button>';
+        html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_advanceTimeBy" data-args="480">8시간 경과</button>';
+        html += '</div>';
+    }
     // 파티 미니바
     html += '<div style="display:flex;gap:4px;margin:4px 0;flex-wrap:wrap;justify-content:center">';
     for (var i = 0; i < player.party.length; i++) {
@@ -6439,22 +6480,34 @@ function renderOverworld() {
     // 도로 목록
     html += '<div style="font-size:14px;font-weight:bold;color:#f5c518;margin:8px 0 4px">' + region.em + ' ' + region.n + ' 도로 목록</div>';
     html += '<div class="pk-road-list">';
+    var hasFly = !!(player.bag && player.bag.hm_fly);
     for (var i = 0; i < region.roads.length; i++) {
         var road = region.roads[i];
         var isActive = (player.roadIdx === i);
         var curBadges = player.badges[player.region] ? player.badges[player.region].length : 0;
-        var locked = (road.reqBadges !== undefined && curBadges < road.reqBadges);
-        html += '<div class="pk-road-item' + (isActive ? ' active' : '') + (locked ? ' pk-locked' : '') + '" ' + (locked ? '' : 'data-action="poke_selectRoad" data-args="' + i + '"') + ' style="' + (locked ? 'opacity:0.4;pointer-events:none' : '') + '">';
+        var badgeLocked = (road.reqBadges !== undefined && curBadges < road.reqBadges);
+        var diff = Math.abs(player.roadIdx - i);
+        var visitKey = player.region + "_" + i;
+        var visited = player.visitedRoads && player.visitedRoads[visitKey];
+        var canFlyTo = hasFly && visited && diff > 1;
+        var adjacent = (diff <= 1);
+        var reachable = !badgeLocked && (adjacent || canFlyTo);
+        var locked = badgeLocked || (!adjacent && !canFlyTo);
+        html += '<div class="pk-road-item' + (isActive ? ' active' : '') + (locked ? ' pk-locked' : '') + '" ' + (reachable ? 'data-action="poke_selectRoad" data-args="' + i + '"' : '') + ' style="' + (locked ? 'opacity:0.4;pointer-events:none' : '') + '">';
         html += '<div style="display:flex;justify-content:space-between;align-items:center">';
         html += '<div>';
         html += '<span style="font-weight:bold;font-size:13px">' + (road.isCity ? '🏙️ ' : '') + road.n + '</span>';
         if (!road.isCity && road.lv) html += ' <span style="color:#aaa;font-size:11px">Lv.' + road.lv[0] + '~' + road.lv[1] + '</span>';
+        if (canFlyTo && !adjacent) html += ' <span style="color:#87ceeb;font-size:10px">🕊️ 공중날기</span>';
         html += '</div>';
         html += '<div style="display:flex;gap:2px">';
         if (road.hasCenter) html += '<span title="포켓몬센터">🏥</span>';
         if (road.hasShop) html += '<span title="상점">🏪</span>';
         html += '</div></div>';
-        html += '<div style="color:#888;font-size:11px">' + road.desc + (locked ? ' 🔒 뱃지 ' + road.reqBadges + '개 필요' : '') + '</div>';
+        var lockMsg = '';
+        if (badgeLocked) lockMsg = ' 🔒 뱃지 ' + road.reqBadges + '개 필요';
+        else if (locked) lockMsg = ' 📍 인접 도로만 이동 가능';
+        html += '<div style="color:#888;font-size:11px">' + road.desc + lockMsg + '</div>';
         html += '</div>';
     }
     html += '</div>';
@@ -6482,9 +6535,9 @@ function renderRoadDetail() {
     html += '<div class="pk-card" style="border-color:rgba(233,69,96,0.4)">';
     html += '<div style="font-size:16px;font-weight:bold;color:#f5c518">' + (road.isCity ? '🏙️' : '📍') + ' ' + road.n + '</div>';
     if (road.isCity) {
-        html += '<div style="color:#aaa;font-size:12px">' + road.desc + ' | ' + TIME_NAMES[player.timeOfDay] + '</div>';
+        html += '<div style="color:#aaa;font-size:12px">' + road.desc + ' | ' + formatGameTime(player.timeOfDay) + ' ' + getTimeEmoji(player.timeOfDay) + '</div>';
     } else {
-        html += '<div style="color:#aaa;font-size:12px">' + road.desc + ' | Lv.' + road.lv[0] + '~' + road.lv[1] + ' | ' + TIME_NAMES[player.timeOfDay] + '</div>';
+        html += '<div style="color:#aaa;font-size:12px">' + road.desc + ' | Lv.' + road.lv[0] + '~' + road.lv[1] + ' | ' + formatGameTime(player.timeOfDay) + ' ' + getTimeEmoji(player.timeOfDay) + '</div>';
     }
     // 대량발생 표시
     var _swarm = getActiveSwarm();
@@ -6604,7 +6657,7 @@ function renderRoadDetail() {
                         var gtDefeated = !!gtDefVal;
                         if (!gtDefeated) allTrainersDefeated = false;
                         var gt = gym.gymTrainers[gti];
-                        var displayGt = (hasBadge && gtDefeated) ? getScaledGymTrainer(gt, gym, regionKey) : gt;
+                        var displayGt = (hasBadge && gtDefeated) ? getScaledGymTrainer(gt, gym, player.region) : gt;
                         html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;margin-top:3px;border-top:1px solid rgba(255,255,255,0.03)">';
                         html += '<div>';
                         html += '<span style="font-size:11px">👤 ' + displayGt.n + (hasBadge && gtDefeated ? ' <span style="color:#e67e22;font-size:9px">★강화</span>' : '') + '</span>';
@@ -7160,7 +7213,7 @@ function renderStatusScreen() {
     html += '<div style="font-size:12px;color:#ccc">이름: ' + player.name + '</div>';
     html += '<div style="font-size:12px;color:#ccc">💰 소지금: ₩' + (player.gold||0).toLocaleString() + '</div>';
     html += '<div style="font-size:12px;color:#ccc">📍 현재 위치: ' + regionName + ' - ' + curRoad + '</div>';
-    html += '<div style="font-size:12px;color:#ccc">📅 ' + (player.day||1) + '일차 / ' + (TIME_NAMES[player.timeOfDay]||"???") + '</div>';
+    html += '<div style="font-size:12px;color:#ccc">📅 ' + (player.day||1) + '일차 / ' + formatGameTime(player.timeOfDay) + ' ' + getTimeEmoji(player.timeOfDay) + '</div>';
     html += '<div style="font-size:12px;color:#ccc">🏅 뱃지: ' + totalBadges + '개' + (badgeList.length > 0 ? ' (' + badgeList.join(', ') + ')' : '') + '</div>';
     html += '<div style="font-size:12px;color:#ccc">⚔️ 총 배틀: ' + (player.battleCount||0) + '회</div>';
     html += '</div>';
@@ -7577,20 +7630,42 @@ window.poke_backToPokedex = function() {
 window.poke_selectRoad = async function(idx) {
     idx = parseInt(idx, 10);
     if (isNaN(idx)) return;
-    // 뱃지 체크: 도로 이동 조건
     var region = REGIONS[player.region];
-    if (region && region.roads[idx] && region.roads[idx].reqBadges !== undefined) {
+    if (!region || !region.roads[idx]) return;
+    // 뱃지 체크
+    if (region.roads[idx].reqBadges !== undefined) {
         var curBadges = player.badges[player.region] ? player.badges[player.region].length : 0;
         if (curBadges < region.roads[idx].reqBadges) {
             showToast("🏅 뱃지 " + region.roads[idx].reqBadges + "개 필요! (현재 " + curBadges + "개)");
             return;
         }
     }
-    // 맵 이동 시 시간 경과
     if (player.roadIdx !== idx) {
+        var diff = Math.abs(player.roadIdx - idx);
+        var hasFly = !!player.bag.hm_fly;
+        // 인접 도로만 이동 가능 (공중날기 없으면)
+        if (diff > 1 && !hasFly) {
+            showToast("한 칸씩만 이동할 수 있습니다! (인접 도로만 가능)");
+            return;
+        }
         var _rd = region.roads[idx];
-        if (_rd) addLog("🗺️ " + _rd.n + "(으)로 이동했다." + (_rd.isCity ? " [도시]" : ""), "info");
-        advanceTime();
+        if (hasFly && diff > 1) {
+            // 공중날기: 방문한 적 있는 곳만
+            if (!player.visitedRoads) player.visitedRoads = {};
+            var visitKey = player.region + "_" + idx;
+            if (!player.visitedRoads[visitKey]) {
+                showToast("아직 방문한 적 없는 곳입니다! 먼저 걸어서 방문하세요.");
+                return;
+            }
+            addLog("🕊️ 공중날기로 " + _rd.n + "(으)로 이동했다!" + (_rd.isCity ? " [도시]" : ""), "info");
+            advanceTime(120);
+        } else {
+            addLog("🗺️ " + _rd.n + "(으)로 이동했다." + (_rd.isCity ? " [도시]" : ""), "info");
+            advanceTime(120);
+        }
+        // 방문 기록
+        if (!player.visitedRoads) player.visitedRoads = {};
+        player.visitedRoads[player.region + "_" + idx] = true;
     }
     player.roadIdx = idx;
     gState.subScreen = "roadDetail";
@@ -7731,11 +7806,7 @@ window.poke_endBattle = async function() {
     if (!gState) return;
     // 배틀 카운트 증가 → 5회마다 시간 경과
     if (player) {
-        player.battleCount = (player.battleCount || 0) + 1;
-        if (player.battleCount >= 5) {
-            advanceTime();
-            showToast(TIME_NAMES[player.timeOfDay]);
-        }
+        advanceTime(20);
     }
     // 메가진화 해제
     for (var i = 0; i < player.party.length; i++) {
@@ -7776,9 +7847,7 @@ window.poke_endBattle = async function() {
 
 window.poke_blackout = async function() {
     if (!player) return;
-    // 배틀 카운트 증가
-    player.battleCount = (player.battleCount || 0) + 1;
-    if (player.battleCount >= 5) advanceTime();
+    advanceTime(20);
     var bd = gState.battleData;
     if (bd && bd.type === "trainer") {
         var baseReward = bd.trainerReward || 500;
@@ -8289,10 +8358,25 @@ window.poke_declineReward = async function() {
     render();
 };
 
+window.poke_toggleClock = function() {
+    if (!gState) return;
+    gState.showClock = !gState.showClock;
+    render();
+};
+
+window.poke_advanceTimeBy = async function(mins) {
+    if (!player) return;
+    mins = parseInt(mins, 10) || 60;
+    advanceTime(mins);
+    showToast(formatGameTime(player.timeOfDay) + " " + getTimeEmoji(player.timeOfDay) + " (Day " + player.day + ")");
+    await saveAll();
+    render();
+};
+
 window.poke_advanceTime = async function() {
     if (!player) return;
-    advanceTime();
-    showToast(TIME_NAMES[player.timeOfDay] + " (Day " + player.day + ")");
+    advanceTime(60);
+    showToast(formatGameTime(player.timeOfDay) + " " + getTimeEmoji(player.timeOfDay) + " (Day " + player.day + ")");
     await saveAll();
     render();
 };
