@@ -5465,6 +5465,33 @@ function calcTrainerGrowth(trainerPokemon, daysElapsed) {
     return { levelBonuses: levelBonuses, extraCount: extraCount, totalBonusLevels: totalBonusLevels };
 }
 
+// 트레이너 성장시 추가되는 비지역 포켓몬 풀 (레벨 구간별)
+var GROWTH_POKEMON_POOL = {
+    low: ["eevee","pikachu","clefairy","jigglypuff","meowth","psyduck","growlithe","poliwag","abra","machop","geodude","magnemite","gastly","ponyta","slowpoke","shellder","krabby","cubone","rhyhorn","horsea","staryu","scyther","pinsir","magikarp","dratini"],
+    mid: ["pidgeotto","nidorina","nidorino","kadabra","machoke","graveler","haunter","magneton","dewgong","kingler","electrode","exeggcute","hitmonlee","hitmonchan","lickitung","tangela","kangaskhan","seadra","goldeen","starmie","electabuzz","magmar","tauros","porygon","lapras"],
+    high: ["pidgeot","nidoqueen","nidoking","arcanine","alakazam","machamp","golem","gengar","rhydon","snorlax","dragonair","dragonite","aerodactyl","gyarados","vaporeon","jolteon","flareon","omastar","kabutops"]
+};
+
+function getGrowthPoolPokemon(road, level, seed) {
+    // 지역 포켓몬 키 목록
+    var regionalKeys = {};
+    if (road && road.pokemon) {
+        for (var i = 0; i < road.pokemon.length; i++) regionalKeys[road.pokemon[i].k] = true;
+    }
+    // 레벨에 맞는 풀 선택
+    var pool;
+    if (level <= 20) pool = GROWTH_POKEMON_POOL.low;
+    else if (level <= 40) pool = GROWTH_POKEMON_POOL.mid;
+    else pool = GROWTH_POKEMON_POOL.high;
+    // 지역 포켓몬 제외
+    var filtered = [];
+    for (var j = 0; j < pool.length; j++) {
+        if (!regionalKeys[pool[j]]) filtered.push(pool[j]);
+    }
+    if (filtered.length === 0) filtered = pool;
+    return filtered[seed % filtered.length];
+}
+
 function getGrownTrainerData(trainer, road, tKey) {
     var defData = getTrainerDefeatData(tKey);
     if (!defData) return { pokemon: trainer.pokemon, reward: trainer.reward, growthTier: 0, isRechallenge: false };
@@ -5478,14 +5505,14 @@ function getGrownTrainerData(trainer, road, tKey) {
         var newLv = Math.min(MAX_LEVEL, trainer.pokemon[i].l + growth.levelBonuses[i]);
         grownPokemon.push({ k: trainer.pokemon[i].k, l: newLv });
     }
-    // 추가 포켓몬 (7일마다 +1, 최대 3마리 추가)
-    if (growth.extraCount > 0 && road && road.pokemon && road.pokemon.length > 0) {
+    // 추가 포켓몬 (7일마다 +1, 최대 3마리 추가) - 지역에 없는 포켓몬 추가
+    if (growth.extraCount > 0) {
         var extras = Math.min(growth.extraCount, 3);
         for (var e = 0; e < extras; e++) {
-            var pkIdx = (defData.firstDay * 7 + e * 13) % road.pokemon.length;
-            var basePk = road.pokemon[pkIdx];
             var extraLv = grownPokemon[grownPokemon.length - 1].l;
-            grownPokemon.push({ k: basePk.k, l: Math.min(MAX_LEVEL, extraLv) });
+            var seed = defData.firstDay * 7 + e * 13;
+            var extraKey = getGrowthPoolPokemon(road, extraLv, seed);
+            grownPokemon.push({ k: extraKey, l: Math.min(MAX_LEVEL, extraLv) });
         }
     }
     // 성장에 따라 보상금도 증가
@@ -6922,12 +6949,15 @@ function createUI() {
     return div;
 }
 
-function showToast(msg) {
+function showToast(msg, duration) {
     var t = document.createElement("div");
     t.className = "pk-toast";
+    t.style.whiteSpace = "pre-line";
+    t.style.textAlign = "left";
+    t.style.maxWidth = "280px";
     t.textContent = msg;
     document.body.appendChild(t);
-    setTimeout(function() { t.remove(); }, 2000);
+    setTimeout(function() { t.remove(); }, duration || 2000);
 }
 
 function typeSpan(t) {
@@ -7472,15 +7502,17 @@ function renderBattleScreen() {
             html += renderBattlePartySwitch();
         }
     } else {
-        html += '<div style="font-size:11px;color:#aaa;margin:4px 0">⚔️ 기술 선택:</div>';
+        html += '<div style="font-size:11px;color:#aaa;margin:4px 0">⚔️ 기술 선택: <span style="font-size:9px">(ℹ️ 길게 누르면 상세정보)</span></div>';
         html += '<div class="pk-move-grid">';
         for (var i = 0; i < myPoke.moves.length; i++) {
             var m = myPoke.moves[i]; var mv = MOVES[m.key];
             if (!mv) continue;
             var disabled = m.ppLeft <= 0 ? ' disabled' : '';
-            html += '<button class="pk-btn pk-btn-dark"' + disabled + ' data-action="poke_attack" data-args="' + m.key + '">';
+            var efDesc = moveEffectDesc(mv.ef, mv.ec);
+            html += '<button class="pk-btn pk-btn-dark"' + disabled + ' data-action="poke_attack" data-args="' + m.key + '" data-longpress="poke_moveInfo" style="position:relative">';
             html += '<div>' + typeSpan(mv.t) + ' ' + mv.n + '</div>';
-            html += '<div style="font-size:10px;color:#aaa">' + (mv.c==="status"?"변화":mv.c==="physical"?"물리":"특수") + ' | ' + (mv.p||"-") + ' | PP:' + m.ppLeft + '/' + mv.pp + '</div>';
+            html += '<div style="font-size:10px;color:#aaa">' + (mv.c==="status"?"변화":mv.c==="physical"?"물리":"특수") + ' | 위력:' + (mv.p||"-") + ' | 명중:' + (mv.a||"-") + '</div>';
+            html += '<div style="font-size:10px;color:#aaa">PP:' + m.ppLeft + '/' + mv.pp + (efDesc ? ' | ' + efDesc : '') + '</div>';
             html += '</button>';
         }
         html += '</div>';
@@ -8311,6 +8343,25 @@ function statusName(s) {
     return names[s] || s;
 }
 
+function moveEffectDesc(ef, ec) {
+    if (!ef) return "";
+    var descs = {
+        burn:"화상",poison:"독",paralyze:"마비",sleep:"잠듦",freeze:"얼음",confuse:"혼란",toxic:"맹독",
+        flinch:"풀죽음",drain:"HP흡수",recoil:"반동 데미지",selfdestruct:"자폭(자신 기절)",
+        highcrit:"급소율 상승",priority:"선제공격",protect:"자신을 보호",heal:"HP회복",rest:"잠들어 HP전회복",
+        atk_up:"공격↑",def_up:"방어↑",spa_up:"특공↑",spd_up:"특방↑",eva_up:"회피↑",
+        atk_down:"상대 공격↓",def_down:"상대 방어↓",spa_down:"상대 특공↓",spd_down:"상대 특방↓",
+        atk_down2:"상대 공격↓↓",def_down2:"상대 방어↓↓",spa_down2:"상대 특공↓↓",spd_down2:"상대 특방↓↓",
+        spdef_down:"상대 특방↓",spdef_up:"특방↑",spdef_up2:"특방↑↑",
+        def_up2:"방어↑↑",spa_up2:"특공↑↑",spd_up2:"특방↑↑",acc_down:"상대 명중↓",
+        swordsdance:"공격 크게↑",calmmind:"특공·특방↑",bulkup:"공격·방어↑",dragondance:"공격·스피드↑",
+        focusenergy:"급소율 크게↑",encore:"기술 고정",counter:"물리 반사",mirrorcoat:"특수 반사",trap:"도주 불가"
+    };
+    var desc = descs[ef] || ef;
+    if (ec && ec < 100) desc += " " + ec + "%";
+    return desc;
+}
+
 // ═══════════════════════════════════════════════
 // 🎯 이벤트 핸들러
 // ═══════════════════════════════════════════════
@@ -8488,6 +8539,27 @@ window.poke_trainerBattle = async function(trainerIdx) {
     }
     await saveAll();
     render();
+};
+
+window.poke_moveInfo = function(moveKey) {
+    var mv = MOVES[moveKey];
+    if (!mv) return;
+    var catName = mv.c === "status" ? "변화" : mv.c === "physical" ? "물리" : "특수";
+    var typeNames = {normal:"노말",fire:"불꽃",water:"물",grass:"풀",electric:"전기",ice:"얼음",fighting:"격투",poison:"독",ground:"땅",flying:"비행",psychic:"에스퍼",bug:"벌레",rock:"바위",ghost:"고스트",dragon:"드래곤",dark:"악",steel:"강철",fairy:"페어리"};
+    var typeName = typeNames[mv.t] || mv.t;
+    var efDesc = moveEffectDesc(mv.ef, mv.ec);
+    var info = "━━━━━━━━━━━━━━━\n";
+    info += "📋 " + mv.n + "\n";
+    info += "━━━━━━━━━━━━━━━\n";
+    info += "타입: " + typeName + "\n";
+    info += "분류: " + catName + "\n";
+    info += "위력: " + (mv.p || "-") + "\n";
+    info += "명중: " + (mv.a || "-") + "\n";
+    info += "PP: " + mv.pp + "\n";
+    if (mv.priority) info += "우선도: +" + mv.priority + " (선제공격)\n";
+    if (efDesc) info += "효과: " + efDesc + "\n";
+    info += "━━━━━━━━━━━━━━━";
+    showToast(info, 4000);
 };
 
 window.poke_attack = async function(moveKey) {
@@ -9429,14 +9501,47 @@ function bindHandlers(container) {
     var btns = container.querySelectorAll("[data-action]");
     for (var i = 0; i < btns.length; i++) {
         (function(btn) {
-            btn.addEventListener("click", function(e) {
-                e.preventDefault();
-                var action = btn.getAttribute("data-action");
-                var args = btn.getAttribute("data-args");
-                if (typeof window[action] === "function") {
-                    window[action](args);
-                }
-            });
+            var longPressAction = btn.getAttribute("data-longpress");
+            if (longPressAction) {
+                var pressTimer = null;
+                var longPressed = false;
+                btn.addEventListener("mousedown", function(e) {
+                    longPressed = false;
+                    pressTimer = setTimeout(function() {
+                        longPressed = true;
+                        var args = btn.getAttribute("data-args");
+                        if (typeof window[longPressAction] === "function") window[longPressAction](args);
+                    }, 500);
+                });
+                btn.addEventListener("mouseup", function(e) { clearTimeout(pressTimer); });
+                btn.addEventListener("mouseleave", function(e) { clearTimeout(pressTimer); });
+                btn.addEventListener("touchstart", function(e) {
+                    longPressed = false;
+                    pressTimer = setTimeout(function() {
+                        longPressed = true;
+                        var args = btn.getAttribute("data-args");
+                        if (typeof window[longPressAction] === "function") window[longPressAction](args);
+                    }, 500);
+                }, {passive:true});
+                btn.addEventListener("touchend", function(e) { clearTimeout(pressTimer); });
+                btn.addEventListener("touchcancel", function(e) { clearTimeout(pressTimer); });
+                btn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    if (longPressed) { longPressed = false; return; }
+                    var action = btn.getAttribute("data-action");
+                    var args = btn.getAttribute("data-args");
+                    if (typeof window[action] === "function") window[action](args);
+                });
+            } else {
+                btn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    var action = btn.getAttribute("data-action");
+                    var args = btn.getAttribute("data-args");
+                    if (typeof window[action] === "function") {
+                        window[action](args);
+                    }
+                });
+            }
         })(btns[i]);
     }
 }
