@@ -4748,6 +4748,7 @@ function startWildBattle(road) {
             gState.battleData.msg.push("⚡ 대량발생! 야생 " + dn + " (Lv." + swLv + ")이(가) 나타났다!");
             var myFirst = player.party[myIdx];
             gState.battleData.msg.push(player.name + "은(는) " + myFirst.nickname + " (Lv." + myFirst.level + ")을(를) 내보냈다!");
+            addLog(player.name + "은(는) " + myFirst.nickname + " (Lv." + myFirst.level + ")을(를) 내보냈다!", "battle");
             if (getAbilityKey(myFirst) === "intimidate") {
                 gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
                 gState.battleData.msg.push(myFirst.nickname + "의 위협! " + dn + "의 공격이 떨어졌다!");
@@ -4811,6 +4812,7 @@ function startWildBattle(road) {
     // 내 포켓몬 등장
     var myFirst = player.party[gState.battleData.myIdx];
     gState.battleData.msg.push(player.name + "은(는) " + myFirst.nickname + " (Lv." + myFirst.level + ")을(를) 내보냈다!");
+    addLog(player.name + "은(는) " + myFirst.nickname + " (Lv." + myFirst.level + ")을(를) 내보냈다!", "battle");
     // 특성: intimidate (내 포켓몬)
     if (getAbilityKey(myFirst) === "intimidate") {
         gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
@@ -4868,6 +4870,7 @@ function startFishingBattle(road, rodType) {
     gState.battleData.msg.push("🎣 " + rodName + "로 야생 " + dn + " (Lv." + lv + ")을(를) 낚았다!");
     var myFirst = player.party[gState.battleData.myIdx];
     gState.battleData.msg.push(player.name + "은(는) " + myFirst.nickname + " (Lv." + myFirst.level + ")을(를) 내보냈다!");
+    addLog(player.name + "은(는) " + myFirst.nickname + " (Lv." + myFirst.level + ")을(를) 내보냈다!", "battle");
     if (getAbilityKey(myFirst) === "intimidate") {
         gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
         gState.battleData.msg.push(myFirst.nickname + "의 위협! " + dn + "의 공격이 떨어졌다!");
@@ -4920,8 +4923,10 @@ function startTrainerBattle(road, trainerIdx) {
     addLog(trainer.em + " " + trainer.n + "이(가) 승부를 걸어왔다!", "battle");
     gState.battleData.msg.push(trainer.em + " " + trainer.n + "이(가) 승부를 걸어왔다!");
     gState.battleData.msg.push(trainer.n + "은(는) " + enemyParty[0].nickname + " (Lv." + enemyParty[0].level + ")을(를) 내보냈다!");
+    addLog(trainer.n + "은(는) " + enemyParty[0].nickname + " (Lv." + enemyParty[0].level + ")을(를) 내보냈다!", "battle");
     var myFirstT = player.party[gState.battleData.myIdx];
     gState.battleData.msg.push(player.name + "은(는) " + myFirstT.nickname + " (Lv." + myFirstT.level + ")을(를) 내보냈다!");
+    addLog(player.name + "은(는) " + myFirstT.nickname + " (Lv." + myFirstT.level + ")을(를) 내보냈다!", "battle");
     // 특성: intimidate (내 포켓몬)
     if (getAbilityKey(myFirstT) === "intimidate") {
         gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
@@ -4986,8 +4991,10 @@ function startGymBattle(regionKey, gymIdx, leaderIdx) {
     addLog(leader.em + " 관장 " + leader.n + "이(가) 승부를 걸어왔다!", "battle");
     gState.battleData.msg.push(leader.em + " 관장 " + leader.n + "이(가) 승부를 걸어왔다!");
     gState.battleData.msg.push("관장 " + leader.n + "은(는) " + enemyParty[0].nickname + " (Lv." + enemyParty[0].level + ")을(를) 내보냈다!");
+    addLog("관장 " + leader.n + "은(는) " + enemyParty[0].nickname + " (Lv." + enemyParty[0].level + ")을(를) 내보냈다!", "battle");
     var myFirstG = player.party[gState.battleData.myIdx];
     gState.battleData.msg.push(player.name + "은(는) " + myFirstG.nickname + " (Lv." + myFirstG.level + ")을(를) 내보냈다!");
+    addLog(player.name + "은(는) " + myFirstG.nickname + " (Lv." + myFirstG.level + ")을(를) 내보냈다!", "battle");
     // 특성: intimidate (내 포켓몬)
     if (getAbilityKey(myFirstG) === "intimidate") {
         gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
@@ -5600,7 +5607,6 @@ function grantExp(myPoke, enemy, isTrainerWin) {
         if (!poke || poke.currentHp <= 0) continue;
         poke.exp += expEach;
         bd.msg.push(poke.nickname + "은(는) " + expEach + " 경험치를 얻었다!");
-        addLog(poke.nickname + "은(는) " + expEach + " 경험치를 얻었다!", "exp");
         while (poke.level < MAX_LEVEL) {
             var needed = getExpForLevel(poke.level + 1) - getExpForLevel(poke.level);
             if (poke.exp >= needed) {
@@ -5608,7 +5614,6 @@ function grantExp(myPoke, enemy, isTrainerWin) {
                 poke.level++;
                 recalcStats(poke);
                 bd.msg.push("🎉 " + poke.nickname + "은(는) Lv." + poke.level + "이(가) 되었다!");
-                addLog("🎉 " + poke.nickname + " Lv." + poke.level + "!", "levelup");
                 checkNewMoves(poke);
                 checkEvolution(poke);
             } else break;
@@ -5634,7 +5639,6 @@ function grantExp(myPoke, enemy, isTrainerWin) {
             if (badgeList && badgeList.indexOf(bd.gymId) === -1) {
                 badgeList.push(bd.gymId);
                 bd.msg.push("🏅 " + bd.gymBadgeEm + " " + bd.gymBadge + "을(를) 획득했다!");
-                addLog("🏅 " + bd.gymBadge + " 획득!", "badge");
                 checkKeyItemReward(bd);
             }
         }
@@ -5658,7 +5662,6 @@ function grantExp(myPoke, enemy, isTrainerWin) {
                     player.party[si].level++;
                     recalcStats(player.party[si]);
                     bd.msg.push("🎉 " + player.party[si].nickname + "은(는) Lv." + player.party[si].level + "이(가) 되었다!");
-                    addLog("🎉 " + player.party[si].nickname + " Lv." + player.party[si].level + "!", "levelup");
                     checkNewMoves(player.party[si]);
                     checkEvolution(player.party[si]);
                 } else break;
@@ -8199,8 +8202,10 @@ window.poke_gymTrainerBattle = async function(args) {
     addLog("👤 " + useGt.n + "이(가) 승부를 걸어왔다!", "battle");
     gState.battleData.msg.push("👤 " + useGt.n + "이(가) 승부를 걸어왔다!");
     gState.battleData.msg.push(useGt.n + "은(는) " + enemyParty[0].nickname + " (Lv." + enemyParty[0].level + ")을(를) 내보냈다!");
+    addLog(useGt.n + "은(는) " + enemyParty[0].nickname + " (Lv." + enemyParty[0].level + ")을(를) 내보냈다!", "battle");
     var myFirst = player.party[myIdx];
     gState.battleData.msg.push(player.name + "은(는) " + myFirst.nickname + " (Lv." + myFirst.level + ")을(를) 내보냈다!");
+    addLog(player.name + "은(는) " + myFirst.nickname + " (Lv." + myFirst.level + ")을(를) 내보냈다!", "battle");
     if (getAbilityKey(myFirst) === "intimidate") {
         gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
         gState.battleData.msg.push(myFirst.nickname + "의 위협! " + enemyParty[0].nickname + "의 공격이 떨어졌다!");
