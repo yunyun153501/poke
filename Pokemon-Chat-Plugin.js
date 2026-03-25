@@ -3632,6 +3632,18 @@ shiny:{togetic:"togekiss",roselia:"roserade",minccino:"cinccino",floette:"florge
 ice:{alolan_vulpix:"alolan_ninetales",alolan_sandshrew:"alolan_sandslash"}
 };
 
+var ALOLAN_VARIANTS = {
+    raichu:"alolan_raichu",
+    sandshrew:"alolan_sandshrew",sandslash:"alolan_sandslash",
+    vulpix:"alolan_vulpix",ninetales:"alolan_ninetales",
+    diglett:"alolan_diglett",dugtrio:"alolan_dugtrio",
+    meowth:"alolan_meowth",persian:"alolan_persian",
+    geodude:"alolan_geodude",graveler:"alolan_graveler",golem:"alolan_golem",
+    grimer:"alolan_grimer",muk:"alolan_muk",
+    exeggutor:"alolan_exeggutor",marowak:"alolan_marowak",
+    rattata:"alolan_rattata",raticate:"alolan_raticate"
+};
+
 // TM 호환성 데이터 (타입 기반)
 var TM_COMPAT = {
     // 기합펀치 (173종)
@@ -6539,6 +6551,11 @@ function checkEvolution(poke) {
     if (!data || !data.e) return;
     if (poke.level >= data.e.l) {
         poke.canEvolve = true;
+        // 알로라 폼 선택 가능 여부 체크
+        var evoTo = data.e.to;
+        if (ALOLAN_VARIANTS[evoTo] && POKEDEX[ALOLAN_VARIANTS[evoTo]]) {
+            poke._alolanEvoAvailable = true;
+        }
         if (gState.battleData) gState.battleData.msg.push("💡 " + poke.nickname + "은(는) 진화할 수 있게 되었다!");
         else addLog("💡 " + poke.nickname + "은(는) 진화할 수 있게 되었다!", "evolution");
     }
@@ -6558,6 +6575,7 @@ function doEvolution() {
     addLog("🌟 " + oldName + "이(가) " + newData.n + "(으)로 진화했다!", "evolution");
     if (player.pokedex) player.pokedex[evo.to] = "caught";
     poke.canEvolve = false;
+    poke._alolanEvoAvailable = false;
     gState.pendingEvo = null;
     checkNewMoves(poke);
 }
@@ -6983,6 +7001,8 @@ function render() {
         html = renderMoveRelearnerScreen();
     } else if (gState.subScreen === "moveRelearnerMoves") {
         html = renderMoveRelearnerMovesScreen();
+    } else if (gState.subScreen === "alolanChoice") {
+        html = renderAlolanChoiceScreen();
     } else {
         html = renderOverworld();
     }
@@ -7799,6 +7819,36 @@ function renderEvolutionScreen() {
     html += '<div style="display:flex;gap:8px;justify-content:center;margin-top:10px">';
     html += '<button class="pk-btn pk-btn-green" data-action="poke_evolve">진화시키기!</button>';
     html += '<button class="pk-btn pk-btn-gray" data-action="poke_cancelEvolve">취소</button>';
+    html += '</div></div>';
+    return html;
+}
+
+function renderAlolanChoiceScreen() {
+    var evoIdx = gState._alolanEvoIdx;
+    if (evoIdx === null || evoIdx === undefined) return '';
+    var evoPoke = player.party[evoIdx];
+    if (!evoPoke) return '';
+    var evoData = POKEDEX[evoPoke.key];
+    if (!evoData || !evoData.e) return '';
+    var normalKey = evoData.e.to;
+    var alolanKey = ALOLAN_VARIANTS[normalKey];
+    var normalData = POKEDEX[normalKey];
+    var alolanData = POKEDEX[alolanKey];
+    var html = '<div style="text-align:center;padding:20px">';
+    html += '<div style="background:#1a1a2e;border-radius:12px;padding:16px;margin:10px 0;border:1px solid #e74c3c">';
+    html += '<div style="font-size:14px;font-weight:bold;color:#f5c518;margin-bottom:12px">🌴 알로라 폼 선택</div>';
+    html += '<div style="font-size:12px;color:#ccc;margin-bottom:12px">' + evoPoke.nickname + '의 진화 형태를 선택하세요!</div>';
+    html += '<div style="display:flex;gap:8px;justify-content:center">';
+    if (normalData) {
+        html += '<button class="pk-btn pk-btn-primary pk-btn-sm" data-action="poke_alolanEvolve" data-args="' + evoIdx + ',normal">';
+        html += normalData.em + ' ' + normalData.n + '<br><span style="font-size:10px;color:#aaa">(' + (normalData.t||[]).join('/') + ')</span></button>';
+    }
+    if (alolanData) {
+        html += '<button class="pk-btn pk-btn-sm" data-action="poke_alolanEvolve" data-args="' + evoIdx + ',alolan" style="background:linear-gradient(135deg,#00b4d8,#48cae4);color:#fff">';
+        html += alolanData.em + ' ' + alolanData.n + '<br><span style="font-size:10px;color:#ddd">(' + (alolanData.t||[]).join('/') + ')</span></button>';
+    }
+    html += '</div>';
+    html += '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_cancelAlolanChoice" style="margin-top:8px;width:100%">취소</button>';
     html += '</div></div>';
     return html;
 }
@@ -8708,6 +8758,13 @@ window.poke_startEvolve = function(idx) {
     if (!poke) return;
     var data = POKEDEX[poke.key];
     if (!data || !data.e || poke.level < data.e.l) return;
+    // 알로라 폼 선택 가능 시 선택 UI 표시
+    if (poke._alolanEvoAvailable && ALOLAN_VARIANTS[data.e.to] && POKEDEX[ALOLAN_VARIANTS[data.e.to]]) {
+        gState._alolanEvoIdx = idx;
+        gState.subScreen = "alolanChoice";
+        render();
+        return;
+    }
     gState.pendingEvo = {pokeIdx: idx, from: poke.key, to: data.e.to};
     render();
 };
@@ -9064,6 +9121,32 @@ window.poke_evolve = async function() {
 window.poke_cancelEvolve = async function() {
     gState.pendingEvo = null;
     await saveAll();
+    render();
+};
+
+window.poke_alolanEvolve = function(args) {
+    if (!args) return;
+    var parts = args.split(",");
+    var idx = parseInt(parts[0], 10);
+    var choice = parts[1];
+    var poke = player.party[idx];
+    if (!poke) return;
+    var data = POKEDEX[poke.key];
+    if (!data || !data.e) return;
+    var newKey = data.e.to;
+    if (choice === "alolan" && ALOLAN_VARIANTS[newKey]) {
+        newKey = ALOLAN_VARIANTS[newKey];
+    }
+    gState._alolanEvoIdx = null;
+    gState.subScreen = null;
+    gState.pendingEvo = {pokeIdx: idx, from: poke.key, to: newKey};
+    poke._alolanEvoAvailable = false;
+    render();
+};
+
+window.poke_cancelAlolanChoice = function() {
+    gState._alolanEvoIdx = null;
+    gState.subScreen = null;
     render();
 };
 
