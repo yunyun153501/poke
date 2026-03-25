@@ -3775,8 +3775,8 @@ function createNewPlayer(name, starterKey, region) {
         badges: {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[]},
         pokedex: dex,
         defeatedTrainers: {},
-        defeatedGyms: {},
-        lostToTrainers: {},
+        defeatedGyms: {}, // 체육관 리더: day값, 체육관 트레이너: {day:값}
+        lostToTrainers: {}, // 연속 패배 추적: 같은 트레이너에게 재패배 시 20%만 차감
         day: 1,
         timeOfDay: 480,
         battleCount: 0,
@@ -4880,8 +4880,9 @@ function generateRecurringTrainers(road, routeIdx) {
             pokeArr.push({k: sigKey, l: sigLv});
             usedKeys[sigKey] = true;
         }
-        // 지역 포켓몬 추가 (소수 해시로 다양성 확보)
+        // 지역 포켓몬 추가 (소수 해시로 트레이너별 다양성 확보)
         var primes = [2, 3, 5, 11, 13, 17, 19, 23];
+        var evolvedSig = sigBase ? sigKey : null;
         for (var p = 0; p < numLocal; p++) {
             var hash = (routeIdx * primes[t % primes.length] + (t + 1) * primes[(p + 3) % primes.length] + p * 31 + 1);
             var poolLen = road.pokemon.length;
@@ -4889,7 +4890,7 @@ function generateRecurringTrainers(road, routeIdx) {
             var pk = road.pokemon[pkIdx].k;
             // 중복 방지: 같은 포켓몬이 이미 있으면 다음 것 선택
             var attempts = 0;
-            while ((usedKeys[pk] || pk === (sigBase && getSignatureAtLevel(sigBase, sigLv))) && attempts < poolLen) {
+            while ((usedKeys[pk] || pk === evolvedSig) && attempts < poolLen) {
                 pkIdx = (pkIdx + 1) % poolLen;
                 pk = road.pokemon[pkIdx].k;
                 attempts++;
@@ -7961,9 +7962,10 @@ window.poke_attack = async function(moveKey) {
     if (!gState || !gState.battleData || gState.battleData.won || gState.battleData.lost || gState.battleData.caught || gState.battleData.fled) return;
     if (gState.battleData.animating) return;
     gState.battleData.animating = true;
-    sfxAttack();
-    executeTurn(moveKey);
-    gState.battleData.animating = false;
+    try {
+        sfxAttack();
+        executeTurn(moveKey);
+    } finally { gState.battleData.animating = false; }
     await saveAll();
     render();
 };
@@ -7972,8 +7974,8 @@ window.poke_throwBall = async function(ballKey) {
     if (!gState || !gState.battleData || gState.battleData.type !== "wild") return;
     if (gState.battleData.animating) return;
     gState.battleData.animating = true;
-    attemptCapture(ballKey);
-    gState.battleData.animating = false;
+    try { attemptCapture(ballKey); }
+    finally { gState.battleData.animating = false; }
     await saveAll();
     render();
 };
@@ -7982,8 +7984,8 @@ window.poke_run = async function() {
     if (!gState || !gState.battleData) return;
     if (gState.battleData.animating) return;
     gState.battleData.animating = true;
-    tryRun();
-    gState.battleData.animating = false;
+    try { tryRun(); }
+    finally { gState.battleData.animating = false; }
     await saveAll();
     render();
 };
