@@ -3769,6 +3769,14 @@ async function loadAll() {
             // 마이그레이션: v1.0→v2.0 호환 (routeIdx→roadIdx 이름 변경, 도감/트레이너 필드 추가)
             if (!player.pokedex) player.pokedex = {};
             if (!player.defeatedTrainers) player.defeatedTrainers = {};
+            // defeatedTrainers 형식 마이그레이션 (숫자→객체)
+            if (player.defeatedTrainers) {
+                for (var dtk in player.defeatedTrainers) {
+                    if (typeof player.defeatedTrainers[dtk] === "number") {
+                        player.defeatedTrainers[dtk] = { day: player.defeatedTrainers[dtk], firstDay: player.defeatedTrainers[dtk], tier: 0 };
+                    }
+                }
+            }
             if (!player.defeatedGyms) player.defeatedGyms = {};
             if (player.day === undefined) player.day = 1;
             // 시간 시스템 마이그레이션
@@ -3851,6 +3859,14 @@ async function loadSlot(slotNum) {
             _eventLog = gState.eventLog || [];
             if (!player.pokedex) player.pokedex = {};
             if (!player.defeatedTrainers) player.defeatedTrainers = {};
+            // defeatedTrainers 형식 마이그레이션 (숫자→객체)
+            if (player.defeatedTrainers) {
+                for (var dtk in player.defeatedTrainers) {
+                    if (typeof player.defeatedTrainers[dtk] === "number") {
+                        player.defeatedTrainers[dtk] = { day: player.defeatedTrainers[dtk], firstDay: player.defeatedTrainers[dtk], tier: 0 };
+                    }
+                }
+            }
             if (!player.defeatedGyms) player.defeatedGyms = {};
             if (player.day === undefined) player.day = 1;
             if (player.timeOfDay === undefined) player.timeOfDay = 1;
@@ -4880,19 +4896,97 @@ function startFishingBattle(road, rodType) {
     return true;
 }
 
+// ── 트레이너 성장 시스템 ──
+function getGrowthDaysPerLevel(lv) {
+    if (lv <= 10) return 2;
+    if (lv <= 20) return 3;
+    if (lv <= 30) return 4;
+    if (lv <= 40) return 5;
+    if (lv <= 50) return 6;
+    return 7;
+}
+
+function getTrainerDefeatData(tKey) {
+    var data = player.defeatedTrainers[tKey];
+    if (!data) return null;
+    if (typeof data === "number") {
+        data = { day: data, firstDay: data, tier: 0 };
+        player.defeatedTrainers[tKey] = data;
+    }
+    return data;
+}
+
+function calcTrainerGrowth(trainerPokemon, daysElapsed) {
+    if (daysElapsed <= 0) return { levelBonuses: [], extraCount: 0, totalBonusLevels: 0 };
+    var extraCount = Math.floor(daysElapsed / 7);
+    var levelBonuses = [];
+    var totalBonusLevels = 0;
+    for (var i = 0; i < trainerPokemon.length; i++) {
+        var baseLv = trainerPokemon[i].l;
+        var bonus = 0;
+        var curLv = baseLv;
+        var daysLeft = daysElapsed;
+        while (daysLeft > 0 && curLv < MAX_LEVEL) {
+            var needed = getGrowthDaysPerLevel(curLv);
+            if (daysLeft >= needed) {
+                daysLeft -= needed;
+                curLv++;
+                bonus++;
+            } else {
+                break;
+            }
+        }
+        levelBonuses.push(bonus);
+        totalBonusLevels += bonus;
+    }
+    return { levelBonuses: levelBonuses, extraCount: extraCount, totalBonusLevels: totalBonusLevels };
+}
+
+function getGrownTrainerData(trainer, road, tKey) {
+    var defData = getTrainerDefeatData(tKey);
+    if (!defData) return { pokemon: trainer.pokemon, reward: trainer.reward, growthTier: 0, isRechallenge: false };
+    var daysElapsed = Math.max(0, player.day - defData.firstDay);
+    var growth = calcTrainerGrowth(trainer.pokemon, daysElapsed);
+    var currentGrowthTier = growth.extraCount;
+    var isRechallenge = (currentGrowthTier > defData.tier);
+    // 성장한 포켓몬 생성
+    var grownPokemon = [];
+    for (var i = 0; i < trainer.pokemon.length; i++) {
+        var newLv = Math.min(MAX_LEVEL, trainer.pokemon[i].l + growth.levelBonuses[i]);
+        grownPokemon.push({ k: trainer.pokemon[i].k, l: newLv });
+    }
+    // 추가 포켓몬 (7일마다 +1, 최대 3마리 추가)
+    if (growth.extraCount > 0 && road && road.pokemon && road.pokemon.length > 0) {
+        var extras = Math.min(growth.extraCount, 3);
+        for (var e = 0; e < extras; e++) {
+            var pkIdx = (defData.firstDay * 7 + e * 13) % road.pokemon.length;
+            var basePk = road.pokemon[pkIdx];
+            var extraLv = grownPokemon[grownPokemon.length - 1].l;
+            grownPokemon.push({ k: basePk.k, l: Math.min(MAX_LEVEL, extraLv) });
+        }
+    }
+    // 성장에 따라 보상금도 증가
+    var grownReward = trainer.reward + growth.totalBonusLevels * 5 + growth.extraCount * 50;
+    return { pokemon: grownPokemon, reward: grownReward, growthTier: currentGrowthTier, isRechallenge: isRechallenge };
+}
+
 function startTrainerBattle(road, trainerIdx) {
     if (!player || !gState || !road) return false;
     var trainer = road.trainers[trainerIdx];
     if (!trainer) return false;
     var tKey = road.id + "_t" + trainerIdx;
-    if (player.defeatedTrainers[tKey] === player.day) {
+    var defData = getTrainerDefeatData(tKey);
+    if (defData && defData.day === player.day) {
         return false; // 오늘 이미 이긴 트레이너
     }
-    var isRematch = (player.defeatedTrainers[tKey] !== undefined);
+    var grownData = getGrownTrainerData(trainer, road, tKey);
+    var isRematch = (defData !== null && !grownData.isRechallenge);
+    var isRechallenge = (defData !== null && grownData.isRechallenge);
     // 트레이너 파티 생성
     var enemyParty = [];
-    for (var i = 0; i < trainer.pokemon.length; i++) {
-        var tp = trainer.pokemon[i];
+    var battlePokemon = grownData.pokemon;
+    for (var i = 0; i < battlePokemon.length; i++) {
+        var tp = battlePokemon[i];
         var poke = createPokemonInstance(tp.k, tp.l);
         if (poke) enemyParty.push(poke);
     }
@@ -4906,9 +5000,11 @@ function startTrainerBattle(road, trainerIdx) {
         type: "trainer",
         trainerName: trainer.n,
         trainerEmoji: trainer.em,
-        trainerReward: trainer.reward,
+        trainerReward: grownData.reward,
         trainerKey: tKey,
         isRematch: isRematch,
+        isRechallenge: isRechallenge,
+        growthTier: grownData.growthTier,
         enemyParty: enemyParty,
         enemyIdx: 0,
         enemy: enemyParty[0],
@@ -5666,17 +5762,34 @@ function grantExp(myPoke, enemy, isTrainerWin) {
     // 트레이너/관장 최종 승리 시 보상금
     if (isTrainerWin && bd.type === "trainer") {
         var baseReward = bd.trainerReward || 500;
-        var reward = isRematch ? Math.floor(baseReward * 0.2) : baseReward;
+        var reward;
+        var rewardLabel = "";
+        if (bd.isRechallenge) {
+            reward = baseReward;
+            rewardLabel = " (재도전)";
+        } else if (isRematch) {
+            reward = Math.floor(baseReward * 0.2);
+            rewardLabel = " (재대결 20%)";
+        } else {
+            reward = baseReward;
+        }
         if (player.bag.amuletcoin && player.bag.amuletcoin > 0 && !isRematch) reward = reward * 2;
         bd.pendingReward = reward;
-        bd.msg.push("💰 상금 ₩" + reward + (isRematch ? " (재대결 20%)" : "") + "을 받을 수 있다!");
+        bd.msg.push("💰 상금 ₩" + reward + rewardLabel + "을 받을 수 있다!");
         if (bd.isGymBattle) {
             player.defeatedGyms[bd.trainerKey] = player.day;
         } else if (bd.isGymTrainer) {
             var prevCount = player.defeatedGyms[bd.trainerKey];
             player.defeatedGyms[bd.trainerKey] = (typeof prevCount === "number" ? prevCount : 0) + 1;
         } else {
-            player.defeatedTrainers[bd.trainerKey] = player.day;
+            // 트레이너 승리 기록 (성장 시스템)
+            var prevData = getTrainerDefeatData(bd.trainerKey);
+            if (prevData) {
+                prevData.day = player.day;
+                if (bd.isRechallenge) prevData.tier = bd.growthTier;
+            } else {
+                player.defeatedTrainers[bd.trainerKey] = { day: player.day, firstDay: player.day, tier: 0 };
+            }
         }
         if (bd.isGymBattle && bd.gymId && bd.gymRegion) {
             var badgeList = player.badges[bd.gymRegion];
@@ -6429,23 +6542,29 @@ function renderRoadDetail() {
         for (var i = 0; i < road.trainers.length; i++) {
             var tr = road.trainers[i];
             var tKey = road.id + "_t" + i;
-            var defeatedDay = player.defeatedTrainers[tKey];
-            var defeatedToday = (defeatedDay === player.day);
-            var defeatedBefore = (defeatedDay !== undefined && !defeatedToday);
+            var defData = getTrainerDefeatData(tKey);
+            var defeatedToday = (defData && defData.day === player.day);
+            var defeatedBefore = (defData !== null && !defeatedToday);
+            var grownData = getGrownTrainerData(tr, road, tKey);
+            var displayPokemon = grownData.pokemon;
+            var displayReward = grownData.reward;
             html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px' + (defeatedToday ? ';opacity:0.5' : '') + '">';
             html += '<div>';
             html += '<span style="font-size:14px">' + tr.em + '</span> ';
             html += '<span style="font-size:13px;font-weight:bold">' + tr.n + '</span>';
+            if (grownData.growthTier > 0) html += ' <span style="font-size:9px;color:#e67e22">⬆Lv+</span>';
             html += '<div style="font-size:10px;color:#aaa;margin-top:2px">';
-            for (var j = 0; j < tr.pokemon.length; j++) {
-                var tpd = POKEDEX[tr.pokemon[j].k];
-                html += (tpd ? tpd.em : "?") + 'Lv.' + tr.pokemon[j].l + ' ';
+            for (var j = 0; j < displayPokemon.length; j++) {
+                var tpd = POKEDEX[displayPokemon[j].k];
+                html += (tpd ? tpd.em : "?") + 'Lv.' + displayPokemon[j].l + ' ';
             }
             html += '</div>';
-            html += '<div style="font-size:10px;color:#f5c518">💰 ₩' + tr.reward + '</div>';
+            html += '<div style="font-size:10px;color:#f5c518">💰 ₩' + displayReward + '</div>';
             html += '</div>';
             if (defeatedToday) {
                 html += '<span style="font-size:11px;color:#27ae60">✅ 오늘 승리</span>';
+            } else if (defeatedBefore && grownData.isRechallenge) {
+                html += '<button class="pk-btn pk-btn-red pk-btn-sm" data-action="poke_trainerBattle" data-args="' + i + '">🔥 재도전</button>';
             } else if (defeatedBefore) {
                 html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_trainerBattle" data-args="' + i + '">🔄 재대결</button>';
             } else {
@@ -7663,9 +7782,11 @@ window.poke_blackout = async function() {
     var bd = gState.battleData;
     if (bd && bd.type === "trainer") {
         var baseReward = bd.trainerReward || 500;
-        var penalty = bd.isRematch ? Math.floor(baseReward * 0.2) : baseReward;
+        var fullPenalty = bd.isRechallenge ? baseReward : (bd.isRematch ? Math.floor(baseReward * 0.2) : baseReward);
+        var penalty = Math.floor(fullPenalty * 0.5);
         player.gold = Math.max(0, player.gold - penalty);
-        addLog("😵 패배... ₩" + penalty + "을 잃었다." + (bd.isRematch ? " (재대결 20%)" : ""), "battle");
+        var penaltyLabel = bd.isRechallenge ? " (재도전)" : (bd.isRematch ? " (재대결)" : "");
+        addLog("😵 패배... ₩" + penalty + "을 잃었다." + penaltyLabel, "battle");
     } else {
         player.gold = Math.max(0, player.gold - Math.floor(player.gold * 0.1));
         addLog("😵 패배... 소지금의 일부를 잃었다.", "battle");
