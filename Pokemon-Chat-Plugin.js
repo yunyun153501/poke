@@ -877,7 +877,7 @@ acid:        {n:"용해액",t:"poison",c:"special",p:40,a:100,pp:30},
 sludgebomb:  {n:"오물폭탄",t:"poison",c:"special",p:90,a:100,pp:10,ef:"poison",ec:30},
 crosspoison: {n:"크로스포이즌",t:"poison",c:"physical",p:70,a:100,pp:20,ef:"poison",ec:10},
 poisonpowder:{n:"독가루",t:"poison",c:"status",p:0,a:75,pp:35,ef:"poison",ec:100},
-toxic:       {n:"맹독",t:"poison",c:"status",p:0,a:90,pp:10,ef:"poison",ec:100},
+toxic:       {n:"맹독",t:"poison",c:"status",p:0,a:90,pp:10,ef:"toxic",ec:100},
 twineedle:   {n:"더블니들",t:"bug",c:"physical",p:50,a:100,pp:20,ef:"poison",ec:20},
 mudshot:     {n:"머드숏",t:"ground",c:"special",p:55,a:95,pp:15},
 dig:         {n:"구멍파기",t:"ground",c:"physical",p:80,a:100,pp:10},
@@ -3926,7 +3926,7 @@ function addLog(msg, type) {
     if (!gState) return;
     gState.log = gState.log || [];
     gState.log.push({msg:msg, type:type, t:Date.now()});
-    if (gState.log.length > 35) gState.log.shift();
+    if (gState.log.length > 60) gState.log.shift();
     _eventLog.push({msg:msg, type:type});
 }
 
@@ -5006,6 +5006,20 @@ function startGymBattle(regionKey, gymIdx, leaderIdx) {
     return true;
 }
 
+// 타입 기반 상태이상 면역 체크 (본가 기준)
+function isTypeImmuneToStatus(poke, statusType) {
+    var pd = POKEDEX[poke.key];
+    if (!pd) return false;
+    var types = poke.megaTypes || pd.t;
+    // 독/강철 타입 → 독 면역
+    if ((statusType === "poison" || statusType === "toxic") && (types.indexOf("poison") >= 0 || types.indexOf("steel") >= 0)) return true;
+    // 불꽃 타입 → 화상 면역
+    if (statusType === "burn" && types.indexOf("fire") >= 0) return true;
+    // 전기 타입 → 마비 면역 (Gen 6+)
+    if (statusType === "paralyze" && types.indexOf("electric") >= 0) return true;
+    return false;
+}
+
 function applyMoveEffects(move, attacker, defender, bd) {
     var mv = MOVES[move];
     if (!mv) return;
@@ -5020,11 +5034,15 @@ function applyMoveEffects(move, attacker, defender, bd) {
         if (getAbilityKey(attacker) === "serenegrace") effChance = Math.min(100, effChance * 2);
         if (Math.random() * 100 < effChance) {
             if (mv.ef === "burn" && !defender.status) {
-                defender.status = "burn"; bd.msg.push(dn + "은(는) 화상을 입었다!");
+                if (isTypeImmuneToStatus(defender, "burn")) { bd.msg.push(dn + "에게는 효과가 없다!"); }
+                else { defender.status = "burn"; bd.msg.push(dn + "은(는) 화상을 입었다!"); }
             } else if (mv.ef === "paralyze" && !defender.status) {
-                defender.status = "paralyze"; bd.msg.push(dn + "은(는) 마비되었다!");
-            } else if (mv.ef === "poison" && !defender.status) {
-                defender.status = "poison"; bd.msg.push(dn + "은(는) 독에 걸렸다!");
+                if (isTypeImmuneToStatus(defender, "paralyze")) { bd.msg.push(dn + "에게는 효과가 없다!"); }
+                else { defender.status = "paralyze"; bd.msg.push(dn + "은(는) 마비되었다!"); }
+            } else if ((mv.ef === "poison" || mv.ef === "toxic") && !defender.status) {
+                if (isTypeImmuneToStatus(defender, "poison")) { bd.msg.push(dn + "에게는 효과가 없다!"); }
+                else if (mv.ef === "toxic") { defender.status = "poison"; defender.badlyPoisoned = true; defender.statusTurns = 1; bd.msg.push(dn + "은(는) 맹독에 걸렸다!"); }
+                else { defender.status = "poison"; defender.badlyPoisoned = false; bd.msg.push(dn + "은(는) 독에 걸렸다!"); }
             } else if (mv.ef === "sleep" && !defender.status) {
                 defender.status = "sleep"; defender.statusTurns = rng(1,3); bd.msg.push(dn + "은(는) 잠들었다!");
             } else if (mv.ef === "freeze" && !defender.status) {
@@ -5070,9 +5088,11 @@ function applyMoveEffects(move, attacker, defender, bd) {
             // 특성: synchronize → 상태이상 반사 (독/마비/화상만)
             if (defender.status && getAbilityKey(defender) === "synchronize" && !attacker.status) {
                 if (defender.status === "poison" || defender.status === "burn" || defender.status === "paralyze") {
-                    attacker.status = defender.status;
-                    attacker.statusTurns = 0;
-                    bd.msg.push(dn + "의 싱크로! " + an + "도 " + statusName(attacker.status) + " 상태가 되었다!");
+                    if (!isTypeImmuneToStatus(attacker, defender.status)) {
+                        attacker.status = defender.status;
+                        attacker.statusTurns = 0;
+                        bd.msg.push(dn + "의 싱크로! " + an + "도 " + statusName(attacker.status) + " 상태가 되었다!");
+                    }
                 }
             }
             checkBerryAfterStatus(defender, bd);
@@ -5265,7 +5285,14 @@ function doStatusDamage(poke, bd) {
         bd.msg.push(poke.nickname + "은(는) 화상 데미지를 받았다! (-" + dmg + ")");
     }
     if (poke.status === "poison" && abKey !== "magicguard") {
-        var dmg = Math.max(1, Math.floor(poke.stats[0] / 8));
+        var dmg;
+        if (poke.badlyPoisoned) {
+            // 맹독: 턴마다 데미지 증가 (1/16, 2/16, 3/16, ...)
+            dmg = Math.max(1, Math.floor(poke.stats[0] * poke.statusTurns / 16));
+            poke.statusTurns++;
+        } else {
+            dmg = Math.max(1, Math.floor(poke.stats[0] / 8));
+        }
         poke.currentHp = Math.max(0, poke.currentHp - dmg);
         bd.msg.push(poke.nickname + "은(는) 독 데미지를 받았다! (-" + dmg + ")");
     }
@@ -5399,6 +5426,7 @@ function executeAttack(attacker, defender, moveKey, bd) {
                     var atkAbDef = getAbility(attacker);
                     var immune = false;
                     if (atkAbDef && atkAbDef.type === "statusimmune" && atkAbDef.immune === defAb.status) immune = true;
+                    if (!immune && isTypeImmuneToStatus(attacker, defAb.status)) immune = true;
                     if (!immune) {
                         attacker.status = defAb.status;
                         attacker.statusTurns = 0;
@@ -5465,9 +5493,23 @@ function enemyChooseMove(enemy, defender, isTrainer) {
         if (mv.c === "status") {
             score = 30;
             // 상태이상기: 상대에게 이미 상태이상이면 낮은 점수
-            if (mv.ef === "poison" || mv.ef === "burn" || mv.ef === "paralyze" || mv.ef === "sleep" || mv.ef === "freeze") {
+            if (mv.ef === "poison" || mv.ef === "toxic" || mv.ef === "burn" || mv.ef === "paralyze" || mv.ef === "sleep" || mv.ef === "freeze") {
                 if (defender.status) score = 5;
+                else if (isTypeImmuneToStatus(defender, mv.ef === "toxic" ? "poison" : mv.ef)) score = 0;
                 else score = 55;
+            }
+            // 능력치 하락기: 이미 많이 떨어졌으면 낮은 점수
+            if (mv.ef && mv.ef.indexOf("_down") >= 0) {
+                var targetStage = 0;
+                if (mv.ef === "atk_down" || mv.ef === "atk_down2") targetStage = defender.statStages.atk;
+                else if (mv.ef === "def_down" || mv.ef === "def_down2") targetStage = defender.statStages.def;
+                else if (mv.ef === "spd_down" || mv.ef === "spd_down2") targetStage = defender.statStages.spd;
+                else if (mv.ef === "spa_down" || mv.ef === "spa_down2") targetStage = defender.statStages.spatk;
+                else if (mv.ef === "spdef_down") targetStage = defender.statStages.spdef;
+                else if (mv.ef === "acc_down") targetStage = defender.statStages.acc;
+                if (targetStage <= -3) score = 3;
+                else if (targetStage <= -1) score = 15;
+                else score = 25;
             }
             // 능력치 변화기: 자기 능력 올리기
             if (mv.ef && (mv.ef.indexOf("_up") >= 0 || mv.ef === "swordsdance" || mv.ef === "dragondance" || mv.ef === "calmmind" || mv.ef === "bulkup")) {
@@ -5890,7 +5932,7 @@ function tryRun() {
 function healAllPokemon(locName) {
     for (var i = 0; i < player.party.length; i++) {
         var p = player.party[i];
-        p.currentHp = p.stats[0]; p.status = null; p.statusTurns = 0;
+        p.currentHp = p.stats[0]; p.status = null; p.statusTurns = 0; p.badlyPoisoned = false;
         p.statStages = {atk:0,def:0,spatk:0,spdef:0,spd:0,acc:0,eva:0};
         for (var j = 0; j < p.moves.length; j++) {
             var mv = MOVES[p.moves[j].key];
