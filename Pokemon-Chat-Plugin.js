@@ -6671,7 +6671,7 @@ function renderRoadDetail() {
                         if (hasBadge && gtDefeated) {
                             html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_gymTrainerBattle" data-args="' + gi + ',' + gti + '">🔄 재대결</button>';
                         } else if (gtDefeated) {
-                            html += '<span style="font-size:10px;color:#27ae60">✅</span>';
+                            html += '<button class="pk-btn pk-btn-yellow pk-btn-sm" data-action="poke_gymTrainerBattle" data-args="' + gi + ',' + gti + '">🔄 재대결</button>';
                         } else {
                             html += '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_gymTrainerBattle" data-args="' + gi + ',' + gti + '">⚔️</button>';
                         }
@@ -8411,10 +8411,6 @@ window.poke_gymTrainerBattle = async function(args) {
     var hasBadge = player.badges[player.region] && player.badges[player.region].indexOf(gym.id) !== -1;
     var isGymRematch = false;
     if (player.defeatedGyms[gtKey]) {
-        if (!hasBadge) {
-            showToast("이미 쓰러뜨린 트레이너입니다!");
-            return;
-        }
         isGymRematch = true;
     }
     var alive = false;
