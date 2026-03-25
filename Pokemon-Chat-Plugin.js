@@ -1566,7 +1566,7 @@ psychup:{n:"사이코업",t:"normal",c:"status",p:0,acc:100,pp:10,ef:""},
 confide:{n:"비밀이야기",t:"normal",c:"status",p:0,acc:100,pp:20,ef:"spa_down"},
 // === 7세대 신규 기술 ===
 leafage:{n:"나뭇잎",t:"grass",c:"physical",p:40,a:100,pp:40},
-spiritshackle:{n:"그림자꿰매기",t:"ghost",c:"physical",p:80,a:100,pp:10},
+spiritshackle:{n:"그림자꿰매기",t:"ghost",c:"physical",p:80,a:100,pp:10,ef:"trap"},
 sparklinaria:{n:"물거품아리아",t:"water",c:"special",p:90,a:100,pp:10},
 darkestlariat:{n:"DD래리어트",t:"dark",c:"physical",p:85,a:100,pp:10},
 icehammer:{n:"아이스해머",t:"ice",c:"physical",p:100,a:90,pp:10},
@@ -6007,6 +6007,79 @@ function executeAttack(attacker, defender, moveKey, bd) {
         var critMsg = result.crit ? " 급소에 맞았다!" : "";
         bd.msg.push(result.dmg + " 데미지! (" + defender.nickname + " " + Math.max(0, defender.currentHp) + "/" + defender.stats[0] + ")" + critMsg + effMsg);
         checkBerryAfterDamage(defender, bd);
+        // ──── 폼 체인지 시스템 ────
+        // 특성: schooling (어군) → Lv.20+, HP 25% 이상이면 무리폼, 아니면 단독폼
+        if (getAbilityKey(defender) === "schooling" && defender.level >= 20) {
+            var schoolThreshold = Math.floor(defender.stats[0] * 0.25);
+            if (defender.currentHp > 0 && defender.currentHp <= schoolThreshold && !defender._soloForm) {
+                defender._soloForm = true;
+                bd.msg.push(dn + "의 어군이 흩어졌다! (단독 폼)");
+            }
+        }
+        if (getAbilityKey(attacker) === "schooling" && attacker.level >= 20) {
+            var schoolThreshold2 = Math.floor(attacker.stats[0] * 0.25);
+            if (attacker.currentHp > 0 && attacker.currentHp <= schoolThreshold2 && !attacker._soloForm) {
+                attacker._soloForm = true;
+                bd.msg.push(an + "의 어군이 흩어졌다! (단독 폼)");
+            }
+        }
+        // 특성: shieldsdown (리밋실드) → HP 반 이하면 코어 폼
+        if (getAbilityKey(defender) === "shieldsdown") {
+            var sdThreshold = Math.floor(defender.stats[0] * 0.5);
+            if (defender.currentHp > 0 && defender.currentHp <= sdThreshold && !defender._coreForm) {
+                defender._coreForm = true;
+                defender.statStages.atk = Math.min(6, defender.statStages.atk + 1);
+                defender.statStages.spa = Math.min(6, defender.statStages.spa + 1);
+                defender.statStages.spd = Math.min(6, defender.statStages.spd + 1);
+                bd.msg.push(dn + "의 리밋실드가 해제되었다! (코어 폼)");
+            }
+        }
+        // 특성: powerconstruct (스웜체인지) → HP 반 이하면 퍼펙트 폼
+        if (getAbilityKey(defender) === "powerconstruct") {
+            var pcThreshold = Math.floor(defender.stats[0] * 0.5);
+            if (defender.currentHp > 0 && defender.currentHp <= pcThreshold && !defender._perfectForm) {
+                defender._perfectForm = true;
+                var pcHeal = Math.floor(defender.stats[0] * 0.5);
+                defender.currentHp = Math.min(defender.stats[0], defender.currentHp + pcHeal);
+                bd.msg.push(dn + "이(가) 퍼펙트 폼으로 변신했다! (HP 회복!)");
+            }
+        }
+        // 특성: emergencyexit/wimpout → HP 반 이하가 되면 강제 교체/도주
+        if (defender.currentHp > 0) {
+            var eeThreshold = Math.floor(defender.stats[0] * 0.5);
+            var defAbKey = getAbilityKey(defender);
+            if ((defAbKey === "emergencyexit" || defAbKey === "wimpout") && defender.currentHp <= eeThreshold && !defender._emergencyTriggered) {
+                defender._emergencyTriggered = true;
+                if (defender === bd.enemy) {
+                    if (bd.type === "trainer" && bd.enemyParty) {
+                        // 트레이너: 다음 포켓몬으로 강제 교체
+                        var nextIdx = -1;
+                        for (var eei = bd.enemyIdx + 1; eei < bd.enemyParty.length; eei++) {
+                            if (bd.enemyParty[eei].currentHp > 0) { nextIdx = eei; break; }
+                        }
+                        if (nextIdx >= 0) {
+                            bd.msg.push(dn + "의 " + (defAbKey === "wimpout" ? "도망태세" : "위기회피") + "! 교체한다!");
+                            bd.enemyIdx = nextIdx;
+                            bd.enemy = bd.enemyParty[bd.enemyIdx];
+                            bd.msg.push(bd.trainerName + "은(는) " + bd.enemy.nickname + "을(를) 내보냈다!");
+                        }
+                    } else {
+                        // 야생: 도주
+                        bd.msg.push(dn + "의 " + (defAbKey === "wimpout" ? "도망태세" : "위기회피") + "! 도망쳤다!");
+                        bd.won = true;
+                    }
+                } else {
+                    // 플레이어 포켓몬: 메시지만 표시
+                    bd.msg.push(dn + "의 " + (defAbKey === "wimpout" ? "도망태세" : "위기회피") + "! 교체하세요!");
+                    bd._forceSwitch = true;
+                }
+            }
+        }
+        // 그림자꿰매기 효과: 도주/교체 봉쇄
+        if (mv.ef === "trap" && result.dmg > 0 && defender.currentHp > 0) {
+            defender._trapped = true;
+            bd.msg.push(dn + "은(는) 그림자에 꿰매어졌다! 교체할 수 없다!");
+        }
         if (mv.ef === "drain") {
             var heal = Math.max(1, Math.floor(result.dmg / 2));
             attacker.currentHp = Math.min(attacker.stats[0], attacker.currentHp + heal);
@@ -6191,6 +6264,47 @@ function executeTurn(playerMoveKey) {
     if (myPoke._unburden) mySpd *= 2;
     if (enemy._unburden) enSpd *= 2;
     var playerMove = MOVES[playerMoveKey];
+    // ──── 트레이너 AI: 상성 불리 시 교체 ────
+    var trainerSwitched = false;
+    if (bd.type === "trainer" && bd.enemyParty && bd.enemyParty.length > 1) {
+        var myTypes2 = (POKEDEX[myPoke.key] && POKEDEX[myPoke.key].t) || [];
+        var enemyTypes2 = (POKEDEX[enemy.key] && POKEDEX[enemy.key].t) || [];
+        var disadvantaged = false;
+        for (var ti1 = 0; ti1 < myTypes2.length && !disadvantaged; ti1++) {
+            for (var ti2 = 0; ti2 < enemyTypes2.length; ti2++) {
+                if (getTypeEffect(myTypes2[ti1], [enemyTypes2[ti2]]) >= 2) { disadvantaged = true; break; }
+            }
+        }
+        if (disadvantaged && Math.random() < 0.35) {
+            var bestSw = -1, bestSwScore = -999;
+            for (var swi = 0; swi < bd.enemyParty.length; swi++) {
+                if (swi === bd.enemyIdx || bd.enemyParty[swi].currentHp <= 0) continue;
+                var swpd = POKEDEX[bd.enemyParty[swi].key];
+                if (!swpd || !swpd.t) continue;
+                var swScore = 0;
+                for (var swt = 0; swt < swpd.t.length; swt++) {
+                    for (var mt4 = 0; mt4 < myTypes2.length; mt4++) {
+                        if (getTypeEffect(swpd.t[swt], [myTypes2[mt4]]) >= 2) swScore += 30;
+                        if (getTypeEffect(myTypes2[mt4], [swpd.t[swt]]) <= 0.5) swScore += 15;
+                        if (getTypeEffect(myTypes2[mt4], [swpd.t[swt]]) >= 2) swScore -= 20;
+                    }
+                }
+                if (swScore > bestSwScore) { bestSwScore = swScore; bestSw = swi; }
+            }
+            if (bestSw >= 0 && bestSwScore > 0) {
+                trainerSwitched = true;
+                bd.msg.push(bd.trainerName + "은(는) " + enemy.nickname + "을(를) 교체했다!");
+                bd.enemyIdx = bestSw;
+                bd.enemy = bd.enemyParty[bd.enemyIdx];
+                enemy = bd.enemy;
+                bd.msg.push(bd.trainerName + "은(는) " + enemy.nickname + " (Lv." + enemy.level + ")을(를) 내보냈다!");
+                if (getAbilityKey(enemy) === "intimidate") {
+                    myPoke.statStages.atk = Math.max(-6, myPoke.statStages.atk - 1);
+                    bd.msg.push(enemy.nickname + "의 위협! " + myPoke.nickname + "의 공격이 떨어졌다!");
+                }
+            }
+        }
+    }
     var enemyMoveKey = enemyChooseMove(enemy, myPoke, bd.type === "trainer");
     var enemyMove = MOVES[enemyMoveKey];
     var pPri = (playerMove && playerMove.priority) ? playerMove.priority : 0;
@@ -6209,11 +6323,18 @@ function executeTurn(playerMoveKey) {
     } else {
         first = enemy; second = myPoke; firstMove = enemyMoveKey; secondMove = playerMoveKey;
     }
+    if (trainerSwitched) {
+        // 교체 턴: 플레이어만 공격
+        if (canAct(myPoke, bd)) executeAttack(myPoke, enemy, playerMoveKey, bd);
+        doStatusDamage(myPoke, bd);
+        doStatusDamage(enemy, bd);
+    } else {
     if (canAct(first, bd)) executeAttack(first, second, firstMove, bd);
     doStatusDamage(first, bd);
     if (second.currentHp > 0 && first.currentHp > 0) {
         if (canAct(second, bd)) executeAttack(second, first, secondMove, bd);
         doStatusDamage(second, bd);
+    }
     }
     // 적 쓰러짐
     if (enemy.currentHp <= 0) {
@@ -8315,6 +8436,24 @@ window.poke_throwBall = async function(ballKey) {
 window.poke_run = async function() {
     if (!gState || !gState.battleData) return;
     if (gState.battleData.animating) return;
+    // 특성: shadowtag/arenatrap → 도주 불가
+    var bd = gState.battleData;
+    if (bd.enemy && bd.enemy.currentHp > 0) {
+        var trapAbility = getAbilityKey(bd.enemy);
+        if (trapAbility === "shadowtag" || trapAbility === "arenatrap") {
+            var abName = trapAbility === "shadowtag" ? "그림자밟기" : "개미지옥";
+            addLog("❌ 상대의 " + abName + "! 도망칠 수 없다!", "battle");
+            render();
+            return;
+        }
+    }
+    // 그림자꿰매기 _trapped 체크
+    var curPoke = player.party[bd.myIdx];
+    if (curPoke && curPoke._trapped) {
+        addLog("❌ 그림자에 꿰매여 도망칠 수 없다!", "battle");
+        render();
+        return;
+    }
     gState.battleData.animating = true;
     try { tryRun(); }
     finally { gState.battleData.animating = false; }
@@ -8345,6 +8484,26 @@ window.poke_switchInBattle = async function(idx) {
     if (isNaN(idx)) return;
     var bd = gState.battleData;
     if (!bd) return;
+    // 교체 봉쇄 체크
+    if (bd.enemy && bd.enemy.currentHp > 0) {
+        var trapAb = getAbilityKey(bd.enemy);
+        if (trapAb === "shadowtag" || trapAb === "arenatrap") {
+            var curPoke2 = player.party[bd.myIdx];
+            // 고스트 타입은 그림자밟기에 면역
+            if (trapAb === "shadowtag" && curPoke2 && curPoke2.types && curPoke2.types.indexOf("ghost") >= 0) {
+                // ghost type is immune to shadow tag
+            } else {
+                addLog("❌ 상대의 " + (trapAb === "shadowtag" ? "그림자밟기" : "개미지옥") + "! 교체할 수 없다!", "battle");
+                render();
+                return;
+            }
+        }
+        if (player.party[bd.myIdx] && player.party[bd.myIdx]._trapped) {
+            addLog("❌ 그림자에 꿰매여 교체할 수 없다!", "battle");
+            render();
+            return;
+        }
+    }
     var prev = player.party[bd.myIdx];
     bd.myIdx = idx;
     // 배틀 참가자 추적
