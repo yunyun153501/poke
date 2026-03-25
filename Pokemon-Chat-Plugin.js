@@ -5428,18 +5428,79 @@ function executeAttack(attacker, defender, moveKey, bd) {
     applyMoveEffects(moveKey, attacker, defender, bd);
 }
 
-function enemyChooseMove(enemy) {
-    var bestMove = null; var bestScore = -1;
+function enemyChooseMove(enemy, defender, isTrainer) {
+    if (!isTrainer || !defender) {
+        // 야생 포켓몬: 기존 랜덤 AI
+        var bestMove = null; var bestScore = -1;
+        for (var i = 0; i < enemy.moves.length; i++) {
+            if (enemy.moves[i].ppLeft <= 0) continue;
+            var mv = MOVES[enemy.moves[i].key];
+            if (!mv) continue;
+            var score = mv.p || 0;
+            if (mv.c === "status") score = 20;
+            if (Math.random() < 0.3) score += 30;
+            if (score > bestScore) { bestScore = score; bestMove = enemy.moves[i].key; }
+        }
+        return bestMove || "tackle";
+    }
+    // 트레이너 포켓몬: 스마트 AI
+    var atkData = POKEDEX[enemy.key];
+    var defData = POKEDEX[defender.key];
+    var defTypes = defender.megaTypes || (defData ? defData.t : []);
+    var atkTypes = enemy.megaTypes || (atkData ? atkData.t : []);
+    var candidates = [];
     for (var i = 0; i < enemy.moves.length; i++) {
         if (enemy.moves[i].ppLeft <= 0) continue;
-        var mv = MOVES[enemy.moves[i].key];
+        var mk = enemy.moves[i].key;
+        var mv = MOVES[mk];
         if (!mv) continue;
-        var score = mv.p || 0;
-        if (mv.c === "status") score = 20;
-        if (Math.random() < 0.3) score += 30;
-        if (score > bestScore) { bestScore = score; bestMove = enemy.moves[i].key; }
+        var score = 0;
+        if (mv.c === "status") {
+            score = 30;
+            // 상태이상기: 상대에게 이미 상태이상이면 낮은 점수
+            if (mv.ef === "poison" || mv.ef === "burn" || mv.ef === "paralyze" || mv.ef === "sleep" || mv.ef === "freeze") {
+                if (defender.status) score = 5;
+                else score = 55;
+            }
+            // 능력치 변화기: 자기 능력 올리기
+            if (mv.ef && (mv.ef.indexOf("_up") >= 0 || mv.ef === "swordsdance" || mv.ef === "dragondance" || mv.ef === "calmmind" || mv.ef === "bulkup")) {
+                score = 35;
+            }
+            // 회복기: HP 낮을수록 높은 점수
+            if (mv.ef === "heal" || mv.ef === "rest") {
+                var hpRatio = enemy.currentHp / enemy.stats[0];
+                score = hpRatio < 0.4 ? 80 : (hpRatio < 0.7 ? 30 : 5);
+            }
+        } else {
+            var power = mv.p || 0;
+            // 타입 상성 계산
+            var eff = getTypeEffect(mv.t, defTypes);
+            // STAB 보너스
+            var stab = 1;
+            for (var ti = 0; ti < atkTypes.length; ti++) {
+                if (atkTypes[ti] === mv.t) { stab = 1.5; break; }
+            }
+            // 물리/특수 분기 - 더 높은 스탯 쪽 기술 선호
+            var atkStat = (mv.c === "physical") ? enemy.stats[1] : enemy.stats[3];
+            var defStat = (mv.c === "physical") ? defender.stats[2] : defender.stats[4];
+            var statRatio = Math.max(0.5, Math.min(2, atkStat / Math.max(1, defStat)));
+            score = power * eff * stab * statRatio;
+            // 면역 기술은 절대 선택 안함
+            if (eff === 0) score = 0;
+            // 우선도 기술: 상대 HP 낮으면 보너스
+            if (mv.priority && mv.priority > 0 && defender.currentHp < defender.stats[0] * 0.3) {
+                score *= 1.5;
+            }
+        }
+        // 약간의 랜덤성 (±15%)
+        score *= (0.85 + Math.random() * 0.3);
+        candidates.push({key: mk, score: score});
     }
-    return bestMove || "tackle";
+    if (candidates.length === 0) return "tackle";
+    candidates.sort(function(a, b) { return b.score - a.score; });
+    // 70% 확률로 최선, 30% 확률로 차선 선택
+    if (candidates.length > 1 && Math.random() < 0.3) return candidates[1].key;
+    return candidates[0].key;
 }
 
 function executeTurn(playerMoveKey) {
@@ -5458,7 +5519,7 @@ function executeTurn(playerMoveKey) {
     if (myPoke._unburden) mySpd *= 2;
     if (enemy._unburden) enSpd *= 2;
     var playerMove = MOVES[playerMoveKey];
-    var enemyMoveKey = enemyChooseMove(enemy);
+    var enemyMoveKey = enemyChooseMove(enemy, myPoke, bd.type === "trainer");
     var enemyMove = MOVES[enemyMoveKey];
     var pPri = (playerMove && playerMove.priority) ? playerMove.priority : 0;
     var ePri = (enemyMove && enemyMove.priority) ? enemyMove.priority : 0;
@@ -5733,8 +5794,8 @@ function attemptCapture(ballKey) {
         var shakeMsg = ["앗! 빠져나왔다!", "아쉽다! 조금만 더!", "흔들 흔들... 탈출!", "거의 다 잡았는데...!"];
         bd.msg.push(shakeMsg[Math.min(shakes, shakeMsg.length - 1)]);
         if (enemy.currentHp > 0) {
-            var emk = enemyChooseMove(enemy);
             var myPoke = player.party[bd.myIdx];
+            var emk = enemyChooseMove(enemy, myPoke, bd.type === "trainer");
             if (canAct(enemy, bd)) executeAttack(enemy, myPoke, emk, bd);
             doStatusDamage(enemy, bd);
             if (myPoke.currentHp <= 0) {
@@ -5792,7 +5853,7 @@ function tryRun() {
     var enAb = getAbility(bd.enemy);
     if (enAb && enAb.type === "notrap") {
         bd.msg.push("상대의 " + enAb.n + "! 도망칠 수 없다!");
-        var emk = enemyChooseMove(bd.enemy);
+        var emk = enemyChooseMove(bd.enemy, myPoke, bd.type === "trainer");
         if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, myPoke, emk, bd);
         doStatusDamage(bd.enemy, bd);
         if (myPoke.currentHp <= 0) {
@@ -5809,7 +5870,7 @@ function tryRun() {
         bd.msg.push("무사히 도망쳤다!"); bd.fled = true;
     } else {
         bd.msg.push("도망칠 수 없었다!");
-        var emk = enemyChooseMove(bd.enemy);
+        var emk = enemyChooseMove(bd.enemy, myPoke, bd.type === "trainer");
         if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, myPoke, emk, bd);
         doStatusDamage(bd.enemy, bd);
         if (myPoke.currentHp <= 0) {
@@ -7467,7 +7528,7 @@ window.poke_switchInBattle = async function(idx) {
             bd.msg.push(prev.nickname + "의 재생력! HP가 회복되었다! (+" + rHeal + ")");
         }
         // 교체 시 적이 공격
-        var emk = enemyChooseMove(bd.enemy);
+        var emk = enemyChooseMove(bd.enemy, player.party[bd.myIdx], bd.type === "trainer");
         if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, player.party[bd.myIdx], emk, bd);
         doStatusDamage(bd.enemy, bd);
     }
@@ -7877,7 +7938,7 @@ window.poke_useItemOnPoke = async function(idx) {
             gState.useItemKey = null;
             gState.battleData.msg = [player.party[idx].nickname + "에게 " + item.n + "을(를) 사용했다!"];
             var bd = gState.battleData;
-            var emk = enemyChooseMove(bd.enemy);
+            var emk = enemyChooseMove(bd.enemy, player.party[bd.myIdx], bd.type === "trainer");
             if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, player.party[bd.myIdx], emk, bd);
             doStatusDamage(bd.enemy, bd);
             for (var j = 0; j < bd.msg.length; j++) addLog(bd.msg[j], "battle");
@@ -7902,7 +7963,7 @@ window.poke_useBattleItem = async function(itemKey) {
         gState.subScreen = null;
         rotateBattleMsg(bd);
         bd.msg = [activePoke.nickname + "에게 " + item.n + "을(를) 사용했다!"];
-        var emk = enemyChooseMove(bd.enemy);
+        var emk = enemyChooseMove(bd.enemy, player.party[bd.myIdx], bd.type === "trainer");
         if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, player.party[bd.myIdx], emk, bd);
         doStatusDamage(bd.enemy, bd);
         for (var j = 0; j < bd.msg.length; j++) addLog(bd.msg[j], "battle");
