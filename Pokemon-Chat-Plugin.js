@@ -3188,22 +3188,22 @@ alola:{n:"알로라지방",em:"🌴",roads:[
 var GYMS = {
 kanto: [
     {id:"k_gym1",city:"니비시티",n:"니비시티 체육관",type:"rock",badge:"회색뱃지",badgeEm:"🪨",
-     gymTrainers:[{n:"등산가",pokemon:[{k:"geodude",l:10},{k:"sandshrew",l:9}],reward:200},{n:"등산가",pokemon:[{k:"sandshrew",l:11},{k:"geodude",l:10}],reward:220}],
+     gymTrainers:[{n:"등산가",pokemon:[{k:"geodude",l:10}],reward:200},{n:"등산가",pokemon:[{k:"sandshrew",l:11}],reward:220}],
      leaders:[
         {id:"brock_lge",reqBadges:0,n:"타케시",em:"🏋️",pokemon:[{k:"geodude",l:11},{k:"onix",l:12}],reward:1200,rewardItems:["tm39_rocktomb"]}
      ]},
     {id:"k_gym2",city:"하나다시티",n:"하나다시티 체육관",type:"water",badge:"블루뱃지",badgeEm:"💧",
-     gymTrainers:[{n:"수영선수",pokemon:[{k:"horsea",l:16},{k:"shellder",l:16}],reward:320},{n:"수영선수",pokemon:[{k:"goldeen",l:18},{k:"horsea",l:17}],reward:360}],
+     gymTrainers:[{n:"수영선수",pokemon:[{k:"horsea",l:16},{k:"shellder",l:16}],reward:320},{n:"수영선수",pokemon:[{k:"goldeen",l:18}],reward:360}],
      leaders:[
         {id:"misty_lge",reqBadges:1,n:"카스미",em:"💧",pokemon:[{k:"psyduck",l:18},{k:"starmie",l:19}],reward:1900,rewardItems:["tm55_scald"]}
      ]},
     {id:"k_gym3",city:"쿠치바시티",n:"쿠치바시티 체육관",type:"electric",badge:"오렌지뱃지",badgeEm:"⚡",
-     gymTrainers:[{n:"선원",pokemon:[{k:"voltorb",l:18},{k:"magnemite",l:18}],reward:360},{n:"신사",pokemon:[{k:"pikachu",l:20},{k:"voltorb",l:19}],reward:400}],
+     gymTrainers:[{n:"선원",pokemon:[{k:"voltorb",l:18},{k:"magnemite",l:18}],reward:360},{n:"신사",pokemon:[{k:"pikachu",l:20}],reward:400}],
      leaders:[
         {id:"surge_lge",reqBadges:2,n:"마치스",em:"⚡",pokemon:[{k:"voltorb",l:25},{k:"magnemite",l:25},{k:"raichu",l:26}],reward:2600,rewardItems:["tm73_thunderwave"]}
      ]},
     {id:"k_gym4",city:"타마무시시티",n:"타마무시시티 체육관",type:"grass",badge:"레인보우뱃지",badgeEm:"🌈",
-     gymTrainers:[{n:"아가씨",pokemon:[{k:"oddish",l:24},{k:"bellsprout",l:24}],reward:480},{n:"미녀",pokemon:[{k:"weepinbell",l:26},{k:"oddish",l:25}],reward:520},{n:"아가씨",pokemon:[{k:"gloom",l:26},{k:"bellsprout",l:25}],reward:520}],
+     gymTrainers:[{n:"아가씨",pokemon:[{k:"oddish",l:24},{k:"bellsprout",l:24}],reward:480},{n:"미녀",pokemon:[{k:"weepinbell",l:26}],reward:520},{n:"아가씨",pokemon:[{k:"gloom",l:26}],reward:520}],
      leaders:[
         {id:"erika_lge",reqBadges:3,n:"에리카",em:"🌿",pokemon:[{k:"tangela",l:33},{k:"weepinbell",l:33},{k:"vileplume",l:34}],reward:3400,rewardItems:["tm86_grassknot"]}
      ]},
@@ -3213,17 +3213,17 @@ kanto: [
         {id:"koga_lge",reqBadges:4,n:"쿄우",em:"☠️",pokemon:[{k:"weezing",l:43},{k:"muk",l:43},{k:"golbat",l:43},{k:"venomoth",l:44}],reward:4400,rewardItems:["tm06_toxic"]}
      ]},
     {id:"k_gym6",city:"야마부키시티",n:"야마부키시티 체육관",type:"psychic",badge:"골드뱃지",badgeEm:"🔮",
-     gymTrainers:[{n:"심령술사",pokemon:[{k:"kadabra",l:36},{k:"slowpoke",l:36}],reward:720},{n:"초능력자",pokemon:[{k:"mrmime",l:38},{k:"jynx",l:37}],reward:760}],
+     gymTrainers:[{n:"심령술사",pokemon:[{k:"kadabra",l:36},{k:"slowpoke",l:36}],reward:720},{n:"초능력자",pokemon:[{k:"mrmime",l:38}],reward:760}],
      leaders:[
         {id:"sabrina_lge",reqBadges:5,n:"나츠메",em:"🔮",pokemon:[{k:"mrmime",l:43},{k:"slowbro",l:43},{k:"jynx",l:43},{k:"alakazam",l:44}],reward:4400,rewardItems:["tm29_psychic"]}
      ]},
     {id:"k_gym7",city:"구레네섬",n:"구레네섬 체육관",type:"fire",badge:"크림슨뱃지",badgeEm:"🔥",
-     gymTrainers:[{n:"마니아",pokemon:[{k:"ponyta",l:38},{k:"growlithe",l:40}],reward:800},{n:"머리짱",pokemon:[{k:"rapidash",l:40},{k:"magmar",l:39}],reward:800}],
+     gymTrainers:[{n:"마니아",pokemon:[{k:"ponyta",l:38},{k:"growlithe",l:40}],reward:800},{n:"머리짱",pokemon:[{k:"rapidash",l:40}],reward:800}],
      leaders:[
         {id:"blaine_lge",reqBadges:6,n:"카츠라",em:"🔥",pokemon:[{k:"magmar",l:47},{k:"rapidash",l:47},{k:"ninetales",l:47},{k:"arcanine",l:48}],reward:4800,rewardItems:["tm35_flamethrower"]}
      ]},
     {id:"k_gym8",city:"토키와시티",n:"토키와시티 체육관",type:"ground",badge:"그린뱃지",badgeEm:"🌍",
-     gymTrainers:[{n:"쿨트레이너",pokemon:[{k:"nidorino",l:42},{k:"nidorina",l:42}],reward:840},{n:"쿨트레이너",pokemon:[{k:"rhyhorn",l:43},{k:"sandslash",l:43}],reward:860},{n:"쿨트레이너",pokemon:[{k:"dugtrio",l:44},{k:"nidoking",l:43}],reward:880}],
+     gymTrainers:[{n:"쿨트레이너",pokemon:[{k:"nidorino",l:42},{k:"nidorina",l:42}],reward:840},{n:"쿨트레이너",pokemon:[{k:"rhyhorn",l:43},{k:"sandslash",l:43}],reward:860},{n:"쿨트레이너",pokemon:[{k:"dugtrio",l:44}],reward:880}],
      leaders:[
         {id:"giovanni_lge",reqBadges:7,n:"사카키",em:"🦹",pokemon:[{k:"dugtrio",l:49},{k:"nidoqueen",l:49},{k:"nidoking",l:49},{k:"rhydon",l:50}],reward:6500,rewardItems:["tm26_earthquake","masterball"]}
      ]}
@@ -5467,23 +5467,53 @@ function calcTrainerGrowth(trainerPokemon, daysElapsed) {
 
 function getGrownTrainerData(trainer, road, tKey) {
     var defData = getTrainerDefeatData(tKey);
-    if (!defData) return { pokemon: trainer.pokemon, reward: trainer.reward, growthTier: 0, isRechallenge: false };
+    var maxTotal = 6;
+    // 1단계: 고유포켓몬 (트레이너 기본 데이터)
+    var basePokemon = [];
+    for (var i = 0; i < trainer.pokemon.length; i++) {
+        basePokemon.push({ k: trainer.pokemon[i].k, l: trainer.pokemon[i].l });
+    }
+    // 2단계: 처음부터 지역포켓몬 1-2마리 추가 (road.pokemon에서 고유포켓몬과 중복되지 않는 것)
+    if (road && road.pokemon && road.pokemon.length > 0) {
+        var ownedKeys = {};
+        for (var j = 0; j < basePokemon.length; j++) ownedKeys[basePokemon[j].k] = true;
+        var candidates = [];
+        for (var p = 0; p < road.pokemon.length; p++) {
+            if (!ownedKeys[road.pokemon[p].k]) candidates.push(road.pokemon[p].k);
+        }
+        if (candidates.length > 0) {
+            var seed = 0;
+            for (var s = 0; s < tKey.length; s++) seed += tKey.charCodeAt(s);
+            var initCount = Math.min(2, candidates.length, maxTotal - basePokemon.length);
+            var baseLv = basePokemon[basePokemon.length - 1].l;
+            for (var e = 0; e < initCount; e++) {
+                var idx = (seed + e * 7) % candidates.length;
+                var pick = candidates.splice(idx, 1)[0];
+                basePokemon.push({ k: pick, l: baseLv });
+            }
+        }
+    }
+    if (!defData) return { pokemon: basePokemon, reward: trainer.reward, growthTier: 0, isRechallenge: false };
+    // 3단계: 시간이 지나면 성장
     var daysElapsed = Math.max(0, player.day - defData.firstDay);
     var growth = calcTrainerGrowth(trainer.pokemon, daysElapsed);
     var currentGrowthTier = growth.extraCount;
     var isRechallenge = (currentGrowthTier > defData.tier);
-    // 성장한 포켓몬 생성
+    // 성장한 포켓몬 생성 - 고유포켓몬에 레벨 보너스 적용
     var grownPokemon = [];
     for (var i = 0; i < trainer.pokemon.length; i++) {
         var newLv = Math.min(MAX_LEVEL, trainer.pokemon[i].l + growth.levelBonuses[i]);
         grownPokemon.push({ k: trainer.pokemon[i].k, l: newLv });
     }
+    // 초기 지역포켓몬에도 레벨 보너스 적용
+    var avgBonus = growth.levelBonuses.length > 0 ? Math.floor(growth.totalBonusLevels / growth.levelBonuses.length) : 0;
+    for (var i = trainer.pokemon.length; i < basePokemon.length; i++) {
+        grownPokemon.push({ k: basePokemon[i].k, l: Math.min(MAX_LEVEL, basePokemon[i].l + avgBonus) });
+    }
     // 추가 포켓몬 (7일마다 +1) - 지역포켓몬 중 이미 가지고있지 않은 포켓몬 추가, 최대 6마리
     if (growth.extraCount > 0 && road && road.pokemon && road.pokemon.length > 0) {
-        var maxTotal = 6;
         var ownedKeys = {};
         for (var j = 0; j < grownPokemon.length; j++) ownedKeys[grownPokemon[j].k] = true;
-        // 지역포켓몬 중 아직 안 가진 것 필터링
         var candidates = [];
         for (var p = 0; p < road.pokemon.length; p++) {
             if (!ownedKeys[road.pokemon[p].k]) candidates.push(road.pokemon[p].k);
