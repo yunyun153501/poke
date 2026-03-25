@@ -3014,8 +3014,8 @@ kanto: [
     {id:"k_gym1",city:"니비시티",n:"니비시티 체육관",type:"rock",badge:"회색뱃지",badgeEm:"🪨",
      gymTrainers:[{n:"등산가",pokemon:[{k:"geodude",l:10}],reward:200},{n:"등산가",pokemon:[{k:"sandshrew",l:11}],reward:220}],
      leaders:[
-        {id:"brock_rgb",n:"타케시",em:"🏋️",gen:1,pokemon:[{k:"geodude",l:12},{k:"onix",l:14}],reward:1400,rewardItems:["tm39_rockslide"]},
-        {id:"brock_hgss",n:"타케시",em:"🏋️",gen:2,reqBadges:8,pokemon:[{k:"graveler",l:51},{k:"rhyhorn",l:51},{k:"omastar",l:53},{k:"onix",l:54},{k:"kabutops",l:52}],reward:5400,rewardItems:["tm39_rockslide"]}
+        {id:"brock_rgb",n:"타케시",em:"🏋️",gen:1,pokemon:[{k:"geodude",l:12},{k:"onix",l:14}],reward:1400,rewardItems:["tm39_rocktomb"]},
+        {id:"brock_hgss",n:"타케시",em:"🏋️",gen:2,reqBadges:8,pokemon:[{k:"graveler",l:51},{k:"rhyhorn",l:51},{k:"omastar",l:53},{k:"onix",l:54},{k:"kabutops",l:52}],reward:5400,rewardItems:["tm80_rockslide"]}
      ]},
     {id:"k_gym2",city:"하나다시티",n:"하나다시티 체육관",type:"water",badge:"블루뱃지",badgeEm:"💧",
      gymTrainers:[{n:"수영선수",pokemon:[{k:"horsea",l:16},{k:"shellder",l:16}],reward:320},{n:"수영선수",pokemon:[{k:"goldeen",l:18}],reward:360}],
@@ -3096,7 +3096,7 @@ johto: [
 ],
 hoenn: [
     {id:"h_gym1",city:"카나즈미시티",n:"카나즈미시티 체육관",type:"rock",badge:"스톤뱃지",badgeEm:"🪨",
-     gymTrainers:[{n:"등산가",pokemon:[{k:"geodude",l:10}],reward:200},{n:"등산가",pokemon:[{k:"geodude",l:10},{k:"geodude",l:11}],reward:220}],leaders:[{id:"roxanne",n:"츠츠지",em:"🪨",gen:3,pokemon:[{k:"geodude",l:12},{k:"geodude",l:12},{k:"nosepass",l:15}],reward:1400,rewardItems:["tm39_rockslide"]},{id:"roxanne_oras",n:"츠츠지",em:"🪨",gen:6,reqBadges:8,pokemon:[{k:"aerodactyl",l:50},{k:"golem",l:52},{k:"onix",l:50},{k:"nosepass",l:54},{k:"rhydon",l:56}],reward:5600}]},
+     gymTrainers:[{n:"등산가",pokemon:[{k:"geodude",l:10}],reward:200},{n:"등산가",pokemon:[{k:"geodude",l:10},{k:"geodude",l:11}],reward:220}],leaders:[{id:"roxanne",n:"츠츠지",em:"🪨",gen:3,pokemon:[{k:"geodude",l:12},{k:"geodude",l:12},{k:"nosepass",l:15}],reward:1400,rewardItems:["tm39_rocktomb"]},{id:"roxanne_oras",n:"츠츠지",em:"🪨",gen:6,reqBadges:8,pokemon:[{k:"aerodactyl",l:50},{k:"golem",l:52},{k:"onix",l:50},{k:"nosepass",l:54},{k:"rhydon",l:56}],reward:5600}]},
     {id:"h_gym2",city:"무로시티",n:"무로시티 체육관",type:"fighting",badge:"너클뱃지",badgeEm:"🥊",
      gymTrainers:[{n:"블랙벨트",pokemon:[{k:"machop",l:14}],reward:280},{n:"블랙벨트",pokemon:[{k:"meditite",l:13},{k:"machop",l:14}],reward:280}],leaders:[{id:"brawly",n:"토키",em:"🥊",gen:3,pokemon:[{k:"machop",l:16},{k:"meditite",l:16},{k:"makuhita",l:19}],reward:1800,rewardItems:["tm31_brickbreak"]},{id:"brawly_oras",n:"토키",em:"🥊",gen:6,reqBadges:8,pokemon:[{k:"hariyama",l:54},{k:"machamp",l:52},{k:"medicham",l:50},{k:"breloom",l:52},{k:"lucario",l:56}],reward:5600}]},
     {id:"h_gym3",city:"키와시티",n:"키와시티 체육관",type:"electric",badge:"다이나모뱃지",badgeEm:"⚡",
@@ -3120,7 +3120,7 @@ sinnoh: [
     {id:"s_gym1",city:"쿠로가네시티",n:"쿠로가네시티 체육관",type:"rock",badge:"콜뱃지",badgeEm:"🪨",
      gymTrainers:[{n:"산악인 다이스케",em:"🧗",pokemon:[{k:"geodude",l:10},{k:"onix",l:10}],reward:300},{n:"등산가 요시히토",em:"🧗",pokemon:[{k:"geodude",l:11},{k:"geodude",l:11}],reward:330}],
      leaders:[
-        {id:"roark_dp",n:"효우타",em:"🪨",gen:4,pokemon:[{k:"geodude",l:12},{k:"onix",l:12},{k:"cranidos",l:14}],reward:1400,rewardItems:["tm39_rockslide"]},
+        {id:"roark_dp",n:"효우타",em:"🪨",gen:4,pokemon:[{k:"geodude",l:12},{k:"onix",l:12},{k:"cranidos",l:14}],reward:1400,rewardItems:["tm39_rocktomb"]},
         {id:"roark_bdsp",n:"효우타",em:"🪨",gen:8,reqBadges:8,pokemon:[{k:"aerodactyl",l:62},{k:"probopass",l:60},{k:"golem",l:60},{k:"rampardos",l:62},{k:"relicanth",l:60}],reward:6200}
      ]},
     {id:"s_gym2",city:"하쿠타이시티",n:"하쿠타이시티 체육관",type:"grass",badge:"포레스트뱃지",badgeEm:"🌿",
@@ -3220,7 +3220,7 @@ kalos: [
     {id:"x_gym1",city:"하쿠단시티",n:"하쿠단시티 체육관",type:"bug",badge:"버그뱃지",badgeEm:"🐛",
      leaders:[{id:"viola",n:"비올라",em:"📷",gen:6,pokemon:[{k:"surskit",l:10},{k:"vivillon",l:12}],reward:1200,rewardItems:["tm83_infestation"]}]},
     {id:"x_gym2",city:"쇼요우시티",n:"쇼요우시티 체육관",type:"rock",badge:"클리프뱃지",badgeEm:"🪨",
-     leaders:[{id:"grant",n:"자크로",em:"🧗",gen:6,pokemon:[{k:"amaura",l:25},{k:"tyrunt",l:25}],reward:2500,rewardItems:["tm39_rockslide"]}]},
+     leaders:[{id:"grant",n:"자크로",em:"🧗",gen:6,pokemon:[{k:"amaura",l:25},{k:"tyrunt",l:25}],reward:2500,rewardItems:["tm39_rocktomb"]}]},
     {id:"x_gym3",city:"샤라시티",n:"샤라시티 체육관",type:"fighting",badge:"럼블뱃지",badgeEm:"🥊",
      leaders:[{id:"korrina",n:"코르니",em:"⛸️",gen:6,pokemon:[{k:"mienfoo",l:29},{k:"machoke",l:28},{k:"hawlucha",l:32}],reward:3200,rewardItems:["tm98_powerpunch","megaring"]}]},
     {id:"x_gym4",city:"카이나시티",n:"카이나시티 체육관",type:"grass",badge:"플랜트뱃지",badgeEm:"🌱",
@@ -3332,7 +3332,8 @@ tm31_brickbreak: {n:"기술머신31 [깨트리기]",desc:"깨트리기를 가르
 tm35_flamethrower:{n:"기술머신35 [화염방사]",desc:"화염방사를 가르친다",type:"tm",value:"flamethrower",buy:5500,sell:2750},
 tm36_sludgebomb: {n:"기술머신36 [오물폭탄]",desc:"오물폭탄을 가르친다",type:"tm",value:"sludgebomb",buy:3000,sell:1500},
 tm38_fireblast:  {n:"기술머신38 [대문자]",desc:"대문자를 가르친다",type:"tm",value:"fireblast",buy:5500,sell:2750},
-tm39_rockslide:  {n:"기술머신39 [암석봉인]",desc:"암석봉인을 가르친다",type:"tm",value:"rockslide",buy:3000,sell:1500},
+tm39_rocktomb:   {n:"기술머신39 [암석봉인]",desc:"암석봉인을 가르친다",type:"tm",value:"rockTomb",buy:3000,sell:1500},
+tm80_rockslide:  {n:"기술머신80 [락슬라이드]",desc:"락슬라이드를 가르친다",type:"tm",value:"rockslide",buy:3000,sell:1500},
 tm40_aerialace:  {n:"기술머신40 [제비반환]",desc:"제비반환을 가르친다",type:"tm",value:"aerialace",buy:3000,sell:1500},
 tm42_facade:     {n:"기술머신42 [근성]",desc:"근성을 가르친다",type:"tm",value:"facade",buy:3000,sell:1500},
 tm46_thief:      {n:"기술머신46 [도둑질]",desc:"도둑질을 가르친다",type:"tm",value:"thief",buy:3000,sell:1500},
@@ -3385,7 +3386,8 @@ var TM_COMPAT = {
     tm35_flamethrower: ["fire","normal","dragon","steel","flying"],
     tm36_sludgebomb: ["poison","grass","ground","dark","ghost"],
     tm38_fireblast: ["fire","normal","dragon","steel"],
-    tm39_rockslide: ["rock","ground","normal","fighting","steel"],
+    tm39_rocktomb: ["rock","ground","normal","fighting","steel"],
+    tm80_rockslide: ["rock","ground","normal","fighting","steel"],
     tm40_aerialace: ["flying","normal","bug","fighting","steel","dark"],
     tm42_facade: null,
     tm46_thief: ["dark","normal","ghost","poison","bug","psychic","fairy"],
