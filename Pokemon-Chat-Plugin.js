@@ -5688,7 +5688,6 @@ function checkKeyItemReward(bd) {
         if (total >= rewards[i].count && !player.bag[rewards[i].item]) {
             player.bag[rewards[i].item] = 1;
             bd.msg.push("🔑 " + ITEMS[rewards[i].item].n + "을(를) 받았다!");
-            addLog("🔑 " + ITEMS[rewards[i].item].n + " 획득!", "reward");
         }
     }
 }
@@ -5709,8 +5708,8 @@ function checkNewMoves(poke) {
         if (!mv) continue;
         if (poke.moves.length < 4) {
             poke.moves.push({key: mk, ppLeft: mv.pp});
-            addLog(poke.nickname + "은(는) " + mv.n + "을(를) 배웠다!", "learn");
             if (gState.battleData) gState.battleData.msg.push(poke.nickname + "은(는) " + mv.n + "을(를) 배웠다!");
+            else addLog(poke.nickname + "은(는) " + mv.n + "을(를) 배웠다!", "learn");
         } else {
             gState.pendingMoveLearn = {pokeIdx: findPartyIdx(poke), moveKey: mk};
         }
@@ -5728,7 +5727,7 @@ function checkEvolution(poke) {
     if (poke.level >= data.e.l) {
         poke.canEvolve = true;
         if (gState.battleData) gState.battleData.msg.push("💡 " + poke.nickname + "은(는) 진화할 수 있게 되었다!");
-        addLog("💡 " + poke.nickname + "은(는) 진화할 수 있게 되었다!", "evolution");
+        else addLog("💡 " + poke.nickname + "은(는) 진화할 수 있게 되었다!", "evolution");
     }
 }
 
@@ -5829,7 +5828,9 @@ function addCapturedPokemon(poke) {
         player.party.push(poke);
     } else {
         player.pc.push(poke);
-        addLog(poke.nickname + "은(는) PC로 보내졌다!", "info");
+        var bd = gState && gState.battleData;
+        if (bd && bd.msg) bd.msg.push(poke.nickname + "은(는) PC로 보내졌다!");
+        else addLog(poke.nickname + "은(는) PC로 보내졌다!", "info");
     }
 }
 
