@@ -3170,58 +3170,42 @@ kanto: [
     {id:"k_gym1",city:"니비시티",n:"니비시티 체육관",type:"rock",badge:"회색뱃지",badgeEm:"🪨",
      gymTrainers:[{n:"등산가",pokemon:[{k:"geodude",l:10}],reward:200},{n:"등산가",pokemon:[{k:"sandshrew",l:11}],reward:220}],
      leaders:[
-        {id:"brock_rgb",n:"타케시",em:"🏋️",gen:1,pokemon:[{k:"geodude",l:12},{k:"onix",l:14}],reward:1400,rewardItems:["tm39_rocktomb"]},
-        {id:"brock_lge",n:"타케시",em:"🏋️",gen:7,pokemon:[{k:"geodude",l:11},{k:"onix",l:12}],reward:1200,rewardItems:["tm39_rocktomb"]},
-        {id:"brock_hgss",n:"타케시",em:"🏋️",gen:2,reqBadges:8,pokemon:[{k:"graveler",l:51},{k:"rhyhorn",l:51},{k:"omastar",l:53},{k:"onix",l:54},{k:"kabutops",l:52}],reward:5400,rewardItems:["tm80_rockslide"]}
+        {id:"brock_lge",n:"타케시",em:"🏋️",pokemon:[{k:"geodude",l:11},{k:"onix",l:12}],reward:1200,rewardItems:["tm39_rocktomb"]}
      ]},
     {id:"k_gym2",city:"하나다시티",n:"하나다시티 체육관",type:"water",badge:"블루뱃지",badgeEm:"💧",
      gymTrainers:[{n:"수영선수",pokemon:[{k:"horsea",l:16},{k:"shellder",l:16}],reward:320},{n:"수영선수",pokemon:[{k:"goldeen",l:18}],reward:360}],
      leaders:[
-        {id:"misty_rgb",n:"카스미",em:"💧",gen:1,pokemon:[{k:"staryu",l:18},{k:"starmie",l:21}],reward:2100,rewardItems:["tm55_scald"]},
-        {id:"misty_lge",n:"카스미",em:"💧",gen:7,pokemon:[{k:"psyduck",l:18},{k:"starmie",l:19}],reward:1900,rewardItems:["tm55_scald"]},
-        {id:"misty_hgss",n:"카스미",em:"💧",gen:2,reqBadges:8,pokemon:[{k:"golduck",l:49},{k:"quagsire",l:49},{k:"lapras",l:52},{k:"starmie",l:54}],reward:5400,rewardItems:["tm55_scald"]}
+        {id:"misty_lge",n:"카스미",em:"💧",pokemon:[{k:"psyduck",l:18},{k:"starmie",l:19}],reward:1900,rewardItems:["tm55_scald"]}
      ]},
     {id:"k_gym3",city:"쿠치바시티",n:"쿠치바시티 체육관",type:"electric",badge:"오렌지뱃지",badgeEm:"⚡",
      gymTrainers:[{n:"선원",pokemon:[{k:"voltorb",l:18},{k:"magnemite",l:18}],reward:360},{n:"신사",pokemon:[{k:"pikachu",l:20}],reward:400}],
      leaders:[
-        {id:"surge_rgb",n:"마치스",em:"⚡",gen:1,pokemon:[{k:"voltorb",l:21},{k:"pikachu",l:18},{k:"raichu",l:24}],reward:2400,rewardItems:["tm73_thunderwave"]},
-        {id:"surge_lge",n:"마치스",em:"⚡",gen:7,pokemon:[{k:"voltorb",l:25},{k:"magnemite",l:25},{k:"raichu",l:26}],reward:2600,rewardItems:["tm73_thunderwave"]},
-        {id:"surge_hgss",n:"마치스",em:"⚡",gen:2,reqBadges:8,pokemon:[{k:"raichu",l:51},{k:"electrode",l:47},{k:"magneton",l:47},{k:"electabuzz",l:53}],reward:5300,rewardItems:["tm73_thunderwave"]}
+        {id:"surge_lge",n:"마치스",em:"⚡",pokemon:[{k:"voltorb",l:25},{k:"magnemite",l:25},{k:"raichu",l:26}],reward:2600,rewardItems:["tm73_thunderwave"]}
      ]},
     {id:"k_gym4",city:"타마무시시티",n:"타마무시시티 체육관",type:"grass",badge:"레인보우뱃지",badgeEm:"🌈",
      gymTrainers:[{n:"아가씨",pokemon:[{k:"oddish",l:24},{k:"bellsprout",l:24}],reward:480},{n:"미녀",pokemon:[{k:"weepinbell",l:26}],reward:520},{n:"아가씨",pokemon:[{k:"gloom",l:26}],reward:520}],
      leaders:[
-        {id:"erika_rgb",n:"에리카",em:"🌿",gen:1,pokemon:[{k:"victreebel",l:29},{k:"tangela",l:24},{k:"vileplume",l:29}],reward:2900,rewardItems:["tm86_grassknot"]},
-        {id:"erika_lge",n:"에리카",em:"🌿",gen:7,pokemon:[{k:"tangela",l:33},{k:"weepinbell",l:33},{k:"vileplume",l:34}],reward:3400,rewardItems:["tm86_grassknot"]},
-        {id:"erika_hgss",n:"에리카",em:"🌿",gen:2,reqBadges:8,pokemon:[{k:"jumpluff",l:51},{k:"tangela",l:52},{k:"victreebel",l:56},{k:"bellossom",l:56}],reward:5600,rewardItems:["tm86_grassknot"]}
+        {id:"erika_lge",n:"에리카",em:"🌿",pokemon:[{k:"tangela",l:33},{k:"weepinbell",l:33},{k:"vileplume",l:34}],reward:3400,rewardItems:["tm86_grassknot"]}
      ]},
     {id:"k_gym5",city:"세키치쿠시티",n:"세키치쿠시티 체육관",type:"poison",badge:"핑크뱃지",badgeEm:"☠️",
      gymTrainers:[{n:"유술가",pokemon:[{k:"koffing",l:34},{k:"grimer",l:34}],reward:680},{n:"닌자소년",pokemon:[{k:"venonat",l:34},{k:"venomoth",l:36}],reward:720}],
      leaders:[
-        {id:"koga_rgb",n:"쿄우",em:"☠️",gen:1,pokemon:[{k:"koffing",l:37},{k:"muk",l:39},{k:"grimer",l:37},{k:"weezing",l:43}],reward:3700,rewardItems:["tm06_toxic"]},
-        {id:"koga_lge",n:"쿄우",em:"☠️",gen:7,pokemon:[{k:"weezing",l:43},{k:"muk",l:43},{k:"golbat",l:43},{k:"venomoth",l:44}],reward:4400,rewardItems:["tm06_toxic"]},
-        {id:"janine_hgss",n:"안즈",em:"🥷",gen:2,reqBadges:8,pokemon:[{k:"crobat",l:47},{k:"weezing",l:44},{k:"ariados",l:47},{k:"venomoth",l:50}],reward:5000,rewardItems:["tm84_poisonjab"]}
+        {id:"koga_lge",n:"쿄우",em:"☠️",pokemon:[{k:"weezing",l:43},{k:"muk",l:43},{k:"golbat",l:43},{k:"venomoth",l:44}],reward:4400,rewardItems:["tm06_toxic"]}
      ]},
     {id:"k_gym6",city:"야마부키시티",n:"야마부키시티 체육관",type:"psychic",badge:"골드뱃지",badgeEm:"🔮",
      gymTrainers:[{n:"심령술사",pokemon:[{k:"kadabra",l:36},{k:"slowpoke",l:36}],reward:720},{n:"초능력자",pokemon:[{k:"mrmime",l:38}],reward:760}],
      leaders:[
-        {id:"sabrina_rgb",n:"나츠메",em:"🔮",gen:1,pokemon:[{k:"kadabra",l:38},{k:"mrmime",l:37},{k:"venomoth",l:38},{k:"alakazam",l:43}],reward:4300,rewardItems:["tm29_psychic"]},
-        {id:"sabrina_lge",n:"나츠메",em:"🔮",gen:7,pokemon:[{k:"mrmime",l:43},{k:"slowbro",l:43},{k:"jynx",l:43},{k:"alakazam",l:44}],reward:4400,rewardItems:["tm29_psychic"]},
-        {id:"sabrina_hgss",n:"나츠메",em:"🔮",gen:2,reqBadges:8,pokemon:[{k:"espeon",l:53},{k:"mrmime",l:53},{k:"alakazam",l:55}],reward:5500,rewardItems:["tm29_psychic"]}
+        {id:"sabrina_lge",n:"나츠메",em:"🔮",pokemon:[{k:"mrmime",l:43},{k:"slowbro",l:43},{k:"jynx",l:43},{k:"alakazam",l:44}],reward:4400,rewardItems:["tm29_psychic"]}
      ]},
     {id:"k_gym7",city:"구레네섬",n:"구레네섬 체육관",type:"fire",badge:"크림슨뱃지",badgeEm:"🔥",
      gymTrainers:[{n:"마니아",pokemon:[{k:"ponyta",l:38},{k:"growlithe",l:40}],reward:800},{n:"머리짱",pokemon:[{k:"rapidash",l:40}],reward:800}],
      leaders:[
-        {id:"blaine_rgb",n:"카츠라",em:"🔥",gen:1,pokemon:[{k:"growlithe",l:42},{k:"ponyta",l:40},{k:"rapidash",l:42},{k:"arcanine",l:47}],reward:4700,rewardItems:["tm35_flamethrower"]},
-        {id:"blaine_lge",n:"카츠라",em:"🔥",gen:7,pokemon:[{k:"magmar",l:47},{k:"rapidash",l:47},{k:"ninetales",l:47},{k:"arcanine",l:48}],reward:4800,rewardItems:["tm35_flamethrower"]},
-        {id:"blaine_hgss",n:"카츠라",em:"🔥",gen:2,reqBadges:8,pokemon:[{k:"magcargo",l:54},{k:"magmar",l:54},{k:"rapidash",l:59}],reward:5900,rewardItems:["tm35_flamethrower"]}
+        {id:"blaine_lge",n:"카츠라",em:"🔥",pokemon:[{k:"magmar",l:47},{k:"rapidash",l:47},{k:"ninetales",l:47},{k:"arcanine",l:48}],reward:4800,rewardItems:["tm35_flamethrower"]}
      ]},
     {id:"k_gym8",city:"토키와시티",n:"토키와시티 체육관",type:"ground",badge:"그린뱃지",badgeEm:"🌍",
      gymTrainers:[{n:"쿨트레이너",pokemon:[{k:"nidorino",l:42},{k:"nidorina",l:42}],reward:840},{n:"쿨트레이너",pokemon:[{k:"rhyhorn",l:43},{k:"sandslash",l:43}],reward:860},{n:"쿨트레이너",pokemon:[{k:"dugtrio",l:44}],reward:880}],
      leaders:[
-        {id:"giovanni_rgb",n:"사카키",em:"🦹",gen:1,pokemon:[{k:"rhyhorn",l:45},{k:"dugtrio",l:42},{k:"nidoqueen",l:44},{k:"nidoking",l:45},{k:"rhydon",l:50}],reward:6500,rewardItems:["tm26_earthquake","masterball"]},
-        {id:"giovanni_lge",n:"사카키",em:"🦹",gen:7,pokemon:[{k:"dugtrio",l:49},{k:"nidoqueen",l:49},{k:"nidoking",l:49},{k:"rhydon",l:50}],reward:6500,rewardItems:["tm26_earthquake"]},
-        {id:"blue_hgss",n:"그린",em:"🏆",gen:2,reqBadges:8,pokemon:[{k:"pidgeot",l:56},{k:"alakazam",l:54},{k:"rhydon",l:56},{k:"gyarados",l:58},{k:"arcanine",l:58},{k:"exeggutor",l:58}],reward:8000}
+        {id:"giovanni_lge",n:"사카키",em:"🦹",pokemon:[{k:"dugtrio",l:49},{k:"nidoqueen",l:49},{k:"nidoking",l:49},{k:"rhydon",l:50}],reward:6500,rewardItems:["tm26_earthquake","masterball"]}
      ]}
 ],
 johto: [
