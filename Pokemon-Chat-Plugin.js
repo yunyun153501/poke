@@ -930,7 +930,7 @@ pound:       {n:"막치기",t:"normal",c:"physical",p:40,a:100,pp:35},
 quickattack: {n:"전광석화",t:"normal",c:"physical",p:40,a:100,pp:30,priority:1},
 slam:        {n:"내던지기",t:"normal",c:"physical",p:80,a:75,pp:20},
 bodyslam:    {n:"누르기",t:"normal",c:"physical",p:85,a:100,pp:15,ef:"paralyze",ec:30},
-hyperbeam:   {n:"파괴광선",t:"normal",c:"special",p:150,a:90,pp:5},
+hyperbeam:   {n:"파괴광선",t:"normal",c:"special",p:150,a:90,pp:5,ef:"recharge"},
 explosion:   {n:"대폭발",t:"normal",c:"physical",p:250,a:100,pp:5,ef:"selfdestruct"},
 stomp:       {n:"짓밟기",t:"normal",c:"physical",p:65,a:100,pp:20,ef:"flinch",ec:30},
 slash:       {n:"베어가르기",t:"normal",c:"physical",p:70,a:100,pp:20,ef:"highcrit"},
@@ -946,7 +946,7 @@ peck:        {n:"쪼기",t:"flying",c:"physical",p:35,a:100,pp:35},
 megakick:    {n:"메가톤킥",t:"normal",c:"physical",p:120,a:75,pp:5},
 sing:        {n:"노래하기",t:"normal",c:"status",p:0,a:55,pp:15,ef:"sleep",ec:100},
 softboiled:  {n:"알낳기",t:"normal",c:"status",p:0,a:100,pp:10,ef:"heal"},
-pursuit:     {n:"따라가때리기",t:"dark",c:"physical",p:40,a:100,pp:20},
+pursuit:     {n:"따라가때리기",t:"dark",c:"physical",p:40,a:100,pp:20,ef:"pursuit"},
 rollout:     {n:"구르기",t:"rock",c:"physical",p:30,a:90,pp:20},
 ember:       {n:"불꽃세례",t:"fire",c:"special",p:40,a:100,pp:25,ef:"burn",ec:10},
 flamewheel:  {n:"화염바퀴",t:"fire",c:"physical",p:60,a:100,pp:25,ef:"burn",ec:10},
@@ -1123,7 +1123,7 @@ thrash:      {n:"난동부리기",t:"normal",c:"physical",p:120,a:100,pp:10},
 return_:     {n:"은혜갚기",t:"normal",c:"physical",p:102,a:100,pp:20},
 frustration: {n:"화풀이",t:"normal",c:"physical",p:102,a:100,pp:20},
 falseswipe:  {n:"칼등치기",t:"normal",c:"physical",p:40,a:100,pp:40},
-gigaimpact:  {n:"기가임팩트",t:"normal",c:"physical",p:150,a:90,pp:5},
+gigaimpact:  {n:"기가임팩트",t:"normal",c:"physical",p:150,a:90,pp:5,ef:"recharge"},
 strength:    {n:"괴력",t:"normal",c:"physical",p:80,a:100,pp:15},
 cut:         {n:"풀베기",t:"normal",c:"physical",p:50,a:95,pp:30},
 hypervoice:  {n:"하이퍼보이스",t:"normal",c:"special",p:90,a:100,pp:10},
@@ -1286,7 +1286,7 @@ dracometeor: {n:"용성군",t:"dragon",c:"special",p:130,a:90,pp:5},
 dragonDance: {n:"용의춤",t:"dragon",c:"status",p:0,a:100,pp:20,ef:"dragondance"},
 twister:     {n:"회오리",t:"dragon",c:"special",p:40,a:100,pp:20,ef:"flinch",ec:20},
 spacialrend: {n:"아공절단",t:"dragon",c:"special",p:100,a:95,pp:5,ef:"highcrit"},
-roaroftime:  {n:"시간의포효",t:"dragon",c:"special",p:150,a:90,pp:5},
+roaroftime:  {n:"시간의포효",t:"dragon",c:"special",p:150,a:90,pp:5,ef:"recharge"},
 // ── Dark ──
 knockoff:    {n:"탈취",t:"dark",c:"physical",p:65,a:100,pp:20},
 suckerpunch: {n:"기습",t:"dark",c:"physical",p:70,a:100,pp:5,priority:1},
@@ -1505,7 +1505,7 @@ dizzypunch:{n:"피바라펀치",t:"normal",c:"physical",p:70,a:100,pp:10,ef:"con
 eggbomb:{n:"에그폭탄",t:"normal",c:"physical",p:100,a:75,pp:10},
 boneclub:{n:"뼈다귀치기",t:"ground",c:"physical",p:65,a:85,pp:20},
 lovelyKiss:{n:"악마의키스",t:"normal",c:"status",p:0,a:75,pp:10,ef:"sleep",ec:100},
-rockWrecker:{n:"암석포",t:"rock",c:"physical",p:150,a:90,pp:5},
+rockWrecker:{n:"암석포",t:"rock",c:"physical",p:150,a:90,pp:5,ef:"recharge"},
 snipeshot:{n:"저격",t:"water",c:"special",p:80,a:100,pp:15,ef:"highcrit"},
 astonish:{n:"놀래키기",t:"ghost",c:"physical",p:30,a:100,pp:15,ef:"flinch",ec:30},
 rockTomb:{n:"암석봉인",t:"rock",c:"physical",p:60,a:95,pp:15,ef:"spd_down",ec:100},
@@ -5412,6 +5412,14 @@ function initRecurringTrainers() {
             if (!roads[i].pokemon || roads[i].pokemon.length === 0) continue;
             var recurring = generateRecurringTrainers(roads[i], rIdx);
             var existing = roads[i].trainers || [];
+            // 기존 트레이너 수에 따라 반복 트레이너 수 조정
+            var baseCount = existing.length;
+            var maxRecurring;
+            if (baseCount >= 6) maxRecurring = 2;
+            else if (baseCount >= 4) maxRecurring = 3;
+            else if (baseCount >= 2) maxRecurring = 3;
+            else maxRecurring = 4;
+            if (recurring.length > maxRecurring) recurring = recurring.slice(0, maxRecurring);
             // 반복 트레이너와 이름이 겹치는 기존 트레이너 제외
             var rcNames = {};
             for (var ri = 0; ri < recurring.length; ri++) rcNames[recurring[ri].n] = true;
@@ -5419,7 +5427,9 @@ function initRecurringTrainers() {
             for (var ei = 0; ei < existing.length; ei++) {
                 if (!rcNames[existing[ei].n]) filtered.push(existing[ei]);
             }
-            roads[i].trainers = recurring.concat(filtered);
+            var combined = recurring.concat(filtered);
+            if (combined.length > 8) combined = combined.slice(0, 8);
+            roads[i].trainers = combined;
             rIdx++;
         }
     }
@@ -6351,6 +6361,9 @@ function executeAttack(attacker, defender, moveKey, bd) {
             attacker.currentHp = 0;
             bd.msg.push(an + "은(는) 쓰러졌다!");
         }
+        if (mv.ef === "recharge") {
+            attacker._recharging = true;
+        }
         // 특성: 접촉 반사 (roughskin/ironbarbs)
         if (mv.c === "physical" && result.dmg > 0 && defender.currentHp > 0) {
             var defAbKey = getAbilityKey(defender);
@@ -6442,7 +6455,7 @@ function enemyChooseMove(enemy, defender, isTrainer) {
         if (!mv) continue;
         var score = 0;
         if (mv.c === "status") {
-            score = 30;
+            score = 15;
             // 상태이상기: 상대에게 이미 상태이상이면 낮은 점수
             if (mv.ef === "poison" || mv.ef === "toxic" || mv.ef === "burn" || mv.ef === "paralyze" || mv.ef === "sleep" || mv.ef === "freeze") {
                 if (defender.status) score = 5;
@@ -6547,6 +6560,19 @@ function executeTurn(playerMoveKey) {
                 if (swScore > bestSwScore) { bestSwScore = swScore; bestSw = swi; }
             }
             if (bestSw >= 0 && bestSwScore > 0) {
+                // 좋은 공격기가 있으면 교체하지 않음
+                var _bestAtkScore = 0;
+                for (var _ai = 0; _ai < enemy.moves.length; _ai++) {
+                    if (enemy.moves[_ai].ppLeft <= 0) continue;
+                    var _amv = MOVES[enemy.moves[_ai].key];
+                    if (!_amv || _amv.c === "status") continue;
+                    var _aeff = getTypeEffect(_amv.t, myTypes2);
+                    var _astab = 1;
+                    for (var _ati = 0; _ati < enemyTypes2.length; _ati++) { if (enemyTypes2[_ati] === _amv.t) { _astab = 1.5; break; } }
+                    var _as = (_amv.p || 0) * _aeff * _astab;
+                    if (_as > _bestAtkScore) _bestAtkScore = _as;
+                }
+                if (_bestAtkScore < 80) {
                 trainerSwitched = true;
                 bd.msg.push(bd.trainerName + "은(는) " + enemy.nickname + "을(를) 교체했다!");
                 bd.enemyIdx = bestSw;
@@ -6558,11 +6584,25 @@ function executeTurn(playerMoveKey) {
                     myPoke.statStages.atk = Math.max(-6, myPoke.statStages.atk - 1);
                     bd.msg.push(enemy.nickname + "의 위협! " + myPoke.nickname + "의 공격이 떨어졌다!");
                 }
+                }
             }
         }
     }
     var enemyMoveKey = enemyChooseMove(enemy, myPoke, bd.type === "trainer");
     var enemyMove = MOVES[enemyMoveKey];
+    // 충전(recharge) 체크: 이전 턴에 충전 기술 사용 시 행동 불가
+    if (myPoke._recharging) {
+        bd.msg.push(myPoke.nickname + "은(는) 반동으로 움직일 수 없다!");
+        myPoke._recharging = false;
+        playerMoveKey = null;
+        playerMove = null;
+    }
+    if (enemy._recharging) {
+        bd.msg.push(enemy.nickname + "은(는) 반동으로 움직일 수 없다!");
+        enemy._recharging = false;
+        enemyMoveKey = null;
+        enemyMove = null;
+    }
     var pPri = (playerMove && playerMove.priority) ? playerMove.priority : 0;
     var ePri = (enemyMove && enemyMove.priority) ? enemyMove.priority : 0;
     // 특성: prankster → 변화기술 우선도+1
@@ -6608,12 +6648,12 @@ function executeTurn(playerMoveKey) {
             }
             if (nextAlive >= 0) {
                 grantExp(myPoke, enemy, false);
-                bd.enemyIdx = nextAlive;
-                bd.enemy = bd.enemyParty[bd.enemyIdx];
-                bd.msg.push(bd.trainerName + "은(는) " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")을(를) 내보냈다!");
-                bd.enemy._fakeoutUsed = false; // 교체 시 속이다 리셋
-                // 도감 등록
-                if (player.pokedex) { if (!player.pokedex[bd.enemy.key]) player.pokedex[bd.enemy.key] = "seen"; }
+                bd._pendingNextEnemy = nextAlive;
+                bd.msg.push("상대 " + enemy.nickname + "이(가) 쓰러졌다!");
+                for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
+                gState.phase = "battle_ko_switch";
+                render();
+                return;
             } else {
                 bd.won = true;
                 bd.msg.push(bd.trainerName + "에게 승리했다!");
@@ -7230,6 +7270,8 @@ function render() {
         html = renderItemPartySelect();
     } else if (gState.subScreen === "battlePartySwitch") {
         html = renderBattlePartySwitch();
+    } else if (gState.phase === "battle_ko_switch") {
+        html = renderKOSwitchScreen();
     } else if (gState.subScreen === "log") {
         html = renderLogScreen();
     } else if (gState.phase === "battle") {
@@ -7462,6 +7504,11 @@ function renderOverworld() {
         html += '<span style="font-weight:bold;font-size:13px">' + (road.isCity ? '🏙️ ' : '') + road.n + '</span>';
         if (!road.isCity && road.lv) html += ' <span style="color:#aaa;font-size:11px">Lv.' + road.lv[0] + '~' + road.lv[1] + '</span>';
         if (canFlyTo && !adjacent) html += ' <span style="color:#87ceeb;font-size:10px">🕊️ 공중날기</span>';
+        var _activeSwarm = getActiveSwarm();
+        if (_activeSwarm && _activeSwarm.road === road.id) {
+            var _swPd = POKEDEX[_activeSwarm.pokemon];
+            html += ' <span style="color:#e74c3c;font-size:10px">⚡대량발생' + (_swPd ? ' ' + _swPd.em : '') + '</span>';
+        }
         html += '</div>';
         html += '<div style="display:flex;gap:2px">';
         if (road.hasCenter) html += '<span title="포켓몬센터">🏥</span>';
@@ -7836,6 +7883,21 @@ function renderBattlePartySwitch() {
     if (bd && bd.type !== "trainer") {
         html += '<button class="pk-btn pk-btn-gray pk-btn-sm" data-action="poke_back" style="margin-top:4px">취소</button>';
     }
+    return html;
+}
+
+function renderKOSwitchScreen() {
+    var bd = gState.battleData;
+    var html = '<div style="font-size:13px;color:#ffcc00;margin:6px 0">상대 포켓몬이 쓰러졌다! 교체하시겠습니까?</div>';
+    for (var i = 0; i < player.party.length; i++) {
+        var p = player.party[i]; var pd = POKEDEX[p.key];
+        if (p.currentHp <= 0) continue;
+        if (bd && i === bd.myIdx) continue;
+        html += '<button class="pk-btn pk-btn-dark pk-btn-block" style="justify-content:flex-start;margin:2px 0" data-action="poke_koSwitchAndSwap" data-args="' + i + '">';
+        html += (pd?pd.em:"?") + ' ' + p.nickname + ' Lv.' + p.level + ' HP:' + p.currentHp + '/' + p.stats[0];
+        html += '</button>';
+    }
+    html += '<button class="pk-btn pk-btn-gray pk-btn-block" data-action="poke_koSwitchContinue" style="margin-top:6px">▶ 그대로 진행</button>';
     return html;
 }
 
@@ -8646,7 +8708,8 @@ function moveEffectDesc(ef, ec) {
         spdef_down:"상대 특방↓",spdef_up:"자신 특방↑",spdef_up2:"자신 특방↑↑",
         def_up2:"자신 방어↑↑",spa_up2:"자신 특공↑↑",spd_up2:"자신 특방↑↑",acc_down:"상대 명중↓",
         swordsdance:"자신 공격 크게↑↑",calmmind:"자신 특공·특방↑",bulkup:"자신 공격·방어↑",dragondance:"자신 공격·스피드↑",
-        focusenergy:"급소율 크게 상승",encore:"상대 기술 고정",counter:"받은 물리데미지 2배 반사",mirrorcoat:"받은 특수데미지 2배 반사",trap:"상대 도주/교체 불가"
+        focusenergy:"급소율 크게 상승",encore:"상대 기술 고정",counter:"받은 물리데미지 2배 반사",mirrorcoat:"받은 특수데미지 2배 반사",trap:"상대 도주/교체 불가",
+        recharge:"다음 턴 행동 불가(충전)",pursuit:"교체 시 2배 데미지"
     };
     var desc = descs[ef] || ef;
     if (ec && ec < 100) desc += " " + ec + "%";
@@ -8890,6 +8953,7 @@ window.poke_moveInfo = function(moveKey) {
     info += "PP: " + mv.pp + "\n";
     if (mv.priority) info += "우선도: +" + mv.priority + " (선제공격)\n";
     if (efDesc) info += "효과: " + efDesc + "\n";
+    else if (mv.c !== "status" && mv.p > 0) info += "효과: 기본 " + typeName + " " + catName + " 공격기\n";
     info += "━━━━━━━━━━━━━━━";
     showToast(info, 4000);
 };
@@ -8988,6 +9052,34 @@ window.poke_switchInBattle = async function(idx) {
         }
     }
     var prev = player.party[bd.myIdx];
+    // 따라가때리기(Pursuit) 체크: 교체 시 2배 데미지
+    var _pursuitUsed = false;
+    if (bd.enemy && bd.enemy.currentHp > 0 && prev && prev.currentHp > 0) {
+        var _hasPursuit = false;
+        for (var pi = 0; pi < bd.enemy.moves.length; pi++) {
+            if (bd.enemy.moves[pi].key === "pursuit" && bd.enemy.moves[pi].ppLeft > 0) { _hasPursuit = true; break; }
+        }
+        if (_hasPursuit) {
+            rotateBattleMsg(bd);
+            bd.msg = [];
+            var _origPower = MOVES.pursuit.p;
+            MOVES.pursuit.p = 80;
+            bd.msg.push(bd.enemy.nickname + "의 따라가때리기! (교체 시 2배)");
+            if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, prev, "pursuit", bd);
+            MOVES.pursuit.p = _origPower;
+            _pursuitUsed = true;
+            for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
+            if (prev.currentHp <= 0) {
+                bd.msg = [];
+                bd.msg.push(prev.nickname + "이(가) 쓰러졌다!");
+                for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
+                gState.subScreen = "battlePartySwitch";
+                await saveAll();
+                render();
+                return;
+            }
+        }
+    }
     bd.myIdx = idx;
     // 배틀 참가자 추적
     if (bd.battleParticipants) {
@@ -9022,13 +9114,73 @@ window.poke_switchInBattle = async function(idx) {
         bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
         bd.msg.push(curPoke.nickname + "의 위협! " + bd.enemy.nickname + "의 공격이 떨어졌다!");
     }
-    // 교체 시 적이 공격
-    if (prev && prev.currentHp > 0) {
+    // 교체 시 적이 공격 (따라가때리기 사용 시 스킵)
+    if (prev && prev.currentHp > 0 && !_pursuitUsed) {
         var emk = enemyChooseMove(bd.enemy, player.party[bd.myIdx], bd.type === "trainer");
         if (canAct(bd.enemy, bd)) executeAttack(bd.enemy, player.party[bd.myIdx], emk, bd);
         doStatusDamage(bd.enemy, bd);
     }
     for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
+    await saveAll();
+    render();
+};
+
+// 상대 KO 후 교체 없이 진행
+window.poke_koSwitchContinue = async function() {
+    var bd = gState.battleData;
+    if (!bd || (bd._pendingNextEnemy === undefined && bd._pendingNextEnemy !== 0)) return;
+    bd.enemyIdx = bd._pendingNextEnemy;
+    bd.enemy = bd.enemyParty[bd.enemyIdx];
+    addLog(bd.trainerName + "은(는) " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")을(를) 내보냈다!", "battle");
+    bd.enemy._fakeoutUsed = false;
+    if (player.pokedex) { if (!player.pokedex[bd.enemy.key]) player.pokedex[bd.enemy.key] = "seen"; }
+    delete bd._pendingNextEnemy;
+    gState.phase = "battle";
+    await saveAll();
+    render();
+};
+
+// 상대 KO 후 내 포켓몬 교체 후 진행
+window.poke_koSwitchAndSwap = async function(idx) {
+    idx = parseInt(idx, 10);
+    if (isNaN(idx)) return;
+    var bd = gState.battleData;
+    if (!bd || (bd._pendingNextEnemy === undefined && bd._pendingNextEnemy !== 0)) return;
+    var prev = player.party[bd.myIdx];
+    bd.myIdx = idx;
+    if (bd.battleParticipants) {
+        var alreadyIn = false;
+        for (var bpi = 0; bpi < bd.battleParticipants.length; bpi++) {
+            if (bd.battleParticipants[bpi] === idx) { alreadyIn = true; break; }
+        }
+        if (!alreadyIn) bd.battleParticipants.push(idx);
+    }
+    if (prev && prev.currentHp > 0) {
+        addLog(prev.nickname + "을(를) 교체했다!", "battle");
+        if (getAbilityKey(prev) === "naturalcure" && prev.status) {
+            prev.status = null; prev.statusTurns = 0;
+            addLog(prev.nickname + "의 자연회복! 상태이상이 회복되었다!", "battle");
+        }
+        if (getAbilityKey(prev) === "regenerator") {
+            var rHeal = Math.max(1, Math.floor(prev.stats[0] / 3));
+            prev.currentHp = Math.min(prev.stats[0], prev.currentHp + rHeal);
+            addLog(prev.nickname + "의 재생력! HP가 회복되었다! (+" + rHeal + ")", "battle");
+        }
+    }
+    var curPoke = player.party[bd.myIdx];
+    addLog(player.name + "은(는) " + curPoke.nickname + " (Lv." + curPoke.level + ")을(를) 내보냈다!", "battle");
+    curPoke._fakeoutUsed = false;
+    bd.enemyIdx = bd._pendingNextEnemy;
+    bd.enemy = bd.enemyParty[bd.enemyIdx];
+    addLog(bd.trainerName + "은(는) " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")을(를) 내보냈다!", "battle");
+    bd.enemy._fakeoutUsed = false;
+    if (player.pokedex) { if (!player.pokedex[bd.enemy.key]) player.pokedex[bd.enemy.key] = "seen"; }
+    if (getAbilityKey(curPoke) === "intimidate") {
+        bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
+        addLog(curPoke.nickname + "의 위협! " + bd.enemy.nickname + "의 공격이 떨어졌다!", "battle");
+    }
+    delete bd._pendingNextEnemy;
+    gState.phase = "battle";
     await saveAll();
     render();
 };
