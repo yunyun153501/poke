@@ -917,6 +917,9 @@ alolan_marowak:{n:"텅구리(알로라)",id:105,t:["fire","ghost"],s:[60,80,110,
 // 관동지역 도감 (레츠고피카츄 도감)
 var KANTO_DEX = ["bulbasaur","ivysaur","venusaur","charmander","charmeleon","charizard","squirtle","wartortle","blastoise","caterpie","metapod","butterfree","weedle","kakuna","beedrill","pidgey","pidgeotto","pidgeot","rattata","raticate","spearow","fearow","ekans","arbok","pikachu","raichu","sandshrew","sandslash","nidoranf","nidorina","nidoqueen","nidoranm","nidorino","nidoking","clefairy","clefable","vulpix","ninetales","jigglypuff","wigglytuff","zubat","golbat","oddish","gloom","vileplume","paras","parasect","venonat","venomoth","diglett","dugtrio","meowth","persian","psyduck","golduck","mankey","primeape","growlithe","arcanine","poliwag","poliwhirl","poliwrath","abra","kadabra","alakazam","machop","machoke","machamp","bellsprout","weepinbell","victreebel","tentacool","tentacruel","geodude","graveler","golem","ponyta","rapidash","slowpoke","slowbro","magnemite","magneton","farfetchd","doduo","dodrio","seel","dewgong","grimer","muk","shellder","cloyster","gastly","haunter","gengar","onix","drowzee","hypno","krabby","kingler","voltorb","electrode","exeggcute","exeggutor","cubone","marowak","hitmonlee","hitmonchan","lickitung","koffing","weezing","rhyhorn","rhydon","chansey","tangela","kangaskhan","horsea","seadra","goldeen","seaking","staryu","starmie","mrmime","scyther","jynx","electabuzz","magmar","pinsir","tauros","magikarp","gyarados","lapras","ditto","eevee","vaporeon","jolteon","flareon","porygon","omanyte","omastar","kabuto","kabutops","aerodactyl","snorlax","dratini","dragonair","dragonite","mewtwo","mew","alolan_rattata","alolan_raticate","alolan_raichu","alolan_sandshrew","alolan_sandslash","alolan_vulpix","alolan_ninetales","alolan_diglett","alolan_dugtrio","alolan_meowth","alolan_persian","alolan_geodude","alolan_graveler","alolan_golem","alolan_grimer","alolan_muk","alolan_exeggutor","alolan_marowak","meltan","melmetal"];
 
+// 알로라지역 도감 (울트라썬/문 바탕)
+var ALOLA_DEX = ["rowlet","dartrix","decidueye","litten","torracat","incineroar","popplio","brionne","primarina","pikipek","trumbeak","toucannon","yungoos","gumshoos","rattata","raticate","alolan_rattata","alolan_raticate","caterpie","metapod","butterfree","ledyba","ledian","grubbin","charjabug","vikavolt","pichu","pikachu","raichu","alolan_raichu","growlithe","arcanine","drowzee","hypno","makuhita","hariyama","smeargle","cutiefly","ribombee","alolan_meowth","alolan_persian","abra","kadabra","alakazam","zubat","golbat","crobat","diglett","dugtrio","alolan_diglett","alolan_dugtrio","noibat","noivern","roggenrola","boldore","gigalith","carbink","rockruff","lycanroc","machop","machoke","machamp","eevee","vaporeon","jolteon","flareon","espeon","umbreon","leafeon","glaceon","sylveon","mudbray","mudsdale","lillipup","herdier","stoutland","crabrawler","crabominable","oricorio","fomantis","lurantis","salandit","salazzle","stufful","bewear","bounsweet","steenee","tsareena","comfey","dewpider","araquanid","bonsly","sudowoodo","alolan_grimer","alolan_muk","sandygast","palossand","cubone","marowak","alolan_marowak","trapinch","vibrava","flygon","sandile","krokorok","krookodile","komala","turtonator","pancham","pangoro","skarmory","alolan_geodude","alolan_graveler","alolan_golem","alolan_vulpix","alolan_ninetales","passimian","oranguru","bruxish","mimikyu","minior","beldum","metang","metagross","clefairy","clefable","ditto","elekid","electabuzz","magneton","magnezone","togedemaru","jangmoo","hakamoo","kommoo","murkrow","honchkrow","sneasel","weavile","vanillite","vanillish","vanilluxe","snorunt","glalie","froslass","absol","riolu","lucario","drampa","alolan_sandshrew","alolan_sandslash","wishiwashi","mareanie","toxapex","morelull","shiinotic","wimpod","golisopod","pyukumuku","dhelmise","type_null","silvally","magikarp","gyarados","lapras","snorlax","dratini","dragonair","dragonite","tapukoko","tapulele","tapubulu","tapufini","cosmog","cosmoem","solgaleo","lunala","nihilego","buzzwole","pheromosa","xurkitree","celesteela","kartana","guzzlord","necrozma","magearna","marshadow","poipole","naganadel","stakataka","blacephalon","zeraora"];
+
 // ═══════════════════════════════════════════════
 // ⚔️ 기술 데이터베이스
 // ═══════════════════════════════════════════════
@@ -4257,7 +4260,7 @@ async function loadAll() {
             }
             // badges 형식 마이그레이션 (숫자→객체)
             if (typeof player.badges === 'number' || !player.badges) {
-                player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[]};
+                player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[], alola:[]};
             }
             if (!player.badges.kanto) player.badges.kanto = [];
             if (!player.badges.johto) player.badges.johto = [];
@@ -4265,6 +4268,7 @@ async function loadAll() {
             if (!player.badges.sinnoh) player.badges.sinnoh = [];
             if (!player.badges.unova) player.badges.unova = [];
             if (!player.badges.kalos) player.badges.kalos = [];
+            if (!player.badges.alola) player.badges.alola = [];
             if (player.routeIdx !== undefined && player.roadIdx === undefined) {
                 player.roadIdx = player.routeIdx;
                 delete player.routeIdx;
@@ -4349,7 +4353,7 @@ async function loadSlot(slotNum) {
                 player.visitedRoads[player.region + "_" + player.roadIdx] = true;
             }
             if (typeof player.badges === 'number' || !player.badges) {
-                player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[]};
+                player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[], alola:[]};
             }
             if (!player.badges.kanto) player.badges.kanto = [];
             if (!player.badges.johto) player.badges.johto = [];
@@ -4357,6 +4361,7 @@ async function loadSlot(slotNum) {
             if (!player.badges.sinnoh) player.badges.sinnoh = [];
             if (!player.badges.unova) player.badges.unova = [];
             if (!player.badges.kalos) player.badges.kalos = [];
+            if (!player.badges.alola) player.badges.alola = [];
             for (var mi = 0; mi < player.party.length; mi++) {
                 if (player.party[mi].heldItem === undefined) player.party[mi].heldItem = null;
                 if (player.party[mi].ab === undefined) {
@@ -4837,7 +4842,7 @@ function getAvailableMythicals() {
             var seen = Object.keys(player.pokedex || {}).length;
             if (seen >= m.reqCount) available.push(m);
         } else if (m.reqType === "totalBadges") {
-            var total = (player.badges.kanto ? player.badges.kanto.length : 0) + (player.badges.johto ? player.badges.johto.length : 0) + (player.badges.hoenn ? player.badges.hoenn.length : 0) + (player.badges.sinnoh ? player.badges.sinnoh.length : 0) + (player.badges.unova ? player.badges.unova.length : 0) + (player.badges.kalos ? player.badges.kalos.length : 0);
+            var total = (player.badges.kanto ? player.badges.kanto.length : 0) + (player.badges.johto ? player.badges.johto.length : 0) + (player.badges.hoenn ? player.badges.hoenn.length : 0) + (player.badges.sinnoh ? player.badges.sinnoh.length : 0) + (player.badges.unova ? player.badges.unova.length : 0) + (player.badges.kalos ? player.badges.kalos.length : 0) + (player.badges.alola ? player.badges.alola.length : 0);
             if (total >= m.reqCount) available.push(m);
         }
     }
@@ -5006,6 +5011,18 @@ var SWARM_DATA = {
         {road:"u_r29", pokemon:"braviary", lv:[42,50]},
         {road:"u_r30", pokemon:"mandibuzz", lv:[42,50]},
         {road:"u_r34", pokemon:"zoroark", lv:[48,56]}
+    ],
+    alola: [
+        {road:"a_r1", pokemon:"pichu", lv:[3,6]},
+        {road:"a_r2", pokemon:"bonsly", lv:[5,9]},
+        {road:"a_r3", pokemon:"riolu", lv:[8,12]},
+        {road:"a_r4", pokemon:"morelull", lv:[12,16]},
+        {road:"a_r5", pokemon:"wimpod", lv:[16,20]},
+        {road:"a_r6", pokemon:"pyukumuku", lv:[18,23]},
+        {road:"a_r7", pokemon:"mareanie", lv:[24,28]},
+        {road:"a_r8", pokemon:"ditto", lv:[27,32]},
+        {road:"a_r9", pokemon:"golisopod", lv:[40,50]},
+        {road:"a_r10", pokemon:"beldum", lv:[48,55]}
     ]
 };
 
@@ -5110,7 +5127,13 @@ var FISHING_DATA = {
 "u_r15":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:20},{k:"basculin",w:40},{k:"stunfisk",w:40}]},super:{lv:[25,45],pokemon:[{k:"gyarados",w:15},{k:"basculin",w:20},{k:"stunfisk",w:20},{k:"seismitoad",w:15},{k:"alomomola",w:15},{k:"jellicent",w:15}]}},
 "u_c13":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:20},{k:"basculin",w:35},{k:"frillish",w:45}]},super:{lv:[30,50],pokemon:[{k:"gyarados",w:15},{k:"basculin",w:20},{k:"jellicent",w:20},{k:"alomomola",w:20},{k:"frillish",w:15},{k:"wailmer",w:10}]}},
 "u_r33":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:20},{k:"basculin",w:40},{k:"frillish",w:40}]},super:{lv:[30,50],pokemon:[{k:"gyarados",w:15},{k:"basculin",w:20},{k:"jellicent",w:20},{k:"alomomola",w:15},{k:"frillish",w:15},{k:"wailmer",w:15}]}},
-"u_r38":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:20},{k:"basculin",w:40},{k:"frillish",w:40}]},super:{lv:[30,50],pokemon:[{k:"gyarados",w:15},{k:"basculin",w:20},{k:"jellicent",w:20},{k:"alomomola",w:20},{k:"frillish",w:15},{k:"wailmer",w:10}]}}
+"u_r38":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:20},{k:"basculin",w:40},{k:"frillish",w:40}]},super:{lv:[30,50],pokemon:[{k:"gyarados",w:15},{k:"basculin",w:20},{k:"jellicent",w:20},{k:"alomomola",w:20},{k:"frillish",w:15},{k:"wailmer",w:10}]}},
+// ── 알로라 ──
+"a_c2":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,20],pokemon:[{k:"magikarp",w:25},{k:"wishiwashi",w:40},{k:"luvdisc",w:35}]},super:{lv:[20,35],pokemon:[{k:"gyarados",w:15},{k:"wishiwashi",w:25},{k:"mareanie",w:20},{k:"bruxish",w:20},{k:"corsola",w:20}]}},
+"a_c3":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:20},{k:"wishiwashi",w:40},{k:"luvdisc",w:40}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"wishiwashi",w:20},{k:"mareanie",w:20},{k:"toxapex",w:10},{k:"bruxish",w:15},{k:"corsola",w:20}]}},
+"a_c5":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:20},{k:"wishiwashi",w:35},{k:"luvdisc",w:45}]},super:{lv:[30,50],pokemon:[{k:"gyarados",w:15},{k:"wishiwashi",w:20},{k:"toxapex",w:15},{k:"bruxish",w:15},{k:"dhelmise",w:10},{k:"mareanie",w:15},{k:"wailmer",w:10}]}},
+"a_r5":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,25],pokemon:[{k:"magikarp",w:25},{k:"dewpider",w:40},{k:"wishiwashi",w:35}]},super:{lv:[25,40],pokemon:[{k:"gyarados",w:15},{k:"araquanid",w:20},{k:"wishiwashi",w:20},{k:"mareanie",w:20},{k:"bruxish",w:15},{k:"corsola",w:10}]}},
+"a_r7":{old:{lv:[5,10],pokemon:[{k:"magikarp",w:100}]},good:{lv:[10,30],pokemon:[{k:"magikarp",w:20},{k:"wishiwashi",w:40},{k:"luvdisc",w:40}]},super:{lv:[30,45],pokemon:[{k:"gyarados",w:15},{k:"wishiwashi",w:20},{k:"bruxish",w:20},{k:"mareanie",w:15},{k:"toxapex",w:15},{k:"dhelmise",w:15}]}}
 };
 
 // ===== 반복 등장 트레이너 시스템 =====
@@ -6588,7 +6611,7 @@ function grantExp(myPoke, enemy, isTrainerWin) {
 
 function checkKeyItemReward(bd) {
     var total = 0;
-    var regions = ["kanto","johto","hoenn","sinnoh","unova","kalos"];
+    var regions = ["kanto","johto","hoenn","sinnoh","unova","kalos","alola"];
     for (var r = 0; r < regions.length; r++) {
         total += (player.badges[regions[r]] ? player.badges[regions[r]].length : 0);
     }
@@ -7142,10 +7165,11 @@ function renderStarterSelect() {
         hoenn: [{k:"treecko",n:"나무지기",t:"풀",em:"🌿"},{k:"torchic",n:"아차모",t:"불꽃",em:"🔥"},{k:"mudkip",n:"물짱이",t:"물",em:"💧"}],
         sinnoh: [{k:"turtwig",n:"모부기",t:"풀",em:"🌿"},{k:"chimchar",n:"불꽃숭이",t:"불꽃",em:"🔥"},{k:"piplup",n:"팽도리",t:"물",em:"💧"}],
         unova: [{k:"snivy",n:"주리비얀",t:"풀",em:"🌿"},{k:"tepig",n:"뚜꾸리",t:"불꽃",em:"🐷"},{k:"oshawott",n:"수댕이",t:"물",em:"🦦"}],
-        kalos: [{k:"chespin",n:"도치마론",t:"풀",em:"🌰"},{k:"fennekin",n:"푸호꼬",t:"불꽃",em:"🦊"},{k:"froakie",n:"개구마르",t:"물",em:"🐸"}]
+        kalos: [{k:"chespin",n:"도치마론",t:"풀",em:"🌰"},{k:"fennekin",n:"푸호꼬",t:"불꽃",em:"🦊"},{k:"froakie",n:"개구마르",t:"물",em:"🐸"}],
+        alola: [{k:"rowlet",n:"나몰빼미",t:"풀/비행",em:"🦉"},{k:"litten",n:"냐비",t:"불꽃",em:"🐱"},{k:"popplio",n:"누리공",t:"물",em:"🦭"}]
     };
     var starters = startersByRegion[region] || startersByRegion.kanto;
-    var regionNameMap = {kanto:"관동",johto:"성도",hoenn:"호연",sinnoh:"신오",unova:"하나",kalos:"칼로스"};
+    var regionNameMap = {kanto:"관동",johto:"성도",hoenn:"호연",sinnoh:"신오",unova:"하나",kalos:"칼로스",alola:"알로라"};
     var html = '<div style="text-align:center;padding:10px 0">';
     html += '<div style="font-size:18px;margin-bottom:4px">🎒 첫 파트너 포켓몬 선택</div>';
     html += '<div style="color:#aaa;font-size:12px;margin-bottom:12px">' + (regionNameMap[region] || "관동") + ' 지방에서 모험 시작!</div>';
@@ -7157,6 +7181,7 @@ function renderStarterSelect() {
     html += '<button class="pk-btn ' + (region==="sinnoh"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="sinnoh">❄️ 신오</button>';
     html += '<button class="pk-btn ' + (region==="unova"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="unova">🏙️ 하나</button>';
     html += '<button class="pk-btn ' + (region==="kalos"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="kalos">🗼 칼로스</button>';
+    html += '<button class="pk-btn ' + (region==="alola"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_setStarterRegion" data-args="alola">🌺 알로라</button>';
     html += '</div>';
     html += '<div style="display:flex;gap:8px;justify-content:center">';
     for (var i = 0; i < starters.length; i++) {
@@ -7184,6 +7209,7 @@ function renderOverworld() {
     html += '<button class="pk-btn ' + (player.region==="sinnoh"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="sinnoh">❄️ 신오</button>';
     html += '<button class="pk-btn ' + (player.region==="unova"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="unova">🏙️ 하나</button>';
     html += '<button class="pk-btn ' + (player.region==="kalos"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="kalos">🗼 칼로스</button>';
+    html += '<button class="pk-btn ' + (player.region==="alola"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="alola">🌺 알로라</button>';
     html += '</div>';
     // 상단 상태바
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px">';
@@ -7198,8 +7224,9 @@ function renderOverworld() {
     var sBadges = player.badges.sinnoh ? player.badges.sinnoh.length : 0;
     var uBadges = player.badges.unova ? player.badges.unova.length : 0;
     var xBadges = player.badges.kalos ? player.badges.kalos.length : 0;
+    var aBadges = player.badges.alola ? player.badges.alola.length : 0;
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:4px 10px;font-size:10px">';
-    html += '<span>🏅 관동 ' + kBadges + '/8 | 성도 ' + jBadges + '/8 | 호연 ' + hBadges + '/8 | 신오 ' + sBadges + '/8 | 하나 ' + uBadges + '/8 | 칼로스 ' + xBadges + '/8</span>';
+    html += '<span>🏅 관동 ' + kBadges + '/8 | 성도 ' + jBadges + '/8 | 호연 ' + hBadges + '/8 | 신오 ' + sBadges + '/8 | 하나 ' + uBadges + '/8 | 칼로스 ' + xBadges + '/8 | 알로라 ' + aBadges + '/4</span>';
     html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_toggleClock">🕐 시계</button>';
     html += '</div>';
     // 시계 패널
@@ -8388,13 +8415,15 @@ function renderGymScreen() {
 function renderBadgeScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">🏅 뱃지 컬렉션</div>';
-    var regions = ["kanto", "johto", "hoenn", "sinnoh", "unova", "kalos"];
-    var regionNames = {kanto: "관동 지방", johto: "성도 지방", hoenn: "호연 지방", sinnoh: "신오 지방", unova: "하나 지방", kalos: "칼로스 지방"};
+    var regions = ["kanto", "johto", "hoenn", "sinnoh", "unova", "kalos", "alola"];
+    var regionNames = {kanto: "관동 지방", johto: "성도 지방", hoenn: "호연 지방", sinnoh: "신오 지방", unova: "하나 지방", kalos: "칼로스 지방", alola: "알로라 지방"};
+    var regionMaxBadges = {kanto:8, johto:8, hoenn:8, sinnoh:8, unova:8, kalos:8, alola:4};
     for (var r = 0; r < regions.length; r++) {
         var rk = regions[r];
         var gymList = GYMS[rk];
         var badges = player.badges[rk] || [];
-        html += '<div style="font-size:14px;font-weight:bold;color:#f5c518;margin:10px 0 4px">' + regionNames[rk] + ' (' + badges.length + '/8)</div>';
+        var maxB = regionMaxBadges[rk] || gymList.length;
+        html += '<div style="font-size:14px;font-weight:bold;color:#f5c518;margin:10px 0 4px">' + regionNames[rk] + ' (' + badges.length + '/' + maxB + ')</div>';
         html += '<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center">';
         for (var g = 0; g < gymList.length; g++) {
             var gym = gymList[g];
