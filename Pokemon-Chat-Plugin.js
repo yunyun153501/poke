@@ -6002,6 +6002,11 @@ function executeAttack(attacker, defender, moveKey, bd) {
     var an = attacker.nickname;
     var dn = defender.nickname;
     bd.msg.push(an + "의 " + mv.n + "!");
+    // 속이다(fakeout) 첫 턴 제한: 등장한 턴에만 사용 가능
+    if (moveKey === "fakeout" && attacker._fakeoutUsed) {
+        bd.msg.push("그러나 실패했다!");
+        return;
+    }
     // 특성: protean → 기술 사용 전 타입 변환
     if (getAbilityKey(attacker) === "protean" && MOVES[moveKey]) {
         var newType = MOVES[moveKey].t;
@@ -6137,6 +6142,7 @@ function executeAttack(attacker, defender, moveKey, bd) {
                             bd.msg.push(dn + "의 " + (defAbKey === "wimpout" ? "도망태세" : "위기회피") + "! 교체한다!");
                             bd.enemyIdx = nextIdx;
                             bd.enemy = bd.enemyParty[bd.enemyIdx];
+                            bd.enemy._fakeoutUsed = false; // 교체 시 속이다 리셋
                             bd.msg.push(bd.trainerName + "은(는) " + bd.enemy.nickname + "을(를) 내보냈다!");
                         }
                     } else {
@@ -6376,6 +6382,7 @@ function executeTurn(playerMoveKey) {
                 bd.enemy = bd.enemyParty[bd.enemyIdx];
                 enemy = bd.enemy;
                 bd.msg.push(bd.trainerName + "은(는) " + enemy.nickname + " (Lv." + enemy.level + ")을(를) 내보냈다!");
+                enemy._fakeoutUsed = false; // 교체 시 속이다 리셋
                 if (getAbilityKey(enemy) === "intimidate") {
                     myPoke.statStages.atk = Math.max(-6, myPoke.statStages.atk - 1);
                     bd.msg.push(enemy.nickname + "의 위협! " + myPoke.nickname + "의 공격이 떨어졌다!");
@@ -6414,6 +6421,12 @@ function executeTurn(playerMoveKey) {
         doStatusDamage(second, bd);
     }
     }
+    // 턴 종료 시 풀죽음 플래그 클리어 (느린 쪽이 건 풀죽음이 다음 턴에 영향 주는 버그 방지)
+    myPoke._flinched = false;
+    enemy._flinched = false;
+    // 속이다(fakeout) 첫 턴 이후 사용 불가 처리
+    myPoke._fakeoutUsed = true;
+    enemy._fakeoutUsed = true;
     // 적 쓰러짐
     if (enemy.currentHp <= 0) {
         if (bd.type === "trainer" && bd.enemyParty) {
@@ -6422,6 +6435,7 @@ function executeTurn(playerMoveKey) {
                 grantExp(myPoke, enemy, false);
                 bd.enemy = bd.enemyParty[bd.enemyIdx];
                 bd.msg.push(bd.trainerName + "은(는) " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")을(를) 내보냈다!");
+                bd.enemy._fakeoutUsed = false; // 교체 시 속이다 리셋
                 // 도감 등록
                 if (player.pokedex) { if (!player.pokedex[bd.enemy.key]) player.pokedex[bd.enemy.key] = "seen"; }
             } else {
@@ -7087,6 +7101,11 @@ function render() {
     }
     body.innerHTML = html;
     bindHandlers(body);
+    // PC 검색 input 이벤트 바인딩 (inline oninput 대신)
+    var pcSearchEl = body.querySelector("#pk-pc-search");
+    if (pcSearchEl) {
+        pcSearchEl.addEventListener("input", function() { poke_pcSearch(this.value); });
+    }
     var battleMsgEl = body.querySelector(".pk-battle-msg");
     if (battleMsgEl) battleMsgEl.scrollTop = battleMsgEl.scrollHeight;
 }
@@ -7632,7 +7651,7 @@ function renderPCScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">💻 PC 보관함 (' + player.pc.length + ')</div>';
     // search bar
-    html += '<div style="margin:6px 0"><input type="text" id="pk-pc-search" placeholder="검색 (이름/종류)" value="' + gState.pcSearch.replace(/"/g, '&quot;') + '" style="width:100%;padding:4px 8px;border:1px solid #555;border-radius:4px;background:#222;color:#eee;font-size:12px" oninput="poke_pcSearch(this.value)" /></div>';
+    html += '<div style="margin:6px 0"><input type="text" id="pk-pc-search" placeholder="검색 (이름/종류)" value="' + gState.pcSearch.replace(/"/g, '&quot;') + '" style="width:100%;padding:4px 8px;border:1px solid #555;border-radius:4px;background:#222;color:#eee;font-size:12px" /></div>';
     if (player.pc.length === 0) { html += '<div style="color:#aaa;text-align:center;margin:20px 0">비어있습니다</div>'; return html; }
     var searchTerm = gState.pcSearch.toLowerCase();
     for (var box = 0; box < BOX_COUNT; box++) {
@@ -7650,7 +7669,7 @@ function renderPCScreen() {
         if (searchTerm && boxItems.length === 0) continue;
         var isOpen = !!gState.pcBoxOpen[box];
         html += '<div class="pk-card" style="padding:6px 8px;margin-bottom:4px">';
-        html += '<div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="poke_togglePCBox(' + box + ')">';
+        html += '<div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer" data-action="poke_togglePCBox" data-args="' + box + '">';
         html += '<span style="font-weight:bold;font-size:13px">' + (isOpen ? '▼' : '▶') + ' 보관함 ' + (box + 1) + ' <span style="color:#aaa;font-size:11px">(' + (endIdx - startIdx) + ')</span></span>';
         html += '</div>';
         if (isOpen) {
@@ -8721,6 +8740,7 @@ window.poke_switchInBattle = async function(idx) {
     }
     var curPoke = player.party[bd.myIdx];
     bd.msg.push(player.name + "은(는) " + curPoke.nickname + " (Lv." + curPoke.level + ")을(를) 내보냈다!");
+    curPoke._fakeoutUsed = false; // 교체 시 속이다 리셋
     // 특성: intimidate → 등장 시 상대 공격 -1
     if (getAbilityKey(curPoke) === "intimidate") {
         bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
@@ -9240,6 +9260,7 @@ window.poke_renamePokemon = async function(idx) {
 };
 
 window.poke_togglePCBox = function(box) {
+    box = parseInt(box, 10);
     if (!gState.pcBoxOpen) gState.pcBoxOpen = {};
     gState.pcBoxOpen[box] = !gState.pcBoxOpen[box];
     render();
