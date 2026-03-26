@@ -1917,20 +1917,20 @@ johto: {
   {k:"zubat",w:40},
   {k:"slowpoke",w:60}
 ,{k:"cleffa",w:5}],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:1,trainers:[
-  {n:"로켓단",em:"🦹",pokemon:[
+  {n:"로켓단 조무래기",em:"🦹",pokemon:[
     {k:"rattata",l:7},
     {k:"zubat",l:8}
   ],reward:240},
-  {n:"로켓단",em:"🦹",pokemon:[
+  {n:"로켓단 조무래기",em:"🦹",pokemon:[
     {k:"zubat",l:8},
     {k:"ekans",l:9}
   ],reward:270},
-  {n:"로켓단",em:"🦹",pokemon:[
+  {n:"로켓단 조무래기",em:"🦹",pokemon:[
     {k:"rattata",l:8},
     {k:"zubat",l:9},
     {k:"koffing",l:9}
   ],reward:270},
-  {n:"로켓단",em:"🦹",pokemon:[
+  {n:"로켓단 간부",em:"🦹",pokemon:[
     {k:"koffing",l:10},
     {k:"zubat",l:10}
   ],reward:300}
@@ -4108,6 +4108,7 @@ function createNewPlayer(name, starterKey, region) {
         region: region || "kanto",
         pokedex: dex,
         regionSaves: saves,
+        saveVersion: CURRENT_SAVE_VERSION,
         // ── 활성 지역 데이터 (현재 지역에서 언팩) ──
         party: regionSave.party,
         pc: regionSave.pc,
@@ -4263,20 +4264,62 @@ function getStatMult(stage) {
 // 💾 세이브 / 로드
 // ═══════════════════════════════════════════════
 
-// 공통 마이그레이션 함수 (로드 후 호출)
-function migratePlayerData() {
-    if (!player) return;
-    // v1→v2 기본 필드 마이그레이션
-    if (!player.pokedex) player.pokedex = {};
-    if (!player.defeatedTrainers) player.defeatedTrainers = {};
-    if (player.defeatedTrainers) {
-        for (var dtk in player.defeatedTrainers) {
-            if (typeof player.defeatedTrainers[dtk] === "number") {
-                player.defeatedTrainers[dtk] = { day: player.defeatedTrainers[dtk], firstDay: player.defeatedTrainers[dtk], tier: 0 };
-            }
+// 포켓몬 인스턴스 마이그레이션 (heldItem, ab 등 새 필드 보정)
+function _migratePokemonArray(arr) {
+    if (!arr) return;
+    for (var mi = 0; mi < arr.length; mi++) {
+        var p = arr[mi];
+        if (!p || !p.key) continue;
+        if (p.heldItem === undefined) p.heldItem = null;
+        if (p.ab === undefined) {
+            var _pd = POKEDEX[p.key];
+            if (_pd && _pd.ab) p.ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
+        }
+        if (p.statStages === undefined) p.statStages = {atk:0,def:0,spatk:0,spdef:0,spd:0,acc:0,eva:0};
+        if (p.status === undefined) p.status = null;
+        if (p.statusTurns === undefined) p.statusTurns = 0;
+    }
+}
+
+// 지역 세이브 필드 보정 (누락 필드에 기본값 채우기)
+function _ensureRegionSaveFields(rs) {
+    if (!rs) return;
+    if (!rs.party) rs.party = [];
+    if (!rs.pc) rs.pc = [];
+    if (!rs.bag) rs.bag = {pokeball:10, potion:5};
+    if (rs.gold === undefined) rs.gold = 3000;
+    if (rs.roadIdx === undefined) rs.roadIdx = 0;
+    if (!rs.badges) rs.badges = [];
+    if (!rs.defeatedTrainers) rs.defeatedTrainers = {};
+    if (!rs.defeatedGyms) rs.defeatedGyms = {};
+    if (!rs.lostToTrainers) rs.lostToTrainers = {};
+    if (rs.day === undefined) rs.day = 1;
+    if (rs.timeOfDay === undefined || rs.timeOfDay < 60) rs.timeOfDay = 480;
+    if (rs.battleCount === undefined) rs.battleCount = 0;
+    if (!rs.caughtLegendaries) rs.caughtLegendaries = {};
+    if (rs.roamingLocation === undefined) rs.roamingLocation = null;
+    if (!rs.visitedRoads) rs.visitedRoads = {};
+    // defeatedTrainers 형식 마이그레이션 (숫자→객체)
+    for (var dtk in rs.defeatedTrainers) {
+        if (typeof rs.defeatedTrainers[dtk] === "number") {
+            rs.defeatedTrainers[dtk] = { day: rs.defeatedTrainers[dtk], firstDay: rs.defeatedTrainers[dtk], tier: 0 };
         }
     }
+    // 포켓몬 인스턴스 마이그레이션
+    _migratePokemonArray(rs.party);
+    _migratePokemonArray(rs.pc);
+}
+
+// 공통 마이그레이션 함수 (로드 후 호출 - 모든 버전의 세이브를 최신으로 변환)
+var CURRENT_SAVE_VERSION = 3;
+function migratePlayerData() {
+    if (!player) return;
+    var allRegions = ["kanto","johto","hoenn","sinnoh","unova","kalos","alola"];
+    // ── 기본 필드 보정 (모든 버전) ──
+    if (!player.pokedex) player.pokedex = {};
+    if (!player.defeatedTrainers) player.defeatedTrainers = {};
     if (!player.defeatedGyms) player.defeatedGyms = {};
+    if (!player.lostToTrainers) player.lostToTrainers = {};
     if (player.day === undefined) player.day = 1;
     if (player.timeOfDay === undefined || player.timeOfDay < 60) player.timeOfDay = 480;
     if (player.battleCount === undefined) player.battleCount = 0;
@@ -4284,48 +4327,34 @@ function migratePlayerData() {
     if (player.roamingLocation === undefined) player.roamingLocation = null;
     if (!player.visitedRoads) {
         player.visitedRoads = {};
-        player.visitedRoads[player.region + "_" + player.roadIdx] = true;
+        if (player.region && player.roadIdx !== undefined) player.visitedRoads[player.region + "_" + player.roadIdx] = true;
+    }
+    // routeIdx→roadIdx 이름 변경
+    if (player.routeIdx !== undefined && player.roadIdx === undefined) {
+        player.roadIdx = player.routeIdx;
+        delete player.routeIdx;
+    }
+    // defeatedTrainers 형식 마이그레이션 (숫자→객체)
+    for (var dtk in player.defeatedTrainers) {
+        if (typeof player.defeatedTrainers[dtk] === "number") {
+            player.defeatedTrainers[dtk] = { day: player.defeatedTrainers[dtk], firstDay: player.defeatedTrainers[dtk], tier: 0 };
+        }
     }
     // badges 형식 마이그레이션
     if (typeof player.badges === 'number' || !player.badges) {
         player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[], alola:[]};
     }
-    if (!player.badges.kanto) player.badges.kanto = [];
-    if (!player.badges.johto) player.badges.johto = [];
-    if (!player.badges.hoenn) player.badges.hoenn = [];
-    if (!player.badges.sinnoh) player.badges.sinnoh = [];
-    if (!player.badges.unova) player.badges.unova = [];
-    if (!player.badges.kalos) player.badges.kalos = [];
-    if (!player.badges.alola) player.badges.alola = [];
-    if (player.routeIdx !== undefined && player.roadIdx === undefined) {
-        player.roadIdx = player.routeIdx;
-        delete player.routeIdx;
+    for (var bi = 0; bi < allRegions.length; bi++) {
+        if (!player.badges[allRegions[bi]]) player.badges[allRegions[bi]] = [];
     }
-    // heldItem/ab 마이그레이션
-    if (player.party) {
-        for (var mi = 0; mi < player.party.length; mi++) {
-            if (player.party[mi].heldItem === undefined) player.party[mi].heldItem = null;
-            if (player.party[mi].ab === undefined) {
-                var _pd = POKEDEX[player.party[mi].key];
-                if (_pd && _pd.ab) player.party[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
-            }
-        }
-    }
-    if (player.pc) {
-        for (var mi = 0; mi < player.pc.length; mi++) {
-            if (player.pc[mi].heldItem === undefined) player.pc[mi].heldItem = null;
-            if (player.pc[mi].ab === undefined) {
-                var _pd = POKEDEX[player.pc[mi].key];
-                if (_pd && _pd.ab) player.pc[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
-            }
-        }
-    }
-    // v2→v3 지역별 독립 세이브 마이그레이션
-    var allRegions = ["kanto","johto","hoenn","sinnoh","unova","kalos","alola"];
+    // 활성 파티/PC 포켓몬 마이그레이션
+    _migratePokemonArray(player.party);
+    _migratePokemonArray(player.pc);
+
+    // ── v2→v3: 지역별 독립 세이브 생성 ──
     if (!player.regionSaves) {
         var curRegion = player.region || "kanto";
         player.regionSaves = {};
-        // 현재 데이터를 현재 지역의 세이브로 팩
         player.regionSaves[curRegion] = {
             party: player.party || [],
             pc: player.pc || [],
@@ -4343,7 +4372,6 @@ function migratePlayerData() {
             roamingLocation: player.roamingLocation || null,
             visitedRoads: player.visitedRoads || {}
         };
-        // 다른 지역에 뱃지가 있으면 최소한 빈 세이브 생성 (뱃지 보존)
         for (var ri = 0; ri < allRegions.length; ri++) {
             var rk = allRegions[ri];
             if (rk !== curRegion && player.badges[rk] && player.badges[rk].length > 0) {
@@ -4357,15 +4385,22 @@ function migratePlayerData() {
             }
         }
     }
-    // regionSaves에서 현재 지역의 badges를 badges 객체에 동기화
-    if (player.regionSaves) {
-        for (var ri2 = 0; ri2 < allRegions.length; ri2++) {
-            var rk2 = allRegions[ri2];
-            if (player.regionSaves[rk2] && player.regionSaves[rk2].badges) {
-                player.badges[rk2] = player.regionSaves[rk2].badges;
-            }
+
+    // ── 모든 regionSaves 보정 (업데이트 후에도 안전하게) ──
+    for (var rKey in player.regionSaves) {
+        _ensureRegionSaveFields(player.regionSaves[rKey]);
+    }
+
+    // regionSaves에서 badges를 badges 객체에 동기화
+    for (var ri2 = 0; ri2 < allRegions.length; ri2++) {
+        var rk2 = allRegions[ri2];
+        if (player.regionSaves[rk2] && player.regionSaves[rk2].badges) {
+            player.badges[rk2] = player.regionSaves[rk2].badges;
         }
     }
+
+    // 세이브 버전 기록
+    player.saveVersion = CURRENT_SAVE_VERSION;
 }
 
 async function saveAll() {
@@ -4420,7 +4455,13 @@ async function loadAll() {
             player = JSON.parse(p);
             gState = JSON.parse(s);
             _eventLog = gState.eventLog || [];
+            var oldVer = player.saveVersion || 0;
             migratePlayerData();
+            // 마이그레이션 발생 시 즉시 재저장 (업데이트 후 데이터 보존)
+            if (oldVer < CURRENT_SAVE_VERSION) {
+                console.log(PLUGIN, "세이브 마이그레이션 완료: v" + oldVer + " → v" + CURRENT_SAVE_VERSION);
+                try { await saveAll(); } catch(e3) {}
+            }
             return true;
         }
     } catch(e) { console.error(PLUGIN, "load fail:", e); }
@@ -4466,7 +4507,13 @@ async function loadSlot(slotNum) {
             player = JSON.parse(p);
             gState = JSON.parse(s);
             _eventLog = gState.eventLog || [];
+            var oldVer = player.saveVersion || 0;
             migratePlayerData();
+            // 마이그레이션 발생 시 슬롯도 재저장
+            if (oldVer < CURRENT_SAVE_VERSION) {
+                console.log(PLUGIN, "슬롯 " + slotNum + " 마이그레이션 완료: v" + oldVer + " → v" + CURRENT_SAVE_VERSION);
+                try { await saveSlot(slotNum); await saveAll(); } catch(e3) {}
+            }
             return true;
         }
     } catch(e) { console.error(PLUGIN, "slot load fail:", e); }
