@@ -1079,7 +1079,7 @@ energyball:  {n:"에너지볼",t:"grass",c:"special",p:90,a:100,pp:10,ef:"spdef_
 airslash:    {n:"에어슬래시",t:"flying",c:"special",p:75,a:95,pp:15,ef:"flinch",ec:30},
 bravebird:   {n:"브레이브버드",t:"flying",c:"physical",p:120,a:100,pp:15,ef:"recoil"},
 wildcharge:  {n:"와일드볼트",t:"electric",c:"physical",p:90,a:100,pp:15,ef:"recoil"},
-stealthrock: {n:"스텔스록",t:"rock",c:"status",p:0,a:0,pp:20},
+stealthrock: {n:"스텔스록",t:"rock",c:"status",p:0,a:0,pp:20,ef:"stealthrock"},
 wish:        {n:"힐링위시",t:"normal",c:"status",p:0,a:100,pp:10,ef:"heal"},
 drainpunch:  {n:"드레인펀치",t:"fighting",c:"physical",p:75,a:100,pp:10,ef:"drain"},
 earthpower:  {n:"대지의힘",t:"ground",c:"special",p:90,a:100,pp:10,ef:"spdef_down",ec:10},
@@ -1094,7 +1094,7 @@ shadowclaw:  {n:"섀도클로",t:"ghost",c:"physical",p:70,a:100,pp:15,ef:"highc
 playrough:   {n:"자랑부리기",t:"fairy",c:"physical",p:90,a:90,pp:10,ef:"atk_down",ec:10},
 scald:       {n:"열탕",t:"water",c:"special",p:80,a:100,pp:15,ef:"burn",ec:30},
 grassknot:   {n:"풀묶기",t:"grass",c:"special",p:80,a:100,pp:20},
-uturn:       {n:"유턴",t:"bug",c:"physical",p:70,a:100,pp:20},
+uturn:       {n:"유턴",t:"bug",c:"physical",p:70,a:100,pp:20,ef:"uturn"},
 facade:      {n:"근성",t:"normal",c:"physical",p:70,a:100,pp:20,cond:"userStatusDouble"},
 focuspunch:  {n:"기합펀치",t:"fighting",c:"physical",p:150,a:100,pp:20},
 hiddenpower: {n:"잠재파워",t:"normal",c:"special",p:60,a:100,pp:15},
@@ -1103,7 +1103,7 @@ rockblast:   {n:"록블래스트",t:"rock",c:"physical",p:25,a:90,pp:10,hits:[2,
 poisonjab:   {n:"독찌르기",t:"poison",c:"physical",p:80,a:100,pp:20,ef:"poison",ec:30},
 acrobatics:  {n:"곡예",t:"flying",c:"physical",p:55,a:100,pp:15},
 retaliate:   {n:"보복",t:"normal",c:"physical",p:70,a:100,pp:5},
-voltswitch:  {n:"볼트체인지",t:"electric",c:"special",p:70,a:100,pp:20},
+voltswitch:  {n:"볼트체인지",t:"electric",c:"special",p:70,a:100,pp:20,ef:"uturn"},
 strugglebug: {n:"벌레의저항",t:"bug",c:"special",p:50,a:100,pp:20},
 bulldoze:    {n:"지진밟기",t:"ground",c:"physical",p:60,a:100,pp:20},
 frostbreath: {n:"프로스트브레스",t:"ice",c:"special",p:60,a:90,pp:10,ef:"highcrit"},
@@ -1241,7 +1241,7 @@ hurricane:   {n:"폭풍",t:"flying",c:"special",p:110,a:70,pp:10,ef:"confuse",ec
 bounce:      {n:"바운스",t:"flying",c:"physical",p:85,a:85,pp:5,ef:"paralyze",ec:30,charge:"하늘 높이 뛰어올랐다!"},
 skyattack:   {n:"갓버드",t:"flying",c:"physical",p:140,a:90,pp:5,ef:"flinch",ec:30,charge:"하늘에서 빛이 내리쬔다!"},
 pluck:       {n:"쪼아대기",t:"flying",c:"physical",p:60,a:100,pp:20},
-defog:       {n:"안개제거",t:"flying",c:"status",p:0,a:100,pp:15},
+defog:       {n:"안개제거",t:"flying",c:"status",p:0,a:100,pp:15,ef:"defog"},
 tailwind:    {n:"순풍",t:"flying",c:"status",p:0,a:100,pp:15},
 oblivionwing:{n:"데스윙",t:"flying",c:"special",p:80,a:100,pp:10,ef:"drain"},
 // ── Psychic ──
@@ -1365,7 +1365,7 @@ sweetscent:{n:"달콤한향기",t:"normal",c:"status",p:0,a:100,pp:20},
 morningsun:{n:"아침햇살",t:"normal",c:"status",p:0,a:100,pp:5,ef:"heal"},
 meanlook:{n:"검은눈빛",t:"normal",c:"status",p:0,a:100,pp:5},
 batonpass:{n:"바톤터치",t:"normal",c:"status",p:0,a:100,pp:40},
-rapidspin:{n:"고속회전",t:"normal",c:"physical",p:50,a:100,pp:40},
+rapidspin:{n:"고속회전",t:"normal",c:"physical",p:50,a:100,pp:40,ef:"rapidspin"},
 perishsong:{n:"멸망의노래",t:"normal",c:"status",p:0,a:100,pp:5},
 followme:{n:"따라와",t:"normal",c:"status",p:0,a:100,pp:20},
 helpinghand:{n:"도우미",t:"normal",c:"status",p:0,a:100,pp:20},
@@ -1419,7 +1419,6 @@ bulletseed:{n:"씨기관총",t:"grass",c:"physical",p:25,a:100,pp:30,hits:[2,5]}
 hornLeech:{n:"우드혼",t:"grass",c:"physical",p:75,a:100,pp:10,ef:"drain"},
 spikyshield:{n:"니들가드",t:"grass",c:"status",p:0,a:100,pp:10},
 grassyterrain:{n:"그래스필드",t:"grass",c:"status",p:0,a:100,pp:10},
-auroraveil:{n:"오로라베일",t:"ice",c:"status",p:0,a:100,pp:20},
 iceburn:{n:"콜드플레어",t:"ice",c:"special",p:140,a:90,pp:5,ef:"burn",ec:30},
 powdersnow:{n:"가루눈",t:"ice",c:"special",p:40,a:100,pp:25,ef:"freeze",ec:10},
 freezebolt:{n:"프리즈볼트",t:"ice",c:"physical",p:140,a:90,pp:5,ef:"paralyze",ec:30},
@@ -1436,8 +1435,8 @@ matblock:{n:"돗자리뒤집기",t:"fighting",c:"status",p:0,a:100,pp:10},
 quickguard:{n:"패스트가드",t:"fighting",c:"status",p:0,a:100,pp:15},
 acidspray:{n:"산성액",t:"poison",c:"special",p:40,a:100,pp:20,ef:"spdef_down",ec:100},
 belch:{n:"게워내기",t:"poison",c:"special",p:120,a:90,pp:10},
-spikes:{n:"압정뿌리기",t:"ground",c:"status",p:0,a:100,pp:20},
-toxicspikes:{n:"독압정",t:"poison",c:"status",p:0,a:100,pp:20},
+spikes:{n:"압정뿌리기",t:"ground",c:"status",p:0,a:0,pp:20,ef:"spikes"},
+toxicspikes:{n:"독압정",t:"poison",c:"status",p:0,a:0,pp:20,ef:"toxicspikes"},
 mudbomb:{n:"진흙폭탄",t:"ground",c:"special",p:65,a:85,pp:10,ef:"acc_down",ec:30},
 magnitude:{n:"매그니튀드",t:"ground",c:"physical",p:70,a:100,pp:30},
 thousandwaves:{n:"사우전드웨이브",t:"ground",c:"physical",p:90,a:100,pp:10},
@@ -1570,24 +1569,20 @@ ruination:{n:"황폐",t:"dark",c:"special",p:1,a:90,pp:10},
 comeuppance:{n:"앙갚음",t:"dark",c:"physical",p:1,a:100,pp:10},
 electroDrift:{n:"일렉트로드리프트",t:"electric",c:"special",p:100,a:100,pp:5},
 // === Gen5/6 TM 추가 기술 ===
-returnmove:{n:"은혜갚기",t:"normal",c:"physical",p:70,acc:100,pp:20,ef:""},
-psychup:{n:"사이코업",t:"normal",c:"status",p:0,acc:100,pp:10,ef:""},
-confide:{n:"비밀이야기",t:"normal",c:"status",p:0,acc:100,pp:20,ef:"spa_down"},
+returnmove:{n:"은혜갚기",t:"normal",c:"physical",p:102,a:100,pp:20},
+psychup:{n:"사이코업",t:"normal",c:"status",p:0,a:0,pp:10},
+confide:{n:"비밀이야기",t:"normal",c:"status",p:0,a:0,pp:20,ef:"spa_down"},
 // === 7세대 신규 기술 ===
 leafage:{n:"나뭇잎",t:"grass",c:"physical",p:40,a:100,pp:40},
 spiritshackle:{n:"그림자꿰매기",t:"ghost",c:"physical",p:80,a:100,pp:10,ef:"trap"},
 sparklinaria:{n:"물거품아리아",t:"water",c:"special",p:90,a:100,pp:10},
 darkestlariat:{n:"DD래리어트",t:"dark",c:"physical",p:85,a:100,pp:10},
 icehammer:{n:"아이스해머",t:"ice",c:"physical",p:100,a:90,pp:10},
-highhorsepower:{n:"10만마력",t:"ground",c:"physical",p:95,a:95,pp:10},
 solarblade:{n:"솔라블레이드",t:"grass",c:"physical",p:125,a:100,pp:10},
 firelash:{n:"불꽃채찍",t:"fire",c:"physical",p:80,a:100,pp:15,ef:"def_down",ec:100},
-smartstrike:{n:"스마트호른",t:"steel",c:"physical",p:70,a:0,pp:10},
 throatchop:{n:"지옥찌르기",t:"dark",c:"physical",p:80,a:100,pp:15},
 pollenpuff:{n:"꽃가루경단",t:"bug",c:"special",p:90,a:100,pp:15},
 anchorshot:{n:"앵커숏",t:"steel",c:"physical",p:80,a:100,pp:20},
-liquidation:{n:"아쿠아브레이크",t:"water",c:"physical",p:85,a:100,pp:10,ef:"def_down",ec:20},
-accelerock:{n:"액셀록",t:"rock",c:"physical",p:40,a:100,pp:20,ef:"priority"},
 brutalswing:{n:"세차게휘두르기",t:"dark",c:"physical",p:60,a:100,pp:20},
 dragonhammer:{n:"드래곤해머",t:"dragon",c:"physical",p:90,a:100,pp:15},
 clangingscales:{n:"스케일노이즈",t:"dragon",c:"special",p:110,a:100,pp:5},
@@ -1595,7 +1590,7 @@ shadowbone:{n:"섀도본",t:"ghost",c:"physical",p:85,a:100,pp:10,ef:"def_down",
 shelltrap:{n:"트랩셸",t:"fire",c:"special",p:150,a:100,pp:5},
 psychicfangs:{n:"사이코팽",t:"psychic",c:"physical",p:85,a:100,pp:10},
 stompingtantrum:{n:"분함의발구르기",t:"ground",c:"physical",p:75,a:100,pp:10},
-firstimpression:{n:"만나자마자",t:"bug",c:"physical",p:90,a:100,pp:10,ef:"priority"},
+firstimpression:{n:"만나자마자",t:"bug",c:"physical",p:90,a:100,pp:10,priority:2},
 lunge:{n:"덤벼들기",t:"bug",c:"physical",p:80,a:100,pp:15,ef:"atk_down",ec:100},
 tropkick:{n:"트로피컬킥",t:"grass",c:"physical",p:70,a:100,pp:15,ef:"atk_down",ec:100},
 beakblast:{n:"부리캐논",t:"flying",c:"physical",p:100,a:100,pp:15},
@@ -4841,6 +4836,15 @@ function calcDamage(attackerPoke, defenderPoke, moveKey) {
     var dmg = Math.floor(baseDmg * stab * eff * crit * rand);
     if (dmg < 1 && eff > 0) dmg = 1;
 
+    // ── 날씨 보정 ──
+    var bd = (typeof gState !== "undefined" && gState.battleData) ? gState.battleData : null;
+    if (bd && bd.weather) {
+        if (bd.weather === "rain" && moveType === "water") dmg = Math.floor(dmg * 1.5);
+        if (bd.weather === "rain" && moveType === "fire") dmg = Math.floor(dmg * 0.5);
+        if (bd.weather === "sun" && moveType === "fire") dmg = Math.floor(dmg * 1.5);
+        if (bd.weather === "sun" && moveType === "water") dmg = Math.floor(dmg * 0.5);
+    }
+
     // 특성: sturdy → HP만땅에서 일격사 방지
     if (defAbKey === "sturdy" && defenderPoke.currentHp >= defenderPoke.stats[0] && dmg >= defenderPoke.currentHp) {
         dmg = defenderPoke.currentHp - 1;
@@ -5562,6 +5566,7 @@ function startWildBattle(road) {
         gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
         gState.battleData.msg.push(myFirst.nickname + "의 위협! " + dn + "의 공격이 떨어졌다!");
     }
+    applyWeatherAbility(myFirst, gState.battleData);
     return true;
 }
 
@@ -5794,6 +5799,8 @@ function startTrainerBattle(road, trainerIdx) {
         gState.battleData.enemy.statStages.atk = Math.max(-6, gState.battleData.enemy.statStages.atk - 1);
         gState.battleData.msg.push(myFirstT.nickname + "의 위협! " + enemyParty[0].nickname + "의 공격이 떨어졌다!");
     }
+    applyWeatherAbility(myFirstT, gState.battleData);
+    applyWeatherAbility(enemyParty[0], gState.battleData);
     // 도감 등록
     for (var i = 0; i < enemyParty.length; i++) {
         if (player.pokedex) { if (!player.pokedex[enemyParty[i].key]) player.pokedex[enemyParty[i].key] = "seen"; }
@@ -6131,6 +6138,37 @@ function applyMoveEffects(move, attacker, defender, bd) {
                 bd.msg.push(an + "은(는) 방어 태세를 취했다!");
             }
         }
+        // ── 엔트리 해저드 설치 ──
+        else if (mv.ef === "stealthrock") {
+            var defSide = (defender === bd.enemy) ? "enemy" : "player";
+            var hz = getHazards(bd, defSide);
+            if (hz.stealthrock > 0) { bd.msg.push("그러나 실패했다!"); }
+            else { hz.stealthrock = 1; bd.msg.push(dn + "의 주위에 스텔스록이 흩어졌다!"); }
+        }
+        else if (mv.ef === "spikes") {
+            var defSide = (defender === bd.enemy) ? "enemy" : "player";
+            var hz = getHazards(bd, defSide);
+            if (hz.spikes >= 3) { bd.msg.push("그러나 실패했다!"); }
+            else { hz.spikes++; bd.msg.push(dn + "의 발밑에 압정이 뿌려졌다!"); }
+        }
+        else if (mv.ef === "toxicspikes") {
+            var defSide = (defender === bd.enemy) ? "enemy" : "player";
+            var hz = getHazards(bd, defSide);
+            if (hz.toxicspikes >= 2) { bd.msg.push("그러나 실패했다!"); }
+            else { hz.toxicspikes++; bd.msg.push(dn + "의 발밑에 독압정이 뿌려졌다!"); }
+        }
+        // ── 해저드 제거 (안개제거/Defog) ──
+        else if (mv.ef === "defog") {
+            var atkSide = (attacker === bd.enemy) ? "enemy" : "player";
+            var defSide2 = (defender === bd.enemy) ? "enemy" : "player";
+            var hzA = getHazards(bd, atkSide);
+            var hzD = getHazards(bd, defSide2);
+            var cleared = false;
+            if (hzA.stealthrock || hzA.spikes || hzA.toxicspikes) { hzA.stealthrock = 0; hzA.spikes = 0; hzA.toxicspikes = 0; cleared = true; }
+            if (hzD.stealthrock || hzD.spikes || hzD.toxicspikes) { hzD.stealthrock = 0; hzD.spikes = 0; hzD.toxicspikes = 0; cleared = true; }
+            if (cleared) bd.msg.push("필드의 해저드가 제거되었다!");
+            else bd.msg.push(an + "은(는) 안개제거를 사용했다!");
+        }
     }
 }
 
@@ -6188,6 +6226,26 @@ function doStatusDamage(poke, bd) {
         bd.msg.push(poke.nickname + "은(는) 독 데미지를 받았다! (-" + dmg + ")");
     }
     if (poke.guardSpec && poke.guardSpec > 0) poke.guardSpec--;
+    // ── 날씨 데미지 (모래바람/싸라기눈) ──
+    if (bd.weather && abKey !== "magicguard" && poke.currentHp > 0) {
+        var pd = POKEDEX[poke.key];
+        var pokeTypes = poke.megaTypes || (pd ? pd.t : []);
+        if (bd.weather === "sand") {
+            var immuneToSand = pokeTypes.indexOf("rock") >= 0 || pokeTypes.indexOf("ground") >= 0 || pokeTypes.indexOf("steel") >= 0;
+            if (!immuneToSand && abKey !== "sandveil" && abKey !== "sandrush" && abKey !== "sandforce" && abKey !== "overcoat") {
+                var wDmg = Math.max(1, Math.floor(poke.stats[0] / 16));
+                poke.currentHp = Math.max(0, poke.currentHp - wDmg);
+                bd.msg.push(poke.nickname + "은(는) 모래바람 데미지를 받았다! (-" + wDmg + ")");
+            }
+        } else if (bd.weather === "hail") {
+            var immuneToHail = pokeTypes.indexOf("ice") >= 0;
+            if (!immuneToHail && abKey !== "snowcloak" && abKey !== "slushrush" && abKey !== "icebody" && abKey !== "overcoat") {
+                var wDmg2 = Math.max(1, Math.floor(poke.stats[0] / 16));
+                poke.currentHp = Math.max(0, poke.currentHp - wDmg2);
+                bd.msg.push(poke.nickname + "은(는) 싸라기눈 데미지를 받았다! (-" + wDmg2 + ")");
+            }
+        }
+    }
     // 특성: speedboost → 매 턴 스피드 +1
     if (abKey === "speedboost" && poke.currentHp > 0) {
         poke.statStages.spd = Math.min(6, poke.statStages.spd + 1);
@@ -6202,6 +6260,75 @@ function doStatusDamage(poke, bd) {
     if (abKey === "harvest" && !poke.heldItem && poke._lastBerry && Math.random() < 0.5) {
         poke.heldItem = poke._lastBerry;
         bd.msg.push(poke.nickname + "의 수확! " + (ITEMS[poke._lastBerry] ? ITEMS[poke._lastBerry].n : "열매") + "이(가) 되살아났다!");
+    }
+}
+
+// ── 엔트리 해저드 (Stealth Rock/Spikes/Toxic Spikes) 관련 헬퍼 ──
+function getHazards(bd, side) {
+    if (side === "player") {
+        if (!bd.playerHazards) bd.playerHazards = {stealthrock:0, spikes:0, toxicspikes:0};
+        return bd.playerHazards;
+    } else {
+        if (!bd.enemyHazards) bd.enemyHazards = {stealthrock:0, spikes:0, toxicspikes:0};
+        return bd.enemyHazards;
+    }
+}
+
+function applyEntryHazards(poke, bd, side) {
+    var hazards = getHazards(bd, side);
+    var abKey = getAbilityKey(poke);
+    if (abKey === "magicguard") return;
+    // Stealth Rock: rock-type effectiveness-based damage (1/8 base)
+    if (hazards.stealthrock > 0) {
+        var pd = POKEDEX[poke.key];
+        var types = poke.megaTypes || (pd ? pd.t : []);
+        var eff = getTypeEffect("rock", types);
+        var srDmg = Math.max(1, Math.floor(poke.stats[0] * eff / 8));
+        poke.currentHp = Math.max(0, poke.currentHp - srDmg);
+        bd.msg.push("스텔스록이 " + poke.nickname + "에게 꽂혔다! (-" + srDmg + ")");
+    }
+    // Spikes: ground-based hazard (flying/levitate immune)
+    if (hazards.spikes > 0) {
+        var pd2 = POKEDEX[poke.key];
+        var types2 = poke.megaTypes || (pd2 ? pd2.t : []);
+        if (types2.indexOf("flying") < 0 && abKey !== "levitate") {
+            var spikeRatios = [0, 1/8, 1/6, 1/4];
+            var spkDmg = Math.max(1, Math.floor(poke.stats[0] * spikeRatios[hazards.spikes]));
+            poke.currentHp = Math.max(0, poke.currentHp - spkDmg);
+            bd.msg.push("압정이 " + poke.nickname + "의 발에 박혔다! (-" + spkDmg + ")");
+        }
+    }
+    // Toxic Spikes: poison on grounded switch-in (flying/levitate immune, poison type absorbs)
+    if (hazards.toxicspikes > 0) {
+        var pd3 = POKEDEX[poke.key];
+        var types3 = poke.megaTypes || (pd3 ? pd3.t : []);
+        if (types3.indexOf("flying") < 0 && abKey !== "levitate") {
+            if (types3.indexOf("poison") >= 0) {
+                hazards.toxicspikes = 0;
+                bd.msg.push(poke.nickname + "이(가) 독압정을 흡수했다!");
+            } else if (types3.indexOf("steel") < 0 && !poke.status) {
+                if (hazards.toxicspikes >= 2) {
+                    poke.status = "poison"; poke.badlyPoisoned = true; poke.statusTurns = 1;
+                    bd.msg.push(poke.nickname + "은(는) 맹독에 걸렸다!");
+                } else {
+                    poke.status = "poison"; poke.badlyPoisoned = false;
+                    bd.msg.push(poke.nickname + "은(는) 독에 걸렸다!");
+                }
+            }
+        }
+    }
+}
+
+// ── 날씨 특성 등장 시 발동 ──
+function applyWeatherAbility(poke, bd) {
+    var abKey = getAbilityKey(poke);
+    var weatherMap = {drought:"sun", drizzle:"rain", sandstream:"sand", snowwarning:"hail"};
+    var weatherNames = {sun:"쾌청", rain:"비", sand:"모래바람", hail:"싸라기눈"};
+    var abilityNames = {drought:"가뭄", drizzle:"잔비", sandstream:"모래날림", snowwarning:"눈퍼뜨리기"};
+    if (weatherMap[abKey] && bd.weather !== weatherMap[abKey]) {
+        bd.weather = weatherMap[abKey];
+        bd.weatherTurns = 5;
+        bd.msg.push(poke.nickname + "의 " + (abilityNames[abKey]||abKey) + "! 날씨가 " + (weatherNames[bd.weather]||bd.weather) + "(으)로 변했다!");
     }
 }
 
@@ -6475,6 +6602,45 @@ function executeAttack(attacker, defender, moveKey, bd) {
         if (mv.ef === "recharge") {
             attacker._recharging = true;
         }
+        // ── 고속회전(Rapid Spin): 자기 측 해저드 제거 ──
+        if (mv.ef === "rapidspin" && result.dmg > 0) {
+            var atkSide = (attacker === bd.enemy) ? "enemy" : "player";
+            var hz = getHazards(bd, atkSide);
+            var cleared = false;
+            if (hz.stealthrock || hz.spikes || hz.toxicspikes) {
+                hz.stealthrock = 0; hz.spikes = 0; hz.toxicspikes = 0;
+                cleared = true;
+            }
+            if (attacker._trapped) { attacker._trapped = false; cleared = true; }
+            if (cleared) bd.msg.push(an + "은(는) 해저드를 날려버렸다!");
+        }
+        // ── 유턴/볼트체인지(U-turn/Volt Switch): 공격 후 교체 ──
+        if (mv.ef === "uturn" && result.dmg > 0 && attacker.currentHp > 0) {
+            if (attacker === bd.enemy && bd.enemyParty) {
+                // AI: 자동 교체
+                var bestSw2 = -1;
+                for (var ui = 0; ui < bd.enemyParty.length; ui++) {
+                    if (ui !== bd.enemyIdx && bd.enemyParty[ui].currentHp > 0) { bestSw2 = ui; break; }
+                }
+                if (bestSw2 >= 0) {
+                    bd.msg.push(an + "은(는) 돌아왔다!");
+                    bd.enemyIdx = bestSw2;
+                    bd.enemy = bd.enemyParty[bd.enemyIdx];
+                    bd.msg.push(bd.trainerName + "은(는) " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")을(를) 내보냈다!");
+                    bd.enemy._fakeoutUsed = false;
+                    bd.enemy._recharging = false; bd.enemy._charging = null;
+                    applyEntryHazards(bd.enemy, bd, "enemy");
+                    if (getAbilityKey(bd.enemy) === "intimidate") {
+                        var target = (defender === bd.enemy) ? attacker : defender;
+                        target.statStages.atk = Math.max(-6, target.statStages.atk - 1);
+                        bd.msg.push(bd.enemy.nickname + "의 위협! " + target.nickname + "의 공격이 떨어졌다!");
+                    }
+                }
+            } else {
+                bd.msg.push(an + "은(는) 돌아왔다!");
+                bd._uturnSwitch = true;
+            }
+        }
         // 자기 능력치 하락 기술 (용성군, 오버히트, 리프스톰 등)
         if (mv.ef === "spa_down2" && mv.p > 0) {
             var sdS = (getAbilityKey(attacker) === "contrary") ? 2 : -2;
@@ -6665,6 +6831,14 @@ function executeTurn(playerMoveKey) {
     // 특성: unburden → 아이템 소비 후 스피드 2배
     if (myPoke._unburden) mySpd *= 2;
     if (enemy._unburden) enSpd *= 2;
+    // ── 날씨 기반 스피드 특성 (엽록소/쓱쓱/모래헤치기/눈치우기) ──
+    if (bd.weather) {
+        var myAb = getAbilityKey(myPoke), enAb = getAbilityKey(enemy);
+        if ((myAb === "chlorophyll" && bd.weather === "sun") || (myAb === "swiftswim" && bd.weather === "rain") ||
+            (myAb === "sandrush" && bd.weather === "sand") || (myAb === "slushrush" && bd.weather === "hail")) mySpd *= 2;
+        if ((enAb === "chlorophyll" && bd.weather === "sun") || (enAb === "swiftswim" && bd.weather === "rain") ||
+            (enAb === "sandrush" && bd.weather === "sand") || (enAb === "slushrush" && bd.weather === "hail")) enSpd *= 2;
+    }
     var playerMove = MOVES[playerMoveKey];
     // ──── 트레이너 AI: 상성 불리 시 교체 ────
     var trainerSwitched = false;
@@ -6715,10 +6889,12 @@ function executeTurn(playerMoveKey) {
                 bd.msg.push(bd.trainerName + "은(는) " + enemy.nickname + " (Lv." + enemy.level + ")을(를) 내보냈다!");
                 enemy._fakeoutUsed = false; // 교체 시 속이다 리셋
                 enemy._recharging = false; enemy._charging = null; // 교체 시 충전 리셋
+                applyEntryHazards(enemy, bd, "enemy");
                 if (getAbilityKey(enemy) === "intimidate") {
                     myPoke.statStages.atk = Math.max(-6, myPoke.statStages.atk - 1);
                     bd.msg.push(enemy.nickname + "의 위협! " + myPoke.nickname + "의 공격이 떨어졌다!");
                 }
+                applyWeatherAbility(enemy, bd);
                 }
             }
         }
@@ -6812,6 +6988,15 @@ function executeTurn(playerMoveKey) {
     // 속이다(fakeout) 첫 턴 이후 사용 불가 처리
     myPoke._fakeoutUsed = true;
     enemy._fakeoutUsed = true;
+    // ── 날씨 턴 감소 ──
+    if (bd.weather && bd.weatherTurns > 0) {
+        bd.weatherTurns--;
+        if (bd.weatherTurns <= 0) {
+            var weatherNames2 = {sun:"쾌청", rain:"비", sand:"모래바람", hail:"싸라기눈"};
+            bd.msg.push((weatherNames2[bd.weather]||bd.weather) + "이(가) 그쳤다!");
+            bd.weather = null;
+        }
+    }
     // 적 쓰러짐
     if (enemy.currentHp <= 0) {
         if (bd.type === "trainer" && bd.enemyParty) {
@@ -6849,6 +7034,17 @@ function executeTurn(playerMoveKey) {
         if (!alive) { bd.lost = true; bd.msg.push("눈앞이 깜깜해졌다..."); }
     }
     for (var i = 0; i < bd.msg.length; i++) addLog(bd.msg[i], "battle");
+    // ── U-Turn/Volt Switch: 플레이어 교체 프롬프트 ──
+    if (bd._uturnSwitch && myPoke.currentHp > 0 && !bd.won && !bd.lost) {
+        delete bd._uturnSwitch;
+        var hasAlive = false;
+        for (var ui2 = 0; ui2 < player.party.length; ui2++) {
+            if (ui2 !== bd.myIdx && player.party[ui2].currentHp > 0) { hasAlive = true; break; }
+        }
+        if (hasAlive) {
+            gState.subScreen = "battlePartySwitch";
+        }
+    }
 }
 
 // 경험치 지급 (isTrainerWin: 트레이너 최종승리시에만 돈 선택권 부여)
@@ -8887,7 +9083,9 @@ function moveEffectDesc(ef, ec) {
         def_up2:"자신 방어↑↑",spa_up2:"자신 특공↑↑",spd_up2:"자신 특방↑↑",acc_down:"상대 명중↓",
         swordsdance:"자신 공격 크게↑↑",calmmind:"자신 특공·특방↑",bulkup:"자신 공격·방어↑",dragondance:"자신 공격·스피드↑",
         focusenergy:"급소율 크게 상승",encore:"상대 기술 고정",counter:"받은 물리데미지 2배 반사",mirrorcoat:"받은 특수데미지 2배 반사",trap:"상대 도주/교체 불가",
-        recharge:"다음 턴 행동 불가(충전)",pursuit:"교체 시 2배 데미지"
+        recharge:"다음 턴 행동 불가(충전)",pursuit:"교체 시 2배 데미지",
+        stealthrock:"상대 필드에 스텔스록 설치",spikes:"상대 필드에 압정 설치",toxicspikes:"상대 필드에 독압정 설치",
+        rapidspin:"자기 필드의 해저드 제거",defog:"양측 필드의 해저드 제거",uturn:"공격 후 교체"
     };
     var desc = descs[ef] || ef;
     if (ec && ec < 100) desc += " " + ec + "%";
@@ -9296,11 +9494,13 @@ window.poke_switchInBattle = async function(idx) {
     bd.msg.push(player.name + "은(는) " + curPoke.nickname + " (Lv." + curPoke.level + ")을(를) 내보냈다!");
     curPoke._fakeoutUsed = false; // 교체 시 속이다 리셋
     curPoke._recharging = false; curPoke._charging = null; // 교체 시 충전 리셋
+    applyEntryHazards(curPoke, bd, "player");
     // 특성: intimidate → 등장 시 상대 공격 -1
     if (getAbilityKey(curPoke) === "intimidate") {
         bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
         bd.msg.push(curPoke.nickname + "의 위협! " + bd.enemy.nickname + "의 공격이 떨어졌다!");
     }
+    applyWeatherAbility(curPoke, bd);
     // 교체 시 적이 공격 (따라가때리기 사용 시 스킵)
     if (prev && prev.currentHp > 0 && !_pursuitUsed) {
         var emk = enemyChooseMove(bd.enemy, player.party[bd.myIdx], bd.type === "trainer");
@@ -9322,6 +9522,9 @@ window.poke_koSwitchContinue = async function() {
     bd.enemy._fakeoutUsed = false;
     bd.enemy._recharging = false;
     bd.enemy._charging = null;
+    bd.msg = bd.msg || [];
+    applyEntryHazards(bd.enemy, bd, "enemy");
+    if (bd.msg.length > 0) { for (var hi = 0; hi < bd.msg.length; hi++) addLog(bd.msg[hi], "battle"); bd.msg = []; }
     if (player.pokedex) { if (!player.pokedex[bd.enemy.key]) player.pokedex[bd.enemy.key] = "seen"; }
     delete bd._pendingNextEnemy;
     gState.phase = "battle";
@@ -9361,12 +9564,17 @@ window.poke_koSwitchAndSwap = async function(idx) {
     curPoke._fakeoutUsed = false;
     curPoke._recharging = false;
     curPoke._charging = null;
+    bd.msg = bd.msg || [];
+    applyEntryHazards(curPoke, bd, "player");
+    if (bd.msg.length > 0) { for (var hi2 = 0; hi2 < bd.msg.length; hi2++) addLog(bd.msg[hi2], "battle"); bd.msg = []; }
     bd.enemyIdx = bd._pendingNextEnemy;
     bd.enemy = bd.enemyParty[bd.enemyIdx];
     addLog(bd.trainerName + "은(는) " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")을(를) 내보냈다!", "battle");
     bd.enemy._fakeoutUsed = false;
     bd.enemy._recharging = false;
     bd.enemy._charging = null;
+    applyEntryHazards(bd.enemy, bd, "enemy");
+    if (bd.msg.length > 0) { for (var hi3 = 0; hi3 < bd.msg.length; hi3++) addLog(bd.msg[hi3], "battle"); bd.msg = []; }
     if (player.pokedex) { if (!player.pokedex[bd.enemy.key]) player.pokedex[bd.enemy.key] = "seen"; }
     if (getAbilityKey(curPoke) === "intimidate") {
         bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
