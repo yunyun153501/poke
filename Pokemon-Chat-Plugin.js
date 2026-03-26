@@ -6324,6 +6324,7 @@ function executeAttack(attacker, defender, moveKey, bd) {
                             bd.enemyIdx = nextIdx;
                             bd.enemy = bd.enemyParty[bd.enemyIdx];
                             bd.enemy._fakeoutUsed = false; // 교체 시 속이다 리셋
+                            bd.enemy._recharging = false; // 교체 시 충전 리셋
                             bd.msg.push(bd.trainerName + "은(는) " + bd.enemy.nickname + "을(를) 내보냈다!");
                         }
                     } else {
@@ -6504,6 +6505,8 @@ function enemyChooseMove(enemy, defender, isTrainer) {
             if (mv.priority && mv.priority > 0 && defender.currentHp < defender.stats[0] * 0.3) {
                 score *= 1.5;
             }
+            // 충전(recharge) 기술: 다음 턴 행동 불가 → 점수 보정
+            if (mv.ef === "recharge") score *= 0.6;
         }
         // 약간의 랜덤성 (±15%)
         score *= (0.85 + Math.random() * 0.3);
@@ -6580,6 +6583,7 @@ function executeTurn(playerMoveKey) {
                 enemy = bd.enemy;
                 bd.msg.push(bd.trainerName + "은(는) " + enemy.nickname + " (Lv." + enemy.level + ")을(를) 내보냈다!");
                 enemy._fakeoutUsed = false; // 교체 시 속이다 리셋
+                enemy._recharging = false; // 교체 시 충전 리셋
                 if (getAbilityKey(enemy) === "intimidate") {
                     myPoke.statStages.atk = Math.max(-6, myPoke.statStages.atk - 1);
                     bd.msg.push(enemy.nickname + "의 위협! " + myPoke.nickname + "의 공격이 떨어졌다!");
@@ -9109,6 +9113,7 @@ window.poke_switchInBattle = async function(idx) {
     var curPoke = player.party[bd.myIdx];
     bd.msg.push(player.name + "은(는) " + curPoke.nickname + " (Lv." + curPoke.level + ")을(를) 내보냈다!");
     curPoke._fakeoutUsed = false; // 교체 시 속이다 리셋
+    curPoke._recharging = false; // 교체 시 충전 리셋
     // 특성: intimidate → 등장 시 상대 공격 -1
     if (getAbilityKey(curPoke) === "intimidate") {
         bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
@@ -9170,10 +9175,12 @@ window.poke_koSwitchAndSwap = async function(idx) {
     var curPoke = player.party[bd.myIdx];
     addLog(player.name + "은(는) " + curPoke.nickname + " (Lv." + curPoke.level + ")을(를) 내보냈다!", "battle");
     curPoke._fakeoutUsed = false;
+    curPoke._recharging = false;
     bd.enemyIdx = bd._pendingNextEnemy;
     bd.enemy = bd.enemyParty[bd.enemyIdx];
     addLog(bd.trainerName + "은(는) " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")을(를) 내보냈다!", "battle");
     bd.enemy._fakeoutUsed = false;
+    bd.enemy._recharging = false;
     if (player.pokedex) { if (!player.pokedex[bd.enemy.key]) player.pokedex[bd.enemy.key] = "seen"; }
     if (getAbilityKey(curPoke) === "intimidate") {
         bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
