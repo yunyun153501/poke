@@ -4075,7 +4075,7 @@ var isVisible = false;
 var _eventLog = [];
 
 // 지역별 독립 세이브 데이터 생성
-function createRegionSave(starterKey, region) {
+function createRegionSave(starterKey) {
     var starter = starterKey ? createPokemonInstance(starterKey, 5) : null;
     return {
         party: starter ? [starter] : [],
@@ -4100,7 +4100,7 @@ function createNewPlayer(name, starterKey, region) {
     var starter = createPokemonInstance(starterKey, 5);
     var dex = {};
     dex[starterKey] = "caught";
-    var regionSave = createRegionSave(starterKey, region);
+    var regionSave = createRegionSave(starterKey);
     var saves = {};
     saves[region] = regionSave;
     return {
@@ -4321,6 +4321,7 @@ function migratePlayerData() {
         }
     }
     // v2→v3 지역별 독립 세이브 마이그레이션
+    var allRegions = ["kanto","johto","hoenn","sinnoh","unova","kalos","alola"];
     if (!player.regionSaves) {
         var curRegion = player.region || "kanto";
         player.regionSaves = {};
@@ -4343,7 +4344,6 @@ function migratePlayerData() {
             visitedRoads: player.visitedRoads || {}
         };
         // 다른 지역에 뱃지가 있으면 최소한 빈 세이브 생성 (뱃지 보존)
-        var allRegions = ["kanto","johto","hoenn","sinnoh","unova","kalos","alola"];
         for (var ri = 0; ri < allRegions.length; ri++) {
             var rk = allRegions[ri];
             if (rk !== curRegion && player.badges[rk] && player.badges[rk].length > 0) {
@@ -4359,9 +4359,8 @@ function migratePlayerData() {
     }
     // regionSaves에서 현재 지역의 badges를 badges 객체에 동기화
     if (player.regionSaves) {
-        var allRegions2 = ["kanto","johto","hoenn","sinnoh","unova","kalos","alola"];
-        for (var ri2 = 0; ri2 < allRegions2.length; ri2++) {
-            var rk2 = allRegions2[ri2];
+        for (var ri2 = 0; ri2 < allRegions.length; ri2++) {
+            var rk2 = allRegions[ri2];
             if (player.regionSaves[rk2] && player.regionSaves[rk2].badges) {
                 player.badges[rk2] = player.regionSaves[rk2].badges;
             }
@@ -8684,7 +8683,7 @@ window.poke_switchRegion = async function(region) {
 window.poke_selectRegionStarter = async function(key) {
     if (!player || !gState || !gState._pendingRegion) return;
     var region = gState._pendingRegion;
-    var newSave = createRegionSave(key, region);
+    var newSave = createRegionSave(key);
     if (!player.regionSaves) player.regionSaves = {};
     player.regionSaves[region] = newSave;
     // 도감에 스타터 등록 (전국도감 공유)
