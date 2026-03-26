@@ -5248,7 +5248,14 @@ function initRecurringTrainers() {
             if (!roads[i].pokemon || roads[i].pokemon.length === 0) continue;
             var recurring = generateRecurringTrainers(roads[i], rIdx);
             var existing = roads[i].trainers || [];
-            roads[i].trainers = recurring.concat(existing.slice(0, 1));
+            // 반복 트레이너와 이름이 겹치는 기존 트레이너 제외
+            var rcNames = {};
+            for (var ri = 0; ri < recurring.length; ri++) rcNames[recurring[ri].n] = true;
+            var filtered = [];
+            for (var ei = 0; ei < existing.length; ei++) {
+                if (!rcNames[existing[ei].n]) filtered.push(existing[ei]);
+            }
+            roads[i].trainers = recurring.concat(filtered);
             rIdx++;
         }
     }
@@ -6135,8 +6142,8 @@ function executeAttack(attacker, defender, moveKey, bd) {
                     if (bd.type === "trainer" && bd.enemyParty) {
                         // 트레이너: 다음 포켓몬으로 강제 교체
                         var nextIdx = -1;
-                        for (var eei = bd.enemyIdx + 1; eei < bd.enemyParty.length; eei++) {
-                            if (bd.enemyParty[eei].currentHp > 0) { nextIdx = eei; break; }
+                        for (var eei = 0; eei < bd.enemyParty.length; eei++) {
+                            if (eei !== bd.enemyIdx && bd.enemyParty[eei].currentHp > 0) { nextIdx = eei; break; }
                         }
                         if (nextIdx >= 0) {
                             bd.msg.push(dn + "의 " + (defAbKey === "wimpout" ? "도망태세" : "위기회피") + "! 교체한다!");
@@ -6430,9 +6437,14 @@ function executeTurn(playerMoveKey) {
     // 적 쓰러짐
     if (enemy.currentHp <= 0) {
         if (bd.type === "trainer" && bd.enemyParty) {
-            bd.enemyIdx++;
-            if (bd.enemyIdx < bd.enemyParty.length) {
+            // 다음 살아있는 포켓몬 찾기 (AI 교체 후 순서가 비순차적일 수 있음)
+            var nextAlive = -1;
+            for (var si = 0; si < bd.enemyParty.length; si++) {
+                if (si !== bd.enemyIdx && bd.enemyParty[si].currentHp > 0) { nextAlive = si; break; }
+            }
+            if (nextAlive >= 0) {
                 grantExp(myPoke, enemy, false);
+                bd.enemyIdx = nextAlive;
                 bd.enemy = bd.enemyParty[bd.enemyIdx];
                 bd.msg.push(bd.trainerName + "은(는) " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")을(를) 내보냈다!");
                 bd.enemy._fakeoutUsed = false; // 교체 시 속이다 리셋
@@ -7568,7 +7580,11 @@ function renderBattleScreen() {
             html += '<button class="pk-btn pk-btn-dark"' + disabled + ' data-action="poke_attack" data-args="' + m.key + '" data-longpress="poke_moveInfo" style="position:relative">';
             html += '<div>' + typeSpan(mv.t) + ' ' + mv.n + '</div>';
             html += '<div style="font-size:10px;color:#aaa">' + (mv.c==="status"?"변화":mv.c==="physical"?"물리":"특수") + ' | 위력:' + (mv.p||"-") + ' | 명중:' + (mv.a||"-") + '</div>';
-            html += '<div style="font-size:10px;color:#aaa">PP:' + m.ppLeft + '/' + mv.pp + (efDesc ? ' | ' + efDesc : '') + '</div>';
+            if (efDesc) {
+                html += '<div style="font-size:10px;color:#e8d44d">⚡ ' + efDesc + ' | PP:' + m.ppLeft + '/' + mv.pp + '</div>';
+            } else {
+                html += '<div style="font-size:10px;color:#aaa">PP:' + m.ppLeft + '/' + mv.pp + '</div>';
+            }
             html += '</button>';
         }
         html += '</div>';
@@ -8402,16 +8418,16 @@ function statusName(s) {
 function moveEffectDesc(ef, ec) {
     if (!ef) return "";
     var descs = {
-        burn:"화상",poison:"독",paralyze:"마비",sleep:"잠듦",freeze:"얼음",confuse:"혼란",toxic:"맹독",
-        flinch:"풀죽음",drain:"HP흡수",recoil:"반동 데미지",selfdestruct:"자폭(자신 기절)",
-        highcrit:"급소율 상승",priority:"선제공격",protect:"자신을 보호",heal:"HP회복",rest:"잠들어 HP전회복",
-        atk_up:"공격↑",def_up:"방어↑",spa_up:"특공↑",spd_up:"특방↑",eva_up:"회피↑",
+        burn:"화상 부여",poison:"독 부여",paralyze:"마비 부여",sleep:"잠재우기",freeze:"얼리기",confuse:"혼란 부여",toxic:"맹독 부여",
+        flinch:"풀죽음(행동불가)",drain:"HP흡수(준 데미지의 일부 회복)",recoil:"반동(자신도 데미지)",selfdestruct:"자폭(자신 기절)",
+        highcrit:"급소 맞추기 쉬움",priority:"선제공격(우선도 높음)",protect:"이 턴 공격을 막음",heal:"자신 HP 절반 회복",rest:"잠들며 HP 전회복",
+        atk_up:"자신 공격↑",def_up:"자신 방어↑",spa_up:"자신 특공↑",spd_up:"자신 특방↑",eva_up:"자신 회피↑",
         atk_down:"상대 공격↓",def_down:"상대 방어↓",spa_down:"상대 특공↓",spd_down:"상대 특방↓",
         atk_down2:"상대 공격↓↓",def_down2:"상대 방어↓↓",spa_down2:"상대 특공↓↓",spd_down2:"상대 특방↓↓",
-        spdef_down:"상대 특방↓",spdef_up:"특방↑",spdef_up2:"특방↑↑",
-        def_up2:"방어↑↑",spa_up2:"특공↑↑",spd_up2:"특방↑↑",acc_down:"상대 명중↓",
-        swordsdance:"공격 크게↑",calmmind:"특공·특방↑",bulkup:"공격·방어↑",dragondance:"공격·스피드↑",
-        focusenergy:"급소율 크게↑",encore:"기술 고정",counter:"물리 반사",mirrorcoat:"특수 반사",trap:"도주 불가"
+        spdef_down:"상대 특방↓",spdef_up:"자신 특방↑",spdef_up2:"자신 특방↑↑",
+        def_up2:"자신 방어↑↑",spa_up2:"자신 특공↑↑",spd_up2:"자신 특방↑↑",acc_down:"상대 명중↓",
+        swordsdance:"자신 공격 크게↑↑",calmmind:"자신 특공·특방↑",bulkup:"자신 공격·방어↑",dragondance:"자신 공격·스피드↑",
+        focusenergy:"급소율 크게 상승",encore:"상대 기술 고정",counter:"받은 물리데미지 2배 반사",mirrorcoat:"받은 특수데미지 2배 반사",trap:"상대 도주/교체 불가"
     };
     var desc = descs[ef] || ef;
     if (ec && ec < 100) desc += " " + ec + "%";
