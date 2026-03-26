@@ -4017,7 +4017,7 @@ kangaskhan:  {n:"메가캥카",t:["normal"],s:[105,125,100,60,100,100],ab:"paren
 pinsir:      {n:"메가쁘사이저",t:["bug","flying"],s:[65,155,120,65,90,105],ab:"aerilate",em:"🪲"},
 gyarados:    {n:"메가갸라도스",t:["water","dark"],s:[95,155,109,70,130,81],ab:"moldbreaker",em:"🐲"},
 aerodactyl:  {n:"메가프테라",t:["rock","flying"],s:[80,135,85,70,95,150],ab:"toughclaws",em:"🦕"},
-mewtwox:     {base:"mewtwo",n:"메가뮤츠X",t:["psychic","fighting"],s:[106,190,100,154,100,130],ab:"innerfocus",em:"🧬"},
+mewtwox:     {base:"mewtwo",n:"메가뮤츠X",t:["psychic","fighting"],s:[106,190,100,154,100,130],ab:"steadfast",em:"🧬"},
 mewtwoy:     {base:"mewtwo",n:"메가뮤츠Y",t:["psychic"],s:[106,150,70,194,120,140],ab:"insomnia",em:"🧬"},
 ampharos:    {n:"메가전룡",t:["electric","dragon"],s:[90,95,105,165,110,45],ab:"moldbreaker",em:"⚡"},
 scizor:      {n:"메가핫삼",t:["bug","steel"],s:[70,150,140,65,100,75],ab:"technician",em:"✂️"},
@@ -4032,7 +4032,7 @@ medicham:    {n:"메가요가램",t:["fighting","psychic"],s:[60,100,85,80,85,10
 manectric:   {n:"메가썬더볼트",t:["electric"],s:[70,75,80,135,80,135],ab:"intimidate",em:"⚡"},
 banette:     {n:"메가다크펫",t:["ghost"],s:[64,165,75,93,83,75],ab:"prankster",em:"🧸"},
 absol:       {n:"메가앱솔",t:["dark"],s:[65,150,60,115,60,115],ab:"superluck",em:"🌙"},
-garchomp:    {n:"메가한카리아스",t:["dragon","ground"],s:[108,170,115,120,95,92],ab:"moldbreaker",em:"🦈"},
+garchomp:    {n:"메가한카리아스",t:["dragon","ground"],s:[108,170,115,120,95,92],ab:"sandforce",em:"🦈"},
 lucario:     {n:"메가루카리오",t:["fighting","steel"],s:[70,145,88,140,70,112],ab:"adaptability",em:"🐺"},
 abomasnow:   {n:"메가유키노오",t:["grass","ice"],s:[90,132,105,132,105,30],ab:"snowwarning",em:"🌲"},
 salamence:   {n:"메가보만다",t:["dragon","flying"],s:[95,145,130,120,90,120],ab:"aerilate",em:"🐉"},
@@ -9315,9 +9315,14 @@ window.poke_endBattle = async function() {
     if (player) {
         advanceTime(20);
     }
-    // 메가진화 해제
+    // 메가진화 해제 + 전투 전용 플래그 초기화
     for (var i = 0; i < player.party.length; i++) {
         var p = player.party[i];
+        // 반동/충전/풀죽음/속이다 등 전투 전용 플래그 초기화
+        p._recharging = false;
+        p._charging = null;
+        p._flinched = false;
+        p._fakeoutUsed = false;
         if (p.isMega) {
             p.isMega = false;
             p.megaForm = null;
@@ -9379,9 +9384,14 @@ window.poke_blackout = async function() {
         addLog("😵 패배... 소지금의 일부를 잃었다.", "battle");
     }
     healAllPokemon();
-    // 메가진화 해제
+    // 메가진화 해제 + 전투 전용 플래그 초기화
     for (var i = 0; i < player.party.length; i++) {
         var p = player.party[i];
+        // 반동/충전/풀죽음/속이다 등 전투 전용 플래그 초기화
+        p._recharging = false;
+        p._charging = null;
+        p._flinched = false;
+        p._fakeoutUsed = false;
         if (p.isMega) {
             p.isMega = false;
             p.megaForm = null;
