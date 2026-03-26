@@ -920,6 +920,9 @@ var KANTO_DEX = ["bulbasaur","ivysaur","venusaur","charmander","charmeleon","cha
 // 알로라지역 도감 (울트라썬/문 바탕)
 var ALOLA_DEX = ["rowlet","dartrix","decidueye","litten","torracat","incineroar","popplio","brionne","primarina","pikipek","trumbeak","toucannon","yungoos","gumshoos","rattata","raticate","alolan_rattata","alolan_raticate","caterpie","metapod","butterfree","ledyba","ledian","grubbin","charjabug","vikavolt","pichu","pikachu","raichu","alolan_raichu","growlithe","arcanine","drowzee","hypno","makuhita","hariyama","smeargle","cutiefly","ribombee","alolan_meowth","alolan_persian","abra","kadabra","alakazam","zubat","golbat","crobat","diglett","dugtrio","alolan_diglett","alolan_dugtrio","noibat","noivern","roggenrola","boldore","gigalith","carbink","rockruff","lycanroc","machop","machoke","machamp","eevee","vaporeon","jolteon","flareon","espeon","umbreon","leafeon","glaceon","sylveon","mudbray","mudsdale","lillipup","herdier","stoutland","crabrawler","crabominable","oricorio","fomantis","lurantis","salandit","salazzle","stufful","bewear","bounsweet","steenee","tsareena","comfey","dewpider","araquanid","bonsly","sudowoodo","alolan_grimer","alolan_muk","sandygast","palossand","cubone","marowak","alolan_marowak","trapinch","vibrava","flygon","sandile","krokorok","krookodile","komala","turtonator","pancham","pangoro","skarmory","alolan_geodude","alolan_graveler","alolan_golem","alolan_vulpix","alolan_ninetales","passimian","oranguru","bruxish","mimikyu","minior","beldum","metang","metagross","clefairy","clefable","ditto","elekid","electabuzz","magneton","magnezone","togedemaru","jangmoo","hakamoo","kommoo","murkrow","honchkrow","sneasel","weavile","vanillite","vanillish","vanilluxe","snorunt","glalie","froslass","absol","riolu","lucario","drampa","alolan_sandshrew","alolan_sandslash","wishiwashi","mareanie","toxapex","morelull","shiinotic","wimpod","golisopod","pyukumuku","dhelmise","type_null","silvally","magikarp","gyarados","lapras","snorlax","dratini","dragonair","dragonite","tapukoko","tapulele","tapubulu","tapufini","cosmog","cosmoem","solgaleo","lunala","nihilego","buzzwole","pheromosa","xurkitree","celesteela","kartana","guzzlord","necrozma","magearna","marshadow","poipole","naganadel","stakataka","blacephalon","zeraora"];
 
+// 성도지역 도감 (하트골드/소울실버 바탕)
+var JOHTO_DEX = ["chikorita","bayleef","meganium","cyndaquil","quilava","typhlosion","totodile","croconaw","feraligatr","caterpie","metapod","butterfree","weedle","kakuna","beedrill","pidgey","pidgeotto","pidgeot","hoothoot","noctowl","rattata","raticate","sentret","furret","pichu","pikachu","raichu","zubat","golbat","crobat","cleffa","clefairy","clefable","igglybuff","jigglypuff","wigglytuff","togepi","togetic","togekiss","mareep","flaaffy","ampharos","geodude","graveler","golem","onix","steelix","natu","xatu","oddish","gloom","vileplume","bellossom","hoppip","skiploom","jumpluff","wooper","quagsire","gastly","haunter","gengar","unown","poliwag","poliwhirl","poliwrath","politoed","ekans","arbok","bellsprout","weepinbell","victreebel","pineco","forretress","spinarak","ariados","ledyba","ledian","drowzee","hypno","tentacool","tentacruel","krabby","kingler","magikarp","gyarados","ditto","eevee","vaporeon","jolteon","flareon","espeon","umbreon","slowpoke","slowbro","slowking","machop","machoke","machamp","nidoranf","nidorina","nidoqueen","nidoranm","nidorino","nidoking","abra","kadabra","alakazam","exeggcute","exeggutor","sudowoodo","miltank","tauros","murkrow","honchkrow","snubbull","granbull","aipom","ambipom","sunkern","sunflora","yanma","yanmega","gligar","gliscor","sneasel","weavile","teddiursa","ursaring","swinub","piloswine","mamoswine","misdreavus","mismagius","heracross","pinsir","magnemite","magneton","magnezone","stantler","smeargle","mantine","mantyke","skarmory","doduo","dodrio","ponyta","rapidash","vulpix","ninetales","growlithe","arcanine","kangaskhan","marill","azumarill","dratini","dragonair","dragonite","larvitar","pupitar","tyranitar"];
+
 // ═══════════════════════════════════════════════
 // ⚔️ 기술 데이터베이스
 // ═══════════════════════════════════════════════
@@ -1738,13 +1741,15 @@ johto: {
   ],reward:180}
 ]},
 {id:"j_r3",n:"31번도로",desc:"키쿄우시티로 향하는 길",lv:[4,7],pokemon:[
-  {k:"pidgey",w:20},
-  {k:"caterpie",w:15},
-  {k:"weedle",w:15},
-  {k:"bellsprout",w:18},
-  {k:"spinarak",w:12},
-  {k:"ledyba",w:12},
-  {k:"poliwag",w:8}
+  {k:"pidgey",w:16},
+  {k:"caterpie",w:12},
+  {k:"weedle",w:12},
+  {k:"bellsprout",w:16},
+  {k:"spinarak",w:10},
+  {k:"ledyba",w:10},
+  {k:"poliwag",w:6},
+  {k:"geodude",w:10},
+  {k:"gastly",w:8}
 ],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:0,trainers:[
   {n:"벌레잡이 소년",em:"🧒",pokemon:[
     {k:"caterpie",l:5},
@@ -2034,13 +2039,17 @@ johto: {
   ],reward:480}
 ]},
 {id:"j_r_park",n:"자연공원",desc:"벌레잡기 대회가 열리는 공원",lv:[12,15],pokemon:[
-  {k:"caterpie",w:15},
-  {k:"weedle",w:15},
-  {k:"paras",w:10},
-  {k:"venonat",w:10},
+  {k:"caterpie",w:10},
+  {k:"metapod",w:5},
+  {k:"butterfree",w:3},
+  {k:"weedle",w:10},
+  {k:"kakuna",w:5},
+  {k:"beedrill",w:3},
+  {k:"paras",w:8},
+  {k:"venonat",w:8},
   {k:"scyther",w:5},
   {k:"pinsir",w:5},
-  {k:"sunkern",w:20},
+  {k:"sunkern",w:18},
   {k:"ledyba",w:10},
   {k:"spinarak",w:10}
 ],hasCenter:false,hasShop:false,encounterRate:0.85,reqBadges:2,trainers:[
@@ -2129,12 +2138,13 @@ johto: {
 ]},
 {id:"j_c6",n:"엔주시티",desc:"역사와 전통의 도시",isCity:true,hasCenter:true,hasShop:true,shopItems:["pokeball","superball","ultraball","potion","superpotion","hyperpotion","antidote","paralyzeheal","awakening","burnheal","iceheal"],reqBadges:3,trainers:[]},
 {id:"j_r_belltower",n:"방울탑",desc:"전설의 포켓몬 호우오우가 기다리는 탑",lv:[20,40],pokemon:[
-  {k:"rattata",w:20},
-  {k:"gastly",w:25},
-  {k:"haunter",w:20},
-  {k:"misdreavus",w:15},
+  {k:"rattata",w:18},
+  {k:"gastly",w:22},
+  {k:"haunter",w:18},
+  {k:"misdreavus",w:14},
   {k:"duskull",w:10},
-  {k:"shuppet",w:10}
+  {k:"shuppet",w:10},
+  {k:"abra",w:8}
 ],hasCenter:false,hasShop:false,encounterRate:0.9,reqBadges:7,trainers:[
   {n:"무녀 소녀",em:"⛩️",pokemon:[
     {k:"gastly",l:30},
@@ -8591,7 +8601,7 @@ function renderPokedexScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     // 도감 모드 탭
     var dexMode = gState.dexMode || "regional";
-    var regionDexMap = {kanto: {dex: KANTO_DEX, label: "🏠 관동지역 도감 (레츠고피카츄)"}, alola: {dex: ALOLA_DEX, label: "🌺 알로라지역 도감 (울트라썬/문)"}};
+    var regionDexMap = {kanto: {dex: KANTO_DEX, label: "🏠 관동지역 도감 (레츠고피카츄)"}, alola: {dex: ALOLA_DEX, label: "🌺 알로라지역 도감 (울트라썬/문)"}, johto: {dex: JOHTO_DEX, label: "🌿 성도지역 도감 (하트골드/소울실버)"}};
     var curRegionDex = regionDexMap[player.region];
     html += '<div style="display:flex;gap:4px;margin:8px 0">';
     if (curRegionDex) {
