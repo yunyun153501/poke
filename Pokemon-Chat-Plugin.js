@@ -1107,7 +1107,7 @@ voltswitch:  {n:"볼트체인지",t:"electric",c:"special",p:70,a:100,pp:20,ef:"
 strugglebug: {n:"벌레의저항",t:"bug",c:"special",p:50,a:100,pp:20},
 bulldoze:    {n:"지진밟기",t:"ground",c:"physical",p:60,a:100,pp:20},
 frostbreath: {n:"프로스트브레스",t:"ice",c:"special",p:60,a:90,pp:10,ef:"highcrit"},
-dragontail:  {n:"드래곤테일",t:"dragon",c:"physical",p:60,a:90,pp:10},
+dragontail:  {n:"드래곤테일",t:"dragon",c:"physical",p:60,a:90,pp:10,priority:-6,ef:"forceswitch"},
 workup:      {n:"자기암시",t:"normal",c:"status",p:0,a:100,pp:30},
 infestation: {n:"침식",t:"bug",c:"special",p:20,a:100,pp:20},
 powerpunch:  {n:"파워업펀치",t:"fighting",c:"physical",p:40,a:100,pp:20},
@@ -1146,8 +1146,8 @@ swagger:     {n:"뽐내기",t:"normal",c:"status",p:0,a:85,pp:15,ef:"confuse",ec
 attract:     {n:"헤롱헤롱",t:"normal",c:"status",p:0,a:100,pp:15},
 yawn:        {n:"하품",t:"normal",c:"status",p:0,a:100,pp:10,ef:"sleep",ec:100},
 screech:     {n:"싫은소리",t:"normal",c:"status",p:0,a:85,pp:40,ef:"def_down2"},
-whirlwind:   {n:"회오리바람",t:"normal",c:"status",p:0,a:100,pp:20},
-roar:        {n:"짖기",t:"normal",c:"status",p:0,a:100,pp:20},
+whirlwind:   {n:"회오리바람",t:"normal",c:"status",p:0,a:100,pp:20,priority:-6,ef:"forceswitch"},
+roar:        {n:"짖기",t:"normal",c:"status",p:0,a:100,pp:20,priority:-6,ef:"forceswitch"},
 stockpile:   {n:"축적",t:"normal",c:"status",p:0,a:100,pp:20},
 spitup:      {n:"분출",t:"normal",c:"special",p:100,a:100,pp:10},
 swallow:     {n:"꿀꺽",t:"normal",c:"status",p:0,a:100,pp:10,ef:"heal"},
@@ -1216,7 +1216,7 @@ lowsweep:    {n:"로킥",t:"fighting",c:"physical",p:65,a:100,pp:20,ef:"spd_down
 vacuumwave:  {n:"진공파",t:"fighting",c:"special",p:40,a:100,pp:30,priority:1},
 focusblast:  {n:"기합구슬",t:"fighting",c:"special",p:120,a:70,pp:5,ef:"spdef_down",ec:10},
 reversal:    {n:"기사회생",t:"fighting",c:"physical",p:1,a:100,pp:15},
-circlethrow: {n:"배대뒤치기",t:"fighting",c:"physical",p:60,a:90,pp:10},
+circlethrow: {n:"배대뒤치기",t:"fighting",c:"physical",p:60,a:90,pp:10,priority:-6,ef:"forceswitch"},
 sacredsword: {n:"성스러운칼",t:"fighting",c:"physical",p:90,a:100,pp:15},
 secretsword: {n:"신비의칼",t:"fighting",c:"special",p:85,a:100,pp:10},
 bulkup:      {n:"벌크업",t:"fighting",c:"status",p:0,a:100,pp:20,ef:"bulkup"},
@@ -1391,7 +1391,7 @@ camouflage:{n:"보호색",t:"normal",c:"status",p:0,a:100,pp:20},
 naturalgift:{n:"자연의은혜",t:"normal",c:"physical",p:80,a:100,pp:15},
 conversion:{n:"타입체인지",t:"normal",c:"status",p:0,a:100,pp:30},
 conversion2:{n:"타입체인지2",t:"normal",c:"status",p:0,a:100,pp:30},
-teleport:{n:"순간이동",t:"psychic",c:"status",p:0,a:100,pp:20},
+teleport:{n:"순간이동",t:"psychic",c:"status",p:0,a:100,pp:20,ef:"teleport"},
 firepledge:{n:"불꽃맹세",t:"fire",c:"special",p:80,a:100,pp:10},
 heatcrash:{n:"히트스탬프",t:"fire",c:"physical",p:1,a:100,pp:10},
 searingshot:{n:"화염탄",t:"fire",c:"special",p:100,a:100,pp:5,ef:"burn",ec:30},
@@ -6821,6 +6821,70 @@ function executeAttack(attacker, defender, moveKey, bd) {
         } // end multi-hit else
         } // end fixedDmg else
     }
+    // ── 순간이동(Teleport): 야생전=도망, 트레이너전=실패 ──
+    if (mv.ef === "teleport") {
+        if (bd.type === "trainer") {
+            bd.msg.push("트레이너전에서는 순간이동할 수 없다!");
+        } else {
+            bd.msg.push(an + "은(는) 순간이동했다!");
+            bd.fled = true;
+        }
+    }
+    // ── 강제교체(Roar/Whirlwind/Dragon Tail/Circle Throw) ──
+    if (mv.ef === "forceswitch" && defender.currentHp > 0) {
+        if (bd.type !== "trainer") {
+            // 야생전: 상대(또는 자신)가 도주
+            bd.msg.push(dn + "은(는) 날려보내졌다!");
+            bd.fled = true;
+        } else if (attacker === bd.enemy && bd.type === "trainer") {
+            // 상대 트레이너가 플레이어에게 사용 → 플레이어 랜덤 교체
+            var fsCandidates = [];
+            for (var fsi = 0; fsi < player.party.length; fsi++) {
+                if (fsi !== bd.myIdx && player.party[fsi].currentHp > 0) fsCandidates.push(fsi);
+            }
+            if (fsCandidates.length > 0) {
+                var fsRand = fsCandidates[Math.floor(Math.random() * fsCandidates.length)];
+                var oldPoke = player.party[bd.myIdx];
+                var exitAbKey = getAbilityKey(oldPoke);
+                if (exitAbKey === "naturalcure" && oldPoke.status) { oldPoke.status = null; oldPoke.statusTurns = 0; }
+                if (exitAbKey === "regenerator" && oldPoke.currentHp > 0) { oldPoke.currentHp = Math.min(oldPoke.stats[0], oldPoke.currentHp + Math.floor(oldPoke.stats[0] / 3)); }
+                bd.myIdx = fsRand;
+                var fsMyPoke = player.party[bd.myIdx];
+                fsMyPoke._fakeoutUsed = false; fsMyPoke._recharging = false; fsMyPoke._charging = null;
+                bd.msg.push(fsMyPoke.nickname + " (Lv." + fsMyPoke.level + ")이(가) 강제로 등장했다!");
+                applyEntryHazards(fsMyPoke, bd, "player");
+                if (!bd.battleParticipants) bd.battleParticipants = [bd.myIdx];
+                if (bd.battleParticipants.indexOf(bd.myIdx) < 0) bd.battleParticipants.push(bd.myIdx);
+                if (getAbilityKey(fsMyPoke) === "intimidate") {
+                    bd.enemy.statStages.atk = Math.max(-6, bd.enemy.statStages.atk - 1);
+                    bd.msg.push(fsMyPoke.nickname + "의 위협! " + bd.enemy.nickname + "의 공격이 떨어졌다!");
+                }
+            } else {
+                bd.msg.push("하지만 교체할 포켓몬이 없다!");
+            }
+        } else if (bd.enemyParty) {
+            // 플레이어가 상대 트레이너에게 사용 → 상대 랜덤 교체
+            var feCandidates = [];
+            for (var fei = 0; fei < bd.enemyParty.length; fei++) {
+                if (fei !== bd.enemyIdx && bd.enemyParty[fei].currentHp > 0) feCandidates.push(fei);
+            }
+            if (feCandidates.length > 0) {
+                var feRand = feCandidates[Math.floor(Math.random() * feCandidates.length)];
+                bd.enemyIdx = feRand;
+                bd.enemy = bd.enemyParty[bd.enemyIdx];
+                bd.enemy._fakeoutUsed = false; bd.enemy._recharging = false; bd.enemy._charging = null;
+                bd.msg.push(bd.trainerName + "의 " + bd.enemy.nickname + " (Lv." + bd.enemy.level + ")이(가) 강제로 등장했다!");
+                applyEntryHazards(bd.enemy, bd, "enemy");
+                if (getAbilityKey(bd.enemy) === "intimidate") {
+                    var fsTarget = player.party[bd.myIdx];
+                    fsTarget.statStages.atk = Math.max(-6, fsTarget.statStages.atk - 1);
+                    bd.msg.push(bd.enemy.nickname + "의 위협! " + fsTarget.nickname + "의 공격이 떨어졌다!");
+                }
+            } else {
+                bd.msg.push("하지만 교체할 포켓몬이 없다!");
+            }
+        }
+    }
     // PP 감소
     for (var i = 0; i < attacker.moves.length; i++) {
         if (attacker.moves[i].key === moveKey) { attacker.moves[i].ppLeft = Math.max(0, attacker.moves[i].ppLeft - 1); break; }
@@ -7822,6 +7886,16 @@ function render() {
     }
     var battleMsgEl = body.querySelector(".pk-battle-msg");
     if (battleMsgEl) battleMsgEl.scrollTop = battleMsgEl.scrollHeight;
+    // 도로 목록 스크롤 위치 복원 또는 현재 위치로 스크롤
+    var _roadListEl2 = body.querySelector(".pk-road-list");
+    if (_roadListEl2 && gState) {
+        if (gState._roadListScrollTop !== undefined && gState._roadListScrollTop !== null) {
+            _roadListEl2.scrollTop = gState._roadListScrollTop;
+        } else {
+            var _activeItem = _roadListEl2.querySelector(".pk-road-item.active");
+            if (_activeItem) _activeItem.scrollIntoView({block:"center",behavior:"instant"});
+        }
+    }
 }
 
 function renderTitleScreen() {
@@ -7976,11 +8050,22 @@ function renderOverworld() {
     html += '<button class="pk-btn pk-btn-dark pk-btn-xs" data-action="poke_openStatus">📊 상태</button>';
     html += '<button class="pk-btn pk-btn-red pk-btn-xs" data-action="poke_freshStart">🌟 새 시작</button>';
     html += '</div>';
-    // 도로 목록
+    // 도로 목록 (레벨순 정렬)
     html += '<div style="font-size:14px;font-weight:bold;color:#f5c518;margin:8px 0 4px">' + region.em + ' ' + region.n + ' 도로 목록</div>';
     html += '<div class="pk-road-list">';
     var hasFly = !!(player.bag && player.bag.hm_fly);
-    for (var i = 0; i < region.roads.length; i++) {
+    // 레벨순으로 정렬된 인덱스 배열 생성
+    var sortedIndices = [];
+    for (var si = 0; si < region.roads.length; si++) sortedIndices.push(si);
+    sortedIndices.sort(function(a, b) {
+        var ra = region.roads[a], rb = region.roads[b];
+        var ba = ra.reqBadges || 0, bb = rb.reqBadges || 0;
+        if (ba !== bb) return ba - bb;
+        var la = ra.lv ? ra.lv[0] : 0, lb = rb.lv ? rb.lv[0] : 0;
+        return la - lb;
+    });
+    for (var si2 = 0; si2 < sortedIndices.length; si2++) {
+        var i = sortedIndices[si2];
         var road = region.roads[i];
         var isActive = (player.roadIdx === i);
         var curBadges = player.badges[player.region] ? player.badges[player.region].length : 0;
@@ -9209,7 +9294,8 @@ function moveEffectDesc(ef, ec) {
         focusenergy:"급소율 크게 상승",encore:"상대 기술 고정",counter:"받은 물리데미지 2배 반사",mirrorcoat:"받은 특수데미지 2배 반사",trap:"상대 도주/교체 불가",
         recharge:"다음 턴 행동 불가(충전)",pursuit:"교체 시 2배 데미지",
         stealthrock:"상대 필드에 스텔스록 설치",spikes:"상대 필드에 압정 설치",toxicspikes:"상대 필드에 독압정 설치",
-        rapidspin:"자기 필드의 해저드 제거",defog:"양측 필드의 해저드 제거",uturn:"공격 후 교체"
+        rapidspin:"자기 필드의 해저드 제거",defog:"양측 필드의 해저드 제거",uturn:"공격 후 교체",
+        teleport:"야생전: 도주 / 트레이너전: 실패",forceswitch:"상대 강제 교체(야생: 도주)"
     };
     var desc = descs[ef] || ef;
     if (ec && ec < 100) desc += " " + ec + "%";
@@ -9380,6 +9466,9 @@ window.poke_selectRoad = async function(idx) {
         player.visitedRoads[player.region + "_" + idx] = true;
     }
     player.roadIdx = idx;
+    // 도로 목록 스크롤 위치 저장
+    var _roadListEl = document.querySelector(".pk-road-list");
+    if (_roadListEl) gState._roadListScrollTop = _roadListEl.scrollTop;
     gState.subScreen = "roadDetail";
     await saveAll();
     render();
