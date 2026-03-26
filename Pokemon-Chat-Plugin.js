@@ -4505,7 +4505,10 @@ async function getSlotInfo(slotNum) {
         }
         if (p && p.length > 2) {
             var data = JSON.parse(p);
-            return { exists: true, name: data.name || "???", region: data.region || "kanto", badges: Object.values(data.badges || {}).flat().length, partyCount: (data.party || []).length, time: t || "" };
+            var totalBadges = 0;
+            if (data.badges) { var _bv = Object.values(data.badges); for (var _bi = 0; _bi < _bv.length; _bi++) { if (Array.isArray(_bv[_bi])) totalBadges += _bv[_bi].length; } }
+            var regionCount = data.regionSaves ? Object.keys(data.regionSaves).length : 1;
+            return { exists: true, name: data.name || "???", region: data.region || "kanto", badges: totalBadges, partyCount: (data.party || []).length, regionCount: regionCount, time: t || "" };
         }
     } catch(e) {}
     return { exists: false };
@@ -8223,6 +8226,12 @@ function renderStatusScreen() {
     html += '<div style="font-size:12px;color:#ccc">📅 ' + (player.day||1) + '일차 / ' + formatGameTime(player.timeOfDay) + ' ' + getTimeEmoji(player.timeOfDay) + '</div>';
     html += '<div style="font-size:12px;color:#ccc">🏅 뱃지: ' + totalBadges + '개' + (badgeList.length > 0 ? ' (' + badgeList.join(', ') + ')' : '') + '</div>';
     html += '<div style="font-size:12px;color:#ccc">⚔️ 총 배틀: ' + (player.battleCount||0) + '회</div>';
+    // 시작된 지역 정보
+    if (player.regionSaves) {
+        var _startedRegions = Object.keys(player.regionSaves);
+        var _rnMap = {kanto:"관동",johto:"성도",hoenn:"호연",sinnoh:"신오",unova:"하나",kalos:"칼로스",alola:"알로라"};
+        html += '<div style="font-size:12px;color:#ccc">🌏 시작된 지역: ' + _startedRegions.map(function(rk){ return _rnMap[rk] || rk; }).join(', ') + ' (' + _startedRegions.length + '/7)</div>';
+    }
     html += '</div>';
     // 도감
     var dexCount = 0;
@@ -9162,7 +9171,8 @@ window.poke_openSaveSlots = function() {
             slotHtml += '<div style="display:flex;justify-content:space-between;align-items:center">';
             slotHtml += '<div><strong>슬롯 ' + si + '</strong>';
             if (info.exists) {
-                slotHtml += ' <span style="color:#aaa;font-size:12px">| ' + info.name + ' | ' + info.region + ' | 🏅' + info.badges + ' | 파티 ' + info.partyCount + '</span>';
+                var _regionNameMap = {kanto:"관동",johto:"성도",hoenn:"호연",sinnoh:"신오",unova:"하나",kalos:"칼로스",alola:"알로라"};
+                slotHtml += ' <span style="color:#aaa;font-size:12px">| ' + info.name + ' | ' + (_regionNameMap[info.region] || info.region) + ' | 🏅' + info.badges + ' | 🌏' + (info.regionCount || 1) + '지역</span>';
                 if (info.time) { try { var d = new Date(info.time); slotHtml += ' <span style="color:#666;font-size:10px">' + d.toLocaleDateString() + ' ' + d.toLocaleTimeString() + '</span>'; } catch(e){} }
             } else {
                 slotHtml += ' <span style="color:#666;font-size:12px">비어있음</span>';
