@@ -1,5 +1,5 @@
 //@name Pokemon Battle
-//@display-name 🎮 포켓몬 배틀 (Gen 1-6)
+//@display-name 🎮 포켓몬 배틀 (Gen 1-7)
 //@api 3.0
 //@version 2.0
 //@arg pokemon_save string "" "포켓몬 세이브 데이터"
@@ -3408,16 +3408,16 @@ kalos: [
 alola:[
     {id:"a_gym1",city:"릴리타운",n:"메레메레섬 시련",type:"normal",badge:"메레메레뱃지",badgeEm:"🌺",
      gymTrainers:[{n:"시련가이드",pokemon:[{k:"yungoos",l:9}],reward:200},{n:"시련가이드",pokemon:[{k:"pikipek",l:10}],reward:220}],
-     leaders:[{id:"hala",n:"할라",em:"👊",pokemon:[{k:"machop",l:11},{k:"makuhita",l:11},{k:"crabrawler",l:12}],reward:1200,rewardItems:["tm31_brickbreak"]}]},
+     leaders:[{id:"hala",reqBadges:0,n:"할라",em:"👊",pokemon:[{k:"machop",l:11},{k:"makuhita",l:11},{k:"crabrawler",l:12}],reward:1200,rewardItems:["tm31_brickbreak"]}]},
     {id:"a_gym2",city:"코니코시티",n:"아칼라섬 시련",type:"water",badge:"아칼라뱃지",badgeEm:"🌊",
      gymTrainers:[{n:"수영선수",pokemon:[{k:"wishiwashi",l:18}],reward:400},{n:"낚시꾼",pokemon:[{k:"dewpider",l:17},{k:"araquanid",l:18}],reward:420}],
-     leaders:[{id:"olivia",n:"라이치",em:"💎",pokemon:[{k:"anorith",l:22},{k:"lileep",l:22},{k:"lycanroc",l:23}],reward:2300,rewardItems:["tm39_rocktomb"]}]},
+     leaders:[{id:"olivia",reqBadges:1,n:"라이치",em:"💎",pokemon:[{k:"anorith",l:22},{k:"lileep",l:22},{k:"lycanroc",l:23}],reward:2300,rewardItems:["tm39_rocktomb"]}]},
     {id:"a_gym3",city:"말리에시티",n:"울라울라섬 시련",type:"dark",badge:"울라울라뱃지",badgeEm:"🌙",
      gymTrainers:[{n:"팀스컬",pokemon:[{k:"drowzee",l:28}],reward:600},{n:"팀스컬",pokemon:[{k:"alolan_raticate",l:29},{k:"salandit",l:28}],reward:620}],
-     leaders:[{id:"nanu",n:"나누",em:"🐱",pokemon:[{k:"sableye",l:33},{k:"krokorok",l:33},{k:"alolan_persian",l:34}],reward:3400,rewardItems:["tm97_darkpulse"]}]},
+     leaders:[{id:"nanu",reqBadges:2,n:"나누",em:"🐱",pokemon:[{k:"sableye",l:33},{k:"krokorok",l:33},{k:"alolan_persian",l:34}],reward:3400,rewardItems:["tm97_darkpulse"]}]},
     {id:"a_gym4",city:"해변마을",n:"포니섬 시련",type:"dragon",badge:"포니뱃지",badgeEm:"🐉",
      gymTrainers:[{n:"에이스트레이너",pokemon:[{k:"hakamoo",l:42}],reward:840},{n:"에이스트레이너",pokemon:[{k:"dragonair",l:42},{k:"gabite",l:43}],reward:860}],
-     leaders:[{id:"hapu",n:"하푸",em:"🐴",pokemon:[{k:"dugtrio",l:46},{k:"mudsdale",l:47},{k:"flygon",l:47},{k:"gastrodon",l:48}],reward:4800,rewardItems:["tm26_earthquake"]}]}
+     leaders:[{id:"hapu",reqBadges:3,n:"하푸",em:"🐴",pokemon:[{k:"dugtrio",l:46},{k:"mudsdale",l:47},{k:"flygon",l:47},{k:"gastrodon",l:48}],reward:4800,rewardItems:["tm26_earthquake"]}]}
 ]
 
 };
@@ -7148,7 +7148,7 @@ function render() {
 function renderTitleScreen() {
     var html = '<div style="text-align:center;padding:20px 0">';
     html += '<div style="font-size:28px;margin:10px 0">🎮 포켓몬 배틀</div>';
-    html += '<div style="color:#aaa;font-size:12px;margin-bottom:20px">Gen 1~6 | 관동 & 성도 & 호연 & 신오 & 하나 & 칼로스</div>';
+    html += '<div style="color:#aaa;font-size:12px;margin-bottom:20px">Gen 1~7 | 관동 & 성도 & 호연 & 신오 & 하나 & 칼로스 & 알로라</div>';
     html += '<div style="display:flex;flex-direction:column;gap:8px;max-width:200px;margin:0 auto">';
     html += '<button class="pk-btn pk-btn-red pk-btn-block" data-action="poke_newGame">🆕 새 게임</button>';
     html += '<button class="pk-btn pk-btn-blue pk-btn-block" data-action="poke_continue">📂 이어하기</button>';
@@ -8201,15 +8201,19 @@ function renderPokedexScreen() {
     var html = '<button class="pk-btn pk-btn-dark pk-btn-sm" data-action="poke_back">◀ 뒤로</button>';
     // 도감 모드 탭
     var dexMode = gState.dexMode || "regional";
+    var regionDexMap = {kanto: {dex: KANTO_DEX, label: "🏠 관동지역 도감 (레츠고피카츄)"}, alola: {dex: ALOLA_DEX, label: "🌺 알로라지역 도감 (울트라썬/문)"}};
+    var curRegionDex = regionDexMap[player.region];
     html += '<div style="display:flex;gap:4px;margin:8px 0">';
-    html += '<button class="pk-btn pk-btn-sm ' + (dexMode === "regional" ? "pk-btn-primary" : "pk-btn-dark") + '" data-action="poke_switchDex" data-args="regional">🏠 관동도감</button>';
+    if (curRegionDex) {
+        html += '<button class="pk-btn pk-btn-sm ' + (dexMode === "regional" ? "pk-btn-primary" : "pk-btn-dark") + '" data-action="poke_switchDex" data-args="regional">' + curRegionDex.label.split(" ")[0] + ' 지역도감</button>';
+    }
     html += '<button class="pk-btn pk-btn-sm ' + (dexMode === "national" ? "pk-btn-primary" : "pk-btn-dark") + '" data-action="poke_switchDex" data-args="national">🌍 전체도감</button>';
     html += '</div>';
 
     var dexKeys, targetKeys, total;
-    if (dexMode === "regional") {
-        targetKeys = KANTO_DEX;
-        total = KANTO_DEX.length;
+    if (dexMode === "regional" && curRegionDex) {
+        targetKeys = curRegionDex.dex;
+        total = curRegionDex.dex.length;
     } else {
         targetKeys = Object.keys(POKEDEX);
         total = targetKeys.length;
@@ -8224,7 +8228,7 @@ function renderPokedexScreen() {
         }
     }
 
-    var dexLabel = dexMode === "regional" ? "🏠 관동지역 도감 (레츠고피카츄)" : "🌍 전체 도감";
+    var dexLabel = (dexMode === "regional" && curRegionDex) ? curRegionDex.label : "🌍 전체 도감";
     html += '<div style="font-size:15px;font-weight:bold;margin:8px 0">' + dexLabel + ' <span style="font-size:12px;color:#aaa">발견 ' + seen + ' | 포획 ' + caught + ' / ' + total + '</span></div>';
     html += '<div class="pk-dex-grid">';
 
