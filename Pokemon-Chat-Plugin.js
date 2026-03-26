@@ -6095,7 +6095,12 @@ function applyMoveEffects(move, attacker, defender, bd) {
             bd.msg.push(an + "의 공격과 스피드가 " + (ddS > 0 ? "올라갔다!" : "떨어졌다!"));
         }
         else if (mv.ef === "focusenergy") { attacker.critBoost = true; bd.msg.push(an + "은(는) 기합을 모으고 있다!"); }
-        else if (mv.ef === "encore") { bd.msg.push(an + "은(는) 앙코르를 사용했다!"); }
+        else if (mv.ef === "encore") {
+            if (defender._lastUsedMove && MOVES[defender._lastUsedMove] && MOVES[defender._lastUsedMove].ef !== "encore") {
+                defender._encored = { move: defender._lastUsedMove, turns: 3 };
+                bd.msg.push(an + "은(는) 앙코르를 사용했다! " + dn + "은(는) " + MOVES[defender._lastUsedMove].n + "만 사용할 수 있다!");
+            } else { bd.msg.push("그러나 실패했다!"); }
+        }
         else if (mv.ef === "counter") {
             if (bd.lastPhysDmg && bd.lastPhysDmg > 0) {
                 var cDmg = bd.lastPhysDmg * 2;
@@ -6206,6 +6211,7 @@ function executeAttack(attacker, defender, moveKey, bd) {
     var an = attacker.nickname;
     var dn = defender.nickname;
     bd.msg.push(an + "의 " + mv.n + "!");
+    attacker._lastUsedMove = moveKey;
     // 속이다(fakeout) 첫 턴 제한: 등장한 턴에만 사용 가능
     if (moveKey === "fakeout" && attacker._fakeoutUsed) {
         bd.msg.push("그러나 실패했다!");
@@ -6261,6 +6267,8 @@ function executeAttack(attacker, defender, moveKey, bd) {
                 return;
             }
             defender.currentHp = Math.max(0, defender.currentHp - fixedResult.dmg);
+            if (mv.c === "physical") bd.lastPhysDmg = fixedResult.dmg;
+            else if (mv.c === "special") bd.lastSpecDmg = fixedResult.dmg;
             bd.msg.push(fixedResult.dmg + " 데미지! (" + defender.nickname + " " + Math.max(0, defender.currentHp) + "/" + defender.stats[0] + ")");
             checkBerryAfterDamage(defender, bd);
         } else {
@@ -6356,9 +6364,13 @@ function executeAttack(attacker, defender, moveKey, bd) {
             else if (result.eff < 1 && result.eff > 0) effMsg = " 효과가 별로였다...";
             else if (result.eff === 0) effMsg = " 효과가 없는 것 같다...";
             bd.msg.push(hitCount + "번 맞았다! 총 " + totalDmg + " 데미지! (" + dn + " " + Math.max(0, defender.currentHp) + "/" + defender.stats[0] + ")" + effMsg);
+            if (mv.c === "physical") bd.lastPhysDmg = totalDmg;
+            else if (mv.c === "special") bd.lastSpecDmg = totalDmg;
             checkBerryAfterDamage(defender, bd);
         } else {
         defender.currentHp = Math.max(0, defender.currentHp - result.dmg);
+        if (mv.c === "physical") bd.lastPhysDmg = result.dmg;
+        else if (mv.c === "special") bd.lastSpecDmg = result.dmg;
         var effMsg = "";
         if (result.eff >= 2) effMsg = " 효과가 굉장했다!";
         else if (result.eff > 1 && result.eff < 2) effMsg = " 효과가 좋았다!";
@@ -6644,6 +6656,8 @@ function executeTurn(playerMoveKey) {
     rotateBattleMsg(bd);
     bd.msg = [];
     bd.turn++;
+    bd.lastPhysDmg = 0;
+    bd.lastSpecDmg = 0;
     var mySpd = myPoke.stats[5] * getStatMult(myPoke.statStages.spd);
     var enSpd = enemy.stats[5] * getStatMult(enemy.statStages.spd);
     if (myPoke.status === "paralyze") mySpd *= 0.5;
@@ -6746,6 +6760,15 @@ function executeTurn(playerMoveKey) {
         enemyMove = MOVES[enemyMoveKey];
         enemy._charging = null;
     }
+    // ── 앙코르(encore) 강제: 대상이 앙코르 상태이면 기술 강제 ──
+    if (myPoke._encored && playerMoveKey) {
+        playerMoveKey = myPoke._encored.move;
+        playerMove = MOVES[playerMoveKey];
+    }
+    if (enemy._encored && enemyMoveKey) {
+        enemyMoveKey = enemy._encored.move;
+        enemyMove = MOVES[enemyMoveKey];
+    }
     var pPri = (playerMove && playerMove.priority) ? playerMove.priority : 0;
     var ePri = (enemyMove && enemyMove.priority) ? enemyMove.priority : 0;
     // 특성: prankster → 변화기술 우선도+1
@@ -6783,6 +6806,9 @@ function executeTurn(playerMoveKey) {
     if (!enemy._protected) enemy._protectCount = 0;
     myPoke._protected = false;
     enemy._protected = false;
+    // 앙코르(encore) 턴 감소
+    if (myPoke._encored) { myPoke._encored.turns--; if (myPoke._encored.turns <= 0) myPoke._encored = null; }
+    if (enemy._encored) { enemy._encored.turns--; if (enemy._encored.turns <= 0) enemy._encored = null; }
     // 속이다(fakeout) 첫 턴 이후 사용 불가 처리
     myPoke._fakeoutUsed = true;
     enemy._fakeoutUsed = true;
