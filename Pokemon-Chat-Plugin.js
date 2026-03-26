@@ -1,7 +1,7 @@
 //@name Pokemon Battle
 //@display-name 🎮 포켓몬 배틀 (Gen 1-7)
 //@api 3.0
-//@version 2.0
+//@version 3.0
 //@arg pokemon_save string "" "포켓몬 세이브 데이터"
 //@arg pokemon_state string "" "게임 상태 데이터"
 
@@ -4074,23 +4074,19 @@ var gState = null;
 var isVisible = false;
 var _eventLog = [];
 
-function createNewPlayer(name, starterKey, region) {
-    var starter = createPokemonInstance(starterKey, 5);
-    var dex = {};
-    dex[starterKey] = "caught";
+// 지역별 독립 세이브 데이터 생성
+function createRegionSave(starterKey, region) {
+    var starter = starterKey ? createPokemonInstance(starterKey, 5) : null;
     return {
-        name: name || "레드",
-        party: [starter],
+        party: starter ? [starter] : [],
         pc: [],
         bag: {pokeball:10, potion:5},
         gold: 3000,
-        region: region || "kanto",
         roadIdx: 0,
-        badges: {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[], alola:[]},
-        pokedex: dex,
+        badges: [],
         defeatedTrainers: {},
-        defeatedGyms: {}, // 체육관 리더: day값, 체육관 트레이너: {day:값}
-        lostToTrainers: {}, // 연속 패배 추적: 같은 트레이너에게 재패배 시 20%만 차감
+        defeatedGyms: {},
+        lostToTrainers: {},
         day: 1,
         timeOfDay: 480,
         battleCount: 0,
@@ -4098,6 +4094,84 @@ function createNewPlayer(name, starterKey, region) {
         roamingLocation: null,
         visitedRoads: {}
     };
+}
+
+function createNewPlayer(name, starterKey, region) {
+    var starter = createPokemonInstance(starterKey, 5);
+    var dex = {};
+    dex[starterKey] = "caught";
+    var regionSave = createRegionSave(starterKey, region);
+    var saves = {};
+    saves[region] = regionSave;
+    return {
+        name: name || "레드",
+        region: region || "kanto",
+        pokedex: dex,
+        regionSaves: saves,
+        // ── 활성 지역 데이터 (현재 지역에서 언팩) ──
+        party: regionSave.party,
+        pc: regionSave.pc,
+        bag: regionSave.bag,
+        gold: regionSave.gold,
+        roadIdx: regionSave.roadIdx,
+        badges: {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[], alola:[]},
+        defeatedTrainers: regionSave.defeatedTrainers,
+        defeatedGyms: regionSave.defeatedGyms,
+        lostToTrainers: regionSave.lostToTrainers,
+        day: regionSave.day,
+        timeOfDay: regionSave.timeOfDay,
+        battleCount: regionSave.battleCount,
+        caughtLegendaries: regionSave.caughtLegendaries,
+        roamingLocation: regionSave.roamingLocation,
+        visitedRoads: regionSave.visitedRoads
+    };
+}
+
+// ── 지역 세이브 팩/언팩 (활성 player 데이터 ↔ regionSaves) ──
+function packCurrentRegion() {
+    if (!player || !player.regionSaves) return;
+    var r = player.region;
+    player.regionSaves[r] = {
+        party: player.party,
+        pc: player.pc,
+        bag: player.bag,
+        gold: player.gold,
+        roadIdx: player.roadIdx,
+        badges: player.badges[r] || [],
+        defeatedTrainers: player.defeatedTrainers,
+        defeatedGyms: player.defeatedGyms,
+        lostToTrainers: player.lostToTrainers,
+        day: player.day,
+        timeOfDay: player.timeOfDay,
+        battleCount: player.battleCount,
+        caughtLegendaries: player.caughtLegendaries,
+        roamingLocation: player.roamingLocation,
+        visitedRoads: player.visitedRoads
+    };
+}
+
+function unpackRegion(region) {
+    if (!player || !player.regionSaves || !player.regionSaves[region]) return false;
+    var s = player.regionSaves[region];
+    player.region = region;
+    player.party = s.party || [];
+    player.pc = s.pc || [];
+    player.bag = s.bag || {pokeball:10, potion:5};
+    player.gold = s.gold !== undefined ? s.gold : 3000;
+    player.roadIdx = s.roadIdx || 0;
+    // badges: 지역별 배열을 badges 객체에 반영
+    if (!player.badges) player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[], alola:[]};
+    player.badges[region] = s.badges || [];
+    player.defeatedTrainers = s.defeatedTrainers || {};
+    player.defeatedGyms = s.defeatedGyms || {};
+    player.lostToTrainers = s.lostToTrainers || {};
+    player.day = s.day || 1;
+    player.timeOfDay = s.timeOfDay || 480;
+    player.battleCount = s.battleCount || 0;
+    player.caughtLegendaries = s.caughtLegendaries || {};
+    player.roamingLocation = s.roamingLocation || null;
+    player.visitedRoads = s.visitedRoads || {};
+    return true;
 }
 
 function createPokemonInstance(key, level) {
@@ -4188,9 +4262,120 @@ function getStatMult(stage) {
 // ═══════════════════════════════════════════════
 // 💾 세이브 / 로드
 // ═══════════════════════════════════════════════
+
+// 공통 마이그레이션 함수 (로드 후 호출)
+function migratePlayerData() {
+    if (!player) return;
+    // v1→v2 기본 필드 마이그레이션
+    if (!player.pokedex) player.pokedex = {};
+    if (!player.defeatedTrainers) player.defeatedTrainers = {};
+    if (player.defeatedTrainers) {
+        for (var dtk in player.defeatedTrainers) {
+            if (typeof player.defeatedTrainers[dtk] === "number") {
+                player.defeatedTrainers[dtk] = { day: player.defeatedTrainers[dtk], firstDay: player.defeatedTrainers[dtk], tier: 0 };
+            }
+        }
+    }
+    if (!player.defeatedGyms) player.defeatedGyms = {};
+    if (player.day === undefined) player.day = 1;
+    if (player.timeOfDay === undefined || player.timeOfDay < 60) player.timeOfDay = 480;
+    if (player.battleCount === undefined) player.battleCount = 0;
+    if (!player.caughtLegendaries) player.caughtLegendaries = {};
+    if (player.roamingLocation === undefined) player.roamingLocation = null;
+    if (!player.visitedRoads) {
+        player.visitedRoads = {};
+        player.visitedRoads[player.region + "_" + player.roadIdx] = true;
+    }
+    // badges 형식 마이그레이션
+    if (typeof player.badges === 'number' || !player.badges) {
+        player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[], alola:[]};
+    }
+    if (!player.badges.kanto) player.badges.kanto = [];
+    if (!player.badges.johto) player.badges.johto = [];
+    if (!player.badges.hoenn) player.badges.hoenn = [];
+    if (!player.badges.sinnoh) player.badges.sinnoh = [];
+    if (!player.badges.unova) player.badges.unova = [];
+    if (!player.badges.kalos) player.badges.kalos = [];
+    if (!player.badges.alola) player.badges.alola = [];
+    if (player.routeIdx !== undefined && player.roadIdx === undefined) {
+        player.roadIdx = player.routeIdx;
+        delete player.routeIdx;
+    }
+    // heldItem/ab 마이그레이션
+    if (player.party) {
+        for (var mi = 0; mi < player.party.length; mi++) {
+            if (player.party[mi].heldItem === undefined) player.party[mi].heldItem = null;
+            if (player.party[mi].ab === undefined) {
+                var _pd = POKEDEX[player.party[mi].key];
+                if (_pd && _pd.ab) player.party[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
+            }
+        }
+    }
+    if (player.pc) {
+        for (var mi = 0; mi < player.pc.length; mi++) {
+            if (player.pc[mi].heldItem === undefined) player.pc[mi].heldItem = null;
+            if (player.pc[mi].ab === undefined) {
+                var _pd = POKEDEX[player.pc[mi].key];
+                if (_pd && _pd.ab) player.pc[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
+            }
+        }
+    }
+    // v2→v3 지역별 독립 세이브 마이그레이션
+    if (!player.regionSaves) {
+        var curRegion = player.region || "kanto";
+        player.regionSaves = {};
+        // 현재 데이터를 현재 지역의 세이브로 팩
+        player.regionSaves[curRegion] = {
+            party: player.party || [],
+            pc: player.pc || [],
+            bag: player.bag || {pokeball:10, potion:5},
+            gold: player.gold !== undefined ? player.gold : 3000,
+            roadIdx: player.roadIdx || 0,
+            badges: player.badges[curRegion] || [],
+            defeatedTrainers: player.defeatedTrainers || {},
+            defeatedGyms: player.defeatedGyms || {},
+            lostToTrainers: player.lostToTrainers || {},
+            day: player.day || 1,
+            timeOfDay: player.timeOfDay || 480,
+            battleCount: player.battleCount || 0,
+            caughtLegendaries: player.caughtLegendaries || {},
+            roamingLocation: player.roamingLocation || null,
+            visitedRoads: player.visitedRoads || {}
+        };
+        // 다른 지역에 뱃지가 있으면 최소한 빈 세이브 생성 (뱃지 보존)
+        var allRegions = ["kanto","johto","hoenn","sinnoh","unova","kalos","alola"];
+        for (var ri = 0; ri < allRegions.length; ri++) {
+            var rk = allRegions[ri];
+            if (rk !== curRegion && player.badges[rk] && player.badges[rk].length > 0) {
+                player.regionSaves[rk] = {
+                    party: [], pc: [], bag: {pokeball:10, potion:5}, gold: 3000,
+                    roadIdx: 0, badges: player.badges[rk],
+                    defeatedTrainers: {}, defeatedGyms: {}, lostToTrainers: {},
+                    day: 1, timeOfDay: 480, battleCount: 0,
+                    caughtLegendaries: {}, roamingLocation: null, visitedRoads: {}
+                };
+            }
+        }
+    }
+    // regionSaves에서 현재 지역의 badges를 badges 객체에 동기화
+    if (player.regionSaves) {
+        var allRegions2 = ["kanto","johto","hoenn","sinnoh","unova","kalos","alola"];
+        for (var ri2 = 0; ri2 < allRegions2.length; ri2++) {
+            var rk2 = allRegions2[ri2];
+            if (player.regionSaves[rk2] && player.regionSaves[rk2].badges) {
+                player.badges[rk2] = player.regionSaves[rk2].badges;
+            }
+        }
+    }
+}
+
 async function saveAll() {
     try {
         if (gState) gState.eventLog = _eventLog;
+        // 저장 전에 현재 지역 데이터를 regionSaves에 팩
+        if (player && player.regionSaves) {
+            packCurrentRegion();
+        }
         var saveData = JSON.stringify(player);
         var stateData = JSON.stringify(gState);
         if (_hasRisu) {
@@ -4236,58 +4421,7 @@ async function loadAll() {
             player = JSON.parse(p);
             gState = JSON.parse(s);
             _eventLog = gState.eventLog || [];
-            // 마이그레이션: v1.0→v2.0 호환 (routeIdx→roadIdx 이름 변경, 도감/트레이너 필드 추가)
-            if (!player.pokedex) player.pokedex = {};
-            if (!player.defeatedTrainers) player.defeatedTrainers = {};
-            // defeatedTrainers 형식 마이그레이션 (숫자→객체)
-            if (player.defeatedTrainers) {
-                for (var dtk in player.defeatedTrainers) {
-                    if (typeof player.defeatedTrainers[dtk] === "number") {
-                        player.defeatedTrainers[dtk] = { day: player.defeatedTrainers[dtk], firstDay: player.defeatedTrainers[dtk], tier: 0 };
-                    }
-                }
-            }
-            if (!player.defeatedGyms) player.defeatedGyms = {};
-            if (player.day === undefined) player.day = 1;
-            // 시간 시스템 마이그레이션
-            if (player.timeOfDay === undefined || player.timeOfDay < 60) player.timeOfDay = 480;
-            if (player.battleCount === undefined) player.battleCount = 0;
-            if (!player.caughtLegendaries) player.caughtLegendaries = {};
-            if (player.roamingLocation === undefined) player.roamingLocation = null;
-            if (!player.visitedRoads) {
-                player.visitedRoads = {};
-                player.visitedRoads[player.region + "_" + player.roadIdx] = true;
-            }
-            // badges 형식 마이그레이션 (숫자→객체)
-            if (typeof player.badges === 'number' || !player.badges) {
-                player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[], alola:[]};
-            }
-            if (!player.badges.kanto) player.badges.kanto = [];
-            if (!player.badges.johto) player.badges.johto = [];
-            if (!player.badges.hoenn) player.badges.hoenn = [];
-            if (!player.badges.sinnoh) player.badges.sinnoh = [];
-            if (!player.badges.unova) player.badges.unova = [];
-            if (!player.badges.kalos) player.badges.kalos = [];
-            if (!player.badges.alola) player.badges.alola = [];
-            if (player.routeIdx !== undefined && player.roadIdx === undefined) {
-                player.roadIdx = player.routeIdx;
-                delete player.routeIdx;
-            }
-            // heldItem/ab 마이그레이션
-            for (var mi = 0; mi < player.party.length; mi++) {
-                if (player.party[mi].heldItem === undefined) player.party[mi].heldItem = null;
-                if (player.party[mi].ab === undefined) {
-                    var _pd = POKEDEX[player.party[mi].key];
-                    if (_pd && _pd.ab) player.party[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
-                }
-            }
-            for (var mi = 0; mi < player.pc.length; mi++) {
-                if (player.pc[mi].heldItem === undefined) player.pc[mi].heldItem = null;
-                if (player.pc[mi].ab === undefined) {
-                    var _pd = POKEDEX[player.pc[mi].key];
-                    if (_pd && _pd.ab) player.pc[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
-                }
-            }
+            migratePlayerData();
             return true;
         }
     } catch(e) { console.error(PLUGIN, "load fail:", e); }
@@ -4298,6 +4432,7 @@ async function saveSlot(slotNum) {
     try {
         if (!player || !gState) return false;
         if (gState) gState.eventLog = _eventLog;
+        if (player.regionSaves) packCurrentRegion();
         var saveData = JSON.stringify(player);
         var stateData = JSON.stringify(gState);
         var key_p = KEY_SLOT + slotNum + "_save";
@@ -4332,50 +4467,7 @@ async function loadSlot(slotNum) {
             player = JSON.parse(p);
             gState = JSON.parse(s);
             _eventLog = gState.eventLog || [];
-            if (!player.pokedex) player.pokedex = {};
-            if (!player.defeatedTrainers) player.defeatedTrainers = {};
-            // defeatedTrainers 형식 마이그레이션 (숫자→객체)
-            if (player.defeatedTrainers) {
-                for (var dtk in player.defeatedTrainers) {
-                    if (typeof player.defeatedTrainers[dtk] === "number") {
-                        player.defeatedTrainers[dtk] = { day: player.defeatedTrainers[dtk], firstDay: player.defeatedTrainers[dtk], tier: 0 };
-                    }
-                }
-            }
-            if (!player.defeatedGyms) player.defeatedGyms = {};
-            if (player.day === undefined) player.day = 1;
-            if (player.timeOfDay === undefined || player.timeOfDay < 60) player.timeOfDay = 480;
-            if (player.battleCount === undefined) player.battleCount = 0;
-            if (!player.caughtLegendaries) player.caughtLegendaries = {};
-            if (player.roamingLocation === undefined) player.roamingLocation = null;
-            if (!player.visitedRoads) {
-                player.visitedRoads = {};
-                player.visitedRoads[player.region + "_" + player.roadIdx] = true;
-            }
-            if (typeof player.badges === 'number' || !player.badges) {
-                player.badges = {kanto:[], johto:[], hoenn:[], sinnoh:[], unova:[], kalos:[], alola:[]};
-            }
-            if (!player.badges.kanto) player.badges.kanto = [];
-            if (!player.badges.johto) player.badges.johto = [];
-            if (!player.badges.hoenn) player.badges.hoenn = [];
-            if (!player.badges.sinnoh) player.badges.sinnoh = [];
-            if (!player.badges.unova) player.badges.unova = [];
-            if (!player.badges.kalos) player.badges.kalos = [];
-            if (!player.badges.alola) player.badges.alola = [];
-            for (var mi = 0; mi < player.party.length; mi++) {
-                if (player.party[mi].heldItem === undefined) player.party[mi].heldItem = null;
-                if (player.party[mi].ab === undefined) {
-                    var _pd = POKEDEX[player.party[mi].key];
-                    if (_pd && _pd.ab) player.party[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
-                }
-            }
-            for (var mi = 0; mi < player.pc.length; mi++) {
-                if (player.pc[mi].heldItem === undefined) player.pc[mi].heldItem = null;
-                if (player.pc[mi].ab === undefined) {
-                    var _pd = POKEDEX[player.pc[mi].key];
-                    if (_pd && _pd.ab) player.pc[mi].ab = Array.isArray(_pd.ab) ? _pd.ab[0] : _pd.ab;
-                }
-            }
+            migratePlayerData();
             return true;
         }
     } catch(e) { console.error(PLUGIN, "slot load fail:", e); }
@@ -7075,6 +7167,8 @@ function render() {
     }
     if (gState && gState.subScreen === "starterSelect") {
         html = renderStarterSelect();
+    } else if (gState && gState.subScreen === "regionStarterSelect") {
+        html = renderRegionStarterSelect();
     } else if (!player || !gState) {
         html = renderTitleScreen();
     } else if (gState.pendingEvo) {
@@ -7196,20 +7290,57 @@ function renderStarterSelect() {
     return html;
 }
 
+// ── 새 지역 스타터 선택 화면 ──
+function renderRegionStarterSelect() {
+    var region = (gState && gState._pendingRegion) || "kanto";
+    var startersByRegion = {
+        kanto: [{k:"bulbasaur",n:"이상해씨",t:"풀/독",em:"🌿"},{k:"charmander",n:"파이리",t:"불꽃",em:"🔥"},{k:"squirtle",n:"꼬부기",t:"물",em:"🐢"}],
+        johto: [{k:"chikorita",n:"치코리타",t:"풀",em:"🍃"},{k:"cyndaquil",n:"브케인",t:"불꽃",em:"🔥"},{k:"totodile",n:"리아코",t:"물",em:"🐊"}],
+        hoenn: [{k:"treecko",n:"나무지기",t:"풀",em:"🌿"},{k:"torchic",n:"아차모",t:"불꽃",em:"🔥"},{k:"mudkip",n:"물짱이",t:"물",em:"💧"}],
+        sinnoh: [{k:"turtwig",n:"모부기",t:"풀",em:"🌿"},{k:"chimchar",n:"불꽃숭이",t:"불꽃",em:"🔥"},{k:"piplup",n:"팽도리",t:"물",em:"💧"}],
+        unova: [{k:"snivy",n:"주리비얀",t:"풀",em:"🌿"},{k:"tepig",n:"뚜꾸리",t:"불꽃",em:"🐷"},{k:"oshawott",n:"수댕이",t:"물",em:"🦦"}],
+        kalos: [{k:"chespin",n:"도치마론",t:"풀",em:"🌰"},{k:"fennekin",n:"푸호꼬",t:"불꽃",em:"🦊"},{k:"froakie",n:"개구마르",t:"물",em:"🐸"}],
+        alola: [{k:"rowlet",n:"나몰빼미",t:"풀/비행",em:"🦉"},{k:"litten",n:"냐비",t:"불꽃",em:"🐱"},{k:"popplio",n:"누리공",t:"물",em:"🦭"}]
+    };
+    var starters = startersByRegion[region] || startersByRegion.kanto;
+    var regionNameMap = {kanto:"관동",johto:"성도",hoenn:"호연",sinnoh:"신오",unova:"하나",kalos:"칼로스",alola:"알로라"};
+    var html = '<div style="text-align:center;padding:10px 0">';
+    html += '<div style="font-size:18px;margin-bottom:4px">🌏 새로운 지역 모험!</div>';
+    html += '<div style="color:#aaa;font-size:12px;margin-bottom:12px">' + (regionNameMap[region] || region) + ' 지방에서 새로운 파트너를 선택하세요!</div>';
+    html += '<div style="display:flex;gap:8px;justify-content:center">';
+    for (var i = 0; i < starters.length; i++) {
+        var s = starters[i];
+        html += '<div class="pk-card" style="width:120px;cursor:pointer;text-align:center" data-action="poke_selectRegionStarter" data-args="' + s.k + '">';
+        html += '<div style="font-size:36px">' + s.em + '</div>';
+        html += '<div style="font-weight:bold">' + s.n + '</div>';
+        html += '<div style="font-size:11px;color:#aaa">' + s.t + '</div>';
+        html += '</div>';
+    }
+    html += '</div>';
+    html += '<button class="pk-btn pk-btn-dark pk-btn-sm" style="margin-top:12px" data-action="poke_cancelRegionSwitch">◀ 취소</button>';
+    html += '</div>';
+    return html;
+}
+
 // ── 메인 오버월드: 지역 선택 → 도로 목록 ──
 function renderOverworld() {
     var region = REGIONS[player.region];
     if (!region) return '<div>지역 데이터 없음</div>';
     var html = '';
-    // 지역 전환 버튼
+    // 지역 전환 버튼 (시작된 지역은 뱃지수 표시, 미시작은 🆕)
+    var _regionBtns = [
+        {k:"kanto",em:"🗾",n:"관동"},{k:"johto",em:"🏔️",n:"성도"},{k:"hoenn",em:"🌴",n:"호연"},
+        {k:"sinnoh",em:"❄️",n:"신오"},{k:"unova",em:"🏙️",n:"하나"},{k:"kalos",em:"🗼",n:"칼로스"},{k:"alola",em:"🌺",n:"알로라"}
+    ];
     html += '<div class="pk-region-switch">';
-    html += '<button class="pk-btn ' + (player.region==="kanto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="kanto">🗾 관동</button>';
-    html += '<button class="pk-btn ' + (player.region==="johto"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="johto">🏔️ 성도</button>';
-    html += '<button class="pk-btn ' + (player.region==="hoenn"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="hoenn">🌴 호연</button>';
-    html += '<button class="pk-btn ' + (player.region==="sinnoh"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="sinnoh">❄️ 신오</button>';
-    html += '<button class="pk-btn ' + (player.region==="unova"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="unova">🏙️ 하나</button>';
-    html += '<button class="pk-btn ' + (player.region==="kalos"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="kalos">🗼 칼로스</button>';
-    html += '<button class="pk-btn ' + (player.region==="alola"?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="alola">🌺 알로라</button>';
+    for (var _ri = 0; _ri < _regionBtns.length; _ri++) {
+        var _rb = _regionBtns[_ri];
+        var _isActive = (player.region === _rb.k);
+        var _hasRegion = (player.regionSaves && player.regionSaves[_rb.k]);
+        var _label = _rb.em + ' ' + _rb.n;
+        if (!_isActive && !_hasRegion) _label += ' 🆕';
+        html += '<button class="pk-btn ' + (_isActive?"pk-btn-red":"pk-btn-dark") + ' pk-btn-sm" data-action="poke_switchRegion" data-args="' + _rb.k + '">' + _label + '</button>';
+    }
     html += '</div>';
     // 상단 상태바
     html += '<div class="pk-card" style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px">';
@@ -8520,8 +8651,41 @@ window.poke_selectStarter = async function(key) {
 
 window.poke_switchRegion = async function(region) {
     if (!player) return;
-    player.region = region;
-    player.roadIdx = 0;
+    if (player.region === region) return; // 같은 지역이면 무시
+    // 현재 지역 데이터 팩 (regionSaves에 저장)
+    if (player.regionSaves) {
+        packCurrentRegion();
+    }
+    // 대상 지역에 세이브가 있는지 확인
+    if (player.regionSaves && player.regionSaves[region]) {
+        // 기존 세이브 로드
+        unpackRegion(region);
+        addLog("🌏 " + (REGIONS[region] ? REGIONS[region].n : region) + "(으)로 이동했다!", "info");
+        await saveAll();
+        render();
+    } else {
+        // 새 지역 시작: 스타터 선택 화면으로
+        gState.subScreen = "regionStarterSelect";
+        gState._pendingRegion = region;
+        render();
+    }
+};
+
+// 새 지역 스타터 선택 완료
+window.poke_selectRegionStarter = async function(key) {
+    if (!player || !gState || !gState._pendingRegion) return;
+    var region = gState._pendingRegion;
+    var newSave = createRegionSave(key, region);
+    if (!player.regionSaves) player.regionSaves = {};
+    player.regionSaves[region] = newSave;
+    // 도감에 스타터 등록 (전국도감 공유)
+    if (key) player.pokedex[key] = "caught";
+    // 새 지역으로 전환
+    unpackRegion(region);
+    gState.subScreen = null;
+    gState._pendingRegion = null;
+    gState.phase = "overworld";
+    addLog("🌏 " + (REGIONS[region] ? REGIONS[region].n : region) + "에서 새로운 모험을 시작했다! 파트너: " + player.party[0].nickname, "info");
     await saveAll();
     render();
 };
@@ -8533,6 +8697,14 @@ window.poke_changeName = async function() {
         await saveAll();
         render();
     }
+};
+
+window.poke_cancelRegionSwitch = function() {
+    if (gState) {
+        gState.subScreen = null;
+        gState._pendingRegion = null;
+    }
+    render();
 };
 
 window.poke_pokedexDetail = function(key) {
