@@ -6106,6 +6106,16 @@ function applyMoveEffects(move, attacker, defender, bd) {
             attacker.currentHp = Math.min(attacker.stats[0], attacker.currentHp + healAmt);
             bd.msg.push(an + "의 HP가 회복되었다!");
         }
+        else if (mv.ef === "protect") {
+            // 연속 사용 시 실패 확률 증가
+            if (attacker._protectCount && Math.random() < (1 - Math.pow(1/3, attacker._protectCount))) {
+                bd.msg.push("그러나 실패했다!");
+            } else {
+                attacker._protected = true;
+                attacker._protectCount = (attacker._protectCount || 0) + 1;
+                bd.msg.push(an + "은(는) 방어 태세를 취했다!");
+            }
+        }
     }
 }
 
@@ -6189,6 +6199,11 @@ function executeAttack(attacker, defender, moveKey, bd) {
     // 속이다(fakeout) 첫 턴 제한: 등장한 턴에만 사용 가능
     if (moveKey === "fakeout" && attacker._fakeoutUsed) {
         bd.msg.push("그러나 실패했다!");
+        return;
+    }
+    // ── 방어(protect) 체크 ──
+    if (defender._protected && mv.ef !== "protect") {
+        bd.msg.push(dn + "은(는) 방어 태세다! 공격이 막혔다!");
         return;
     }
     // ── 조건부 기술 체크 ──
@@ -6753,6 +6768,11 @@ function executeTurn(playerMoveKey) {
     // 턴 종료 시 풀죽음 플래그 클리어 (느린 쪽이 건 풀죽음이 다음 턴에 영향 주는 버그 방지)
     myPoke._flinched = false;
     enemy._flinched = false;
+    // 방어(protect) 턴 종료 시 해제 + 연속 미사용 시 카운트 리셋
+    if (!myPoke._protected) myPoke._protectCount = 0;
+    if (!enemy._protected) enemy._protectCount = 0;
+    myPoke._protected = false;
+    enemy._protected = false;
     // 속이다(fakeout) 첫 턴 이후 사용 불가 처리
     myPoke._fakeoutUsed = true;
     enemy._fakeoutUsed = true;
