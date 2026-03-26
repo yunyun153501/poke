@@ -1006,7 +1006,7 @@ drillpeck:   {n:"드릴부리",t:"flying",c:"physical",p:80,a:100,pp:20},
 confusion:   {n:"염동력",t:"psychic",c:"special",p:50,a:100,pp:25,ef:"confuse",ec:10},
 psybeam:     {n:"사이코빔",t:"psychic",c:"special",p:65,a:100,pp:20,ef:"confuse",ec:10},
 psychic:     {n:"사이코키네시스",t:"psychic",c:"special",p:90,a:100,pp:10},
-calmmind:    {n:"명상",t:"psychic",c:"status",p:0,a:100,pp:20,ef:"calmmind"},
+calmmind:    {n:"명상",t:"psychic",c:"status",p:0,a:0,pp:20,ef:"calmmind"},
 hypnosis:    {n:"최면술",t:"psychic",c:"status",p:0,a:60,pp:20,ef:"sleep",ec:100},
 dreameater:  {n:"꿈먹기",t:"psychic",c:"special",p:100,a:100,pp:15,ef:"drain",cond:"sleep"},
 lightscreen: {n:"빛의장막",t:"psychic",c:"status",p:0,a:100,pp:30,ef:"spdef_up"},
@@ -1023,19 +1023,19 @@ rockslide:   {n:"락슬라이드",t:"rock",c:"physical",p:75,a:90,pp:10,ef:"flin
 stoneedge:   {n:"스톤에지",t:"rock",c:"physical",p:100,a:80,pp:5,ef:"highcrit"},
 lick:        {n:"핥기",t:"ghost",c:"physical",p:30,a:100,pp:30,ef:"paralyze",ec:30},
 nightshade:  {n:"나이트헤드",t:"ghost",c:"special",p:50,a:100,pp:15,fixedDmg:"level"},
-shadowball:  {n:"섀도볼",t:"ghost",c:"special",p:80,a:100,pp:15},
+shadowball:  {n:"섀도볼",t:"ghost",c:"special",p:80,a:100,pp:15,ef:"spdef_down",ec:20},
 confuseray:  {n:"이상한빛",t:"ghost",c:"status",p:0,a:100,pp:10,ef:"confuse",ec:100},
 dragonrage:  {n:"용의분노",t:"dragon",c:"special",p:40,a:100,pp:10,fixedDmg:40},
 dragonclaw:  {n:"드래곤클로",t:"dragon",c:"physical",p:80,a:100,pp:15},
 dragonpulse: {n:"용의파동",t:"dragon",c:"special",p:85,a:100,pp:10},
 outrage:     {n:"역린",t:"dragon",c:"physical",p:120,a:100,pp:10},
 bite:        {n:"물기",t:"dark",c:"physical",p:60,a:100,pp:25,ef:"flinch",ec:30},
-crunch:      {n:"깨물어부수기",t:"dark",c:"physical",p:80,a:100,pp:15},
+crunch:      {n:"깨물어부수기",t:"dark",c:"physical",p:80,a:100,pp:15,ef:"def_down",ec:20},
 darkpulse:   {n:"악의파동",t:"dark",c:"special",p:80,a:100,pp:15,ef:"flinch",ec:20},
 metalclaw:   {n:"메탈클로",t:"steel",c:"physical",p:50,a:95,pp:35},
 irontail:    {n:"아이언테일",t:"steel",c:"physical",p:100,a:75,pp:15},
 steelwing:   {n:"강철날개",t:"steel",c:"physical",p:70,a:90,pp:25},
-flashcannon: {n:"러스터캐논",t:"steel",c:"special",p:80,a:100,pp:10},
+flashcannon: {n:"러스터캐논",t:"steel",c:"special",p:80,a:100,pp:10,ef:"spdef_down",ec:10},
 moonblast:   {n:"문블라스트",t:"fairy",c:"special",p:95,a:100,pp:15},
 dazzlinggleam:{n:"매지컬샤인",t:"fairy",c:"special",p:80,a:100,pp:10},
 charm:       {n:"애교부리기",t:"fairy",c:"status",p:0,a:100,pp:20,ef:"atk_down2"},
@@ -1045,10 +1045,10 @@ tailwhip:    {n:"꼬리흔들기",t:"normal",c:"status",p:0,a:100,pp:30,ef:"def_
 smokescreen: {n:"연막",t:"normal",c:"status",p:0,a:100,pp:20,ef:"acc_down"},
 sleeppowder: {n:"수면가루",t:"grass",c:"status",p:0,a:75,pp:15,ef:"sleep",ec:100},
 supersonic:  {n:"초음파",t:"normal",c:"status",p:0,a:55,pp:20,ef:"confuse",ec:100},
-swordsdance: {n:"칼춤",t:"normal",c:"status",p:0,a:100,pp:20,ef:"swordsdance"},
+swordsdance: {n:"칼춤",t:"normal",c:"status",p:0,a:0,pp:20,ef:"swordsdance"},
 harden:      {n:"단단해지기",t:"normal",c:"status",p:0,a:100,pp:30,ef:"def_up"},
 defensecurl: {n:"웅크리기",t:"normal",c:"status",p:0,a:100,pp:40,ef:"def_up"},
-moonlight:   {n:"달의빛",t:"fairy",c:"status",p:0,a:100,pp:5,ef:"heal"},
+moonlight:   {n:"달의빛",t:"fairy",c:"status",p:0,a:0,pp:5,ef:"heal"},
 hornattack:  {n:"뿔찌르기",t:"normal",c:"physical",p:65,a:100,pp:25},
 sketch:      {n:"스케치",t:"normal",c:"status",p:0,a:100,pp:1},
 counter:     {n:"카운터",t:"fighting",c:"physical",p:0,a:100,pp:20,ef:"counter"},
@@ -1056,11 +1056,11 @@ mirrorcoat:  {n:"미러코트",t:"psychic",c:"special",p:0,a:100,pp:20,ef:"mirro
 encore:      {n:"앙코르",t:"normal",c:"status",p:0,a:100,pp:5,ef:"encore"},
 mudslap:     {n:"흙뿌리기",t:"ground",c:"special",p:20,a:100,pp:10,ef:"acc_down",ec:100},
 megadrain:   {n:"메가드레인",t:"grass",c:"special",p:40,a:100,pp:15},
-ironhead:    {n:"아이언헤드",t:"steel",c:"physical",p:80,a:100,pp:15},
+ironhead:    {n:"아이언헤드",t:"steel",c:"physical",p:80,a:100,pp:15,ef:"flinch",ec:30},
 dragonbreath:{n:"용의숨결",t:"dragon",c:"special",p:60,a:100,pp:20},
 bubblebeam:  {n:"거품광선",t:"water",c:"special",p:65,a:100,pp:20},
 spark:       {n:"스파크",t:"electric",c:"physical",p:65,a:100,pp:20},
-doubleedge:  {n:"이판사판박치기",t:"normal",c:"physical",p:120,a:100,pp:15},
+doubleedge:  {n:"이판사판박치기",t:"normal",c:"physical",p:120,a:100,pp:15,ef:"recoil"},
 hex:         {n:"주술",t:"ghost",c:"special",p:65,a:100,pp:10,cond:"statusDouble"},
 aquatail:    {n:"아쿠아테일",t:"water",c:"physical",p:90,a:90,pp:10},
 sludge:      {n:"오물공격",t:"poison",c:"special",p:65,a:100,pp:20},
@@ -1068,7 +1068,7 @@ lowkick:     {n:"발밑차기",t:"fighting",c:"physical",p:60,a:100,pp:20},
 silverwind:  {n:"은빛바람",t:"bug",c:"special",p:60,a:100,pp:5},
 furycutter:  {n:"연속자르기",t:"bug",c:"physical",p:40,a:95,pp:20},
 leer:        {n:"째려보기",t:"normal",c:"status",p:0,a:100,pp:30},
-willowisp:   {n:"도깨비불",t:"fire",c:"status",p:0,a:85,pp:15,ef:"burn"},
+willowisp:   {n:"도깨비불",t:"fire",c:"status",p:0,a:85,pp:15,ef:"burn",ec:100},
 lockon:      {n:"록온",t:"normal",c:"status",p:0,a:100,pp:5},
 megapunch:   {n:"메가톤펀치",t:"normal",c:"physical",p:80,a:85,pp:20},
 // ═══ Gen 5-6 추가 기술 ═══
@@ -1076,14 +1076,14 @@ energyball:  {n:"에너지볼",t:"grass",c:"special",p:90,a:100,pp:10,ef:"spdef_
 airslash:    {n:"에어슬래시",t:"flying",c:"special",p:75,a:95,pp:15,ef:"flinch",ec:30},
 bravebird:   {n:"브레이브버드",t:"flying",c:"physical",p:120,a:100,pp:15,ef:"recoil"},
 wildcharge:  {n:"와일드볼트",t:"electric",c:"physical",p:90,a:100,pp:15,ef:"recoil"},
-stealthrock: {n:"스텔스록",t:"rock",c:"status",p:0,a:100,pp:20},
+stealthrock: {n:"스텔스록",t:"rock",c:"status",p:0,a:0,pp:20},
 wish:        {n:"힐링위시",t:"normal",c:"status",p:0,a:100,pp:10,ef:"heal"},
 drainpunch:  {n:"드레인펀치",t:"fighting",c:"physical",p:75,a:100,pp:10,ef:"drain"},
 earthpower:  {n:"대지의힘",t:"ground",c:"special",p:90,a:100,pp:10,ef:"spdef_down",ec:10},
-protect:     {n:"방어",t:"normal",c:"status",p:0,a:100,pp:10},
+protect:     {n:"방어",t:"normal",c:"status",p:0,a:0,pp:10,ef:"protect",priority:4},
 poisonfang:  {n:"독엄니",t:"poison",c:"physical",p:50,a:100,pp:15,ef:"poison",ec:50},
 petalblizzard:{n:"꽃보라",t:"grass",c:"physical",p:90,a:100,pp:15},
-recover:     {n:"회복",t:"normal",c:"status",p:0,a:100,pp:10,ef:"heal"},
+recover:     {n:"회복",t:"normal",c:"status",p:0,a:0,pp:10,ef:"heal"},
 irondefense: {n:"철벽",t:"steel",c:"status",p:0,a:100,pp:15,ef:"def_up"},
 leechseed:   {n:"씨뿌리기",t:"grass",c:"status",p:0,a:90,pp:10,ef:"drain"},
 aurasphere:  {n:"파동탄",t:"fighting",c:"special",p:80,a:0,pp:20},
@@ -1108,8 +1108,8 @@ dragontail:  {n:"드래곤테일",t:"dragon",c:"physical",p:60,a:90,pp:10},
 workup:      {n:"자기암시",t:"normal",c:"status",p:0,a:100,pp:30},
 infestation: {n:"침식",t:"bug",c:"special",p:20,a:100,pp:20},
 powerpunch:  {n:"파워업펀치",t:"fighting",c:"physical",p:40,a:100,pp:20},
-overheat:    {n:"오버히트",t:"fire",c:"special",p:130,a:90,pp:5},
-roost:       {n:"깃털쉬기",t:"flying",c:"status",p:0,a:100,pp:10,ef:"heal"},
+overheat:    {n:"오버히트",t:"fire",c:"special",p:130,a:90,pp:5,ef:"spa_down2"},
+roost:       {n:"깃털쉬기",t:"flying",c:"status",p:0,a:0,pp:10,ef:"heal"},
 shockwave:   {n:"전격파",t:"electric",c:"special",p:60,a:0,pp:20},
 // ═══ 추가 기술 (Gen 1-6 원작 기반) ═══
 // ── Normal ──
@@ -1185,11 +1185,11 @@ leafblade:   {n:"리프블레이드",t:"grass",c:"physical",p:90,a:100,pp:15,ef:
 powerwhip:   {n:"파워휩",t:"grass",c:"physical",p:120,a:85,pp:10},
 woodhammer:  {n:"우드해머",t:"grass",c:"physical",p:120,a:100,pp:15,ef:"recoil"},
 magicalleaf: {n:"매지컬리프",t:"grass",c:"special",p:60,a:0,pp:20},
-leafstorm:   {n:"리프스톰",t:"grass",c:"special",p:130,a:90,pp:5},
+leafstorm:   {n:"리프스톰",t:"grass",c:"special",p:130,a:90,pp:5,ef:"spa_down2"},
 grasswhistle:{n:"풀피리",t:"grass",c:"status",p:0,a:55,pp:15,ef:"sleep",ec:100},
 cottonspore: {n:"목화포자",t:"grass",c:"status",p:0,a:100,pp:40,ef:"spd_down2"},
 growth:      {n:"성장",t:"normal",c:"status",p:0,a:100,pp:20,ef:"spa_up"},
-synthesis:   {n:"광합성",t:"grass",c:"status",p:0,a:100,pp:5,ef:"heal"},
+synthesis:   {n:"광합성",t:"grass",c:"status",p:0,a:0,pp:5,ef:"heal"},
 aromatherapy:{n:"아로마테라피",t:"grass",c:"status",p:0,a:100,pp:5},
 seedflare:   {n:"시드플레어",t:"grass",c:"special",p:120,a:85,pp:5,ef:"spdef_down",ec:40},
 grasspledge:  {n:"풀의맹세",t:"grass",c:"special",p:80,a:100,pp:10},
@@ -1282,8 +1282,8 @@ destinybond: {n:"길동무",t:"ghost",c:"status",p:0,a:100,pp:5},
 spite:       {n:"원한",t:"ghost",c:"status",p:0,a:100,pp:10},
 // ── Dragon ──
 dragonrush:  {n:"드래곤다이브",t:"dragon",c:"physical",p:100,a:75,pp:10,ef:"flinch",ec:20},
-dracometeor: {n:"용성군",t:"dragon",c:"special",p:130,a:90,pp:5},
-dragonDance: {n:"용의춤",t:"dragon",c:"status",p:0,a:100,pp:20,ef:"dragondance"},
+dracometeor: {n:"용성군",t:"dragon",c:"special",p:130,a:90,pp:5,ef:"spa_down2"},
+dragonDance: {n:"용의춤",t:"dragon",c:"status",p:0,a:0,pp:20,ef:"dragondance"},
 twister:     {n:"회오리",t:"dragon",c:"special",p:40,a:100,pp:20,ef:"flinch",ec:20},
 spacialrend: {n:"아공절단",t:"dragon",c:"special",p:100,a:95,pp:5,ef:"highcrit"},
 roaroftime:  {n:"시간의포효",t:"dragon",c:"special",p:150,a:90,pp:5,ef:"recharge"},
@@ -5943,6 +5943,13 @@ function applyMoveEffects(move, attacker, defender, bd) {
                     defender.statStages.spd = Math.max(-6, defender.statStages.spd - 1); bd.msg.push(dn + "의 스피드가 떨어졌다!");
                     if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
                 }
+            } else if (mv.ef === "def_down") {
+                var _defAbType4 = getAbility(defender) ? getAbility(defender).type : null;
+                if (_defAbType4 === "prevent_statdown") { bd.msg.push(dn + "의 " + getAbility(defender).n + "! 능력치가 떨어지지 않는다!"); }
+                else {
+                    defender.statStages.def = Math.max(-6, defender.statStages.def - 1); bd.msg.push(dn + "의 방어가 떨어졌다!");
+                    if (getAbilityKey(defender) === "competitive") { defender.statStages.spatk = Math.min(6, defender.statStages.spatk + 2); bd.msg.push(dn + "의 승부근성! 특공이 크게 올라갔다!"); }
+                }
             }
             // 특성: synchronize → 상태이상 반사 (독/마비/화상만)
             if (defender.status && getAbilityKey(defender) === "synchronize" && !attacker.status) {
@@ -6430,6 +6437,12 @@ function executeAttack(attacker, defender, moveKey, bd) {
         }
         if (mv.ef === "recharge") {
             attacker._recharging = true;
+        }
+        // 자기 능력치 하락 기술 (용성군, 오버히트, 리프스톰 등)
+        if (mv.ef === "spa_down2" && mv.p > 0) {
+            var sdS = (getAbilityKey(attacker) === "contrary") ? 2 : -2;
+            attacker.statStages.spatk = Math.max(-6, Math.min(6, attacker.statStages.spatk + sdS));
+            bd.msg.push(an + "의 특공이 " + (sdS > 0 ? "크게 올라갔다!" : "크게 떨어졌다!"));
         }
         // 특성: 접촉 반사 (roughskin/ironbarbs)
         if (mv.c === "physical" && result.dmg > 0 && defender.currentHp > 0) {
